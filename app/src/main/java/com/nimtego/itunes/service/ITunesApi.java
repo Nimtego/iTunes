@@ -14,6 +14,6 @@ public interface ITunesApi {
     *
     https://itunes.apple.com/search?term=metallica&entity=album&limit=5&attribute=albumTerm
     */
-    @GET("search?term=metallica&entity=album&limit=5&attribute=albumTerm")
-    Call<List<ResultEntity>> getData(@Query("term") String resourceName, @Query("limit") int count);
+    @GET("search&entity=album&attribute=albumTerm")
+    Call<EntityRepository> getData(@Query("term") String resourceName, @Query("limit") int count);
 }
