@@ -89,7 +89,7 @@ public class AlbumsCollectionActivity
 
     @Override
     public String getsearchText() {
-        return String.valueOf(searchText);
+        return String.valueOf(searchText.getText());
     }
 
     @Override

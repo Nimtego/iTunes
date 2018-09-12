@@ -31,6 +31,12 @@ public class AlbumsCollectionPresenter
             @Override
             public void onResponse(@NonNull Call<EntityRepository> call, @NonNull Response<EntityRepository> response) {
                     mResultEntityList = response.body();
+                    view.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setSearchList(mResultEntityList.getResults());
+                    }
+                });
             }
 
             @Override
@@ -39,6 +45,7 @@ public class AlbumsCollectionPresenter
             }
         });
         try {
+            view.toast(String.valueOf(mResultEntityList.getResults().size()));
             view.setSearchList(mResultEntityList.getResults());
         } catch (NullPointerException e) {
             view.toast("NPE\n" +e.getMessage());
