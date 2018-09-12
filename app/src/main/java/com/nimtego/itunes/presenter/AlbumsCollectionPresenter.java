@@ -7,6 +7,7 @@ import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.service.EntityRepository;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;

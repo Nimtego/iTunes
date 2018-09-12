@@ -110,7 +110,7 @@ public class AlbumsCollectionActivity
 
     @Override
     public void setSearchList(List<ResultEntity> list) {
-        RecyclerView.Adapter adapter = new PostAdapter(list);
+        RecyclerView.Adapter adapter = new PostAdapter(list, this);
         mRecyclerView.setAdapter(adapter);
     }
 }
