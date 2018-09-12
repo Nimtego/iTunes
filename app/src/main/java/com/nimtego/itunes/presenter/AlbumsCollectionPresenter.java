@@ -5,7 +5,11 @@ import android.support.annotation.NonNull;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.service.EntityRepository;
+import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,11 +24,9 @@ public class AlbumsCollectionPresenter
     @Override
     public void search() {
         String message = view.getsearchText();
-/*        if (message.isEmpty()) {*/
-            view.toast(message);
-/*        }*/
+        view.toast(message);
         ITunesApi iTunesApi = App.getApi();
-        iTunesApi.getData(message, 50).enqueue(new Callback<EntityRepository>() {
+        iTunesApi.getData(FabricParam.searchAlbumParam(message)).enqueue(new Callback<EntityRepository>() {
             @Override
             public void onResponse(Call<EntityRepository> call, Response<EntityRepository> response) {
                     mResultEntityList = response.body();

@@ -10,13 +10,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends Application {
 
     private static ITunesApi iTunes;
-    private Retrofit retrofit;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        retrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://itunes.apple.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

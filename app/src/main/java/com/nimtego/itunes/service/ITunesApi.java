@@ -1,11 +1,10 @@
 package com.nimtego.itunes.service;
 
-import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface ITunesApi {
 
@@ -14,6 +13,6 @@ public interface ITunesApi {
     *
     https://itunes.apple.com/search?term=metallica&entity=album&limit=5&attribute=albumTerm
     */
-    @GET("search&entity=album&attribute=albumTerm")
-    Call<EntityRepository> getData(@Query("term") String resourceName, @Query("limit") int count);
+    @GET("/search")
+    Call<EntityRepository> getData(@QueryMap Map<String, String> param);
 }
