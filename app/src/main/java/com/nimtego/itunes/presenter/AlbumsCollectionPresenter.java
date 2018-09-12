@@ -7,6 +7,8 @@ import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.service.EntityRepository;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
+import com.nimtego.itunes.utils.IpTags;
+import com.nimtego.itunes.view.InformationAlbumActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -27,7 +29,7 @@ public class AlbumsCollectionPresenter
         String message = view.getsearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
-        Call<EntityRepository> call = iTunesApi.getData(FabricParam.searchAlbumParam(message));
+        Call<EntityRepository> call = iTunesApi.getAlbum(FabricParam.searchAlbumParam(message));
         call.enqueue(new Callback<EntityRepository>() {
             @Override
             public void onResponse(@NonNull Call<EntityRepository> call, @NonNull Response<EntityRepository> response) {
@@ -45,12 +47,6 @@ public class AlbumsCollectionPresenter
                 view.toast("An error occurred during networking");
             }
         });
-        try {
-            view.toast(String.valueOf(mResultEntityList.getResults().size()));
-            view.setSearchList(mResultEntityList.getResults());
-        } catch (NullPointerException e) {
-            view.toast("NPE\n" +e.getMessage());
-        }
     }
 
     @Override
@@ -60,7 +56,7 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void pushInRV(int position) {
-
+        view.intent(IpTags.ALBUM_ID, mResultEntityList.getResults().get(position).getCollectionId());
     }
 
     @Override
@@ -70,6 +66,6 @@ public class AlbumsCollectionPresenter
 
     @Override
     public Class<?> getNextActivity() {
-        return null;
+        return InformationAlbumActivity.class;
     }
 }

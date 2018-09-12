@@ -23,6 +23,8 @@ public interface BaseContract {
 
         void hideLoading();
 
+        void toast(String message);
+
         P supplyPresenter();
     }
 }

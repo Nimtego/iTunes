@@ -1,19 +1,17 @@
 package com.nimtego.itunes.service;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EntityRepository {
+import java.util.List;
 
+public class SongsRepository {
     @SerializedName("resultCount")
     @Expose
     private Integer resultCount;
     @SerializedName("results")
     @Expose
-    private List<ResultEntity> results = null;
-
-    private ResultEntity current = null;
+    private List<SongResult> results = null;
 
     public Integer getResultCount() {
         return resultCount;
@@ -23,16 +21,11 @@ public class EntityRepository {
         this.resultCount = resultCount;
     }
 
-    public List<ResultEntity> getResults() {
+    public List<SongResult> getResults() {
         return results;
     }
 
-    public void setResults(List<ResultEntity> results) {
+    public void setResults(List<SongResult> results) {
         this.results = results;
     }
-
-    public void setCurrent(int number) {current = results.get(number);}
-
-    public ResultEntity getCurrent() {return current;}
-
 }

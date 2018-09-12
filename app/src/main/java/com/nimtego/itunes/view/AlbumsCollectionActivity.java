@@ -1,6 +1,7 @@
 package com.nimtego.itunes.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,6 +21,7 @@ import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.presenter.AlbumsCollectionPresenter;
 import com.nimtego.itunes.service.ResultEntity;
+import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.utils.RecyclerItemClickListener;
 import com.nimtego.itunes.view.toast.SimpleToastAlarm;
 import com.nimtego.itunes.view.toast.ToastAlarm;
@@ -109,14 +111,10 @@ public class AlbumsCollectionActivity
     }
 
     @Override
-    public void toast(String message) {
-        ToastAlarm toastAlarm = new SimpleToastAlarm(this);
-        toastAlarm.message(message);
-    }
-
-    @Override
-    public void intent(String tabType) {
-
+    public void intent(IpTags tags, int id) {
+        Intent intent = new Intent(this, mPresenter.getNextActivity());
+        intent.putExtra(tags.toString(), id);
+        (this).startActivity(intent);
     }
 
     @Override

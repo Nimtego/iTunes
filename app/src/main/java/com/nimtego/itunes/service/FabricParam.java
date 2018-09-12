@@ -18,4 +18,14 @@ public class FabricParam {
     public static Map<String, String> searchAlbumParam(String album){
         return searchAlbumParam(album, 200);
     }
+
+    //https://itunes.apple.com/search?id=211192863&entity=song&media=music
+    public static Map<String, String> searchSongsAlbum(String album){
+        Map<String, String> param = new HashMap<>();
+        param.put("id", album);
+        param.put("entity", "song");
+        param.put("media", "music");
+        return param;
+    }
+
 }
