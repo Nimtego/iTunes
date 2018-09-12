@@ -3,6 +3,7 @@ package com.nimtego.itunes.view;
 import android.content.Context;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -41,27 +42,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.albumName.setText(posts.get(position).getCollectionName());
         holder.artistName.setText(posts.get(position).getArtistName());
         Picasso.get().load(posts.get(position).getArtworkUrl100())
-                .placeholder(R.drawable.baseline_search_black_18dp) //показываем что-то, пока не загрузится указанная картинка
-                .error(R.drawable.ic_launcher_background) // показываем что-то, если не удалось скачать картинку
+                .placeholder(R.drawable.baseline_search_black_18dp)
+                .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);
-/*        Picasso.get()
-                .load(posts.get(position).getArtworkUrl60())
-                .networkPolicy(NetworkPolicy.OFFLINE)//user this for offline support
-                .into(holder.albumImage, new Callback() {
-                    @Override
-                    public void onSuccess() {
-
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-                        Picasso.get()
-                                .load(posts.get(position).getArtworkUrl60())
-                                .error(android.R.drawable.stat_notify_error)//user this for offline support
-                                .into(holder.albumImage);
-                    }
-                });
-        Picasso.get().load(posts.get(position).getCollectionViewUrl()).into(holder.albumImage);*/
+        holder.cv.setCardElevation(5);
     }
 
     @Override
@@ -75,12 +59,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         ImageView albumImage;
         TextView albumName;
         TextView artistName;
+        CardView cv;
 
         public ViewHolder(View itemView) {
             super(itemView);
             albumImage = itemView.findViewById(R.id.album_image);
             albumName = itemView.findViewById(R.id.artist_name);
             artistName = itemView.findViewById(R.id.album_name);
+            cv = itemView.findViewById(R.id.cv);
+
         }
     }
 }

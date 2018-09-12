@@ -16,6 +16,6 @@ public class FabricParam {
         return param;
     }
     public static Map<String, String> searchAlbumParam(String album){
-        return searchAlbumParam(album, 20);
+        return searchAlbumParam(album, 200);
     }
 }
