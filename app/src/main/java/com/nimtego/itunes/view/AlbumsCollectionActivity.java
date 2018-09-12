@@ -1,5 +1,6 @@
 package com.nimtego.itunes.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
@@ -29,14 +31,12 @@ import butterknife.ButterKnife;
 
 public class AlbumsCollectionActivity
         extends BaseView<AlbumsCollectionContract.Presenter>
-        implements AlbumsCollectionContract.View<AlbumsCollectionContract.Presenter>{
+        implements AlbumsCollectionContract.View<AlbumsCollectionContract.Presenter> {
 
     @BindView(R.id.search_edit_text)
     EditText searchText;
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-    @BindView(R.id.search_button)
-    ImageButton searchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +51,8 @@ public class AlbumsCollectionActivity
     private void setUpRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-       // LinearLayoutManager llm = new LinearLayoutManager(this);
-       // llm.setOrientation(LinearLayoutManager.VERTICAL);
+        // LinearLayoutManager llm = new LinearLayoutManager(this);
+        // llm.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
@@ -75,14 +75,22 @@ public class AlbumsCollectionActivity
                         })
         );
     }
+
     private void init() {
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View view) {
-                mPresenter.search();
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    mPresenter.search();
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (in != null) {
+                        in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                    }
+                    return true;
+                }
+                return false;
             }
         });
-
     }
 
     @Override
