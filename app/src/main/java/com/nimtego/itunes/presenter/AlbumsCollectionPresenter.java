@@ -26,9 +26,10 @@ public class AlbumsCollectionPresenter
         String message = view.getsearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
-        iTunesApi.getData(FabricParam.searchAlbumParam(message)).enqueue(new Callback<EntityRepository>() {
+        Call<EntityRepository> call = iTunesApi.getData(FabricParam.searchAlbumParam(message));
+        call.enqueue(new Callback<EntityRepository>() {
             @Override
-            public void onResponse(Call<EntityRepository> call, Response<EntityRepository> response) {
+            public void onResponse(@NonNull Call<EntityRepository> call, @NonNull Response<EntityRepository> response) {
                     mResultEntityList = response.body();
             }
 
