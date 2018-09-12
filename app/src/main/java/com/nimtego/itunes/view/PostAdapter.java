@@ -2,6 +2,7 @@ package com.nimtego.itunes.view;
 
 import android.content.Context;
 import android.os.Build;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -39,11 +40,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         final ResultEntity post = posts.get(position);
         holder.albumName.setText(posts.get(position).getCollectionName());
         holder.artistName.setText(posts.get(position).getArtistName());
-        Picasso.get().load(posts.get(position).getArtworkUrl60())
+        Picasso.get().load(posts.get(position).getArtworkUrl100())
                 .placeholder(R.drawable.baseline_search_black_18dp) //показываем что-то, пока не загрузится указанная картинка
                 .error(R.drawable.ic_launcher_background) // показываем что-то, если не удалось скачать картинку
                 .into(holder.albumImage);
-
 /*        Picasso.get()
                 .load(posts.get(position).getArtworkUrl60())
                 .networkPolicy(NetworkPolicy.OFFLINE)//user this for offline support
