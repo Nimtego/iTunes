@@ -52,10 +52,10 @@ public class AlbumsCollectionActivity
 
     private void setUpRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        // LinearLayoutManager llm = new LinearLayoutManager(this);
-        // llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
+        //GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(llm);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
                 DividerItemDecoration.VERTICAL);
@@ -111,7 +111,7 @@ public class AlbumsCollectionActivity
     }
 
     @Override
-    public void intent(IpTags tags, int id) {
+    public void intent(IpTags tags, String id) {
         Intent intent = new Intent(this, mPresenter.getNextActivity());
         intent.putExtra(tags.toString(), id);
         (this).startActivity(intent);

@@ -17,6 +17,6 @@ public interface ITunesApi {
     Call<EntityRepository> getAlbum(@QueryMap Map<String, String> param);
 
     //https://itunes.apple.com/search?id=211192863&entity=song&media=music
-    @GET("/search")
-    Call<SongResult> getSongs(@QueryMap Map<String, String> param);
+    @GET("/lookup")
+    Call<SongsRepository> getSongs(@QueryMap Map<String, String> param);
 }

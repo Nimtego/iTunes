@@ -12,6 +12,9 @@ import com.nimtego.itunes.service.SongResult;
 import com.nimtego.itunes.service.SongsRepository;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,16 +22,18 @@ import retrofit2.Response;
 public class InformationAlbumPresenter extends BasePresenter<InformationAlbumContract.View>
         implements InformationAlbumContract.Presenter<InformationAlbumContract.View> {
 
-    private int id;
-    private SongResult mSongResult;
+    private String id;
+    private SongsRepository mSongResult;
+    private List<String> songsList;
 
     @Override
     public Class<?> getNextActivity() {
         return null;
     }
 
-    public InformationAlbumPresenter(int id) {
+    public InformationAlbumPresenter(String id) {
         this.id = id;
+        songsList = new ArrayList<>();
     }
 
     @Override
@@ -36,23 +41,40 @@ public class InformationAlbumPresenter extends BasePresenter<InformationAlbumCon
 
 
         ITunesApi iTunesApi = App.getApi();
-        Call<SongResult> call = iTunesApi.getSongs(FabricParam.searchSongsAlbum(String.valueOf(id)));
-        call.enqueue(new Callback<SongResult>() {
+        Call<SongsRepository> call = iTunesApi.getSongs(FabricParam.lookupSongsAlbum(id));
+        call.enqueue(new Callback<SongsRepository>() {
             @Override
-            public void onResponse(@NonNull Call<SongResult> call, @NonNull final Response<SongResult> response) {
+            public void onResponse(@NonNull Call<SongsRepository> call, @NonNull final Response<SongsRepository> response) {
                 mSongResult = response.body();
+
                 view.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
-                        view.setImageAlbum(mSongResult.getArtworkUrl100());
-                        view.setAlbumName(mSongResult.getCollectionArtistName());
-                        view.setArtistName(mSongResult.getArtistName());
+                        int count = 1;
+                        for (SongResult s :
+                                mSongResult.getResults()) {
+                            if (s.getWrapperType().equals("collection")){
+                                view.setImageAlbum(s.getArtworkUrl100());
+                                view.setAlbumName(s.getCollectionName());
+                                view.setArtistName(s.getArtistName());
+                                StringBuilder sb = new StringBuilder();
+                                sb.append("Country - ").append(s.getCountry()).append("\n")
+                                        .append("Release date - ").append(s.getReleaseDate());
+                                view.setAlbumInformation(String.valueOf(sb));
+                            }
+                            else {
+                                StringBuilder sb = new StringBuilder();
+                                sb.append(count++).append(". \"").append(s.getTrackName()).append("\"");
+                                songsList.add(String.valueOf(sb));
+                            }
+                        }
+                        view.setSongList(songsList);
                     }
                 });
             }
 
             @Override
-            public void onFailure(@NonNull Call<SongResult> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<SongsRepository> call, @NonNull Throwable t) {
                 view.toast("An error occurred during networking");
             }
         });

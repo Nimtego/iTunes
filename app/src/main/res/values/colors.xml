@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#51535e</color>
+    <color name="colorPrimaryDark">#434449</color>
     <color name="colorAccent">#6fa4b6</color>
     <color name="black_effective">#2a2a2a</color>
     <color name="with_grad">#c5ffffff</color>
     <color name="separator_gray">#98a6af</color>
+    <color name="black_tr">#ad000000</color>
+    <color name="w">#fff</color>
 </resources>

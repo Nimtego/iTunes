@@ -16,6 +16,9 @@ public class SongResult {
     @SerializedName("collectionId")
     @Expose
     private Integer collectionId;
+    @SerializedName("amgArtistId")
+    @Expose
+    private Integer amgArtistId;
     @SerializedName("artistName")
     @Expose
     private String artistName;
@@ -73,15 +76,6 @@ public class SongResult {
     @SerializedName("trackCensoredName")
     @Expose
     private String trackCensoredName;
-    @SerializedName("collectionArtistId")
-    @Expose
-    private Integer collectionArtistId;
-    @SerializedName("collectionArtistName")
-    @Expose
-    private String collectionArtistName;
-    @SerializedName("collectionArtistViewUrl")
-    @Expose
-    private String collectionArtistViewUrl;
     @SerializedName("trackViewUrl")
     @Expose
     private String trackViewUrl;
@@ -143,6 +137,14 @@ public class SongResult {
 
     public void setCollectionId(Integer collectionId) {
         this.collectionId = collectionId;
+    }
+
+    public Integer getAmgArtistId() {
+        return amgArtistId;
+    }
+
+    public void setAmgArtistId(Integer amgArtistId) {
+        this.amgArtistId = amgArtistId;
     }
 
     public String getArtistName() {
@@ -297,30 +299,6 @@ public class SongResult {
         this.trackCensoredName = trackCensoredName;
     }
 
-    public Integer getCollectionArtistId() {
-        return collectionArtistId;
-    }
-
-    public void setCollectionArtistId(Integer collectionArtistId) {
-        this.collectionArtistId = collectionArtistId;
-    }
-
-    public String getCollectionArtistName() {
-        return collectionArtistName;
-    }
-
-    public void setCollectionArtistName(String collectionArtistName) {
-        this.collectionArtistName = collectionArtistName;
-    }
-
-    public String getCollectionArtistViewUrl() {
-        return collectionArtistViewUrl;
-    }
-
-    public void setCollectionArtistViewUrl(String collectionArtistViewUrl) {
-        this.collectionArtistViewUrl = collectionArtistViewUrl;
-    }
-
     public String getTrackViewUrl() {
         return trackViewUrl;
     }
@@ -400,4 +378,7 @@ public class SongResult {
     public void setIsStreamable(Boolean isStreamable) {
         this.isStreamable = isStreamable;
     }
+
 }
+
+

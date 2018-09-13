@@ -23,7 +23,7 @@ public interface AlbumsCollectionContract {
 
         void clearList();
 
-        void intent(IpTags tags, int id);
+        void intent(IpTags tags, String id);
 
         void setSearchList(List<ResultEntity> list);
     }
