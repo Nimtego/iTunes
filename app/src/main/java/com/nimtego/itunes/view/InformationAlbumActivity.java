@@ -58,7 +58,7 @@ public class InformationAlbumActivity
     @Override
     public void setImageAlbum(String url) {
         Picasso.get().load(url.replace("100x100", "600x600"))
-                .placeholder(R.drawable.baseline_search_black_18dp)
+                .placeholder(R.drawable.baseline_update_black_48dp)
                 .error(R.drawable.ic_launcher_background)
                 .into(albumImage);
     }

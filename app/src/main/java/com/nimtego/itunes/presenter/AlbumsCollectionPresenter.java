@@ -34,21 +34,24 @@ public class AlbumsCollectionPresenter
         String message = view.getsearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
-        Call<EntityRepository> call = iTunesApi.getAlbum(FabricParam.searchAlbumParam(message));
+        view.showLoading();
+        Call<EntityRepository> call = iTunesApi.getAlbum(FabricParam.searchAlbumParam(message, 100));
         call.enqueue(new Callback<EntityRepository>() {
             @Override
             public void onResponse(@NonNull Call<EntityRepository> call, @NonNull final Response<EntityRepository> response) {
-                    mResultEntityList = response.body();
-                    view.runOnMainThread(new Runnable() {
+                mResultEntityList = response.body();
+                view.hideLoading();
+                List<ResultEntity> resultEntity = mResultEntityList.getResults();
+                Collections.sort(resultEntity, new Comparator<ResultEntity>() {
+                    @Override
+                    public int compare(ResultEntity o1, ResultEntity o2) {
+                        return o1.getCollectionName().compareTo(o2.getCollectionName());
+                    }
+                });
+                view.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
-                        List<ResultEntity> resultEntity = mResultEntityList.getResults();
-                        Collections.sort(resultEntity, new Comparator<ResultEntity>() {
-                            @Override
-                            public int compare(ResultEntity o1, ResultEntity o2) {
-                                return o1.getCollectionName().compareTo(o2.getCollectionName());
-                            }
-                        });
+
                         view.setSearchList(mResultEntityList.getResults());
                     }
                 });
@@ -67,7 +70,8 @@ public class AlbumsCollectionPresenter
     }
 
     @Override
-    public void longPushInRV(int position) {}
+    public void longPushInRV(int position) {
+    }
 
     @Override
     public Class<?> getNextActivity() {

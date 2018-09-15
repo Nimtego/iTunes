@@ -42,7 +42,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.albumName.setText(posts.get(position).getCollectionName());
         holder.artistName.setText(posts.get(position).getArtistName());
         Picasso.get().load(posts.get(position).getArtworkUrl100().replace("100x100", "200x200"))
-                .placeholder(R.drawable.baseline_search_black_18dp)
+                .placeholder(R.drawable.baseline_update_black_24dp)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);
         holder.cv.setCardElevation(5);
