@@ -10,8 +10,6 @@ public interface AlbumsCollectionContract {
 
         void search();
 
-        void viewIsReady();
-
         void pushInRV(int position);
 
         void longPushInRV(int position);

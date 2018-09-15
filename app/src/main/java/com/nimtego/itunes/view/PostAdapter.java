@@ -22,12 +22,12 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    private final Context paren;
+    //private final Context paren;
     private List<ResultEntity> posts;
 
     public PostAdapter(List<ResultEntity> posts, Context parent) {
         this.posts = posts;
-        this.paren = parent;
+       //this.paren = parent;
     }
 
     @Override
@@ -38,10 +38,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final ResultEntity post = posts.get(position);
+       // final ResultEntity post = posts.get(position);
         holder.albumName.setText(posts.get(position).getCollectionName());
         holder.artistName.setText(posts.get(position).getArtistName());
-        Picasso.get().load(posts.get(position).getArtworkUrl100().replace("100x100", "600x600"))
+        Picasso.get().load(posts.get(position).getArtworkUrl100().replace("100x100", "200x200"))
                 .placeholder(R.drawable.baseline_search_black_18dp)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);
