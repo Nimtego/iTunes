@@ -56,14 +56,9 @@ public class AlbumsCollectionPresenter
 
             @Override
             public void onFailure(@NonNull Call<EntityRepository> call, @NonNull Throwable t) {
-                view.toast("An error occurred during networking");
+                view.toast("Networking error");
             }
         });
-    }
-
-    @Override
-    public void viewIsReady() {
-
     }
 
     @Override
@@ -72,9 +67,7 @@ public class AlbumsCollectionPresenter
     }
 
     @Override
-    public void longPushInRV(int position) {
-
-    }
+    public void longPushInRV(int position) {}
 
     @Override
     public Class<?> getNextActivity() {

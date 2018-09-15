@@ -32,7 +32,6 @@ public abstract class BaseView<P extends BaseContract.Presenter>
 
     @Override
     public void runOnMainThread(Runnable runnable) {
-        //if (!isDestroyed())
             runOnUiThread(runnable);
     }
 
