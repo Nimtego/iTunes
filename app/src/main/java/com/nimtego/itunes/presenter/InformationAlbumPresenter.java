@@ -3,14 +3,11 @@ package com.nimtego.itunes.presenter;
 import android.support.annotation.NonNull;
 
 import com.nimtego.itunes.App;
-import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.InformationAlbumContract;
-import com.nimtego.itunes.service.EntityRepository;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
 import com.nimtego.itunes.service.SongResult;
 import com.nimtego.itunes.service.SongsRepository;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;

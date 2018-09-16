@@ -131,7 +131,7 @@
                     app:layout_constraintTop_toTopOf="@+id/view_separator_2">
                 </com.nimtego.itunes.view.custom_view.CustomListView>
             </LinearLayout>
-            
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </android.support.v7.widget.CardView>

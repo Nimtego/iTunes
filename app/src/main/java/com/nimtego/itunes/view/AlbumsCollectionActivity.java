@@ -55,9 +55,6 @@ public class AlbumsCollectionActivity
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-/*        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL);
-        //mRecyclerView.addItemDecoration(dividerItemDecoration);*/
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(this, mRecyclerView,
                         new RecyclerItemClickListener.OnItemClickListener() {

@@ -8,15 +8,9 @@ import retrofit2.http.QueryMap;
 
 public interface ITunesApi {
 
-    /*
-    *
-    *
-    https://itunes.apple.com/search?term=metallica&entity=album&limit=5&attribute=albumTerm
-    */
     @GET("/search")
     Call<EntityRepository> getAlbum(@QueryMap Map<String, String> param);
 
-    //https://itunes.apple.com/search?id=211192863&entity=song&media=music
     @GET("/lookup")
     Call<SongsRepository> getSongs(@QueryMap Map<String, String> param);
 }

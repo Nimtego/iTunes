@@ -15,24 +15,9 @@ public class EntityRepository {
 
     private ResultEntity current = null;
 
-    public Integer getResultCount() {
-        return resultCount;
-    }
-
-    public void setResultCount(Integer resultCount) {
-        this.resultCount = resultCount;
-    }
-
     public List<ResultEntity> getResults() {
         return results;
     }
 
-    public void setResults(List<ResultEntity> results) {
-        this.results = results;
-    }
-
-    public void setCurrent(int number) {current = results.get(number);}
-
-    public ResultEntity getCurrent() {return current;}
 
 }

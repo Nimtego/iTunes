@@ -10,14 +10,10 @@ import com.nimtego.itunes.service.ITunesApi;
 import com.nimtego.itunes.service.ResultEntity;
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.view.InformationAlbumActivity;
-import com.squareup.picasso.Picasso;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;

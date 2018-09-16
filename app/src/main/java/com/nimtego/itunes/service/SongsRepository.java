@@ -13,19 +13,8 @@ public class SongsRepository {
     @Expose
     private List<SongResult> results = null;
 
-    public Integer getResultCount() {
-        return resultCount;
-    }
-
-    public void setResultCount(Integer resultCount) {
-        this.resultCount = resultCount;
-    }
-
     public List<SongResult> getResults() {
         return results;
     }
 
-    public void setResults(List<SongResult> results) {
-        this.results = results;
-    }
 }
