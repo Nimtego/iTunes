@@ -55,6 +55,7 @@ public class AlbumsCollectionPresenter
 
             @Override
             public void onFailure(@NonNull Call<EntityRepository> call, @NonNull Throwable t) {
+                view.hideLoading();
                 view.toast("Networking error");
             }
         });
