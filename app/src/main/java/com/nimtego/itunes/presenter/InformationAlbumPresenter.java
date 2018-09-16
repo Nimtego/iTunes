@@ -59,7 +59,7 @@ public class InformationAlbumPresenter extends BasePresenter<InformationAlbumCon
                                         .append(s.getCountry())
                                         .append("\n")
                                         .append("Release date - ")
-                                        .append(s.getReleaseDate().substring(0,4));
+                                        .append(s.getReleaseDate().substring(0,10));
                                 view.setAlbumInformation(String.valueOf(sb));
                             }
                             else {
