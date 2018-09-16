@@ -55,13 +55,19 @@ public class InformationAlbumPresenter extends BasePresenter<InformationAlbumCon
                                 view.setAlbumName(s.getCollectionName());
                                 view.setArtistName(s.getArtistName());
                                 StringBuilder sb = new StringBuilder();
-                                sb.append("Country - ").append(s.getCountry()).append("\n")
-                                        .append("Release date - ").append(s.getReleaseDate().substring(0,4));
+                                sb.append("Country - ")
+                                        .append(s.getCountry())
+                                        .append("\n")
+                                        .append("Release date - ")
+                                        .append(s.getReleaseDate().substring(0,4));
                                 view.setAlbumInformation(String.valueOf(sb));
                             }
                             else {
                                 StringBuilder sb = new StringBuilder();
-                                sb.append(count++).append(". \"").append(s.getTrackName()).append("\"");
+                                sb.append(count++)
+                                        .append(". \"")
+                                        .append(s.getTrackName())
+                                        .append("\"");
                                 songsList.add(String.valueOf(sb));
                             }
                         }
