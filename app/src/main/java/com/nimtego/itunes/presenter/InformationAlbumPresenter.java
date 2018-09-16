@@ -56,7 +56,7 @@ public class InformationAlbumPresenter extends BasePresenter<InformationAlbumCon
                                 view.setArtistName(s.getArtistName());
                                 StringBuilder sb = new StringBuilder();
                                 sb.append("Country - ").append(s.getCountry()).append("\n")
-                                        .append("Release date - ").append(s.getReleaseDate());
+                                        .append("Release date - ").append(s.getReleaseDate().substring(0,4));
                                 view.setAlbumInformation(String.valueOf(sb));
                             }
                             else {

@@ -47,7 +47,6 @@ public class AlbumsCollectionPresenter
                 view.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
-
                         view.setSearchList(mResultEntityList.getResults());
                     }
                 });
