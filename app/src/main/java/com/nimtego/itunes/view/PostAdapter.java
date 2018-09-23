@@ -1,6 +1,7 @@
 package com.nimtego.itunes.view;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -19,6 +20,7 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Random;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -46,6 +48,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);
         holder.cv.setCardElevation(5);
+        Random rand = new Random();
+        holder.card.setBackgroundColor(Color.rgb(rand.nextInt(250),
+                rand.nextInt(250),
+                rand.nextInt(250)));
     }
 
     @Override
@@ -60,12 +66,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         TextView albumName;
         TextView artistName;
         CardView cv;
+        ConstraintLayout card;
 
         public ViewHolder(View itemView) {
             super(itemView);
             albumImage = itemView.findViewById(R.id.album_image);
             albumName = itemView.findViewById(R.id.artist_name);
             artistName = itemView.findViewById(R.id.album_name);
+            card = itemView.findViewById(R.id.card);
             cv = itemView.findViewById(R.id.cv);
 
         }

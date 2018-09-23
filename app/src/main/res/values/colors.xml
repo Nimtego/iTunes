@@ -10,5 +10,6 @@
     <color name="w">#fff</color>
     <color name="colorPrimaryTransparent">#eb51535e</color>
     <color name="colorPrimaryDarkTransparent">#e2424768</color>
+    <color name="grey">#dadada</color>
 
 </resources>
