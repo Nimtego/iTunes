@@ -3,6 +3,7 @@ package com.nimtego.itunes.presenter;
 import android.support.annotation.NonNull;
 
 import com.nimtego.itunes.App;
+import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.service.EntityRepository;
 import com.nimtego.itunes.service.FabricParam;
@@ -24,6 +25,11 @@ public class AlbumsCollectionPresenter
         implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View> {
 
     private EntityRepository mResultEntityList;
+    private ModelManager mModelManager;
+
+    public AlbumsCollectionPresenter() {
+        mModelManager = App.getModelManager();
+    }
 
     @Override
     public void search() {
@@ -35,7 +41,7 @@ public class AlbumsCollectionPresenter
         call.enqueue(new Callback<EntityRepository>() {
             @Override
             public void onResponse(@NonNull Call<EntityRepository> call, @NonNull final Response<EntityRepository> response) {
-                mResultEntityList = response.body();
+                mModelManager.setAlbumCollection(response.body());
                 view.hideLoading();
                 List<ResultEntity> resultEntity = mResultEntityList.getResults();
                 Collections.sort(resultEntity, new Comparator<ResultEntity>() {
