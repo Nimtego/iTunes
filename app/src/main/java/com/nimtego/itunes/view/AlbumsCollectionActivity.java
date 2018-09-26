@@ -49,6 +49,9 @@ public class AlbumsCollectionActivity
         ButterKnife.bind(this);
         init();
         setUpRecyclerView();
+        if (savedInstanceState != null) {
+            mPresenter.viewIsReady();
+        }
     }
 
 
@@ -94,6 +97,11 @@ public class AlbumsCollectionActivity
     @Override
     public AlbumsCollectionContract.Presenter supplyPresenter() {
         return new AlbumsCollectionPresenter();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override

@@ -2,8 +2,10 @@ package com.nimtego.itunes;
 
 import android.app.Application;
 
+import com.nimtego.itunes.model.AlbumsModel;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.service.ITunesApi;
+import com.nimtego.itunes.service.ResultEntity;
 
 import java.lang.reflect.Modifier;
 
@@ -13,9 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends Application {
 
     private static ITunesApi iTunes;
-    private static ModelManager modelManager;
+    private static ModelManager<ResultEntity> modelManager;
 
-    public static ModelManager getModelManager() {
+    public static ModelManager<ResultEntity> getModelManager() {
         return modelManager;
     }
 
@@ -27,7 +29,7 @@ public class App extends Application {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         iTunes = retrofit.create(ITunesApi.class);
-        modelManager = new ModelManager();
+        modelManager = new AlbumsModel();
     }
 
     public static ITunesApi getApi() {

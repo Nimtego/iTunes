@@ -24,8 +24,7 @@ public class AlbumsCollectionPresenter
         extends BasePresenter<AlbumsCollectionContract.View>
         implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View> {
 
-    private EntityRepository mResultEntityList;
-    private ModelManager mModelManager;
+    private ModelManager<ResultEntity> mModelManager;
 
     public AlbumsCollectionPresenter() {
         mModelManager = App.getModelManager();
@@ -33,7 +32,7 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void search() {
-        String message = view.getsearchText();
+        final String message = view.getsearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
         view.showLoading();
@@ -41,21 +40,23 @@ public class AlbumsCollectionPresenter
         call.enqueue(new Callback<EntityRepository>() {
             @Override
             public void onResponse(@NonNull Call<EntityRepository> call, @NonNull final Response<EntityRepository> response) {
-                mModelManager.setAlbumCollection(response.body());
-                view.hideLoading();
+                EntityRepository mResultEntityList = response.body();
                 List<ResultEntity> resultEntity = mResultEntityList.getResults();
+                mModelManager.setAlbumCollection(resultEntity, message);
+                view.hideLoading();
                 Collections.sort(resultEntity, new Comparator<ResultEntity>() {
                     @Override
                     public int compare(ResultEntity o1, ResultEntity o2) {
                         return o1.getCollectionName().compareTo(o2.getCollectionName());
                     }
                 });
-                view.runOnMainThread(new Runnable() {
+                view.setSearchList(mModelManager.getListAlbum());
+/*                view.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
                         view.setSearchList(mResultEntityList.getResults());
                     }
-                });
+                });*/
             }
 
             @Override
@@ -68,11 +69,19 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void pushInRV(int position) {
-        view.intent(IpTags.ALBUM_ID, String.valueOf(mResultEntityList.getResults().get(position).getCollectionId()));
+        view.intent(IpTags.ALBUM_ID, String.valueOf(mModelManager.getListAlbum().get(position).getCollectionId()));
     }
 
     @Override
     public void longPushInRV(int position) {
+    }
+
+    @Override
+    public void viewIsReady() {
+        if (!mModelManager.getListAlbum().isEmpty())
+            view.setSearchList(mModelManager.getListAlbum());
+        else
+            search();
     }
 
     @Override

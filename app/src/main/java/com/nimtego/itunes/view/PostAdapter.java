@@ -49,9 +49,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 .into(holder.albumImage);
         holder.cv.setCardElevation(5);
         Random rand = new Random();
-        holder.card.setBackgroundColor(Color.rgb(rand.nextInt(250),
-                rand.nextInt(250),
-                rand.nextInt(250)));
+
+/*        holder.card.setBackgroundColor(Color.rgb(rand.nextInt(250)+ 100,
+                rand.nextInt(250) + 100,
+                rand.nextInt(250) + 100));*/
     }
 
     @Override

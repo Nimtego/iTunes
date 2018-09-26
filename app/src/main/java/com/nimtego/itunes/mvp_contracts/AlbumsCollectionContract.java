@@ -13,6 +13,8 @@ public interface AlbumsCollectionContract {
         void pushInRV(int position);
 
         void longPushInRV(int position);
+
+        void viewIsReady();
     }
 
     interface View<P extends Presenter> extends BaseContract.View<P> {
