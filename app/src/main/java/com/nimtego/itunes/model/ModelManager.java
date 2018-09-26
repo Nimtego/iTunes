@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 public interface ModelManager<T extends ResultEntity> {
-    public List<T> getListAlbum();
-    public T getAlbumByName(String name);
+    List<T> getListAlbum();
+    T getAlbumByName(String name);
+    void setAlbumCollection(List<T> list, String valueSearch);
+    boolean searchCheck();
 }
