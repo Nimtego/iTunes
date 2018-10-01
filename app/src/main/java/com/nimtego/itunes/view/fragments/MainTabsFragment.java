@@ -12,7 +12,11 @@ import android.view.ViewGroup;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.TabsFragmentContract;
+import com.nimtego.itunes.service.ResultEntity;
 import com.nimtego.itunes.utils.RecyclerItemClickListener;
+import com.nimtego.itunes.view.PostAdapter;
+
+import java.util.List;
 
 public class MainTabsFragment extends Fragment {
 
@@ -48,5 +52,10 @@ public class MainTabsFragment extends Fragment {
         );*/
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
+    }
+
+    public void setSearchList(List<ResultEntity> list) {
+        RecyclerView.Adapter adapter = new PostAdapter(list, this.getActivity());
+        mRecyclerView.setAdapter(adapter);
     }
 }
