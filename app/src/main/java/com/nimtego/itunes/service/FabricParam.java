@@ -46,7 +46,7 @@ public class FabricParam {
 
     public static Map<String, String> searchArtistParam(String artist) {
          /*
-         https://itunes.apple.com/search?media=music&entity=musicTrack&attribute=songTerm&term=xxx
+         https://itunes.apple.com/search?term=artist
          */
         Map<String, String> param = new HashMap<>();
         param.put("term", artist);

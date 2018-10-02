@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.service.ResultEntity;
+import com.nimtego.itunes.service.AlbumResult;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -25,9 +26,9 @@ import java.util.Random;
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     //private final Context paren;
-    private List<ResultEntity> posts;
+    private List<AlbumResult> posts;
 
-    public PostAdapter(List<ResultEntity> posts, Context parent) {
+    public PostAdapter(List<AlbumResult> posts, Context parent) {
         this.posts = posts;
        //this.paren = parent;
     }

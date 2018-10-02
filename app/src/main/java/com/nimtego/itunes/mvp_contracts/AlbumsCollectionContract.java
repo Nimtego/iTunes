@@ -1,6 +1,6 @@
 package com.nimtego.itunes.mvp_contracts;
 
-import com.nimtego.itunes.service.ResultEntity;
+import com.nimtego.itunes.service.AlbumResult;
 import com.nimtego.itunes.utils.IpTags;
 
 import java.util.List;
@@ -25,6 +25,6 @@ public interface AlbumsCollectionContract {
 
         void intent(IpTags tags, String id);
 
-        void setSearchList(List<ResultEntity> list);
+        void setSearchList(List<AlbumResult> list);
     }
 }

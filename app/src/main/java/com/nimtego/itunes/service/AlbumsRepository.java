@@ -4,18 +4,18 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EntityRepository {
+public class AlbumsRepository {
 
     @SerializedName("resultCount")
     @Expose
     private Integer resultCount;
     @SerializedName("results")
     @Expose
-    private List<ResultEntity> results = null;
+    private List<AlbumResult> results = null;
 
-    private ResultEntity current = null;
+    private AlbumResult current = null;
 
-    public List<ResultEntity> getResults() {
+    public List<AlbumResult> getResults() {
         return results;
     }
 
