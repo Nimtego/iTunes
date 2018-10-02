@@ -19,6 +19,15 @@ android {
 }
 
 dependencies {
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok:1.18.2'
+    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    testImplementation 'org.projectlombok:lombok:1.18.2'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+    androidTestImplementation 'org.projectlombok:lombok:1.18.2'
+    androidTestAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
