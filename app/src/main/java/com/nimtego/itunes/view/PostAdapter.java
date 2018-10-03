@@ -1,12 +1,9 @@
 package com.nimtego.itunes.view;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +13,6 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.service.AlbumResult;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
