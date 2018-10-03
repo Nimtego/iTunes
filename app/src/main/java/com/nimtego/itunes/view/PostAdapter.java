@@ -11,8 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.service.AlbumResult;
-
+import com.nimtego.itunes.service.pojo.AlbumResult;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

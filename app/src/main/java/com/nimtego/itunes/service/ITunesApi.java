@@ -1,5 +1,9 @@
 package com.nimtego.itunes.service;
 
+import com.nimtego.itunes.service.pojo.AlbumsRepository;
+import com.nimtego.itunes.service.pojo.ArtistsRepository;
+import com.nimtego.itunes.service.pojo.SongsRepository;
+
 import java.util.Map;
 
 import retrofit2.Call;
@@ -12,7 +16,7 @@ public interface ITunesApi {
     Call<ArtistsRepository> getAutorSongs(@QueryMap Map<String, String> param);
 
     @GET("/search")
-    Call<AlbumsRepository> getAlbum(@QueryMap Map<String, String> param);
+    Call<AlbumsRepository> searchAlbum(@QueryMap Map<String, String> param);
 
     @GET("/lookup")
     Call<SongsRepository> getSongs(@QueryMap Map<String, String> param);

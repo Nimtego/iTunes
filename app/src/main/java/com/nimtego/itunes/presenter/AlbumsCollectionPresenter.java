@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
-import com.nimtego.itunes.service.AlbumResult;
-import com.nimtego.itunes.service.AlbumsRepository;
+import com.nimtego.itunes.service.pojo.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumsRepository;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
 import com.nimtego.itunes.utils.IpTags;
@@ -36,7 +36,7 @@ public class AlbumsCollectionPresenter
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
         view.showLoading();
-        Call<AlbumsRepository> call = iTunesApi.getAlbum(FabricParam.searchAlbumParam(message, 100));
+        Call<AlbumsRepository> call = iTunesApi.searchAlbum(FabricParam.searchAlbumParam(message, 100));
         call.enqueue(new Callback<AlbumsRepository>() {
             @Override
             public void onResponse(@NonNull Call<AlbumsRepository> call, @NonNull final Response<AlbumsRepository> response) {

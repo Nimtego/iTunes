@@ -1,7 +1,5 @@
 package com.nimtego.itunes.service;
 
-import com.nimtego.itunes.view.fragments.MainTabsFragment;
-
 import java.util.HashMap;
 import java.util.Map;
 

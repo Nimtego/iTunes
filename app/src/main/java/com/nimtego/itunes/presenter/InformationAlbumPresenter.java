@@ -6,8 +6,8 @@ import com.nimtego.itunes.App;
 import com.nimtego.itunes.mvp_contracts.InformationAlbumContract;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
-import com.nimtego.itunes.service.SongResult;
-import com.nimtego.itunes.service.SongsRepository;
+import com.nimtego.itunes.service.pojo.SongResult;
+import com.nimtego.itunes.service.pojo.SongsRepository;
 
 import java.util.ArrayList;
 import java.util.List;

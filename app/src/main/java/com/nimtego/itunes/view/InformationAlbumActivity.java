@@ -1,6 +1,5 @@
 package com.nimtego.itunes.view;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;

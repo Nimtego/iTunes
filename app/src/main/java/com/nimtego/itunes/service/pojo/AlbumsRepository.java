@@ -1,20 +1,23 @@
-package com.nimtego.itunes.service;
+package com.nimtego.itunes.service.pojo;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+public class AlbumsRepository {
 
-public class SongsRepository {
     @SerializedName("resultCount")
     @Expose
     private Integer resultCount;
     @SerializedName("results")
     @Expose
-    private List<SongResult> results = null;
+    private List<AlbumResult> results = null;
 
-    public List<SongResult> getResults() {
+    private AlbumResult current = null;
+
+    public List<AlbumResult> getResults() {
         return results;
     }
+
 
 }

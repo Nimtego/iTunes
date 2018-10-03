@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -14,19 +13,14 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.GridLayout;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.presenter.AlbumsCollectionPresenter;
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.utils.RecyclerItemClickListener;
-import com.nimtego.itunes.view.toast.SimpleToastAlarm;
-import com.nimtego.itunes.view.toast.ToastAlarm;
 
 import java.util.List;
 

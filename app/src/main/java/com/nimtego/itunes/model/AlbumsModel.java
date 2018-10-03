@@ -1,7 +1,7 @@
 package com.nimtego.itunes.model;
 
 
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 
 import java.util.List;
 

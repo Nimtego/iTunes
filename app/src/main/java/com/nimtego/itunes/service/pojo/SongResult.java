@@ -1,10 +1,9 @@
-package com.nimtego.itunes.service;
+package com.nimtego.itunes.service.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AlbumResult {
-
+public class SongResult {
     @SerializedName("wrapperType")
     @Expose
     private String wrapperType;
@@ -65,9 +64,51 @@ public class AlbumResult {
     @SerializedName("primaryGenreName")
     @Expose
     private String primaryGenreName;
+    @SerializedName("kind")
+    @Expose
+    private String kind;
+    @SerializedName("trackId")
+    @Expose
+    private Integer trackId;
+    @SerializedName("trackName")
+    @Expose
+    private String trackName;
+    @SerializedName("trackCensoredName")
+    @Expose
+    private String trackCensoredName;
+    @SerializedName("trackViewUrl")
+    @Expose
+    private String trackViewUrl;
+    @SerializedName("previewUrl")
+    @Expose
+    private String previewUrl;
+    @SerializedName("artworkUrl30")
+    @Expose
+    private String artworkUrl30;
+    @SerializedName("trackPrice")
+    @Expose
+    private Double trackPrice;
+    @SerializedName("trackExplicitness")
+    @Expose
+    private String trackExplicitness;
+    @SerializedName("discCount")
+    @Expose
+    private Integer discCount;
+    @SerializedName("discNumber")
+    @Expose
+    private Integer discNumber;
+    @SerializedName("trackNumber")
+    @Expose
+    private Integer trackNumber;
+    @SerializedName("trackTimeMillis")
+    @Expose
+    private Integer trackTimeMillis;
+    @SerializedName("isStreamable")
+    @Expose
+    private Boolean isStreamable;
 
-    public Integer getCollectionId() {
-        return collectionId;
+    public String getWrapperType() {
+        return wrapperType;
     }
 
     public String getArtistName() {
@@ -82,4 +123,20 @@ public class AlbumResult {
         return artworkUrl100;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getTrackName() {
+        return trackName;
+    }
+
+    public Integer getTrackTimeMillis() {return trackTimeMillis;}
+
 }
+
+
