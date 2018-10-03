@@ -1,6 +1,6 @@
 package com.nimtego.itunes.mvp_contracts;
 
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 import com.nimtego.itunes.utils.IpTags;
 
 import java.util.List;

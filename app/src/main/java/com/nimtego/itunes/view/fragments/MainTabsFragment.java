@@ -11,10 +11,8 @@ import android.view.ViewGroup;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.model.ModelManager;
-import com.nimtego.itunes.mvp_contracts.TabsFragmentContract;
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 
-import com.nimtego.itunes.utils.RecyclerItemClickListener;
 import com.nimtego.itunes.view.PostAdapter;
 
 import java.util.List;

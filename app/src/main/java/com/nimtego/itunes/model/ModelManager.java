@@ -1,9 +1,8 @@
 package com.nimtego.itunes.model;
 
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 
 
-import java.util.Collections;
 import java.util.List;
 
 public interface ModelManager<T extends AlbumResult> {

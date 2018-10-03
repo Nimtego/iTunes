@@ -4,10 +4,8 @@ import android.app.Application;
 
 import com.nimtego.itunes.model.AlbumsModel;
 import com.nimtego.itunes.model.ModelManager;
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 import com.nimtego.itunes.service.ITunesApi;
-
-import java.lang.reflect.Modifier;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

@@ -11,5 +11,4 @@ public class Artist {
     private String artistName;
     private String artistViewUrl;
     private String previewUrl;
-    private String artworkUrl60;
 }

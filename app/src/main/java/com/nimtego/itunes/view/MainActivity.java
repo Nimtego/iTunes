@@ -1,11 +1,9 @@
 package com.nimtego.itunes.view;
 
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -18,7 +16,7 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.presenter.AlbumsCollectionPresenter;
-import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumResult;
 
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.view.adapter.ViewPagerAdapter;
