@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.TabsFragmentContract;
-import com.nimtego.itunes.service.ResultEntity;
+import com.nimtego.itunes.service.AlbumResult;
+
 import com.nimtego.itunes.utils.RecyclerItemClickListener;
 import com.nimtego.itunes.view.PostAdapter;
 
@@ -54,7 +55,7 @@ public class MainTabsFragment extends Fragment {
         return view;
     }
 
-    public void setSearchList(List<ResultEntity> list) {
+    public void setSearchList(List<AlbumResult> list) {
         RecyclerView.Adapter adapter = new PostAdapter(list, this.getActivity());
         mRecyclerView.setAdapter(adapter);
     }

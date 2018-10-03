@@ -1,11 +1,11 @@
 package com.nimtego.itunes.model;
 
-import com.nimtego.itunes.service.EntityRepository;
-import com.nimtego.itunes.service.ResultEntity;
+
+import com.nimtego.itunes.service.AlbumResult;
 
 import java.util.List;
 
-public class AlbumsModel<T extends ResultEntity> implements ModelManager<T>{
+public class AlbumsModel<T extends AlbumResult> implements ModelManager<T>{
     private List<T> result;
     private String valueSearch = null;
 
@@ -16,7 +16,7 @@ public class AlbumsModel<T extends ResultEntity> implements ModelManager<T>{
     }
     @Override
     public T getAlbumByName(String name) {
-        for (ResultEntity re : result) {
+        for (AlbumResult re : result) {
             if (re.getCollectionName().equals(name)) {
                 return (T) re;
             }

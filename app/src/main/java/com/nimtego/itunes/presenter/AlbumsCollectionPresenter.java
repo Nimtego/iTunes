@@ -5,10 +5,10 @@ import android.support.annotation.NonNull;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
-import com.nimtego.itunes.service.EntityRepository;
+import com.nimtego.itunes.service.AlbumResult;
+import com.nimtego.itunes.service.AlbumsRepository;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
-import com.nimtego.itunes.service.ResultEntity;
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.view.InformationAlbumActivity;
 
@@ -24,7 +24,7 @@ public class AlbumsCollectionPresenter
         extends BasePresenter<AlbumsCollectionContract.View>
         implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View> {
 
-    private ModelManager<ResultEntity> mModelManager;
+    private ModelManager<AlbumResult> mModelManager;
 
     public AlbumsCollectionPresenter() {
         mModelManager = App.getModelManager();
@@ -36,17 +36,17 @@ public class AlbumsCollectionPresenter
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
         view.showLoading();
-        Call<EntityRepository> call = iTunesApi.getAlbum(FabricParam.searchAlbumParam(message, 100));
-        call.enqueue(new Callback<EntityRepository>() {
+        Call<AlbumsRepository> call = iTunesApi.getAlbum(FabricParam.searchAlbumParam(message, 100));
+        call.enqueue(new Callback<AlbumsRepository>() {
             @Override
-            public void onResponse(@NonNull Call<EntityRepository> call, @NonNull final Response<EntityRepository> response) {
-                EntityRepository mResultEntityList = response.body();
-                List<ResultEntity> resultEntity = mResultEntityList.getResults();
+            public void onResponse(@NonNull Call<AlbumsRepository> call, @NonNull final Response<AlbumsRepository> response) {
+                AlbumsRepository mResultEntityList = response.body();
+                List<AlbumResult> resultEntity = mResultEntityList.getResults();
                 mModelManager.setAlbumCollection(resultEntity, message);
                 view.hideLoading();
-                Collections.sort(resultEntity, new Comparator<ResultEntity>() {
+                Collections.sort(resultEntity, new Comparator<AlbumResult>() {
                     @Override
-                    public int compare(ResultEntity o1, ResultEntity o2) {
+                    public int compare(AlbumResult o1, AlbumResult o2) {
                         return o1.getCollectionName().compareTo(o2.getCollectionName());
                     }
                 });
@@ -60,7 +60,7 @@ public class AlbumsCollectionPresenter
             }
 
             @Override
-            public void onFailure(@NonNull Call<EntityRepository> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<AlbumsRepository> call, @NonNull Throwable t) {
                 view.hideLoading();
                 view.toast("Networking error");
             }

@@ -4,8 +4,8 @@ import android.app.Application;
 
 import com.nimtego.itunes.model.AlbumsModel;
 import com.nimtego.itunes.model.ModelManager;
+import com.nimtego.itunes.service.AlbumResult;
 import com.nimtego.itunes.service.ITunesApi;
-import com.nimtego.itunes.service.ResultEntity;
 
 import java.lang.reflect.Modifier;
 
@@ -15,9 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends Application {
 
     private static ITunesApi iTunes;
-    private static ModelManager<ResultEntity> modelManager;
+    private static ModelManager<AlbumResult> modelManager;
 
-    public static ModelManager<ResultEntity> getModelManager() {
+    public static ModelManager<AlbumResult> getModelManager() {
         return modelManager;
     }
 

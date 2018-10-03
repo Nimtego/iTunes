@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.presenter.AlbumsCollectionPresenter;
-import com.nimtego.itunes.service.ResultEntity;
+import com.nimtego.itunes.service.AlbumResult;
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.utils.RecyclerItemClickListener;
 import com.nimtego.itunes.view.toast.SimpleToastAlarm;
@@ -122,7 +122,7 @@ public class AlbumsCollectionActivity
     }
 
     @Override
-    public void setSearchList(List<ResultEntity> list) {
+    public void setSearchList(List<AlbumResult> list) {
         RecyclerView.Adapter adapter = new PostAdapter(list, this);
         mRecyclerView.setAdapter(adapter);
     }

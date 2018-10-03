@@ -9,10 +9,10 @@ import retrofit2.http.QueryMap;
 public interface ITunesApi {
 
     @GET("/search")
-    Call<EntityRepository> getAutorSongs(@QueryMap Map<String, String> param);
+    Call<ArtistsRepository> getAutorSongs(@QueryMap Map<String, String> param);
 
     @GET("/search")
-    Call<EntityRepository> getAlbum(@QueryMap Map<String, String> param);
+    Call<AlbumsRepository> getAlbum(@QueryMap Map<String, String> param);
 
     @GET("/lookup")
     Call<SongsRepository> getSongs(@QueryMap Map<String, String> param);

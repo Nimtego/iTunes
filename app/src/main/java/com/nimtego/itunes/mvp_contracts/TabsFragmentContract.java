@@ -1,7 +1,6 @@
 package com.nimtego.itunes.mvp_contracts;
 
 import com.nimtego.itunes.model.ModelManager;
-import com.nimtego.itunes.service.ResultEntity;
 import com.nimtego.itunes.utils.IpTags;
 
 import java.util.List;

@@ -135,6 +135,8 @@ public class SongResult {
         return trackName;
     }
 
+    public Integer getTrackTimeMillis() {return trackTimeMillis;}
+
 }
 
 

@@ -18,7 +18,8 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.presenter.AlbumsCollectionPresenter;
-import com.nimtego.itunes.service.ResultEntity;
+import com.nimtego.itunes.service.AlbumResult;
+
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.view.adapter.ViewPagerAdapter;
 import com.nimtego.itunes.view.fragments.MainTabsFragment;
@@ -102,7 +103,7 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
     }
 
     @Override
-    public void setSearchList(List<ResultEntity> list) {
+    public void setSearchList(List<AlbumResult> list) {
         RecyclerView.Adapter adapter = new PostAdapter(list, this);
         MainTabsFragment f = (MainTabsFragment) mViewPagerAdapter.getItem(mViewPager.getCurrentItem());
         f.setSearchList(list);
