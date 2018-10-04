@@ -67,9 +67,9 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
 
     private void setupViewPager(ViewPager viewPager) {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragment(new MainTabsFragment(), "ONE");
-        mViewPagerAdapter.addFragment(new MainTabsFragment(), "TWO");
-        mViewPagerAdapter.addFragment(new MainTabsFragment(), "THREE");
+        mViewPagerAdapter.addFragment(new MainTabsFragment(), "Albums");
+        mViewPagerAdapter.addFragment(new MainTabsFragment(), "Artists");
+        mViewPagerAdapter.addFragment(new MainTabsFragment(), "Songs");
         viewPager.setAdapter(mViewPagerAdapter);
     }
 

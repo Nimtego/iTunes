@@ -1,8 +1,5 @@
 package com.nimtego.itunes.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import lombok.Builder;
 import lombok.Data;
 
