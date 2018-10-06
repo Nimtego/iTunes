@@ -34,22 +34,6 @@ public class MainTabsFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(container.getContext(), 2);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-       /* mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, mRecyclerView,
-                        new RecyclerItemClickListener.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int position) {
-                               *//* mPresenter.pushInRV(position);*//*
-                            }
-
-                            @Override
-                            public void onLongItemClick(View view, int position) {
-                                *//*mPresenter.longPushInRV(position);*//*
-                            }
-                        })
-        );*/
-        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
