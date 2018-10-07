@@ -5,16 +5,18 @@ import android.support.annotation.NonNull;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
+import com.nimtego.itunes.mvp_contracts.InformationAlbumContract;
 import com.nimtego.itunes.service.pojo.AlbumResult;
 import com.nimtego.itunes.service.pojo.AlbumsRepository;
 import com.nimtego.itunes.service.FabricParam;
 import com.nimtego.itunes.service.ITunesApi;
 import com.nimtego.itunes.utils.IpTags;
-import com.nimtego.itunes.view.InformationAlbumActivity;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,7 +34,7 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void search() {
-        final String message = view.getsearchText();
+        final String message = view.getSearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
         view.showLoading();
@@ -69,7 +71,11 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void pushInRV(int position) {
-        view.intent(IpTags.ALBUM_ID, String.valueOf(mModelManager.getListAlbum().get(position).getCollectionId()));
+        Map<String, String> params = new HashMap<>();
+        String key = IpTags.ALBUM_ID.toString();
+        String value = String.valueOf(mModelManager.getListAlbum().get(position).getCollectionId());
+        params.put(key, value);
+        view.showView(InformationAlbumContract.View.class, params);
     }
 
     @Override
@@ -84,8 +90,4 @@ public class AlbumsCollectionPresenter
             search();
     }
 
-    @Override
-    public Class<?> getNextActivity() {
-        return InformationAlbumActivity.class;
-    }
 }
