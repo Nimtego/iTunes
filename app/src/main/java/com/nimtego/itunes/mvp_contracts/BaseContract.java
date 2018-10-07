@@ -1,6 +1,8 @@
 package com.nimtego.itunes.mvp_contracts;
 
 
+import java.util.Map;
+
 public interface BaseContract {
 
     interface Presenter<V extends View> {
@@ -10,9 +12,6 @@ public interface BaseContract {
         void detach();
 
         V getView();
-
-        Class<?> getNextActivity();
-
     }
 
     interface View<P extends Presenter> {
@@ -24,6 +23,10 @@ public interface BaseContract {
         void hideLoading();
 
         void toast(String message);
+
+        void showView(Class<? super View> view, Map<String, String> params);
+
+        void showView(Class<? super View> view);
 
         P supplyPresenter();
     }

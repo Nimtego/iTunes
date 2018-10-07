@@ -84,20 +84,13 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
     }
 
     @Override
-    public String getsearchText() {
+    public String getSearchText() {
         return String.valueOf(searchText.getText());
     }
 
     @Override
     public void clearList() {
 
-    }
-
-    @Override
-    public void intent(IpTags tags, String id) {
-        Intent intent = new Intent(this, mPresenter.getNextActivity());
-        intent.putExtra(tags.toString(), id);
-        (this).startActivity(intent);
     }
 
     @Override
