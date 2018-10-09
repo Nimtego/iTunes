@@ -1,4 +1,4 @@
-package com.nimtego.itunes.service.pojo;
+package com.nimtego.itunes.data.rest.pojo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
 import com.nimtego.itunes.presenter.AlbumsCollectionPresenter;
-import com.nimtego.itunes.service.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.utils.IpTags;
 import com.nimtego.itunes.utils.RecyclerItemClickListener;
 

@@ -1,4 +1,4 @@
-package com.nimtego.itunes.service;
+package com.nimtego.itunes.data.rest.network;
 
 import java.util.HashMap;
 import java.util.Map;

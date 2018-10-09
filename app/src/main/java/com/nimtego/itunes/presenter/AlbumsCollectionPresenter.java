@@ -5,11 +5,10 @@ import android.support.annotation.NonNull;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
-import com.nimtego.itunes.service.pojo.AlbumResult;
-import com.nimtego.itunes.service.pojo.AlbumsRepository;
-import com.nimtego.itunes.service.FabricParam;
-import com.nimtego.itunes.service.ITunesApi;
-import com.nimtego.itunes.utils.IpTags;
+import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
+import com.nimtego.itunes.data.rest.network.FabricParam;
+import com.nimtego.itunes.data.rest.network.ITunesApi;
 import com.nimtego.itunes.view.InformationAlbumActivity;
 
 import java.util.Collections;

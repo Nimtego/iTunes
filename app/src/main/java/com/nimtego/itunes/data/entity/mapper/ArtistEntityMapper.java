@@ -1,17 +1,11 @@
-package com.nimtego.itunes.data.mapper;
+package com.nimtego.itunes.data.entity.mapper;
 
-import com.nimtego.itunes.model.Artist;
-import com.nimtego.itunes.service.pojo.ArtistResult;
-import com.nimtego.itunes.service.pojo.SongResult;
+import com.nimtego.itunes.data.entity.Artist;
+import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import lombok.NonNull;
 
 public class ArtistEntityMapper {
     public Artist transform(final ArtistResult songResult) {

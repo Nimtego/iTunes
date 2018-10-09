@@ -1,8 +1,8 @@
-package com.nimtego.itunes.service;
+package com.nimtego.itunes.data.rest.network;
 
-import com.nimtego.itunes.service.pojo.AlbumsRepository;
-import com.nimtego.itunes.service.pojo.ArtistsRepository;
-import com.nimtego.itunes.service.pojo.SongsRepository;
+import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
+import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
+import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 
 import java.util.Map;
 

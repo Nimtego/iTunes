@@ -1,11 +1,12 @@
-package com.nimtego.itunes.model;
+package com.nimtego.itunes.data.entity;
 
 
-import com.nimtego.itunes.service.pojo.AlbumResult;
+import com.nimtego.itunes.model.ModelManager;
+import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 
 import java.util.List;
 
-public class AlbumsModel<T extends AlbumResult> implements ModelManager{
+public class AlbumsModel<T extends AlbumResult> implements ModelManager {
     private List<T> result;
     private String valueSearch = null;
 

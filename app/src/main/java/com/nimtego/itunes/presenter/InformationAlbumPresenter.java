@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.mvp_contracts.InformationAlbumContract;
-import com.nimtego.itunes.service.FabricParam;
-import com.nimtego.itunes.service.ITunesApi;
-import com.nimtego.itunes.service.pojo.SongResult;
-import com.nimtego.itunes.service.pojo.SongsRepository;
+import com.nimtego.itunes.data.rest.network.FabricParam;
+import com.nimtego.itunes.data.rest.network.ITunesApi;
+import com.nimtego.itunes.data.rest.pojo.SongResult;
+import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 
 import java.util.ArrayList;
 import java.util.List;

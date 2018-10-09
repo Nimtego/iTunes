@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.model.ModelManager;
-import com.nimtego.itunes.service.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 
 import com.nimtego.itunes.view.PostAdapter;
 

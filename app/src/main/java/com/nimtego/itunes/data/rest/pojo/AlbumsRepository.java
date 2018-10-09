@@ -1,4 +1,4 @@
-package com.nimtego.itunes.service.pojo;
+package com.nimtego.itunes.data.rest.pojo;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

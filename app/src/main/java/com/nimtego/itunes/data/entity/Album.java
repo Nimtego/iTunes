@@ -1,4 +1,4 @@
-package com.nimtego.itunes.model;
+package com.nimtego.itunes.data.entity;
 
 import lombok.Builder;
 import lombok.Data;
