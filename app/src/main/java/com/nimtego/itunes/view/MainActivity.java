@@ -59,18 +59,18 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mViewPager = findViewById(R.id.viewpager);
-        setupViewPager(mViewPager);
+        setupViewPager();
 
         mTabLayout = findViewById(R.id.tablayout);
         mTabLayout.setupWithViewPager(mViewPager);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager() {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPagerAdapter.addFragment(new MainTabsFragment(), "Albums");
         mViewPagerAdapter.addFragment(new MainTabsFragment(), "Artists");
         mViewPagerAdapter.addFragment(new MainTabsFragment(), "Songs");
-        viewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setAdapter(mViewPagerAdapter);
     }
 
     @Override

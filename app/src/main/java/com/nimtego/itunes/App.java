@@ -13,9 +13,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class App extends Application {
 
     private static ITunesApi iTunes;
-    private static ModelManager<AlbumResult> modelManager;
+    private static ModelManager modelManager;
 
-    public static ModelManager<AlbumResult> getModelManager() {
+    public static ModelManager getModelManager() {
         return modelManager;
     }
 

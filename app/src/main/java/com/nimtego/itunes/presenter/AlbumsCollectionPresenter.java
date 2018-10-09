@@ -24,7 +24,7 @@ public class AlbumsCollectionPresenter
         extends BasePresenter<AlbumsCollectionContract.View>
         implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View> {
 
-    private ModelManager<AlbumResult> mModelManager;
+    private ModelManager mModelManager;
 
     public AlbumsCollectionPresenter() {
         mModelManager = App.getModelManager();
@@ -42,7 +42,7 @@ public class AlbumsCollectionPresenter
             public void onResponse(@NonNull Call<AlbumsRepository> call, @NonNull final Response<AlbumsRepository> response) {
                 AlbumsRepository mResultEntityList = response.body();
                 List<AlbumResult> resultEntity = mResultEntityList.getResults();
-                mModelManager.setAlbumCollection(resultEntity, message);
+                /*mModelManager.setAlbumCollection(resultEntity, message);*/ // TODO: 09.10.2018  
                 view.hideLoading();
                 Collections.sort(resultEntity, new Comparator<AlbumResult>() {
                     @Override
@@ -50,7 +50,7 @@ public class AlbumsCollectionPresenter
                         return o1.getCollectionName().compareTo(o2.getCollectionName());
                     }
                 });
-                view.setSearchList(mModelManager.getListAlbum());
+                /*view.setSearchList(mModelManager.getListAlbum());*/ // TODO: 09.10.2018  
 /*                view.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
@@ -69,7 +69,8 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void pushInRV(int position) {
-        view.intent(IpTags.ALBUM_ID, String.valueOf(mModelManager.getListAlbum().get(position).getCollectionId()));
+        /*view.intent(IpTags.ALBUM_ID, String.valueOf(mModelManager.getAlbums().get(position).getCollectionId()));*/
+        // TODO: 09.10.2018  
     }
 
     @Override
@@ -78,8 +79,8 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void viewIsReady() {
-        if (!mModelManager.getListAlbum().isEmpty())
-            view.setSearchList(mModelManager.getListAlbum());
+        if (!mModelManager.getAlbums().isEmpty())
+            view.setSearchList(mModelManager.getAlbums());
         else
             search();
     }

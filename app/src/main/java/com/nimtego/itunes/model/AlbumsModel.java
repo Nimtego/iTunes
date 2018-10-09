@@ -5,11 +5,12 @@ import com.nimtego.itunes.service.pojo.AlbumResult;
 
 import java.util.List;
 
-public class AlbumsModel<T extends AlbumResult> implements ModelManager<T>{
+public class AlbumsModel<T extends AlbumResult> implements ModelManager{
     private List<T> result;
     private String valueSearch = null;
 
 
+/*
     @Override
     public List<T> getListAlbum() {
         return result;
@@ -33,5 +34,21 @@ public class AlbumsModel<T extends AlbumResult> implements ModelManager<T>{
     @Override
     public boolean searchCheck() {
         return valueSearch == null;
+    }
+*/
+
+    @Override
+    public List<Album> getAlbums() {
+        return null;
+    }
+
+    @Override
+    public List<Artist> getArtists() {
+        return null;
+    }
+
+    @Override
+    public List<Song> getSongs() {
+        return null;
     }
 }

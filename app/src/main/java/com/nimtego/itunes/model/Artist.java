@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class Artist {
-
     private Integer artistId;
     private String artistName;
     private String artistViewUrl;
