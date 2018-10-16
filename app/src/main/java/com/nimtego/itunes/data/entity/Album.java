@@ -2,10 +2,12 @@ package com.nimtego.itunes.data.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 
 
 @Data
 @Builder
+@ToString
 public class Album {
     private Integer albumId;
     private Integer albumArtistId;
@@ -15,4 +17,5 @@ public class Album {
     private String albumArtWorkUrl;
     private String albumArtistName;
     private Double albumPrice;
+
 }
