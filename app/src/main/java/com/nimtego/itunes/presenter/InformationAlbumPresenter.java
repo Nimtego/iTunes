@@ -23,11 +23,6 @@ public class InformationAlbumPresenter extends BasePresenter<InformationAlbumCon
     private SongsRepository mSongResult;
     private List<String> songsList;
 
-    @Override
-    public Class<?> getNextActivity() {
-        return null;
-    }
-
     public InformationAlbumPresenter(String id) {
         this.id = id;
         songsList = new ArrayList<>();

@@ -5,15 +5,18 @@ import android.support.annotation.NonNull;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.model.ModelManager;
 import com.nimtego.itunes.mvp_contracts.AlbumsCollectionContract;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
-import com.nimtego.itunes.data.rest.network.FabricParam;
-import com.nimtego.itunes.data.rest.network.ITunesApi;
-import com.nimtego.itunes.view.InformationAlbumActivity;
+import com.nimtego.itunes.mvp_contracts.InformationAlbumContract;
+import com.nimtego.itunes.service.pojo.AlbumResult;
+import com.nimtego.itunes.service.pojo.AlbumsRepository;
+import com.nimtego.itunes.service.FabricParam;
+import com.nimtego.itunes.service.ITunesApi;
+import com.nimtego.itunes.utils.IpTags;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +26,7 @@ public class AlbumsCollectionPresenter
         extends BasePresenter<AlbumsCollectionContract.View>
         implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View> {
 
-    private ModelManager mModelManager;
+    private ModelManager<AlbumResult> mModelManager;
 
     public AlbumsCollectionPresenter() {
         mModelManager = App.getModelManager();
@@ -31,7 +34,7 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void search() {
-        final String message = view.getsearchText();
+        final String message = view.getSearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();
         view.showLoading();
@@ -41,7 +44,7 @@ public class AlbumsCollectionPresenter
             public void onResponse(@NonNull Call<AlbumsRepository> call, @NonNull final Response<AlbumsRepository> response) {
                 AlbumsRepository mResultEntityList = response.body();
                 List<AlbumResult> resultEntity = mResultEntityList.getResults();
-                /*mModelManager.setAlbumCollection(resultEntity, message);*/ // TODO: 09.10.2018  
+                mModelManager.setAlbumCollection(resultEntity, message);
                 view.hideLoading();
                 Collections.sort(resultEntity, new Comparator<AlbumResult>() {
                     @Override
@@ -49,7 +52,7 @@ public class AlbumsCollectionPresenter
                         return o1.getCollectionName().compareTo(o2.getCollectionName());
                     }
                 });
-                /*view.setSearchList(mModelManager.getListAlbum());*/ // TODO: 09.10.2018  
+                view.setSearchList(mModelManager.getListAlbum());
 /*                view.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
@@ -68,8 +71,11 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void pushInRV(int position) {
-        /*view.intent(IpTags.ALBUM_ID, String.valueOf(mModelManager.getAlbums().get(position).getCollectionId()));*/
-        // TODO: 09.10.2018  
+        Map<String, String> params = new HashMap<>();
+        String key = IpTags.ALBUM_ID.toString();
+        String value = String.valueOf(mModelManager.getListAlbum().get(position).getCollectionId());
+        params.put(key, value);
+        view.showView(InformationAlbumContract.View.class, params);
     }
 
     @Override
@@ -78,14 +84,10 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void viewIsReady() {
-        if (!mModelManager.getAlbums().isEmpty())
-            view.setSearchList(mModelManager.getAlbums());
+        if (!mModelManager.getListAlbum().isEmpty())
+            view.setSearchList(mModelManager.getListAlbum());
         else
             search();
     }
 
-    @Override
-    public Class<?> getNextActivity() {
-        return InformationAlbumActivity.class;
-    }
 }

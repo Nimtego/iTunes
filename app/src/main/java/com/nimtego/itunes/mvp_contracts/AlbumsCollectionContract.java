@@ -19,11 +19,9 @@ public interface AlbumsCollectionContract {
 
     interface View<P extends Presenter> extends BaseContract.View<P> {
 
-        String getsearchText();
+        String getSearchText();
 
         void clearList();
-
-        void intent(IpTags tags, String id);
 
         void setSearchList(List<AlbumResult> list);
     }

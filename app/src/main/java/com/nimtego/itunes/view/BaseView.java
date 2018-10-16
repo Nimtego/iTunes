@@ -1,6 +1,7 @@
 package com.nimtego.itunes.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -8,6 +9,9 @@ import com.nimtego.itunes.mvp_contracts.BaseContract;
 import com.nimtego.itunes.utils.CommonUtils;
 import com.nimtego.itunes.view.toast.SimpleToastAlarm;
 import com.nimtego.itunes.view.toast.ToastAlarm;
+
+import java.util.Collections;
+import java.util.Map;
 
 public abstract class BaseView<P extends BaseContract.Presenter>
         extends AppCompatActivity
@@ -32,7 +36,7 @@ public abstract class BaseView<P extends BaseContract.Presenter>
 
     @Override
     public void runOnMainThread(Runnable runnable) {
-            runOnUiThread(runnable);
+        runOnUiThread(runnable);
     }
 
     @Override
@@ -52,5 +56,19 @@ public abstract class BaseView<P extends BaseContract.Presenter>
     public void toast(String message) {
         ToastAlarm toastAlarm = new SimpleToastAlarm(this);
         toastAlarm.message(message);
+    }
+
+    @Override
+    public void showView(Class<? super BaseContract.View> view, Map<String, String> params) {
+        Intent intent = new Intent(this, ViewRegistry.getViewImplementation(view));
+        for (Map.Entry<String, String> pair : params.entrySet()) {
+            intent.putExtra(pair.getKey(), pair.getValue());
+        }
+        (this).startActivity(intent);
+    }
+
+    @Override
+    public void showView(Class<? super BaseContract.View> view) {
+        showView(view, Collections.<String, String>emptyMap());
     }
 }
