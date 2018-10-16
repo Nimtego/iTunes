@@ -13,7 +13,7 @@ import retrofit2.http.QueryMap;
 public interface ITunesApi {
 
     @GET("/search")
-    Call<ArtistsRepository> getAutorSongs(@QueryMap Map<String, String> param);
+    Call<ArtistsRepository> searchSongs(@QueryMap Map<String, String> param);
 
     @GET("/search")
     Call<AlbumsRepository> searchAlbum(@QueryMap Map<String, String> param);
