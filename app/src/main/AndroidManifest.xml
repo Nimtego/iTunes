@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".presentation.view.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
@@ -22,9 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.InformationAlbumActivity">
+        <activity android:name=".presentation.view.InformationAlbumActivity">
         </activity>
-        <activity android:name=".view.AlbumsCollectionActivity">
+        <activity android:name=".presentation.view.AlbumsCollectionActivity">
         </activity>
     </application>
 

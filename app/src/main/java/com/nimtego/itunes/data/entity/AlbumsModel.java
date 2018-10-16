@@ -1,11 +1,13 @@
 package com.nimtego.itunes.data.entity;
 
 
-import com.nimtego.itunes.model.ModelManager;
+import com.nimtego.itunes.domain.model.ModelManager;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.presentation.mvp_contracts.AlbumsCollectionContract;
 
 import java.util.List;
 
+@Deprecated
 public class AlbumsModel<T extends AlbumResult> implements ModelManager {
     private List<T> result;
     private String valueSearch = null;
@@ -39,17 +41,17 @@ public class AlbumsModel<T extends AlbumResult> implements ModelManager {
 */
 
     @Override
-    public List<Album> getAlbums() {
-        return null;
+    public void getAlbums(AlbumsCollectionContract.OnFinishedListener listener, String request) {
+
     }
 
     @Override
-    public List<Artist> getArtists() {
-        return null;
+    public void getArtists(AlbumsCollectionContract.OnFinishedListener listener, String request) {
+
     }
 
     @Override
-    public List<Song> getSongs() {
-        return null;
+    public void getSongs(AlbumsCollectionContract.OnFinishedListener listener, String request) {
+
     }
 }
