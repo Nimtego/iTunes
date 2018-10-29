@@ -1,31 +1,36 @@
 package com.nimtego.itunes.presentation.main;
 
-import android.util.Log;
-
 import com.nimtego.itunes.App;
-import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.domain.model.ModelManager;
+import com.nimtego.itunes.data.model.ModelManager;
+import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BasePresenter;
-import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
-import com.nimtego.itunes.presentation.utils.Constant;
 
-import java.util.List;
+import javax.inject.Inject;
 
 public class AlbumsCollectionPresenter
-        extends BasePresenter<AlbumsCollectionContract.View>
-        implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View> {
+        extends BasePresenter<AlbumsCollectionContract.View,
+                              AlbumsCollectionContract.Interactor>
+        implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View,
+                                                      AlbumsCollectionContract.Interactor> {
 
     private final String TAG = this.getClass().getCanonicalName();
-
     private ModelManager mModelManager;
 
+    @Inject
+    public AlbumsCollectionPresenter(AlbumsCollectionContract.Interactor interactor) {
+        this.interactor = interactor;
+    }
+
+    @Deprecated
     public AlbumsCollectionPresenter() {
+        this(new MainViewInteractor());
+        // TODO: 29.10.2018 replaceable di
         mModelManager = App.getModelManager();
     }
 
     @Override
     public void search() {
-        final String requestStr = view.getSearchText();
+/*        final String requestStr = view.getSearchText();
         if (requestStr.isEmpty()) {
             Log.d(TAG, "BLOCK - <<if (requestStr.isEmpty())>>");
             view.toast(Constant.ERROR_EMPTY_SEARCH_TEXT);
@@ -43,7 +48,7 @@ public class AlbumsCollectionPresenter
                     Log.d(TAG, t.getMessage());
                 }
             }, requestStr);
-        }
+        }*/
         /*final String message = view.getSearchText();
         view.toast(message);
         ITunesApi iTunesApi = App.getApi();

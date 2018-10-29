@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface BaseContract {
 
-    interface Presenter<V extends View> {
+    interface Presenter<V extends View, I extends Interactor> {
 
         void attach(V view);
 
@@ -32,6 +32,6 @@ public interface BaseContract {
 
         P supplyPresenter();
     }
-    interface Interactor<T> {}
+    interface Interactor {}
 }
 

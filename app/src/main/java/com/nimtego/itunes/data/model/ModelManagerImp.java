@@ -1,4 +1,4 @@
-package com.nimtego.itunes.domain.model;
+package com.nimtego.itunes.data.model;
 
 import android.support.annotation.NonNull;
 import android.util.Log;

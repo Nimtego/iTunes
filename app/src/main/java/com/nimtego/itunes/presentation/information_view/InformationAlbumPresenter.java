@@ -8,7 +8,6 @@ import com.nimtego.itunes.data.rest.network.ITunesApi;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.presentation.base.BasePresenter;
-import com.nimtego.itunes.presentation.information_view.InformationAlbumContract;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +16,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class InformationAlbumPresenter extends BasePresenter<InformationAlbumContract.View>
-        implements InformationAlbumContract.Presenter<InformationAlbumContract.View> {
+public class InformationAlbumPresenter
+        extends BasePresenter<InformationAlbumContract.View,
+                              InformationAlbumContract.Interactor>
+        implements InformationAlbumContract.Presenter<InformationAlbumContract.View,
+                                                      InformationAlbumContract.Interactor> {
 
     private String id;
     private SongsRepository mSongResult;
