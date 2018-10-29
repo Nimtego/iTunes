@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.view;
+package com.nimtego.itunes.presentation.main;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.presentation.mvp_contracts.AlbumsCollectionContract;
-import com.nimtego.itunes.presentation.presenter.AlbumsCollectionPresenter;
-import com.nimtego.itunes.presentation.view.adapter.ViewPagerAdapter;
-import com.nimtego.itunes.presentation.view.fragments.MainTabsFragment;
+import com.nimtego.itunes.presentation.base.BaseView;
+import com.nimtego.itunes.presentation.main.adapter.PostAdapter;
+import com.nimtego.itunes.presentation.main.adapter.ViewPagerAdapter;
+import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 
 import java.util.List;
 

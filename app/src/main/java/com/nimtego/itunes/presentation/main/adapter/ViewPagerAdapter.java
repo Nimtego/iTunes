@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.view.adapter;
+package com.nimtego.itunes.presentation.main.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

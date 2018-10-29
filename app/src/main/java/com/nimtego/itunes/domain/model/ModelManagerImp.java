@@ -12,7 +12,7 @@ import com.nimtego.itunes.data.rest.network.FabricParam;
 import com.nimtego.itunes.data.rest.network.ITunesApi;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
-import com.nimtego.itunes.presentation.mvp_contracts.AlbumsCollectionContract;
+import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
 
 import java.util.List;
 

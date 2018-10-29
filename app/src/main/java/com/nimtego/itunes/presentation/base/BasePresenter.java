@@ -1,7 +1,7 @@
-package com.nimtego.itunes.presentation.presenter;
+package com.nimtego.itunes.presentation.base;
 
 
-import com.nimtego.itunes.presentation.mvp_contracts.BaseContract;
+import com.nimtego.itunes.presentation.base.BaseContract;
 
 public abstract class BasePresenter<V extends BaseContract.View> implements BaseContract.Presenter<V> {
 

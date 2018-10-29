@@ -1,7 +1,7 @@
 package com.nimtego.itunes.domain.model;
 
 
-import com.nimtego.itunes.presentation.mvp_contracts.AlbumsCollectionContract;
+import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
 
 public interface ModelManager {
     void getAlbums(AlbumsCollectionContract.OnFinishedListener listener, String request);

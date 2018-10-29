@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.view;
+package com.nimtego.itunes.presentation.information_view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.presentation.mvp_contracts.InformationAlbumContract;
-import com.nimtego.itunes.presentation.presenter.InformationAlbumPresenter;
+import com.nimtego.itunes.presentation.base.BaseView;
+import com.nimtego.itunes.presentation.information_view.InformationAlbumContract;
+import com.nimtego.itunes.presentation.information_view.InformationAlbumPresenter;
 import com.nimtego.itunes.presentation.utils.IpTags;
 import com.squareup.picasso.Picasso;
 

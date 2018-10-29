@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.view.custom_view;
+package com.nimtego.itunes.presentation.information_view.custom_view;
 
 import android.content.Context;
 import android.util.AttributeSet;
