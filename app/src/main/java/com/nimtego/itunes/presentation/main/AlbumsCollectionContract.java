@@ -1,14 +1,19 @@
 package com.nimtego.itunes.presentation.main;
 
+
 import com.nimtego.itunes.data.entity.Album;
+import com.nimtego.itunes.data.entity.Artist;
+import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.presentation.base.BaseContract;
 
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface AlbumsCollectionContract {
-    interface Presenter<V extends View> extends BaseContract.Presenter<V> {
+    interface Presenter<V extends View, I extends Interactor> extends BaseContract.Presenter<V, I> {
 
         void search();
 
@@ -27,6 +32,13 @@ public interface AlbumsCollectionContract {
 
         void setSearchList(List<AlbumResult> list);
     }
+
+    interface Interactor extends BaseContract.Interactor{
+        Observable<List<Album>> albums(String response);
+        Observable<List<Artist>> artists(String response);
+        Observable<List<Song>> songs(String response);
+    }
+    @Deprecated
     interface OnFinishedListener {
 
         void onFinished(List<Album> albums);
