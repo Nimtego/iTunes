@@ -3,7 +3,7 @@ package com.nimtego.itunes.data.entity;
 
 import com.nimtego.itunes.domain.model.ModelManager;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.presentation.mvp_contracts.AlbumsCollectionContract;
+import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
 
 import java.util.List;
 

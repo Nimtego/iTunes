@@ -1,4 +1,6 @@
-package com.nimtego.itunes.presentation.mvp_contracts;
+package com.nimtego.itunes.presentation.information_view;
+
+import com.nimtego.itunes.presentation.base.BaseContract;
 
 import java.util.List;
 

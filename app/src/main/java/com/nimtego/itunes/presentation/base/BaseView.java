@@ -1,14 +1,14 @@
-package com.nimtego.itunes.presentation.view;
+package com.nimtego.itunes.presentation.base;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.nimtego.itunes.presentation.mvp_contracts.BaseContract;
 import com.nimtego.itunes.presentation.utils.CommonUtils;
-import com.nimtego.itunes.presentation.view.toast.SimpleToastAlarm;
-import com.nimtego.itunes.presentation.view.toast.ToastAlarm;
+import com.nimtego.itunes.presentation.utils.navigation.ViewRegistry;
+import com.nimtego.itunes.presentation.utils.toast.SimpleToastAlarm;
+import com.nimtego.itunes.presentation.utils.toast.ToastAlarm;
 
 import java.util.Collections;
 import java.util.Map;

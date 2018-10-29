@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.presenter;
+package com.nimtego.itunes.presentation.information_view;
 
 import android.support.annotation.NonNull;
 
@@ -7,7 +7,8 @@ import com.nimtego.itunes.data.rest.network.FabricParam;
 import com.nimtego.itunes.data.rest.network.ITunesApi;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
-import com.nimtego.itunes.presentation.mvp_contracts.InformationAlbumContract;
+import com.nimtego.itunes.presentation.base.BasePresenter;
+import com.nimtego.itunes.presentation.information_view.InformationAlbumContract;
 
 import java.util.ArrayList;
 import java.util.List;

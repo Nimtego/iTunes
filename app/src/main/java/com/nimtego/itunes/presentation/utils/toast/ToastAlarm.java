@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.view.toast;
+package com.nimtego.itunes.presentation.utils.toast;
 
 public interface ToastAlarm {
     void destroy();

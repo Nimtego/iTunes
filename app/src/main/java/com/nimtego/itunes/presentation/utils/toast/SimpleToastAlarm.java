@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.view.toast;
+package com.nimtego.itunes.presentation.utils.toast;
 
 import android.content.Context;
 import android.widget.Toast;

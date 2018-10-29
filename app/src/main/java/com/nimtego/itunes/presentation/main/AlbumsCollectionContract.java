@@ -1,8 +1,8 @@
-package com.nimtego.itunes.presentation.mvp_contracts;
+package com.nimtego.itunes.presentation.main;
 
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.domain.model.ModelManager;
+import com.nimtego.itunes.presentation.base.BaseContract;
 
 
 import java.util.List;

@@ -1,11 +1,12 @@
-package com.nimtego.itunes.presentation.presenter;
+package com.nimtego.itunes.presentation.main;
 
 import android.util.Log;
 
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.domain.model.ModelManager;
-import com.nimtego.itunes.presentation.mvp_contracts.AlbumsCollectionContract;
+import com.nimtego.itunes.presentation.base.BasePresenter;
+import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
 import com.nimtego.itunes.presentation.utils.Constant;
 
 import java.util.List;

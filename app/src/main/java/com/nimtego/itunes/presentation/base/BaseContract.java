@@ -1,5 +1,7 @@
-package com.nimtego.itunes.presentation.mvp_contracts;
+package com.nimtego.itunes.presentation.base;
 
+
+import com.nimtego.itunes.data.rest.network.ApiHelper;
 
 import java.util.Map;
 
@@ -30,5 +32,6 @@ public interface BaseContract {
 
         P supplyPresenter();
     }
+    interface Interactor<T> {}
 }
 
