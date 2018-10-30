@@ -2,8 +2,11 @@ package com.nimtego.itunes.presentation.base;
 
 
 import com.nimtego.itunes.data.rest.network.ApiHelper;
+import com.nimtego.itunes.domain.Repository;
 
 import java.util.Map;
+
+import io.reactivex.Observable;
 
 public interface BaseContract {
 
@@ -32,6 +35,8 @@ public interface BaseContract {
 
         P supplyPresenter();
     }
-    interface Interactor {}
+    interface Interactor<R extends Repository> {
+        void dispose();
+    }
 }
 

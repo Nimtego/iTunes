@@ -30,6 +30,7 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void search() {
+
 /*        final String requestStr = view.getSearchText();
         if (requestStr.isEmpty()) {
             Log.d(TAG, "BLOCK - <<if (requestStr.isEmpty())>>");
