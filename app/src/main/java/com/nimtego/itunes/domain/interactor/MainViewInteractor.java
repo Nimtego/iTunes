@@ -3,7 +3,7 @@ package com.nimtego.itunes.domain.interactor;
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.data.entity.Song;
-import com.nimtego.itunes.presentation.base.BaseInteractor;
+import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
 
 import java.util.List;
@@ -11,9 +11,12 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public class MainViewInteractor extends BaseInteractor implements AlbumsCollectionContract.Interactor {
+
+    private Repository repository;
+
     @Override
     public Observable<List<Album>> albums(String response) {
-        return null;
+        return repository.albums();
     }
 
     @Override

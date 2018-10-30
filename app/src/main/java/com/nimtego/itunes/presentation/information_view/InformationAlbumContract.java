@@ -1,8 +1,13 @@
 package com.nimtego.itunes.presentation.information_view;
 
+import com.nimtego.itunes.data.entity.Album;
+import com.nimtego.itunes.data.entity.Artist;
+import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.presentation.base.BaseContract;
 
 import java.util.List;
+
+import io.reactivex.Observable;
 
 public interface InformationAlbumContract {
     interface Presenter<V extends View, I extends Interactor> extends BaseContract.Presenter<V, I> {
@@ -18,6 +23,8 @@ public interface InformationAlbumContract {
     }
 
     interface Interactor extends BaseContract.Interactor{
-        // TODO: 29.10.2018
+        Observable<Album> album(String id);
+        Observable<Song> song(String id);
+        Observable<Artist> artist(String id);
     }
 }
