@@ -4,7 +4,6 @@ import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.model.ModelManager;
 import com.nimtego.itunes.data.repository.AppRepository;
-import com.nimtego.itunes.domain.interactor.BaseInteractor;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
@@ -12,6 +11,8 @@ import com.nimtego.itunes.presentation.base.BasePresenter;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.observers.DisposableObserver;
 
 public class AlbumsCollectionPresenter
         extends BasePresenter<AlbumsCollectionContract.View,
@@ -36,7 +37,22 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void search() {
+        interactor.execute(new DisposableObserver<List<Album>>() {
+            @Override
+            public void onNext(List<Album> albums) {
+                view.setSearchList(albums);
+            }
 
+            @Override
+            public void onError(Throwable e) {
+                view.toast(e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                AlbumsCollectionPresenter.this.hideViewLoading();
+            }
+        });
 /*        final String requestStr = view.getSearchText();
         if (requestStr.isEmpty()) {
             Log.d(TAG, "BLOCK - <<if (requestStr.isEmpty())>>");
@@ -89,6 +105,10 @@ public class AlbumsCollectionPresenter
                 view.toast("Networking error");
             }
         });*/
+    }
+
+    private void hideViewLoading() {
+        view.hideLoading();
     }
 
     @Override
