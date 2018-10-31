@@ -10,9 +10,24 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-public class MainViewInteractor extends BaseInteractor implements AlbumsCollectionContract.Interactor {
+public class MainViewInteractor
+        extends BaseInteractor<List<Album>> {
 
-    private Repository repository;
+    public MainViewInteractor(Repository repository) {
+        super(repository);
+    }
+
+    @Override
+    protected Observable<List<Album>> buildUseCaseObservable() {
+        return null;
+    }
+
+}
+
+
+/*    public MainViewInteractor(Repository repository) {
+        super(repository);
+    }
 
     @Override
     public Observable<List<Album>> albums(String response) {
@@ -21,11 +36,11 @@ public class MainViewInteractor extends BaseInteractor implements AlbumsCollecti
 
     @Override
     public Observable<List<Artist>> artists(String response) {
-        return null;
+        return repository.artists();
     }
 
     @Override
     public Observable<List<Song>> songs(String response) {
-        return null;
-    }
-}
+        return repository.songs();
+    }*/
+

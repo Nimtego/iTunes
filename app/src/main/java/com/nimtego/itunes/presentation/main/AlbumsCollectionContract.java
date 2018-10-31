@@ -13,7 +13,9 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public interface AlbumsCollectionContract {
-    interface Presenter<V extends View, I extends Interactor> extends BaseContract.Presenter<V, I> {
+    interface Presenter<V extends View,
+                        I extends BaseContract.Interactor<List<Album>>>
+            extends BaseContract.Presenter<V, I> {
 
         void search();
 
@@ -33,11 +35,6 @@ public interface AlbumsCollectionContract {
         void setSearchList(List<AlbumResult> list);
     }
 
-    interface Interactor extends BaseContract.Interactor{
-        Observable<List<Album>> albums(String response);
-        Observable<List<Artist>> artists(String response);
-        Observable<List<Song>> songs(String response);
-    }
     @Deprecated
     interface OnFinishedListener {
 
