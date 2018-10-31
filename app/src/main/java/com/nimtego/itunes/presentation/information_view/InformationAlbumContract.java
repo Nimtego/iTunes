@@ -10,7 +10,7 @@ import java.util.List;
 import io.reactivex.Observable;
 
 public interface InformationAlbumContract {
-    interface Presenter<V extends View, I extends Interactor> extends BaseContract.Presenter<V, I> {
+    interface Presenter<V extends View, I extends BaseContract.Interactor> extends BaseContract.Presenter<V, I> {
         void viewIsReady();
     }
 
@@ -20,11 +20,5 @@ public interface InformationAlbumContract {
         void setAlbumName(String nameAlbum);
         void setSongList(List<String> songs);
         void setAlbumInformation(String information);
-    }
-
-    interface Interactor extends BaseContract.Interactor{
-        Observable<Album> album(String id);
-        Observable<Song> song(String id);
-        Observable<Artist> artist(String id);
     }
 }

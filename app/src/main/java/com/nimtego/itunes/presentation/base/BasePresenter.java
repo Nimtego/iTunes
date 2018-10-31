@@ -16,7 +16,7 @@ public abstract class BasePresenter<V extends BaseContract.View, I extends BaseC
         @Override
         public void detach() {
             this.view = null;
-            this.interactor = null;
+            this.interactor.dispose();
         }
 
         @Override

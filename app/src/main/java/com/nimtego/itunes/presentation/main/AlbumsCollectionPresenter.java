@@ -1,29 +1,35 @@
 package com.nimtego.itunes.presentation.main;
 
 import com.nimtego.itunes.App;
+import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.model.ModelManager;
+import com.nimtego.itunes.data.repository.AppRepository;
+import com.nimtego.itunes.domain.interactor.BaseInteractor;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
+import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 public class AlbumsCollectionPresenter
         extends BasePresenter<AlbumsCollectionContract.View,
-                              AlbumsCollectionContract.Interactor>
+        BaseContract.Interactor<List<Album>>>
         implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View,
-                                                      AlbumsCollectionContract.Interactor> {
+        BaseContract.Interactor<List<Album>>> {
 
     private final String TAG = this.getClass().getCanonicalName();
     private ModelManager mModelManager;
 
     @Inject
-    public AlbumsCollectionPresenter(AlbumsCollectionContract.Interactor interactor) {
+    public AlbumsCollectionPresenter(BaseContract.Interactor<List<Album>> interactor) {
         this.interactor = interactor;
     }
 
     @Deprecated
     public AlbumsCollectionPresenter() {
-        this(new MainViewInteractor());
+        this(new MainViewInteractor(new AppRepository()));
         // TODO: 29.10.2018 replaceable di
         mModelManager = App.getModelManager();
     }

@@ -7,6 +7,8 @@ import com.nimtego.itunes.domain.Repository;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 public interface BaseContract {
 
@@ -35,7 +37,8 @@ public interface BaseContract {
 
         P supplyPresenter();
     }
-    interface Interactor<R extends Repository> {
+    interface Interactor<T> {
+        void execute(DisposableObserver<T> observer);
         void dispose();
     }
 }
