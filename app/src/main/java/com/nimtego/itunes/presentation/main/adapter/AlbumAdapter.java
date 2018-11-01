@@ -11,32 +11,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.Random;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
     //private final Context paren;
     private List<AlbumModel> posts;
 
-    public PostAdapter(List<AlbumModel> posts, Context parent) {
+    public AlbumAdapter(List<AlbumModel> posts, Context parent) {
         this.posts = posts;
-       //this.paren = parent;
+        //this.paren = parent;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
-        return new ViewHolder(v);
+        return new AlbumAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-       // final ResultEntity post = posts.get(position);
+    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
+        // final ResultEntity post = posts.get(position);
         holder.albumName.setText(posts.get(position).getCollectionName());
         holder.artistName.setText(posts.get(position).getArtistName());
         Picasso.get().load(posts.get(position).getArtworkUrl100().replace("100x100", "200x200"))

@@ -15,10 +15,13 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.presentation.base.BaseView;
+import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
 import com.nimtego.itunes.presentation.main.adapter.PostAdapter;
 import com.nimtego.itunes.presentation.main.adapter.ViewPagerAdapter;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -76,24 +79,15 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
     public String getSearchText() {
         return String.valueOf(searchText.getText());
     }
 
     @Override
-    public void clearList() {
-
-    }
-
-    @Override
-    public void setSearchList(List<AlbumResult> list) {
-        RecyclerView.Adapter adapter = new PostAdapter(list, this);
-        MainTabsFragment f = (MainTabsFragment) mViewPagerAdapter.getItem(mViewPager.getCurrentItem());
-        f.setSearchList(list);
+    public void render(List<AlbumModel> list) {
+        MainTabsFragment fragment =
+                (MainTabsFragment) mViewPagerAdapter
+                        .getItem(mViewPager.getCurrentItem());
+        fragment.setSearchList(list);
     }
 }

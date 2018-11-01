@@ -11,7 +11,7 @@ import io.reactivex.Observable;
 public interface Repository {
     Observable<List<Song>> songs();
     Observable<List<Artist>> artists();
-    Observable<List<Album>> albums();
+    Observable<List<Album>> albums(String request);
     Observable<Song> song();
     Observable<Artist> artist();
     Observable<Album> album();

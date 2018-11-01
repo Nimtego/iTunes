@@ -11,15 +11,14 @@ import android.view.ViewGroup;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.data.model.ModelManager;
 import com.nimtego.itunes.presentation.main.adapter.PostAdapter;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
 import java.util.List;
 
 public class MainTabsFragment extends Fragment {
 
     protected RecyclerView mRecyclerView;
-    protected ModelManager mModelManager;
 
     public MainTabsFragment() {
 
@@ -36,7 +35,7 @@ public class MainTabsFragment extends Fragment {
         return view;
     }
 
-    public void setSearchList(List<AlbumResult> list) {
+    public void setSearchList(List<AlbumModel> list) {
         RecyclerView.Adapter adapter = new PostAdapter(list, this.getActivity());
         mRecyclerView.setAdapter(adapter);
     }

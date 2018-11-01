@@ -10,8 +10,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ArtistEntityMapper {
-    public Artist transform(final ArtistResult songResult) {
+public class EntityDataMapper {
+    public Artist transformArtist(final ArtistResult songResult) {
         return Artist.builder()
                 .artistName(songResult.getArtistName())
                 .artistId(songResult.getArtistId())
@@ -21,22 +21,22 @@ public class ArtistEntityMapper {
 
     public List<Artist> transformArtists(final Collection<ArtistResult> artistResultCollection) {
         return artistResultCollection.stream()
-                .map(this::transform)
+                .map(this::transformArtist)
                 .collect(Collectors.toList());
     }
-    public Album transform(final AlbumResult songResult) {
-/*        return Album.builder()
-                .artistName(songResult.getArtistName())
-                .artistId(songResult.getArtistId())
-                .artistViewUrl(songResult.getArtistViewUrl())
-                .build();*/
-        return Album.builder().build(); // TODO: 17.10.2018
+    public Album transformAlbum(final AlbumResult albumResult) {
+        return Album.builder()
+                .albumName(albumResult.getCollectionName())
+                .albumId(albumResult.getCollectionId())
+                .albumArtWorkUrl(albumResult.getArtworkUrl100())
+                .build()
+                ;
     }
 
     public List<Album> transformAlbums(final Collection<AlbumResult> artistResultCollection) {
-/*        return artistResultCollection.stream()
-                .map(this::transform)
-                .collect(Collectors.toList());*/
-        return new ArrayList<>(); // TODO: 17.10.2018
+        return artistResultCollection.stream()
+                .map(this::transformAlbum)
+                .collect(Collectors.toList())
+                ;
     }
 }

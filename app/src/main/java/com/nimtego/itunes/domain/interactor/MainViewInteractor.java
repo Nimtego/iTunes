@@ -8,39 +8,33 @@ import com.nimtego.itunes.presentation.main.AlbumsCollectionContract;
 
 import java.util.List;
 
+import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
 public class MainViewInteractor
-        extends BaseInteractor<List<Album>> {
+        extends BaseInteractor<List<Album>, MainViewInteractor.Params> {
 
     public MainViewInteractor(Repository repository) {
         super(repository);
     }
 
     @Override
-    protected Observable<List<Album>> buildUseCaseObservable() {
-        return null;
+    protected Observable<List<Album>> buildUseCaseObservable(Params params) {
+        Preconditions.checkNotNull(params);
+        return repository.albums(params.request);
+    }
+
+    public static final class Params {
+
+        private final String request;
+
+        private Params(String request) {
+            this.request = request;
+        }
+
+        public static Params forRequest(String request) {
+            return new Params(request);
+        }
     }
 
 }
-
-
-/*    public MainViewInteractor(Repository repository) {
-        super(repository);
-    }
-
-    @Override
-    public Observable<List<Album>> albums(String response) {
-        return repository.albums();
-    }
-
-    @Override
-    public Observable<List<Artist>> artists(String response) {
-        return repository.artists();
-    }
-
-    @Override
-    public Observable<List<Song>> songs(String response) {
-        return repository.songs();
-    }*/
-

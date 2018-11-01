@@ -37,8 +37,8 @@ public interface BaseContract {
 
         P supplyPresenter();
     }
-    interface Interactor<T> {
-        void execute(DisposableObserver<T> observer);
+    interface Interactor<T, P> {
+        void execute(DisposableObserver<T> observer, P params);
         void dispose();
     }
 }

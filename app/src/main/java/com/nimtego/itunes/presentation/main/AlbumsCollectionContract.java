@@ -5,16 +5,20 @@ import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
 
+import java.util.Collection;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
 
 public interface AlbumsCollectionContract {
     interface Presenter<V extends View,
-                        I extends BaseContract.Interactor<List<Album>>>
+                        I extends BaseContract.Interactor>
             extends BaseContract.Presenter<V, I> {
 
         void search();
@@ -30,15 +34,6 @@ public interface AlbumsCollectionContract {
 
         String getSearchText();
 
-        void clearList();
-
-        void setSearchList(List<AlbumResult> list);
-    }
-
-    @Deprecated
-    interface OnFinishedListener {
-
-        void onFinished(List<Album> albums);
-        void onFailure(Throwable t);
+        void render(List<AlbumModel> albumModels);
     }
 }

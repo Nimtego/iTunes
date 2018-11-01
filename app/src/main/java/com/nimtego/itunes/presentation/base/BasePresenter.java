@@ -3,7 +3,9 @@ package com.nimtego.itunes.presentation.base;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
 
-public abstract class BasePresenter<V extends BaseContract.View, I extends BaseContract.Interactor> implements BaseContract.Presenter<V, I> {
+public abstract class BasePresenter<V extends BaseContract.View,
+                                    I extends BaseContract.Interactor>
+        implements BaseContract.Presenter<V, I> {
 
         protected V view;
         protected I interactor;
