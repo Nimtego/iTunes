@@ -7,6 +7,7 @@ import com.nimtego.itunes.data.rest.network.FabricParam;
 import com.nimtego.itunes.data.rest.network.ITunesApi;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 
 import java.util.ArrayList;
@@ -18,9 +19,9 @@ import retrofit2.Response;
 
 public class InformationAlbumPresenter
         extends BasePresenter<InformationAlbumContract.View,
-                              InformationAlbumContract.Interactor>
+                              BaseContract.Interactor>
         implements InformationAlbumContract.Presenter<InformationAlbumContract.View,
-                                                      InformationAlbumContract.Interactor> {
+                                                      BaseContract.Interactor> {
 
     private String id;
     private SongsRepository mSongResult;

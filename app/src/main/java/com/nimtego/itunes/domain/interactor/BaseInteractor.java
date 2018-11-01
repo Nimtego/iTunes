@@ -17,7 +17,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public abstract class BaseInteractor<T> implements BaseContract.Interactor<T> {
+public abstract class BaseInteractor<T, P> implements BaseContract.Interactor<T, P> {
     protected final CompositeDisposable disposables;
     protected Repository repository;
 
@@ -27,11 +27,11 @@ public abstract class BaseInteractor<T> implements BaseContract.Interactor<T> {
         this.repository = repository;
     }
 
-    protected abstract Observable<T> buildUseCaseObservable();
+    protected abstract Observable<T> buildUseCaseObservable(P param);
 
     @Override
-    public void execute(DisposableObserver<T> observer) {
-        final Observable<T> observable = this.buildUseCaseObservable();
+    public void execute(DisposableObserver<T> observer, P param) {
+        final Observable<T> observable = this.buildUseCaseObservable(param);
         // TODO: 31.10.2018 class
 /*                .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(postExecutionThread.getScheduler());*/
