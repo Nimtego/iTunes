@@ -8,6 +8,7 @@ import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 
 import java.util.Collection;
@@ -23,6 +24,8 @@ public interface AlbumsCollectionContract {
 
         void search();
 
+        void tabSelected(String tabName);
+
         void pushInRV(int position);
 
         void longPushInRV(int position);
@@ -34,6 +37,6 @@ public interface AlbumsCollectionContract {
 
         String getSearchText();
 
-        void render(List<AlbumModel> albumModels);
+        void render(MainDataModel dataModel);
     }
 }

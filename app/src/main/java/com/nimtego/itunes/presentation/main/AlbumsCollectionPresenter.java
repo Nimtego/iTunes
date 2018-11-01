@@ -6,6 +6,7 @@ import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.main.model.MainDataModel;
 import com.nimtego.itunes.presentation.mapper.AlbumModelDataMapper;
 
 import java.util.Collection;
@@ -59,63 +60,18 @@ public class AlbumsCollectionPresenter
                 AlbumsCollectionPresenter.this.hideViewLoading();
             }
         }, MainViewInteractor.Params.forRequest(getSearchText()));
-/*        final String requestStr = view.getSearchText();
-        if (requestStr.isEmpty()) {
-            Log.d(TAG, "BLOCK - <<if (requestStr.isEmpty())>>");
-            view.toast(Constant.ERROR_EMPTY_SEARCH_TEXT);
-        }
-        else {
-            mModelManager.getAlbums(new AlbumsCollectionContract.OnFinishedListener() {
-                @Override
-                public void onFinished(List<Album> albums) {
-                    view.setSearchList(albums);
-                }
+    }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    view.toast(t.getMessage());
-                    Log.d(TAG, t.getMessage());
-                }
-            }, requestStr);
-        }*/
-        /*final String message = view.getSearchText();
-        view.toast(message);
-        ITunesApi iTunesApi = App.getApi();
-        view.showLoading();
-        Call<AlbumsRepository> call = iTunesApi.searchAlbum(FabricParam.searchAlbumParam(message, 100));
-        call.enqueue(new Callback<AlbumsRepository>() {
-            @Override
-            public void onResponse(@NonNull Call<AlbumsRepository> call, @NonNull final Response<AlbumsRepository> response) {
-                AlbumsRepository mResultEntityList = response.body();
-                List<AlbumResult> resultEntity = mResultEntityList.getResults();
-                mModelManager.setAlbumCollection(resultEntity, message);
-                view.hideLoading();
-                Collections.sort(resultEntity, new Comparator<AlbumResult>() {
-                    @Override
-                    public int compare(AlbumResult o1, AlbumResult o2) {
-                        return o1.getCollectionName().compareTo(o2.getCollectionName());
-                    }
-                });
-                view.setSearchList(mModelManager.getListAlbum());
-*//*                view.runOnMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        view.setSearchList(mResultEntityList.getResults());
-                    }
-                });*//*
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<AlbumsRepository> call, @NonNull Throwable t) {
-                view.hideLoading();
-                view.toast("Networking error");
-            }
-        });*/
+    @Override
+    public void tabSelected(String tabName) {
+        // TODO: 01.11.2018  
     }
 
     private void showAlbumsInView(Collection<Album> albums) {
-        final List<AlbumModel> albumModels = mapper.transformAlbums(albums);
-        view.render(albumModels);
+        final MainDataModel dataModel = MainDataModel.builder()
+                            .albumModels(mapper.transformAlbums(albums))
+                            .build();
+        view.render(dataModel);
     }
     private String getSearchText() {
         return view.getSearchText();

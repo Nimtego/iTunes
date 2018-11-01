@@ -15,9 +15,9 @@ public class AlbumModelDataMapper {
 
     public AlbumModel transform(final Album album) {
         return AlbumModel.builder()
-                .artistName(album.getAlbumArtistName())
-                .collectionName(album.getAlbumName())
-                .artworkUrl100(album.getAlbumArtWorkUrl())
+                .albumArtistName(album.getAlbumArtistName())
+                .albumName(album.getAlbumName())
+                .albumArtwork(album.getAlbumArtWorkUrl())
                 .build()
                 ;
     }

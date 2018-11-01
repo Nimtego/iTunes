@@ -18,37 +18,12 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 import java.util.Random;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+public abstract class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
-    private List<AlbumModel> models;
+    protected MainDataModel model;
 
-    public AlbumAdapter(List<AlbumModel> model, Context parent) {
-        this.models = model;
-    }
-
-    @Override
-    public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
-        return new AlbumAdapter.ViewHolder(v);
-    }
-
-
-    @Override
-    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(models.get(position).getAlbumName());
-        holder.artistName.setText(models.get(position).getAlbumArtistName());
-        Picasso.get().load(models.get(position).getAlbumArtwork().replace("100x100", "200x200"))
-                .placeholder(R.drawable.baseline_update_black)
-                .error(R.drawable.ic_launcher_background)
-                .into(holder.albumImage);
-        holder.cv.setCardElevation(5);
-    }
-
-    @Override
-    public int getItemCount() {
-        if (models == null)
-            return 0;
-        return models.size();
+    public MainAdapter(MainDataModel model, Context parent) {
+        this.model = model;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

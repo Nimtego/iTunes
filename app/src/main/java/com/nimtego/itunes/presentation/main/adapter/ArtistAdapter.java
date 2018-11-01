@@ -12,32 +12,32 @@ import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Random;
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
 
-    private List<AlbumModel> models;
+    private List<ArtistModel> models;
 
-    public AlbumAdapter(List<AlbumModel> model, Context parent) {
+    public ArtistAdapter(List<ArtistModel> model, Context parent) {
         this.models = model;
     }
 
     @Override
-    public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ArtistAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
-        return new AlbumAdapter.ViewHolder(v);
+        return new ArtistAdapter.ViewHolder(v);
     }
 
 
     @Override
-    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(models.get(position).getAlbumName());
-        holder.artistName.setText(models.get(position).getAlbumArtistName());
-        Picasso.get().load(models.get(position).getAlbumArtwork().replace("100x100", "200x200"))
+    public void onBindViewHolder(final ArtistAdapter.ViewHolder holder, final int position) {
+        holder.albumName.setText(models.get(position).getArtistName());
+        holder.artistName.setText("TODO");
+        Picasso.get().load(models.get(position).getArtistArtwork().replace("100x100", "200x200"))
                 .placeholder(R.drawable.baseline_update_black)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);

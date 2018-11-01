@@ -11,51 +11,45 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.data.entity.Song;
+import com.nimtego.itunes.presentation.main.model.ArtistModel;
+import com.nimtego.itunes.presentation.main.model.SongModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Random;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
-    //private final Context paren;
-    private List<AlbumModel> posts;
+    private List<SongModel> models;
 
-    public PostAdapter(List<AlbumModel> posts, Context parent) {
-        this.posts = posts;
-       //this.paren = parent;
+    public SongAdapter(List<SongModel> model, Context parent) {
+        this.models = model;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SongAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
-        return new ViewHolder(v);
+        return new SongAdapter.ViewHolder(v);
     }
 
+
+
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-       // final ResultEntity post = posts.get(position);
-        holder.albumName.setText(posts.get(position).getCollectionName());
-        holder.artistName.setText(posts.get(position).getArtistName());
-        Picasso.get().load(posts.get(position).getArtworkUrl100().replace("100x100", "200x200"))
+    public void onBindViewHolder(final SongAdapter.ViewHolder holder, final int position) {
+        holder.albumName.setText(models.get(position).getSongAlbumName());
+        holder.artistName.setText(models.get(position).getSongAlbumName());
+        Picasso.get().load(models.get(position).getSongArtwork().replace("100x100", "200x200"))
                 .placeholder(R.drawable.baseline_update_black)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);
         holder.cv.setCardElevation(5);
-        Random rand = new Random();
-
-/*        holder.card.setBackgroundColor(Color.rgb(rand.nextInt(250)+ 100,
-                rand.nextInt(250) + 100,
-                rand.nextInt(250) + 100));*/
     }
 
     @Override
     public int getItemCount() {
-        if (posts == null)
+        if (models == null)
             return 0;
-        return posts.size();
+        return models.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

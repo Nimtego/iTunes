@@ -7,8 +7,7 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-public class AlbumModel {
-    private String albumName;
-    private String albumArtistName;
-    private String albumArtwork;
+public class ArtistModel {
+    private String artistName;
+    private String artistArtwork;
 }
