@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -13,16 +12,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.presentation.base.BaseView;
-import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
-import com.nimtego.itunes.presentation.main.adapter.PostAdapter;
 import com.nimtego.itunes.presentation.main.adapter.ViewPagerAdapter;
+import com.nimtego.itunes.presentation.main.fragments.AlbumTabsFragment;
+import com.nimtego.itunes.presentation.main.fragments.ArtistTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
-
-import java.util.Collection;
-import java.util.List;
+import com.nimtego.itunes.presentation.main.fragments.SongTabsFragment;
+import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 
 public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
@@ -63,13 +59,29 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
 
         mTabLayout = findViewById(R.id.tablayout);
         mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mPresenter.tabSelected(String.valueOf(tab.getContentDescription()));
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
 
     private void setupViewPager() {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragment(new MainTabsFragment(), "Albums");
-        mViewPagerAdapter.addFragment(new MainTabsFragment(), "Artists");
-        mViewPagerAdapter.addFragment(new MainTabsFragment(), "Songs");
+        mViewPagerAdapter.addFragment(new AlbumTabsFragment(), "Albums");
+        mViewPagerAdapter.addFragment(new ArtistTabsFragment(), "Artists");
+        mViewPagerAdapter.addFragment(new SongTabsFragment(), "Songs");
         mViewPager.setAdapter(mViewPagerAdapter);
     }
 
@@ -84,10 +96,10 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
     }
 
     @Override
-    public void render(List<AlbumModel> list) {
+    public void render(MainDataModel dataModel) {
         MainTabsFragment fragment =
                 (MainTabsFragment) mViewPagerAdapter
                         .getItem(mViewPager.getCurrentItem());
-        fragment.setSearchList(list);
+        fragment.setSearchList(dataModel);
     }
 }
