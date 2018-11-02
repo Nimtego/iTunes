@@ -1,6 +1,8 @@
 package com.nimtego.itunes.presentation.base;
 
 
+import android.content.Context;
+
 import com.nimtego.itunes.data.rest.network.ApiHelper;
 import com.nimtego.itunes.domain.Repository;
 
@@ -34,6 +36,8 @@ public interface BaseContract {
         void showView(Class<? super View> view, Map<String, String> params);
 
         void showView(Class<? super View> view);
+
+        Context context();
 
         P supplyPresenter();
     }

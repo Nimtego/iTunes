@@ -21,8 +21,8 @@ import com.nimtego.itunes.presentation.main.fragments.SongTabsFragment;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 
-public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
-        implements AlbumsCollectionContract.View<AlbumsCollectionContract.Presenter> {
+public class MainActivity extends BaseView<MainContract.Presenter>
+        implements MainContract.View<MainContract.Presenter> {
     private Toolbar mToolBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -86,8 +86,8 @@ public class MainActivity extends BaseView<AlbumsCollectionContract.Presenter>
     }
 
     @Override
-    public AlbumsCollectionContract.Presenter supplyPresenter() {
-        return new AlbumsCollectionPresenter();
+    public MainContract.Presenter supplyPresenter() {
+        return new MainPresenter();
     }
 
     @Override

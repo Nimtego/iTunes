@@ -5,7 +5,6 @@ import com.nimtego.itunes.data.repository.AppRepository;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 import com.nimtego.itunes.presentation.mapper.AlbumModelDataMapper;
 
@@ -16,11 +15,11 @@ import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableObserver;
 
-public class AlbumsCollectionPresenter
-        extends BasePresenter<AlbumsCollectionContract.View,
+public class MainPresenter
+        extends BasePresenter<MainContract.View,
         BaseContract.Interactor<List<Album>,
                                       MainViewInteractor.Params>>
-        implements AlbumsCollectionContract.Presenter<AlbumsCollectionContract.View,
+        implements MainContract.Presenter<MainContract.View,
         BaseContract.Interactor<List<Album>,
                 MainViewInteractor.Params>> {
 
@@ -28,13 +27,16 @@ public class AlbumsCollectionPresenter
     private AlbumModelDataMapper mapper;
 
     @Inject
-    public AlbumsCollectionPresenter(BaseContract.Interactor<List<Album>, MainViewInteractor.Params> interactor) {
+    public MainPresenter(BaseContract.Interactor<List<Album>,
+                                      MainViewInteractor.Params> interactor,
+                         AlbumModelDataMapper mapper) {
+        this.mapper = mapper;
         this.interactor = interactor;
     }
 
 
-    public AlbumsCollectionPresenter() {
-        this(new MainViewInteractor(new AppRepository()));
+    public MainPresenter() {
+        this(new MainViewInteractor(new AppRepository()), new AlbumModelDataMapper());
         // TODO: 29.10.2018 replaceable di
     }
 
@@ -44,20 +46,20 @@ public class AlbumsCollectionPresenter
         interactor.execute(new DisposableObserver<List<Album>>() {
             @Override
             public void onNext(List<Album> albums) {
-                AlbumsCollectionPresenter.this.showAlbumsInView(albums);
+                MainPresenter.this.showAlbumsInView(albums);
             }
 
             @Override
             public void onError(Throwable e) {
-                AlbumsCollectionPresenter.this.hideViewLoading();
-                AlbumsCollectionPresenter.this.toast(e.getMessage());
+                MainPresenter.this.hideViewLoading();
+                MainPresenter.this.toast(e.getMessage());
                 // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
             }
 
             @Override
             public void onComplete() {
-                AlbumsCollectionPresenter.this.hideViewLoading();
+                MainPresenter.this.hideViewLoading();
             }
         }, MainViewInteractor.Params.forRequest(getSearchText()));
     }
@@ -101,10 +103,8 @@ public class AlbumsCollectionPresenter
 
     @Override
     public void viewIsReady() {
-/*        if (!mModelManager.getListAlbum().isEmpty())
-            view.setSearchList(mModelManager.getListAlbum());
-        else
-            search();*/
+        if (!view.getSearchText().isEmpty())
+                search();
     }
 
 }
