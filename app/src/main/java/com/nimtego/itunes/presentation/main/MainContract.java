@@ -17,7 +17,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 
-public interface AlbumsCollectionContract {
+public interface MainContract {
     interface Presenter<V extends View,
                         I extends BaseContract.Interactor>
             extends BaseContract.Presenter<V, I> {
