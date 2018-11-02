@@ -64,5 +64,16 @@ public class AlbumModelDataMapperTest {
                 .limit(5)
                 .collect(Collectors.toList()))
                 .forEach(this::testAssert);
+
+        /*mapper.transformAlbums(Stream
+                .generate(this::createFakeAlbum)
+                .limit(5)
+                .collect(Collectors.toList()))
+                .forEach((a) -> {
+                    assertThat(a, is(instanceOf(AlbumModel.class)));
+                    assertThat(a.getAlbumArtistName(), is(ALBUM_ARTIST_NAME));
+                    assertThat(a.getAlbumName(), is(ALBUM_NAME));
+                    assertThat(a.getAlbumArtwork(), is(ALBUM_IMAGE));
+                });*/
     }
 }
