@@ -1,3 +1,5 @@
+[![codecov.io](https://codecov.io/github/Nimtego/iTunes/branch/master/graph/badge.svg)]
+
 # iTunes
 
 
