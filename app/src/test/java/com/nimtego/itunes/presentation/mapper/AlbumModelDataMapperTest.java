@@ -3,20 +3,15 @@ package com.nimtego.itunes.presentation.mapper;
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
-import junit.framework.TestCase;
-
-import net.bytebuddy.matcher.ElementMatcher;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class AlbumModelDataMapperTest {
@@ -30,7 +25,7 @@ public class AlbumModelDataMapperTest {
     private AlbumModelDataMapper mapper;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mapper = new AlbumModelDataMapper();
     }
 
