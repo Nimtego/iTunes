@@ -27,13 +27,16 @@ public class MainPresenter
     private AlbumModelDataMapper mapper;
 
     @Inject
-    public MainPresenter(BaseContract.Interactor<List<Album>, MainViewInteractor.Params> interactor) {
+    public MainPresenter(BaseContract.Interactor<List<Album>,
+                                      MainViewInteractor.Params> interactor,
+                         AlbumModelDataMapper mapper) {
+        this.mapper = mapper;
         this.interactor = interactor;
     }
 
 
     public MainPresenter() {
-        this(new MainViewInteractor(new AppRepository()));
+        this(new MainViewInteractor(new AppRepository()), new AlbumModelDataMapper());
         // TODO: 29.10.2018 replaceable di
     }
 
@@ -100,10 +103,8 @@ public class MainPresenter
 
     @Override
     public void viewIsReady() {
-/*        if (!mModelManager.getListAlbum().isEmpty())
-            view.setSearchList(mModelManager.getListAlbum());
-        else
-            search();*/
+        if (!view.getSearchText().isEmpty())
+                search();
     }
 
 }

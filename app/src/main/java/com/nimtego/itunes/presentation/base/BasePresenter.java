@@ -3,6 +3,8 @@ package com.nimtego.itunes.presentation.base;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
 
+import io.reactivex.annotations.NonNull;
+
 public abstract class BasePresenter<V extends BaseContract.View,
                                     I extends BaseContract.Interactor>
         implements BaseContract.Presenter<V, I> {
@@ -11,7 +13,7 @@ public abstract class BasePresenter<V extends BaseContract.View,
         protected I interactor;
 
         @Override
-        public void attach(V view) {
+        public void attach(@NonNull V view) {
             this.view = view;
         }
 

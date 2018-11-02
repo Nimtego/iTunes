@@ -11,6 +11,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import io.reactivex.observers.DisposableObserver;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 @RunWith(MockitoJUnitRunner.class)
 public class MainPresenterTest {
     private MainPresenter presenter;
@@ -18,18 +25,31 @@ public class MainPresenterTest {
     @Mock
     private Context mockContext;
     @Mock
-    private MainActivity mockMainActivity;
+    private MainActivity mockMainView;
     @Mock
     private MainViewInteractor mockInteracter;
     @Mock
     private AlbumModelDataMapper mockModelDataMapper;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
+        presenter = new MainPresenter(mockInteracter, mockModelDataMapper);
+        presenter.attach(mockMainView);
     }
-
     @Test
-    public void search() {
+    @SuppressWarnings("unchecked")
+    public void testUserListPresenterInitialize() {
+        given(mockMainView.context()).willReturn(mockContext);
+        when(mockMainView.getSearchText()).thenReturn("metallica");
+
+        presenter.viewIsReady();
+        verify(mockMainView).showLoading();
+        verify(mockInteracter).execute(any(DisposableObserver.class),
+                any(MainViewInteractor.Params.class));
+    }
+    @Test
+    public void searchTest() {
+        presenter.search();
     }
 
     @Test
