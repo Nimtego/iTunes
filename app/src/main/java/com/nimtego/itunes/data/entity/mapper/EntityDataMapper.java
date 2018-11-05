@@ -3,6 +3,7 @@ package com.nimtego.itunes.data.entity.mapper;
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 
 import java.util.ArrayList;
@@ -38,5 +39,8 @@ public class EntityDataMapper {
                 .map(this::transformAlbum)
                 .collect(Collectors.toList())
                 ;
+    }
+    public List<Album> transformAlbums(final AlbumsRepository albumsRepository) {
+        return transformAlbums(albumsRepository.getResults());
     }
 }

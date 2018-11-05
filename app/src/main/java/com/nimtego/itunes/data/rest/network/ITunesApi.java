@@ -6,18 +6,18 @@ import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 
 import java.util.Map;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
 public interface ITunesApi {
 
     @GET("/search")
-    Call<ArtistsRepository> searchAutor(@QueryMap Map<String, String> param);
+    Observable<ArtistsRepository> searchAutor(@QueryMap Map<String, String> param);
 
     @GET("/search")
-    Call<AlbumsRepository> searchAlbum(@QueryMap Map<String, String> param);
+    Observable<AlbumsRepository> searchAlbum(@QueryMap Map<String, String> param);
 
     @GET("/lookup")
-    Call<SongsRepository> getSongs(@QueryMap Map<String, String> param);
+    Observable<SongsRepository> getSongs(@QueryMap Map<String, String> param);
 }

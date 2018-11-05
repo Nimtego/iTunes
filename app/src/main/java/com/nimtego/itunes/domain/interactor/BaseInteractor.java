@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -31,10 +32,9 @@ public abstract class BaseInteractor<T, P> implements BaseContract.Interactor<T,
 
     @Override
     public void execute(DisposableObserver<T> observer, P param) {
-        final Observable<T> observable = this.buildUseCaseObservable(param);
-        // TODO: 31.10.2018 class
-/*                .subscribeOn(Schedulers.from(threadExecutor))
-                .observeOn(postExecutionThread.getScheduler());*/
+        final Observable<T> observable = this.buildUseCaseObservable(param)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
         addDisposable(observable.subscribeWith(observer));
     }
 
