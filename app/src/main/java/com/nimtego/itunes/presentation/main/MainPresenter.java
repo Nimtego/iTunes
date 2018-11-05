@@ -43,6 +43,7 @@ public class MainPresenter
     @Override
     public void search() {
         showViewLoading();
+        toast("Search");
         interactor.execute(new DisposableObserver<List<Album>>() {
             @Override
             public void onNext(List<Album> albums) {
@@ -52,7 +53,7 @@ public class MainPresenter
             @Override
             public void onError(Throwable e) {
                 MainPresenter.this.hideViewLoading();
-                MainPresenter.this.toast(e.getMessage());
+                MainPresenter.this.toast("error" +e.getLocalizedMessage());
                 // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
             }

@@ -17,7 +17,7 @@ import io.reactivex.Observable;
 public interface DataStore {
     Observable<SongsRepository> songs();
     Observable<ArtistsRepository> artists();
-    Observable<List<AlbumResult>> albums(String request);
+    Observable<AlbumsRepository> albums(String request);
     Observable<SongResult> song();
     Observable<ArtistResult> artist();
     Observable<AlbumResult> album();

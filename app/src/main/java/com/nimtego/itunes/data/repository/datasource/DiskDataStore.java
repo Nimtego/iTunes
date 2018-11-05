@@ -2,6 +2,7 @@ package com.nimtego.itunes.data.repository.datasource;
 
 import com.nimtego.itunes.data.cache.Cache;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
@@ -30,7 +31,7 @@ public class DiskDataStore implements DataStore{
     }
 
     @Override
-    public Observable<List<AlbumResult>> albums(String request) {
+    public Observable<AlbumsRepository> albums(String request) {
         return null;
     }
 

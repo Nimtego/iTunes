@@ -36,7 +36,7 @@ public class InformationAlbumPresenter
     public void viewIsReady (){
 
 
-        ITunesApi iTunesApi = App.getApi();
+       /* ITunesApi iTunesApi = App.getApi();
         Call<SongsRepository> call = iTunesApi.getSongs(FabricParam.lookupSongsAlbum(id));
         call.enqueue(new Callback<SongsRepository>() {
             @Override
@@ -79,6 +79,6 @@ public class InformationAlbumPresenter
             public void onFailure(@NonNull Call<SongsRepository> call, @NonNull Throwable t) {
                 view.toast("An error occurred during networking");
             }
-        });
+        });*/
     }
 }

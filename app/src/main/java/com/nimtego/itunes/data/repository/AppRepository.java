@@ -1,5 +1,8 @@
 package com.nimtego.itunes.data.repository;
 
+import com.nimtego.itunes.App;
+import com.nimtego.itunes.data.cache.AlbumCache;
+import com.nimtego.itunes.data.cache.FileManager;
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.data.entity.Song;
@@ -10,12 +13,26 @@ import com.nimtego.itunes.domain.Repository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 public class AppRepository implements Repository {
 
     private DataStoreFactory dataStoreFactory;
     private EntityDataMapper mapper;
+
+
+    public AppRepository(DataStoreFactory dataStoreFactory, EntityDataMapper mapper) {
+        this.dataStoreFactory = dataStoreFactory;
+        this.mapper = mapper;
+    }
+
+    public AppRepository() {
+        this(new DataStoreFactory(App.getAppContext(),
+                new AlbumCache(App.getAppContext(),
+                        new FileManager())), new EntityDataMapper());
+    }
 
     @Override
     public Observable<List<Song>> songs() {

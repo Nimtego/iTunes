@@ -18,7 +18,7 @@ public class DataStoreFactory {
     private final Cache cache;
 
     @Inject
-    DataStoreFactory(@NonNull Context context, @NonNull Cache cache) {
+    public DataStoreFactory(@NonNull Context context, @NonNull Cache cache) {
         this.context = context.getApplicationContext();
         this.cache = cache;
     }
