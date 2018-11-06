@@ -29,6 +29,7 @@ public class EntityDataMapper {
         return Album.builder()
                 .albumName(albumResult.getCollectionName())
                 .albumId(albumResult.getCollectionId())
+                .albumArtistName(albumResult.getArtistName())
                 .albumArtWorkUrl(albumResult.getArtworkUrl100())
                 .build()
                 ;
