@@ -35,8 +35,9 @@ public class AppRepository implements Repository {
     }
 
     @Override
-    public Observable<List<Song>> songs() {
-        return null;
+    public Observable<List<Song>> songs(String request) {
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return dataStore.songs(request).map(this.mapper::transformSongs);
     }
 
     @Override

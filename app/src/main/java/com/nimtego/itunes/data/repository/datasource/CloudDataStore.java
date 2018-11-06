@@ -32,8 +32,8 @@ public class CloudDataStore implements DataStore{
     }
 
     @Override
-    public Observable<SongsRepository> songs() {
-        return null;
+    public Observable<SongsRepository> songs(String request) {
+        return restApi.getSongs(FabricParam.searchSongParam(request));
     }
 
     @Override

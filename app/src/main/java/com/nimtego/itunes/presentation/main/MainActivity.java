@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 public class MainActivity extends BaseView<MainContract.Presenter>
         implements MainContract.View<MainContract.Presenter> {
+
     private Toolbar mToolBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -34,11 +36,22 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchText = findViewById(R.id.search_edit_text);
+        searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (hasFocus) {
+                    searchText.setCursorVisible(true);
+                } else {
+                    searchText.setCursorVisible(false);
+                }
+            }
+        });
         searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     mPresenter.search();
+                    searchText.setCursorVisible(false);
                     InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     if (in != null) {
                         in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);

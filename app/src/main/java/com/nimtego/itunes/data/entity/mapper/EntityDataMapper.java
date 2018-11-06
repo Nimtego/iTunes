@@ -2,9 +2,12 @@ package com.nimtego.itunes.data.entity.mapper;
 
 import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.entity.Artist;
+import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistResult;
+import com.nimtego.itunes.data.rest.pojo.SongResult;
+import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,5 +46,22 @@ public class EntityDataMapper {
     }
     public List<Album> transformAlbums(final AlbumsRepository albumsRepository) {
         return transformAlbums(albumsRepository.getResults());
+    }
+
+    public List<Song> transformSongs(final Collection<SongResult> results) {
+        return results.stream()
+                .map(this::transformSong)
+                .collect(Collectors.toList());
+    }
+
+    private Song transformSong(SongResult songResult) {
+        return Song.builder()
+                .trackName(songResult.getTrackName())
+                .artistName(songResult.getArtistName())
+                .build();
+    }
+
+    public List<Song> transformSongs(final SongsRepository songsRepository) {
+        return transformSongs(songsRepository.getResults());
     }
 }

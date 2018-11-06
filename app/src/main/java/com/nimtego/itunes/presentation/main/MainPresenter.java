@@ -67,7 +67,7 @@ public class MainPresenter
 
     @Override
     public void tabSelected(String tabName) {
-        // TODO: 01.11.2018  
+        toast(tabName);
     }
 
     private void showAlbumsInView(Collection<Album> albums) {
