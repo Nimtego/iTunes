@@ -1,21 +1,8 @@
 package com.nimtego.itunes.presentation.main;
 
 
-import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.data.entity.Artist;
-import com.nimtego.itunes.data.entity.Song;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
-
-
-import java.util.Collection;
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.observers.DisposableObserver;
 
 public interface MainContract {
     interface Presenter<V extends View,

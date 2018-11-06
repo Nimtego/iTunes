@@ -18,7 +18,7 @@ import io.reactivex.observers.DisposableObserver;
 public class MainPresenter
         extends BasePresenter<MainContract.View,
         BaseContract.Interactor<List<Album>,
-                                      MainViewInteractor.Params>>
+                MainViewInteractor.Params>>
         implements MainContract.Presenter<MainContract.View,
         BaseContract.Interactor<List<Album>,
                 MainViewInteractor.Params>> {
@@ -28,7 +28,7 @@ public class MainPresenter
 
     @Inject
     public MainPresenter(BaseContract.Interactor<List<Album>,
-                                      MainViewInteractor.Params> interactor,
+            MainViewInteractor.Params> interactor,
                          AlbumModelDataMapper mapper) {
         this.mapper = mapper;
         this.interactor = interactor;
@@ -72,19 +72,23 @@ public class MainPresenter
 
     private void showAlbumsInView(Collection<Album> albums) {
         final MainDataModel dataModel = MainDataModel.builder()
-                            .albumModels(mapper.transformAlbums(albums))
-                            .build();
+                .albumModels(mapper.transformAlbums(albums))
+                .build();
         view.render(dataModel);
     }
+
     private String getSearchText() {
         return view.getSearchText();
     }
+
     private void showViewLoading() {
         view.showLoading();
     }
+
     private void hideViewLoading() {
         view.hideLoading();
     }
+
     private void toast(String message) {
         view.toast(message);
     }
@@ -105,7 +109,7 @@ public class MainPresenter
     @Override
     public void viewIsReady() {
         if (!view.getSearchText().isEmpty())
-                search();
+            search();
     }
 
 }

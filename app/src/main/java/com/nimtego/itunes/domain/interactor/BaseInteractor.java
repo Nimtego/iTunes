@@ -1,12 +1,7 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.base.BaseContract;
-
-import org.reactivestreams.Subscriber;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

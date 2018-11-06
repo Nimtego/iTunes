@@ -54,6 +54,7 @@ public class MainPresenterTest {
 
     @Test
     public void tabSelected() {
+
     }
 
     @Test
