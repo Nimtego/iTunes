@@ -35,9 +35,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ArtistAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(models.get(position).getArtistName());
-        holder.artistName.setText("TODO");
-        Picasso.get().load(models.get(position).getArtistArtwork().replace("100x100", "200x200"))
+        holder.albumName.setText(String.valueOf(models.get(position).getArtistId()));
+        holder.artistName.setText(models.get(position).getArtistName());
+        Picasso.get().load(models.get(position).getArtistViewUrl().replace("100x100", "200x200"))
                 .placeholder(R.drawable.baseline_update_black)
                 .error(R.drawable.ic_launcher_background)
                 .into(holder.albumImage);

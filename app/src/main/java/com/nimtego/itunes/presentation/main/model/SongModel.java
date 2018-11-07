@@ -8,8 +8,9 @@ import lombok.ToString;
 @Builder
 @ToString
 public class SongModel {
-    private String songName;
-    private String songAlbumName;
-    private String songArtistName;
-    private String songArtwork;
+    private String trackName;
+    private String trackAlbumName;
+    private String trackArtistName;
+    private String trackArtwork;
+
 }

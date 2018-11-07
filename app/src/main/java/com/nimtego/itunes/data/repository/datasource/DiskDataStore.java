@@ -21,14 +21,15 @@ public class DiskDataStore implements DataStore{
     }
 
     @Override
-    public Observable<SongsRepository> songs() {
+    public Observable<SongsRepository> songs(String request) {
         return null;
     }
 
     @Override
-    public Observable<ArtistsRepository> artists() {
+    public Observable<ArtistsRepository> artists(String request) {
         return null;
     }
+
 
     @Override
     public Observable<AlbumsRepository> albums(String request) {
