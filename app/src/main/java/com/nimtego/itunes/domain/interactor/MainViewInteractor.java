@@ -1,10 +1,13 @@
 package com.nimtego.itunes.domain.interactor;
 
 import com.nimtego.itunes.data.entity.Album;
+import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
+import com.nimtego.itunes.presentation.main.model.SongModel;
 import com.nimtego.itunes.presentation.mapper.AlbumModelDataMapper;
 
 import java.util.List;
@@ -15,6 +18,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function3;
 
 public class MainViewInteractor
         extends BaseInteractor<MainDataModel, MainViewInteractor.Params> {
@@ -26,17 +30,15 @@ public class MainViewInteractor
     @Override
     protected Observable<MainDataModel> buildUseCaseObservable(MainViewInteractor.Params params) {
         Preconditions.checkNotNull(params);
-        AlbumModelDataMapper mapper = new AlbumModelDataMapper();
-        Observable<List<Album>> albObs = repository.albums(params.request);
-        Observable<List<Song>> songObs = repository.songs(params.request);
-
-        return Observable.zip(repository.albums(params.request), repository.songs(params.request),
-                new BiFunction<List<Album>, List<Song>, MainDataModel>() {
-                    @Override
-                    public MainDataModel apply(List<Album> albums, List<Song> songs) throws Exception {
-                        return MainDataModel.builder().build();
-                    }
-                });
+        Observable<List<AlbumModel>> albumsObs = repository.albums(params.request);
+        Observable<List<SongModel>> songsObs = repository.songs(params.request);
+        Observable<List<ArtistModel>> artistsObs = repository.artists(params.request);
+        return Observable.zip(albumsObs, songsObs, artistsObs, (albums, songs, artists) ->
+                MainDataModel.builder()
+                        .albumModels(albums)
+                        .songModels(songs)
+                        .artistModels(artists)
+                        .build());
     }
 
 

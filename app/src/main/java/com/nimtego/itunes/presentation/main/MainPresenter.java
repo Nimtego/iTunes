@@ -17,26 +17,23 @@ import io.reactivex.observers.DisposableObserver;
 
 public class MainPresenter
         extends BasePresenter<MainContract.View,
-        BaseContract.Interactor<List<Album>,
+        BaseContract.Interactor<MainDataModel,
                 MainViewInteractor.Params>>
         implements MainContract.Presenter<MainContract.View,
-        BaseContract.Interactor<List<Album>,
+        BaseContract.Interactor<MainDataModel,
                 MainViewInteractor.Params>> {
 
     private final String TAG = this.getClass().getCanonicalName();
-    private AlbumModelDataMapper mapper;
 
     @Inject
-    public MainPresenter(BaseContract.Interactor<List<Album>,
-            MainViewInteractor.Params> interactor,
-                         AlbumModelDataMapper mapper) {
-        this.mapper = mapper;
+    public MainPresenter(BaseContract.Interactor<MainDataModel,
+            MainViewInteractor.Params> interactor) {
         this.interactor = interactor;
     }
 
 
     public MainPresenter() {
-        this(new MainViewInteractor(new AppRepository()), new AlbumModelDataMapper());
+        this(new MainViewInteractor(new AppRepository()));
         // TODO: 29.10.2018 replaceable di
     }
 
@@ -44,10 +41,10 @@ public class MainPresenter
     public void search() {
         showViewLoading();
         toast("Search");
-        interactor.execute(new DisposableObserver<List<Album>>() {
+        interactor.execute(new DisposableObserver<MainDataModel>() {
             @Override
-            public void onNext(List<Album> albums) {
-                MainPresenter.this.showAlbumsInView(albums);
+            public void onNext(MainDataModel dataModel) {
+                MainPresenter.this.showAlbumsInView(dataModel);
             }
 
             @Override
@@ -70,10 +67,7 @@ public class MainPresenter
         toast(tabName);
     }
 
-    private void showAlbumsInView(Collection<Album> albums) {
-        final MainDataModel dataModel = MainDataModel.builder()
-                .albumModels(mapper.transformAlbums(albums))
-                .build();
+    private void showAlbumsInView(MainDataModel dataModel) {
         view.render(dataModel);
     }
 

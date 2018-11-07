@@ -1,22 +1,21 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.domain.Repository;
+import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.List;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
-public class SongInteractor extends BaseInteractor<List<Song>, SongInteractor.Params> {
+public class SongInteractor extends BaseInteractor<List<SongModel>, SongInteractor.Params> {
 
     public SongInteractor(Repository repository) {
         super(repository);
     }
 
     @Override
-    protected Observable<List<Song>> buildUseCaseObservable(Params params) {
+    protected Observable<List<SongModel>> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
         return repository.songs(params.request);
     }

@@ -10,6 +10,9 @@ import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.domain.Repository;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.main.model.ArtistModel;
+import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.List;
 
@@ -35,35 +38,36 @@ public class AppRepository implements Repository {
     }
 
     @Override
-    public Observable<List<Song>> songs(String request) {
+    public Observable<List<SongModel>> songs(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songs(request).map(this.mapper::transformSongs);
     }
 
     @Override
-    public Observable<List<Artist>> artists() {
-        return null;
+    public Observable<List<ArtistModel>> artists(String request) {
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return dataStore.artists(request).map(this.mapper::transformArtists);
     }
 
     @Override
-    public Observable<List<Album>> albums(String request) {
+    public Observable<List<AlbumModel>> albums(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.albums(request).map(this.mapper::transformAlbums);
     }
 
 
     @Override
-    public Observable<Song> song() {
+    public Observable<SongModel> song(int id) {
         return null;
     }
 
     @Override
-    public Observable<Artist> artist() {
+    public Observable<ArtistModel> artist(int id) {
         return null;
     }
 
     @Override
-    public Observable<Album> album() {
+    public Observable<AlbumModel> album(int id) {
         return null;
     }
 }
