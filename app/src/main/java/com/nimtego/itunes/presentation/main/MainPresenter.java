@@ -65,6 +65,9 @@ public class MainPresenter
     @Override
     public void tabSelected(String tabName) {
         toast(tabName);
+        //interactor.dispose();
+        if(!view.getSearchText().isEmpty())
+            search();
     }
 
     private void showAlbumsInView(MainDataModel dataModel) {

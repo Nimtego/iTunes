@@ -19,15 +19,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EntityDataMapper {
-    public ArtistModel transformArtist(final ArtistResult songResult) {
+    private ArtistModel transformArtist(final ArtistResult result) {
         return ArtistModel.builder()
-                .artistName(songResult.getArtistName())
-                .artistId(songResult.getArtistId())
-                .artistViewUrl(songResult.getArtistViewUrl())
+                .artistName(result.getArtistName())
+                .artistId(result.getArtistId())
+                .artistViewUrl(result.getArtworkUrl100())
                 .build();
     }
 
-    public List<ArtistModel> transformArtists(final Collection<ArtistResult> artistResultCollection) {
+    private List<ArtistModel> transformArtists(final Collection<ArtistResult> artistResultCollection) {
         return artistResultCollection.stream()
                 .map(this::transformArtist)
                 .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class EntityDataMapper {
     public List<ArtistModel> transformArtists(final ArtistsRepository artistsRepository) {
         return transformArtists(artistsRepository.getResults());
     }
-    public AlbumModel transformAlbum(final AlbumResult albumResult) {
+    private AlbumModel transformAlbum(final AlbumResult albumResult) {
         return AlbumModel.builder()
                 .albumName(albumResult.getCollectionName())
                 .albumId(albumResult.getCollectionId())
@@ -46,8 +46,8 @@ public class EntityDataMapper {
                 ;
     }
 
-    public List<AlbumModel> transformAlbums(final Collection<AlbumResult> artistResultCollection) {
-        return artistResultCollection.stream()
+    private List<AlbumModel> transformAlbums(final Collection<AlbumResult> results) {
+        return results.stream()
                 .map(this::transformAlbum)
                 .collect(Collectors.toList())
                 ;
@@ -56,7 +56,7 @@ public class EntityDataMapper {
         return transformAlbums(albumsRepository.getResults());
     }
 
-    public List<SongModel> transformSongs(final Collection<SongResult> results) {
+    private List<SongModel> transformSongs(final Collection<SongResult> results) {
         return results.stream()
                 .map(this::transformSong)
                 .collect(Collectors.toList());
@@ -65,7 +65,7 @@ public class EntityDataMapper {
     private SongModel transformSong(SongResult songResult) {
         return SongModel.builder()
                 .trackName(songResult.getTrackName())
-                .trackName(songResult.getArtistName())
+                .trackArtistName(songResult.getArtistName())
                 .trackArtwork(songResult.getArtworkUrl100())
                 .build();
     }

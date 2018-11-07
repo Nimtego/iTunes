@@ -18,6 +18,7 @@ import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;
 
 public class MainViewInteractor
@@ -33,6 +34,12 @@ public class MainViewInteractor
         Observable<List<AlbumModel>> albumsObs = repository.albums(params.request);
         Observable<List<SongModel>> songsObs = repository.songs(params.request);
         Observable<List<ArtistModel>> artistsObs = repository.artists(params.request);
+/*        return songsObs.map(new Function<List<SongModel>, MainDataModel>() {
+                                 @Override
+                                 public MainDataModel apply(List<SongModel> albumModels) throws Exception {
+                                     return MainDataModel.builder().songModels(albumModels).build();
+                                 }
+                             });*/
         return Observable.zip(albumsObs, songsObs, artistsObs, (albums, songs, artists) ->
                 MainDataModel.builder()
                         .albumModels(albums)

@@ -75,7 +75,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mPresenter.tabSelected(String.valueOf(tab.getContentDescription()));
+                mPresenter.tabSelected(String.valueOf(tab.getText()));
             }
 
             @Override
