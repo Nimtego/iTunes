@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
@@ -30,12 +31,14 @@ public class MainActivity extends BaseView<MainContract.Presenter>
     private TabLayout mTabLayout;
     private EditText searchText;
     private ViewPagerAdapter mViewPagerAdapter;
+    private ProgressBar pb;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchText = findViewById(R.id.search_edit_text);
+        pb = findViewById(R.id.progressBar);
         searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -114,5 +117,15 @@ public class MainActivity extends BaseView<MainContract.Presenter>
                 (MainTabsFragment) mViewPagerAdapter
                         .getItem(mViewPager.getCurrentItem());
         fragment.setSearchList(dataModel);
+    }
+
+    @Override
+    public void showLoading() {
+        pb.setVisibility(ProgressBar.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        pb.setVisibility(ProgressBar.INVISIBLE);
     }
 }

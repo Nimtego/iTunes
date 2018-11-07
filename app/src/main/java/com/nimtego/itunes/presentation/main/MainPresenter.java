@@ -40,7 +40,6 @@ public class MainPresenter
     @Override
     public void search() {
         showViewLoading();
-        toast("Search");
         interactor.execute(new DisposableObserver<MainDataModel>() {
             @Override
             public void onNext(MainDataModel dataModel) {
@@ -64,7 +63,6 @@ public class MainPresenter
 
     @Override
     public void tabSelected(String tabName) {
-        toast(tabName);
         //interactor.dispose();
         if(!view.getSearchText().isEmpty())
             search();

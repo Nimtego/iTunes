@@ -1,8 +1,5 @@
 package com.nimtego.itunes.data.entity.mapper;
 
-import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.data.entity.Artist;
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistResult;
@@ -13,7 +10,6 @@ import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +18,7 @@ public class EntityDataMapper {
     private ArtistModel transformArtist(final ArtistResult result) {
         return ArtistModel.builder()
                 .artistName(result.getArtistName())
-                .artistId(result.getArtistId())
+                .artistId(result.getArtistId() == null ? 0 : result.getArtistId())
                 .artistViewUrl(result.getArtworkUrl100())
                 .build();
     }
@@ -36,12 +32,12 @@ public class EntityDataMapper {
     public List<ArtistModel> transformArtists(final ArtistsRepository artistsRepository) {
         return transformArtists(artistsRepository.getResults());
     }
-    private AlbumModel transformAlbum(final AlbumResult albumResult) {
+    private AlbumModel transformAlbum(final AlbumResult result) {
         return AlbumModel.builder()
-                .albumName(albumResult.getCollectionName())
-                .albumId(albumResult.getCollectionId())
-                .albumArtistName(albumResult.getArtistName())
-                .albumArtWorkUrl(albumResult.getArtworkUrl100())
+                .albumName(result.getCollectionName())
+                .albumId(result.getCollectionId() == null ? 0 : result.getCollectionId())
+                .albumArtistName(result.getArtistName())
+                .albumArtWorkUrl(result.getArtworkUrl100())
                 .build()
                 ;
     }
