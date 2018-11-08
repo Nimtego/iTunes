@@ -28,7 +28,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public SongAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_card_form, parent, false);
         return new SongAdapter.ViewHolder(v);
     }
 
@@ -36,12 +36,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final SongAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(models.get(position).getTrackAlbumName());
-        holder.artistName.setText(models.get(position).getTrackName());
+        holder.songName.setText(models.get(position).getTrackName());
+        holder.songAlbumName.setText(models.get(position).getTrackAlbumName());
+        holder.songArtistName.setText(models.get(position).getTrackArtistName());
         Picasso.get().load(models.get(position).getTrackArtwork().replace("100x100", "200x200"))
                 .placeholder(R.drawable.baseline_update_black)
                 .error(R.drawable.ic_launcher_background)
-                .into(holder.albumImage);
+                .into(holder.songImage);
         holder.cv.setCardElevation(5);
     }
 
@@ -53,17 +54,19 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView albumImage;
-        TextView albumName;
-        TextView artistName;
+        ImageView songImage;
+        TextView songName;
+        TextView songAlbumName;
+        TextView songArtistName;
         CardView cv;
         ConstraintLayout card;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            albumImage = itemView.findViewById(R.id.album_image);
-            albumName = itemView.findViewById(R.id.artist_name);
-            artistName = itemView.findViewById(R.id.album_name);
+            songImage = itemView.findViewById(R.id.song_image);
+            songName = itemView.findViewById(R.id.song_name);
+            songAlbumName = itemView.findViewById(R.id.song_album_name);
+            songArtistName = itemView.findViewById(R.id.song_artist_name);
             card = itemView.findViewById(R.id.card);
             cv = itemView.findViewById(R.id.cv);
 

@@ -63,6 +63,7 @@ public class EntityDataMapper {
                 .trackName(songResult.getTrackName())
                 .trackArtistName(songResult.getArtistName())
                 .trackArtwork(songResult.getArtworkUrl100())
+                .trackAlbumName(songResult.getCollectionName())
                 .build();
     }
 

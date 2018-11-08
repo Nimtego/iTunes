@@ -1,5 +1,6 @@
 package com.nimtego.itunes.presentation.main.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -30,10 +31,13 @@ public abstract class MainTabsFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(container.getContext(), 2);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setLayoutManager(rvLayoutManager(container.getContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
+
+    protected abstract RecyclerView.LayoutManager rvLayoutManager(Context context);
+
     public abstract void setSearchList(MainDataModel dataModel);
 /*    public void setSearchList(AlbumModel albumModel) {
         RecyclerView.Adapter adapter = new AlbumAdapter(list, this.getActivity());
