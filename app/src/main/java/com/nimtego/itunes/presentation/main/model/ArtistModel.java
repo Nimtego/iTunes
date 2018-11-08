@@ -10,6 +10,6 @@ import lombok.ToString;
 public class ArtistModel {
     private String artistName;
     private String artistArtwork;
-    private int artistId;
+    private String primaryGenreName;
     private String artistViewUrl;
 }

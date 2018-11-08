@@ -32,7 +32,7 @@ public class FabricParam {
 
     public static Map<String, String> searchSongParam(String song) {
          /*
-         https://itunes.apple.com/search?media=music&entity=musicTrack&attribute=songTerm&term=xxx
+         https://itunes.apple.com/search?media=music&entity=musicTrack&limit=5&attribute=songTerm&term=xxx
          */
         Map<String, String> param = new HashMap<>();
         param.put("term", song);
@@ -44,13 +44,14 @@ public class FabricParam {
 
     public static Map<String, String> searchArtistParam(String artist) {
          /*
-         https://itunes.apple.com/search?term=me&limit=5&attribute=artistTerm
+         https://itunes.apple.com/search?media=music&entity=musicArtist&limit=5&attribute=artistTerm&term=xxxx
          */
         Map<String, String> param = new HashMap<>();
+        param.put("media", "music");
+        param.put("entity", "musicArtist");
+        param.put("attribute", "artistTerm");
         param.put("term", artist);
-/*        param.put("entity", "musicTrack");*/
         param.put("limit", String.valueOf(limit));
-/*        param.put("attribute", "songTerm");*/
         return param;
     }
 

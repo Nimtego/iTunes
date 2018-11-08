@@ -8,7 +8,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class Artist {
-    private Integer artistId;
+    private String primaryGenreName;
     private String artistName;
     private String artistViewUrl;
     private String previewUrl;

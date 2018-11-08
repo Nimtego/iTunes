@@ -18,8 +18,8 @@ public class EntityDataMapper {
     private ArtistModel transformArtist(final ArtistResult result) {
         return ArtistModel.builder()
                 .artistName(result.getArtistName())
-                .artistId(result.getArtistId() == null ? 0 : result.getArtistId())
-                .artistViewUrl(result.getArtworkUrl100())
+                .primaryGenreName(result.getPrimaryGenreName())
+                .artistViewUrl(result.getArtistLinkUrl())
                 .build();
     }
 
