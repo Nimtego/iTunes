@@ -12,5 +12,6 @@
     <color name="colorPrimaryDarkTransparent">#e2424768</color>
     <color name="grey">#dadada</color>
     <color name="cardBack">#e83c494e</color>
+    <color name="reds">#9f5454</color>
 
 </resources>
