@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -37,10 +39,21 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     public void onBindViewHolder(final ArtistAdapter.ViewHolder holder, final int position) {
         holder.albumName.setText(String.valueOf(models.get(position).getPrimaryGenreName()));
         holder.artistName.setText(models.get(position).getArtistName());
+        holder.pb.setVisibility(View.VISIBLE);
         Picasso.get().load(models.get(position).getArtistViewUrl())
-                .placeholder(R.drawable.baseline_update_black)
-                .error(R.drawable.ic_launcher_background)
-                .into(holder.albumImage);
+                .into(holder.albumImage, new Callback() {
+            @Override
+            public void onSuccess() {
+                if (holder.pb != null)
+                    holder.pb.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                if (holder.pb != null)
+                    holder.pb.setVisibility(View.GONE);
+            }
+        });
         holder.cv.setCardElevation(5);
     }
 
@@ -55,6 +68,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         ImageView albumImage;
         TextView albumName;
         TextView artistName;
+        ProgressBar pb;
         CardView cv;
         ConstraintLayout card;
 
@@ -63,6 +77,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
             albumImage = itemView.findViewById(R.id.album_image);
             albumName = itemView.findViewById(R.id.artist_name);
             artistName = itemView.findViewById(R.id.album_name);
+            pb = itemView.findViewById(R.id.image_progress_bar);
             card = itemView.findViewById(R.id.card);
             cv = itemView.findViewById(R.id.cv);
 
