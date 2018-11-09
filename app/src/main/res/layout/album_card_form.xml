@@ -82,7 +82,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:singleLine="false"
-                android:textColor="@color/w"
+                android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@+id/album_image"
                 app:layout_constraintEnd_toEndOf="@+id/album_image"

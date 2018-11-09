@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,10 +41,21 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.songName.setText(models.get(position).getTrackName());
         holder.songAlbumName.setText(models.get(position).getTrackAlbumName());
         holder.songArtistName.setText(models.get(position).getTrackArtistName());
+        holder.pb.setVisibility(View.VISIBLE);
         Picasso.get().load(models.get(position).getTrackArtwork().replace("100x100", "200x200"))
-                .placeholder(R.drawable.baseline_update_black)
-                .error(R.drawable.ic_launcher_background)
-                .into(holder.songImage);
+                .into(holder.songImage, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        if (holder.pb != null)
+                            holder.pb.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        if (holder.pb != null)
+                            holder.pb.setVisibility(View.GONE);
+                    }
+                });
         holder.cv.setCardElevation(5);
     }
 
@@ -58,6 +71,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         TextView songName;
         TextView songAlbumName;
         TextView songArtistName;
+        ProgressBar pb;
         CardView cv;
         ConstraintLayout card;
 
@@ -67,6 +81,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             songName = itemView.findViewById(R.id.song_name);
             songAlbumName = itemView.findViewById(R.id.song_album_name);
             songArtistName = itemView.findViewById(R.id.song_artist_name);
+            pb = itemView.findViewById(R.id.image_progress_bar);
             card = itemView.findViewById(R.id.card);
             cv = itemView.findViewById(R.id.cv);
 

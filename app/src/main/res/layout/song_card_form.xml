@@ -14,7 +14,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/reds">
+        android:background="@color/with_grad">
 
         <ImageView
             android:id="@+id/song_image"
@@ -27,7 +27,24 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/image_progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:theme="@style/AppTheme.WhiteAccent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/song_image"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +57,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:ellipsize="end"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:ellipsize="end"
                 android:text="song"
                 android:textColor="@color/w"
                 android:textSize="16sp"
@@ -54,12 +71,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="song_album_name"
-                android:textColor="@color/w"
+                android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toTopOf="@+id/song_artist_name"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -69,12 +86,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="song_artist"
-                android:textColor="@color/w"
+                android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
