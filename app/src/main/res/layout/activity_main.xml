@@ -66,6 +66,10 @@
             android:id="@+id/tablayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabPaddingEnd="2dp"
+            app:tabPaddingStart="0dp"
+            app:tabSelectedTextColor="@color/w"
+            app:tabIndicatorHeight="4dp"
             app:tabGravity="fill"
             app:tabMode="fixed" />
     </android.support.design.widget.AppBarLayout>
