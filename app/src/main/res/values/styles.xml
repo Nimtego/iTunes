@@ -23,7 +23,7 @@
         <item name="android:textColor">@color/w</item>
     </style>
 
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="MyMaterialTheme.Base" parent="Theme.Design.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -32,7 +32,7 @@
     </style>
 
     <style name="AppTheme.WhiteAccent">
-        <item name="colorAccent">@color/grey</item> <!-- Whatever color you want-->
+        <item name="colorAccent">@color/colorAccent</item> <!-- Whatever color you want-->
     </style>
 
 </resources>
