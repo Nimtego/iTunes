@@ -1,12 +1,8 @@
 package com.nimtego.itunes.presentation.mapper;
 
 import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.data.entity.Artist;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,5 +1,5 @@
 package com.nimtego.itunes.presentation.utils;
 
-public enum  IpTags {
+public enum IpTags {
     ALBUM_ID
 }

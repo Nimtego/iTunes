@@ -1,9 +1,6 @@
 package com.nimtego.itunes.data.repository.datasource;
 
-import android.support.annotation.NonNull;
-
 import com.nimtego.itunes.data.cache.Cache;
-import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.rest.network.FabricParam;
 import com.nimtego.itunes.data.rest.network.ITunesApi;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
@@ -13,14 +10,9 @@ import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 
-import java.util.List;
-
 import io.reactivex.Observable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class CloudDataStore implements DataStore{
+public class CloudDataStore implements DataStore {
 
     private final ITunesApi restApi;
     private final Cache cache;

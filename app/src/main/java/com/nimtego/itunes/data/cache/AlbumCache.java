@@ -18,17 +18,17 @@ public class AlbumCache implements Cache {
     private final Context context;
     private final File cacheDir;
     private final FileManager fileManager;
-   // private final ThreadExecutor threadExecutor;
+    // private final ThreadExecutor threadExecutor;
 
     public AlbumCache(Context context,
-                    FileManager fileManager) {
-        if (context == null  || fileManager == null) {
+                      FileManager fileManager) {
+        if (context == null || fileManager == null) {
             throw new IllegalArgumentException("Invalid null parameter");
         }
         this.context = context.getApplicationContext();
         this.cacheDir = this.context.getCacheDir();
         this.fileManager = fileManager;
-      //  this.threadExecutor = executor;
+        //  this.threadExecutor = executor;
     }
 
     @Override

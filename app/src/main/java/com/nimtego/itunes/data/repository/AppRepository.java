@@ -3,9 +3,6 @@ package com.nimtego.itunes.data.repository;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.AlbumCache;
 import com.nimtego.itunes.data.cache.FileManager;
-import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.data.entity.Artist;
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
@@ -15,8 +12,6 @@ import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import io.reactivex.Observable;
 

@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.base.BaseView;
-import com.nimtego.itunes.presentation.information_view.InformationAlbumContract;
-import com.nimtego.itunes.presentation.information_view.InformationAlbumPresenter;
 import com.nimtego.itunes.presentation.utils.IpTags;
 import com.squareup.picasso.Picasso;
 

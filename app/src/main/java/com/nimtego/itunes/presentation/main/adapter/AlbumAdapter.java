@@ -13,12 +13,10 @@ import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
-import com.nimtego.itunes.presentation.main.model.MainDataModel;
-import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Random;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 

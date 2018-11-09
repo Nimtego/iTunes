@@ -6,7 +6,7 @@ import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 public interface MainContract {
     interface Presenter<V extends View,
-                        I extends BaseContract.Interactor>
+            I extends BaseContract.Interactor>
             extends BaseContract.Presenter<V, I> {
 
         void search();

@@ -1,11 +1,5 @@
 package com.nimtego.itunes.presentation.information_view;
 
-import android.support.annotation.NonNull;
-
-import com.nimtego.itunes.App;
-import com.nimtego.itunes.data.rest.network.FabricParam;
-import com.nimtego.itunes.data.rest.network.ITunesApi;
-import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
@@ -13,15 +7,11 @@ import com.nimtego.itunes.presentation.base.BasePresenter;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class InformationAlbumPresenter
         extends BasePresenter<InformationAlbumContract.View,
-                              BaseContract.Interactor>
+        BaseContract.Interactor>
         implements InformationAlbumContract.Presenter<InformationAlbumContract.View,
-                                                      BaseContract.Interactor> {
+        BaseContract.Interactor> {
 
     private String id;
     private SongsRepository mSongResult;
@@ -33,7 +23,7 @@ public class InformationAlbumPresenter
     }
 
     @Override
-    public void viewIsReady (){
+    public void viewIsReady() {
 
 
        /* ITunesApi iTunesApi = App.getApi();

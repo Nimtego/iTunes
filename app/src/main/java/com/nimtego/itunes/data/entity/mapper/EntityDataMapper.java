@@ -32,6 +32,7 @@ public class EntityDataMapper {
     public List<ArtistModel> transformArtists(final ArtistsRepository artistsRepository) {
         return transformArtists(artistsRepository.getResults());
     }
+
     private AlbumModel transformAlbum(final AlbumResult result) {
         return AlbumModel.builder()
                 .albumName(result.getCollectionName())
@@ -48,6 +49,7 @@ public class EntityDataMapper {
                 .collect(Collectors.toList())
                 ;
     }
+
     public List<AlbumModel> transformAlbums(final AlbumsRepository albumsRepository) {
         return transformAlbums(albumsRepository.getResults());
     }

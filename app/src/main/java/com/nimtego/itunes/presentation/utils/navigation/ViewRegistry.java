@@ -1,10 +1,10 @@
 package com.nimtego.itunes.presentation.utils.navigation;
 
-import com.nimtego.itunes.presentation.information_view.InformationAlbumActivity;
-import com.nimtego.itunes.presentation.main.MainContract;
 import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.information_view.InformationAlbumActivity;
 import com.nimtego.itunes.presentation.information_view.InformationAlbumContract;
 import com.nimtego.itunes.presentation.main.MainActivity;
+import com.nimtego.itunes.presentation.main.MainContract;
 
 public final class ViewRegistry {
     private ViewRegistry() {

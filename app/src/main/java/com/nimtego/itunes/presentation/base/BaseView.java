@@ -1,6 +1,5 @@
 package com.nimtego.itunes.presentation.base;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -46,9 +45,12 @@ public abstract class BaseView<P extends BaseContract.Presenter>
         hideLoading();
         mProgressDialog = CommonUtils.showLoadingDialog(this);
     }
-    @Override public Context context() {
+
+    @Override
+    public Context context() {
         return this.getApplicationContext();
     }
+
     @Override
     public void hideLoading() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {

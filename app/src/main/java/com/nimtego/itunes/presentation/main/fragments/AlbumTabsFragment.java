@@ -5,10 +5,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
-public class AlbumTabsFragment extends MainTabsFragment{
+public class AlbumTabsFragment extends MainTabsFragment {
 
     @Override
     protected RecyclerView.LayoutManager rvLayoutManager(Context context) {
@@ -18,7 +17,7 @@ public class AlbumTabsFragment extends MainTabsFragment{
     @Override
     public void setSearchList(MainDataModel dataModel) {
         RecyclerView.Adapter adapter = new AlbumAdapter(dataModel.getAlbumModels(),
-                                                        this.getActivity());
+                this.getActivity());
         mRecyclerView.setAdapter(adapter);
     }
 }

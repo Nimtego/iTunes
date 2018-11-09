@@ -11,11 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
-
-import java.util.List;
 
 public abstract class MainTabsFragment extends Fragment {
 

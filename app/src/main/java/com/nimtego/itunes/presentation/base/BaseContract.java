@@ -3,13 +3,8 @@ package com.nimtego.itunes.presentation.base;
 
 import android.content.Context;
 
-import com.nimtego.itunes.data.rest.network.ApiHelper;
-import com.nimtego.itunes.domain.Repository;
-
 import java.util.Map;
 
-import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
 public interface BaseContract {
@@ -41,8 +36,10 @@ public interface BaseContract {
 
         P supplyPresenter();
     }
+
     interface Interactor<T, P> {
         void execute(DisposableObserver<T> observer, P params);
+
         void dispose();
     }
 }

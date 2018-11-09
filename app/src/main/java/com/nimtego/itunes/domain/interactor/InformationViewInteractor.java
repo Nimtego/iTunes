@@ -1,16 +1,11 @@
 package com.nimtego.itunes.domain.interactor;
 
-import android.support.v4.app.INotificationSideChannel;
-
 import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.data.entity.Artist;
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.domain.Repository;
-import com.nimtego.itunes.presentation.information_view.InformationAlbumContract;
 
 import io.reactivex.Observable;
 
-public class InformationViewInteractor extends BaseInteractor<Album, InformationViewInteractor.Params>  {
+public class InformationViewInteractor extends BaseInteractor<Album, InformationViewInteractor.Params> {
 
     public InformationViewInteractor(Repository repository) {
         super(repository);

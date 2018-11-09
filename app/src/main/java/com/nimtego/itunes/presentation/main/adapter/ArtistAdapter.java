@@ -12,9 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
-import com.nimtego.itunes.presentation.main.model.MainDataModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -42,18 +40,18 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         holder.pb.setVisibility(View.VISIBLE);
         Picasso.get().load(models.get(position).getArtistViewUrl())
                 .into(holder.albumImage, new Callback() {
-            @Override
-            public void onSuccess() {
-                if (holder.pb != null)
-                    holder.pb.setVisibility(View.GONE);
-            }
+                    @Override
+                    public void onSuccess() {
+                        if (holder.pb != null)
+                            holder.pb.setVisibility(View.GONE);
+                    }
 
-            @Override
-            public void onError(Exception e) {
-                if (holder.pb != null)
-                    holder.pb.setVisibility(View.GONE);
-            }
-        });
+                    @Override
+                    public void onError(Exception e) {
+                        if (holder.pb != null)
+                            holder.pb.setVisibility(View.GONE);
+                    }
+                });
         holder.cv.setCardElevation(5);
     }
 

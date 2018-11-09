@@ -12,8 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.entity.Song;
-import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -33,7 +31,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_card_form, parent, false);
         return new SongAdapter.ViewHolder(v);
     }
-
 
 
     @Override

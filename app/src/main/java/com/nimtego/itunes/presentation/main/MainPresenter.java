@@ -1,15 +1,10 @@
 package com.nimtego.itunes.presentation.main;
 
-import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.data.repository.AppRepository;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
-import com.nimtego.itunes.presentation.mapper.AlbumModelDataMapper;
-
-import java.util.Collection;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -49,7 +44,7 @@ public class MainPresenter
             @Override
             public void onError(Throwable e) {
                 MainPresenter.this.hideViewLoading();
-                MainPresenter.this.toast("error" +e.getLocalizedMessage());
+                MainPresenter.this.toast("error" + e.getLocalizedMessage());
                 // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
             }
@@ -64,7 +59,7 @@ public class MainPresenter
     @Override
     public void tabSelected(String tabName) {
         //interactor.dispose();
-        if(!view.getSearchText().isEmpty())
+        if (!view.getSearchText().isEmpty())
             search();
     }
 

@@ -1,30 +1,28 @@
 package com.nimtego.itunes.presentation.base;
 
 
-import com.nimtego.itunes.presentation.base.BaseContract;
-
 import io.reactivex.annotations.NonNull;
 
 public abstract class BasePresenter<V extends BaseContract.View,
-                                    I extends BaseContract.Interactor>
+        I extends BaseContract.Interactor>
         implements BaseContract.Presenter<V, I> {
 
-        protected V view;
-        protected I interactor;
+    protected V view;
+    protected I interactor;
 
-        @Override
-        public void attach(@NonNull V view) {
-            this.view = view;
-        }
+    @Override
+    public void attach(@NonNull V view) {
+        this.view = view;
+    }
 
-        @Override
-        public void detach() {
-            this.view = null;
-            this.interactor.dispose();
-        }
+    @Override
+    public void detach() {
+        this.view = null;
+        this.interactor.dispose();
+    }
 
-        @Override
-        public V getView() {
-            return view;
-        }
+    @Override
+    public V getView() {
+        return view;
+    }
 }

@@ -8,11 +8,9 @@ import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 
-import java.util.List;
-
 import io.reactivex.Observable;
 
-public class DiskDataStore implements DataStore{
+public class DiskDataStore implements DataStore {
 
     private final Cache cache;
 
