@@ -20,10 +20,10 @@
     </style>
 
     <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
-
+        <item name="android:textColor">@color/w</item>
     </style>
 
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
