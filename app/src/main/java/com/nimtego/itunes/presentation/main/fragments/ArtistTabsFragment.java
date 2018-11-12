@@ -14,6 +14,7 @@ public class ArtistTabsFragment extends MainTabsFragment {
         return new GridLayoutManager(context, 2);
     }
 
+
     @Override
     public void setSearchList(MainDataModel dataModel) {
         RecyclerView.Adapter adapter = new ArtistAdapter(dataModel.getArtistModels(),
