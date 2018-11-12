@@ -5,11 +5,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.main.AlbumContract;
 import com.nimtego.itunes.presentation.main.AlbumPresenter;
 import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
-public class AlbumTabsFragment extends MainTabsFragment {
+import java.util.Collection;
+
+public class AlbumTabsFragment
+        extends MainTabsFragment implements AlbumContract.View{
 
     @Override
     protected RecyclerView.LayoutManager rvLayoutManager(Context context) {
@@ -26,5 +31,11 @@ public class AlbumTabsFragment extends MainTabsFragment {
     @Override
     public BaseContract.Presenter supplyPresenter() {
         return new AlbumPresenter();
+    }
+
+
+    @Override
+    public void render(Collection albumModel) {
+
     }
 }

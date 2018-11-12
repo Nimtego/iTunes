@@ -11,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BaseFragment;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
-public abstract class MainTabsFragment extends BaseFragment {
+public abstract class MainTabsFragment<P extends BaseContract.Presenter> extends BaseFragment<BaseContract.Presenter> {
 
     protected RecyclerView mRecyclerView;
 
