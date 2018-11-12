@@ -10,8 +10,7 @@ import io.reactivex.Observable;
 
 public class AlbumInteractor extends BaseInteractor<List<AlbumModel>, AlbumInteractor.Params> {
 
-    public AlbumInteractor(Repository repository) {
-        super(repository);
+    public AlbumInteractor() {
     }
 
     @Override

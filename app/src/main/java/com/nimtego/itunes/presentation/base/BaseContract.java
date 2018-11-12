@@ -37,6 +37,8 @@ public interface BaseContract {
         P supplyPresenter();
     }
 
+    interface ViewFragment<P extends Presenter>{}
+
     interface Interactor<T, P> {
         void execute(DisposableObserver<T> observer, P params);
 

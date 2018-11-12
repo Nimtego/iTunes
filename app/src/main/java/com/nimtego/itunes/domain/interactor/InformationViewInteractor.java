@@ -7,8 +7,7 @@ import io.reactivex.Observable;
 
 public class InformationViewInteractor extends BaseInteractor<Album, InformationViewInteractor.Params> {
 
-    public InformationViewInteractor(Repository repository) {
-        super(repository);
+    public InformationViewInteractor() {
     }
 
     @Override

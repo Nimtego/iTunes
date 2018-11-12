@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.main.AlbumPresenter;
 import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
@@ -19,5 +21,10 @@ public class AlbumTabsFragment extends MainTabsFragment {
         RecyclerView.Adapter adapter = new AlbumAdapter(dataModel.getAlbumModels(),
                 this.getActivity());
         mRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public BaseContract.Presenter supplyPresenter() {
+        return new AlbumPresenter();
     }
 }

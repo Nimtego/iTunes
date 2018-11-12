@@ -14,8 +14,7 @@ import io.reactivex.Observable;
 public class MainViewInteractor
         extends BaseInteractor<MainDataModel, MainViewInteractor.Params> {
 
-    public MainViewInteractor(Repository repository) {
-        super(repository);
+    public MainViewInteractor() {
     }
 
     @Override

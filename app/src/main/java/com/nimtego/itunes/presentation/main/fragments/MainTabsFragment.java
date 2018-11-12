@@ -11,9 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.presentation.base.BaseFragment;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
-public abstract class MainTabsFragment extends Fragment {
+public abstract class MainTabsFragment extends BaseFragment {
 
     protected RecyclerView mRecyclerView;
 
@@ -26,7 +27,6 @@ public abstract class MainTabsFragment extends Fragment {
         View view = inflater.inflate(R.layout.my_tabs_fragment, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(container.getContext(), 2);
         mRecyclerView.setLayoutManager(rvLayoutManager(container.getContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;

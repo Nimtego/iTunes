@@ -1,5 +1,6 @@
 package com.nimtego.itunes.presentation.main;
 
+import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.repository.AppRepository;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
@@ -28,7 +29,7 @@ public class MainPresenter
 
 
     public MainPresenter() {
-        this(new MainViewInteractor(new AppRepository()));
+        this(new MainViewInteractor());
         // TODO: 29.10.2018 replaceable di
     }
 

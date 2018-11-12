@@ -10,8 +10,7 @@ import io.reactivex.Observable;
 
 public class SongInteractor extends BaseInteractor<List<SongModel>, SongInteractor.Params> {
 
-    public SongInteractor(Repository repository) {
-        super(repository);
+    public SongInteractor() {
     }
 
     @Override

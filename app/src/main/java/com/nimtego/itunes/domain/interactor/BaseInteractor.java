@@ -1,5 +1,6 @@
 package com.nimtego.itunes.domain.interactor;
 
+import com.nimtego.itunes.App;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.base.BaseContract;
 
@@ -18,9 +19,9 @@ public abstract class BaseInteractor<T, P> implements BaseContract.Interactor<T,
     protected Repository repository;
 
     @Inject
-    public BaseInteractor(Repository repository) {
+    public BaseInteractor() {
         disposables = new CompositeDisposable();
-        this.repository = repository;
+        this.repository = App.getRepository();
     }
 
     protected abstract Observable<T> buildUseCaseObservable(P param);
