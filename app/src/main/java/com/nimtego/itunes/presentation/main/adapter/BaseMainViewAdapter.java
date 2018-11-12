@@ -1,8 +1,10 @@
 package com.nimtego.itunes.presentation.main.adapter;
 
+import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,40 +15,35 @@ import com.nimtego.itunes.R;
 
 import java.util.List;
 
-public class BaseMainViewAdapter<E> extends RecyclerView.Adapter<BaseMainViewAdapter.ViewHolder>{
-    private List<E> list;
+public abstract class BaseMainViewAdapter<E> extends RecyclerView.Adapter<BaseMainViewAdapter.BaseViewHolder>{
 
-    @Override
-    public BaseMainViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    private List<E> models;
+
+    public BaseMainViewAdapter(List<E> models, Context parent) {
+        this.models = models;
     }
 
     @Override
-    public void onBindViewHolder(BaseMainViewAdapter.ViewHolder holder, int position) {
-
+    public BaseMainViewAdapter.BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(getItemView(), parent, false);
+        return getHolder(v);
     }
+
+    protected abstract BaseViewHolder getHolder(View v);
+
+    protected abstract int getItemView();
 
     @Override
     public int getItemCount() {
-        return 0;
+        if (models == null)
+            return 0;
+        return models.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView albumImage;
-        TextView albumName;
-        TextView artistName;
-        ProgressBar pb;
-        CardView cv;
-        ConstraintLayout card;
+    class BaseViewHolder extends RecyclerView.ViewHolder {
 
-        public ViewHolder(View itemView) {
+        public BaseViewHolder(View itemView) {
             super(itemView);
-            albumImage = itemView.findViewById(R.id.album_image);
-            albumName = itemView.findViewById(R.id.artist_name);
-            artistName = itemView.findViewById(R.id.album_name);
-            pb = itemView.findViewById(R.id.image_progress_bar);
-            card = itemView.findViewById(R.id.card);
-            cv = itemView.findViewById(R.id.cv);
 
         }
     }
