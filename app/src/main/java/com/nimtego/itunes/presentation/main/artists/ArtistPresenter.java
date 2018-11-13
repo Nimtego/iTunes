@@ -25,7 +25,7 @@ public class ArtistPresenter
 
     @Override
     public void artistClicked(ArtistModel albumModel) {
-        // TODO: 13.11.2018  
+        view.toast(albumModel.getArtistName());
     }
 
     @Override
