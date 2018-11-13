@@ -13,10 +13,6 @@ public interface MainContract {
 
         void tabSelected(String tabName);
 
-        void pushInRV(int position);
-
-        void longPushInRV(int position);
-
         void viewIsReady();
     }
 
