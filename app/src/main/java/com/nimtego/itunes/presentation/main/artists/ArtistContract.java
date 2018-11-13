@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.main;
+package com.nimtego.itunes.presentation.main.artists;
 
 import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.presentation.base.BaseContract;

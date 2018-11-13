@@ -35,39 +35,13 @@ public class MainPresenter
 
     @Override
     public void search() {
-        showViewLoading();
-        view.render(getSearchText());
-/*        interactor.execute(new DisposableObserver<MainDataModel>() {
-            @Override
-            public void onNext(MainDataModel dataModel) {
-                MainPresenter.this.showAlbumsInView(dataModel);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                MainPresenter.this.hideViewLoading();
-                MainPresenter.this.toast("error" + e.getLocalizedMessage());
-                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
-
-            }
-
-            @Override
-            public void onComplete() {
-                MainPresenter.this.hideViewLoading();
-            }
-        }, MainViewInteractor.Params.forRequest(getSearchText()));*/
+        view.render(view.getSearchText());
     }
 
     @Override
     public void tabSelected(String tabName) {
-        //interactor.dispose();
-        if (!view.getSearchText().isEmpty())
-            search();
+        search();
     }
-
-/*    private void showAlbumsInView(MainDataModel dataModel) {
-        view.render(dataModel);
-    }*/
 
     private String getSearchText() {
         return view.getSearchText();
@@ -83,19 +57,6 @@ public class MainPresenter
 
     private void toast(String message) {
         view.toast(message);
-    }
-
-    @Override
-    public void pushInRV(int position) {
-/*        Map<String, String> params = new HashMap<>();
-        String key = IpTags.ALBUM_ID.toString();
-        String value = String.valueOf(mModelManager.getListAlbum().get(position).getCollectionId());
-        params.put(key, value);
-        view.showView(InformationAlbumContract.View.class, params);*/
-    }
-
-    @Override
-    public void longPushInRV(int position) {
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.main.adapter;
+package com.nimtego.itunes.presentation.main.songs;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -12,38 +12,35 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.main.model.SongModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static com.nimtego.itunes.presentation.main.adapter.BaseMainViewAdapter.*;
+public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
-public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
+    private List<SongModel> models;
 
-    private List<AlbumModel> models;
-
-
-    public AlbumAdapter(List<AlbumModel> model, Context parent) {
+    public SongAdapter(List<SongModel> model, Context parent) {
         this.models = model;
     }
 
     @Override
-    public AlbumAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
-        return new AlbumAdapter.ViewHolder(v);
+    public SongAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_card_form, parent, false);
+        return new SongAdapter.ViewHolder(v);
     }
 
 
     @Override
-    public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(models.get(position).getAlbumName());
-        holder.artistName.setText(models.get(position).getAlbumArtistName());
+    public void onBindViewHolder(final SongAdapter.ViewHolder holder, final int position) {
+        holder.songName.setText(models.get(position).getTrackName());
+        holder.songAlbumName.setText(models.get(position).getTrackAlbumName());
+        holder.songArtistName.setText(models.get(position).getTrackArtistName());
         holder.pb.setVisibility(View.VISIBLE);
-        Picasso.get().load(models.get(position).getAlbumArtWorkUrl()
-                .replace("100x100", "200x200"))
-                .into(holder.albumImage, new Callback() {
+        Picasso.get().load(models.get(position).getTrackArtwork().replace("100x100", "200x200"))
+                .into(holder.songImage, new Callback() {
                     @Override
                     public void onSuccess() {
                         if (holder.pb != null)
@@ -67,18 +64,20 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView albumImage;
-        TextView albumName;
-        TextView artistName;
+        ImageView songImage;
+        TextView songName;
+        TextView songAlbumName;
+        TextView songArtistName;
         ProgressBar pb;
         CardView cv;
         ConstraintLayout card;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            albumImage = itemView.findViewById(R.id.album_image);
-            albumName = itemView.findViewById(R.id.artist_name);
-            artistName = itemView.findViewById(R.id.album_name);
+            songImage = itemView.findViewById(R.id.song_image);
+            songName = itemView.findViewById(R.id.song_name);
+            songAlbumName = itemView.findViewById(R.id.song_album_name);
+            songArtistName = itemView.findViewById(R.id.song_artist_name);
             pb = itemView.findViewById(R.id.image_progress_bar);
             card = itemView.findViewById(R.id.card);
             cv = itemView.findViewById(R.id.cv);

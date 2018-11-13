@@ -1,10 +1,8 @@
-package com.nimtego.itunes.presentation.main;
+package com.nimtego.itunes.presentation.main.songs;
 
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.domain.interactor.SongInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.Collection;
@@ -32,26 +30,29 @@ public class SongPresenter
 
     @Override
     public void search(String response) {
-        showViewLoading();
-        interactor.execute(new DisposableObserver<List<SongModel>>() {
-            @Override
-            public void onNext(List<SongModel> songModel) {
-                SongPresenter.this.showSongsInView(songModel);
-            }
+        if (!view.getCurrentSerch().equals(response)) {
+            view.setCurrentSearch(response);
+            showViewLoading();
+            interactor.execute(new DisposableObserver<List<SongModel>>() {
+                @Override
+                public void onNext(List<SongModel> songModel) {
+                    SongPresenter.this.showSongsInView(songModel);
+                }
 
-            @Override
-            public void onError(Throwable e) {
-                SongPresenter.this.hideViewLoading();
-                SongPresenter.this.toast("error" + e.getLocalizedMessage());
-                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
+                @Override
+                public void onError(Throwable e) {
+                    SongPresenter.this.hideViewLoading();
+                    SongPresenter.this.toast("error" + e.getLocalizedMessage());
+                    // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
-            }
+                }
 
-            @Override
-            public void onComplete() {
-                SongPresenter.this.hideViewLoading();
-            }
-        }, SongInteractor.Params.forRequest(response));
+                @Override
+                public void onComplete() {
+                    SongPresenter.this.hideViewLoading();
+                }
+            }, SongInteractor.Params.forRequest(response));
+        }
     }
 
     private void showViewLoading() {

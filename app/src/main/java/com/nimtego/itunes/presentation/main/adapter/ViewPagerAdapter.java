@@ -3,6 +3,7 @@ package com.nimtego.itunes.presentation.main.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.nimtego.itunes.presentation.main.fragments.MainTabsContract;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
@@ -10,7 +11,7 @@ import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private final List<MainTabsFragment> mFragmentList;
     private final List<String> mFragmentTitleList;
 
@@ -34,7 +35,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
     }
-
     @Override
     public CharSequence getPageTitle(int position) {
         return mFragmentTitleList.get(position);

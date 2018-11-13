@@ -1,6 +1,5 @@
-package com.nimtego.itunes.presentation.main;
+package com.nimtego.itunes.presentation.main.artists;
 
-import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.domain.interactor.ArtistInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
@@ -31,26 +30,29 @@ public class ArtistPresenter
 
     @Override
     public void search(String response) {
-        showViewLoading();
-        interactor.execute(new DisposableObserver<List<ArtistModel>>() {
-            @Override
-            public void onNext(List<ArtistModel> dataModel) {
-                ArtistPresenter.this.showAlbumsInView(dataModel);
-            }
+        if (!view.getCurrentSerch().equals(response)) {
+            view.setCurrentSearch(response);
+            showViewLoading();
+            interactor.execute(new DisposableObserver<List<ArtistModel>>() {
+                @Override
+                public void onNext(List<ArtistModel> dataModel) {
+                    ArtistPresenter.this.showAlbumsInView(dataModel);
+                }
 
-            @Override
-            public void onError(Throwable e) {
-                ArtistPresenter.this.hideViewLoading();
-                ArtistPresenter.this.toast("error" + e.getLocalizedMessage());
-                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
+                @Override
+                public void onError(Throwable e) {
+                    ArtistPresenter.this.hideViewLoading();
+                    ArtistPresenter.this.toast("error" + e.getLocalizedMessage());
+                    // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
-            }
+                }
 
-            @Override
-            public void onComplete() {
-                ArtistPresenter.this.hideViewLoading();
-            }
-        }, ArtistInteractor.Params.forRequest(response));
+                @Override
+                public void onComplete() {
+                    ArtistPresenter.this.hideViewLoading();
+                }
+            }, ArtistInteractor.Params.forRequest(response));
+        }
     }
 
     private void showViewLoading() {

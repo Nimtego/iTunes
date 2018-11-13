@@ -1,18 +1,14 @@
-package com.nimtego.itunes.presentation.main.fragments;
+package com.nimtego.itunes.presentation.main.albums;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.nimtego.itunes.presentation.main.AlbumContract;
-import com.nimtego.itunes.presentation.main.AlbumPresenter;
-import com.nimtego.itunes.presentation.main.adapter.AlbumAdapter;
+import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
-import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class AlbumTabsFragment
         extends MainTabsFragment<AlbumContract.Presenter>

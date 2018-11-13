@@ -22,7 +22,7 @@ extends BaseFragment<P>
         implements MainTabsContract.View<P>{
 
     protected RecyclerView mRecyclerView;
-
+    protected String searchText = "";
     public MainTabsFragment() {
 
     }
@@ -39,4 +39,20 @@ extends BaseFragment<P>
 
     protected abstract RecyclerView.LayoutManager rvLayoutManager(Context context);
 
+    @Override
+    public boolean isRvEmpty() {
+        if ( mRecyclerView.getAdapter() == null)
+            return true;
+        return mRecyclerView.getAdapter().getItemCount() == 0;
+    }
+
+    @Override
+    public String getCurrentSerch() {
+        return searchText;
+    }
+
+    @Override
+    public void setCurrentSearch(String response) {
+        this.searchText = response;
+    }
 }

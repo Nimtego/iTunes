@@ -13,10 +13,6 @@ public interface MainContract {
 
         void tabSelected(String tabName);
 
-        void pushInRV(int position);
-
-        void longPushInRV(int position);
-
         void viewIsReady();
     }
 
@@ -25,5 +21,7 @@ public interface MainContract {
         String getSearchText();
 
         void render(String response);
+
+        boolean emptyRv();
     }
 }

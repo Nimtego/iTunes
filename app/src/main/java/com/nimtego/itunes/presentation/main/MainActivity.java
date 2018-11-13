@@ -16,12 +16,10 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.base.BaseView;
 import com.nimtego.itunes.presentation.main.adapter.ViewPagerAdapter;
-import com.nimtego.itunes.presentation.main.fragments.AlbumTabsFragment;
-import com.nimtego.itunes.presentation.main.fragments.ArtistTabsFragment;
-import com.nimtego.itunes.presentation.main.fragments.MainTabsContract;
+import com.nimtego.itunes.presentation.main.albums.AlbumTabsFragment;
+import com.nimtego.itunes.presentation.main.artists.ArtistTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
-import com.nimtego.itunes.presentation.main.fragments.SongTabsFragment;
-import com.nimtego.itunes.presentation.main.model.MainDataModel;
+import com.nimtego.itunes.presentation.main.songs.SongTabsFragment;
 
 
 public class MainActivity extends BaseView<MainContract.Presenter>
@@ -79,7 +77,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mPresenter.tabSelected(String.valueOf(tab.getText()));
+               mPresenter.tabSelected(String.valueOf(tab.getText()));
             }
 
             @Override
@@ -99,6 +97,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         mViewPagerAdapter.addFragment(new AlbumTabsFragment(), "Albums");
         mViewPagerAdapter.addFragment(new ArtistTabsFragment(), "Artists");
         mViewPagerAdapter.addFragment(new SongTabsFragment(), "Songs");
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mViewPagerAdapter);
     }
 
@@ -117,6 +116,11 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         MainTabsFragment fragment = mViewPagerAdapter
                         .getItem(mViewPager.getCurrentItem());
         fragment.search(response);
+    }
+
+    @Override
+    public boolean emptyRv() {
+        return mViewPagerAdapter.getItem(mViewPager.getCurrentItem()).isRvEmpty();
     }
 
     @Override
