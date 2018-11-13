@@ -10,6 +10,10 @@ public abstract class BasePresenter<V extends BaseContract.View,
     protected V view;
     protected I interactor;
 
+    public BasePresenter(I interactor) {
+        this.interactor = interactor;
+    }
+
     @Override
     public void attach(@NonNull V view) {
         this.view = view;

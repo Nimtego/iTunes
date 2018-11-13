@@ -15,7 +15,11 @@ import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BaseFragment;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
-public abstract class MainTabsFragment<P extends BaseContract.Presenter> extends BaseFragment<BaseContract.Presenter> {
+import java.util.Collection;
+
+public abstract class MainTabsFragment<P extends MainTabsContract.Presenter>
+extends BaseFragment<P>
+        implements MainTabsContract.View<P>{
 
     protected RecyclerView mRecyclerView;
 
@@ -35,9 +39,4 @@ public abstract class MainTabsFragment<P extends BaseContract.Presenter> extends
 
     protected abstract RecyclerView.LayoutManager rvLayoutManager(Context context);
 
-    public abstract void setSearchList(MainDataModel dataModel);
-/*    public void setSearchList(AlbumModel albumModel) {
-        RecyclerView.Adapter adapter = new AlbumAdapter(list, this.getActivity());
-        mRecyclerView.setAdapter(adapter);
-    }*/
 }

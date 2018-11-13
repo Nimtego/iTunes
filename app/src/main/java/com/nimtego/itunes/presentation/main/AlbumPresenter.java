@@ -2,11 +2,17 @@ package com.nimtego.itunes.presentation.main;
 
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.domain.interactor.AlbumInteractor;
+import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.inject.Inject;
+
+import io.reactivex.observers.DisposableObserver;
 
 public class AlbumPresenter
         extends BasePresenter<AlbumContract.View, BaseContract.Interactor>
@@ -16,7 +22,7 @@ public class AlbumPresenter
 
     @Inject
     public AlbumPresenter(BaseContract.Interactor interactor) {
-        this.interactor = interactor;
+        super(interactor);
     }
 
 
@@ -27,6 +33,46 @@ public class AlbumPresenter
 
     @Override
     public void albumClicked(AlbumModel albumModel) {
+        // TODO: 13.11.2018  
+    }
 
+    @Override
+    public void search(String response) {
+        showViewLoading();
+        interactor.execute(new DisposableObserver<List<AlbumModel>>() {
+            @Override
+            public void onNext(List<AlbumModel> dataModel) {
+                AlbumPresenter.this.showAlbumsInView(dataModel);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                AlbumPresenter.this.hideViewLoading();
+                AlbumPresenter.this.toast("error" + e.getLocalizedMessage());
+                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
+
+            }
+
+            @Override
+            public void onComplete() {
+                AlbumPresenter.this.hideViewLoading();
+            }
+        }, AlbumInteractor.Params.forRequest(response));
+    }
+
+    private void showViewLoading() {
+        view.showLoading();
+    }
+
+    private void showAlbumsInView(Collection<AlbumModel> albumModels) {
+        view.render(albumModels);
+    }
+
+    private void hideViewLoading() {
+        view.hideLoading();
+    }
+
+    private void toast(String message) {
+        view.toast(message);
     }
 }

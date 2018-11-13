@@ -17,10 +17,18 @@ public class InformationAlbumPresenter
     private SongsRepository mSongResult;
     private List<String> songsList;
 
-    public InformationAlbumPresenter(String id) {
+    public InformationAlbumPresenter(BaseContract.Interactor interactor) {
+        super(interactor);
+    }
+
+    public InformationAlbumPresenter() {
+        this(null);
+    }
+
+/*    public InformationAlbumPresenter(String id) {
         this.id = id;
         songsList = new ArrayList<>();
-    }
+    }*/
 
     @Override
     public void viewIsReady() {

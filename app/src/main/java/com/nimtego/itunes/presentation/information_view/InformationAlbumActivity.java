@@ -50,7 +50,7 @@ public class InformationAlbumActivity
     public InformationAlbumContract.Presenter supplyPresenter() {
         Intent intent = getIntent();
         String id = intent.getStringExtra(IpTags.ALBUM_ID.toString());
-        return new InformationAlbumPresenter(id);
+        return new InformationAlbumPresenter();
     }
 
     @Override

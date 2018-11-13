@@ -1,6 +1,5 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;

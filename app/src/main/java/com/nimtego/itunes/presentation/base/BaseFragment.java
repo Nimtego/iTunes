@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.main.MainContract;
 import com.nimtego.itunes.presentation.utils.CommonUtils;
 import com.nimtego.itunes.presentation.utils.navigation.ViewRegistry;
 import com.nimtego.itunes.presentation.utils.toast.SimpleToastAlarm;
@@ -43,8 +44,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     @Override
     public void showLoading() {
-        hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
+        ((MainContract.View)this.getActivity()).showLoading();
     }
 
     @Override
@@ -54,9 +54,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     @Override
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
-        }
+        ((MainContract.View)this.getActivity()).hideLoading();
     }
 
     @Override
