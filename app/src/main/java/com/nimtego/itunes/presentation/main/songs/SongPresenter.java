@@ -25,7 +25,7 @@ public class SongPresenter
 
     @Override
     public void songClicked(SongModel songModel) {
-
+        view.toast(songModel.getTrackName());
     }
 
     @Override

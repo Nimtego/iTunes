@@ -21,8 +21,14 @@ public class SongTabsFragment
 
     @Override
     public void render(Collection<SongModel> songModels) {
-        RecyclerView.Adapter adapter = new SongAdapter(new ArrayList<>(songModels),
+        SongAdapter adapter = new SongAdapter(new ArrayList<>(songModels),
                 this.getActivity());
+        adapter.setOnItemClickListener(new SongAdapter.OnItemClickListener() {
+            @Override
+            public void onUserItemClicked(SongModel artistModel) {
+                mPresenter.songClicked(artistModel);
+            }
+        });
         mRecyclerView.setAdapter(adapter);
     }
 

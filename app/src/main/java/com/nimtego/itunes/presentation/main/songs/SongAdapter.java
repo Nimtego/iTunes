@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -19,8 +20,11 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
-
+    public interface OnItemClickListener {
+        void onUserItemClicked(SongModel albumModel);
+    }
     private List<SongModel> models;
+    private OnItemClickListener onItemClickListener;
 
     public SongAdapter(List<SongModel> model, Context parent) {
         this.models = model;
@@ -35,10 +39,19 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final SongAdapter.ViewHolder holder, final int position) {
-        holder.songName.setText(models.get(position).getTrackName());
-        holder.songAlbumName.setText(models.get(position).getTrackAlbumName());
-        holder.songArtistName.setText(models.get(position).getTrackArtistName());
+        final SongModel songModel = this.models.get(position);
+        holder.songName.setText(songModel.getTrackName());
+        holder.songAlbumName.setText(songModel.getTrackAlbumName());
+        holder.songArtistName.setText(songModel.getTrackArtistName());
         holder.pb.setVisibility(View.VISIBLE);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (SongAdapter.this.onItemClickListener != null) {
+                    SongAdapter.this.onItemClickListener.onUserItemClicked(songModel);
+                }
+            }
+        });
         Picasso.get().load(models.get(position).getTrackArtwork().replace("100x100", "200x200"))
                 .into(holder.songImage, new Callback() {
                     @Override
@@ -54,6 +67,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     }
                 });
         holder.cv.setCardElevation(5);
+    }
+    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class AlbumPresenter
 
     @Override
     public void albumClicked(AlbumModel albumModel) {
-        // TODO: 13.11.2018  
+        toast(albumModel.getAlbumName());
     }
 
     @Override

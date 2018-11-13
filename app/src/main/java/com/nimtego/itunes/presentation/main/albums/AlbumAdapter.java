@@ -12,16 +12,21 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
+    public interface OnItemClickListener {
+        void onUserItemClicked(AlbumModel albumModel);
+    }
     private List<AlbumModel> models;
-
+    private OnItemClickListener onItemClickListener;
 
     public AlbumAdapter(List<AlbumModel> model, Context parent) {
         this.models = model;
@@ -36,9 +41,18 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final AlbumAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(models.get(position).getAlbumName());
-        holder.artistName.setText(models.get(position).getAlbumArtistName());
+        final AlbumModel albumModel = this.models.get(position);
+        holder.albumName.setText(albumModel.getAlbumName());
+        holder.artistName.setText(albumModel.getAlbumArtistName());
         holder.pb.setVisibility(View.VISIBLE);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (AlbumAdapter.this.onItemClickListener != null) {
+                    AlbumAdapter.this.onItemClickListener.onUserItemClicked(albumModel);
+                }
+            }
+        });
         Picasso.get().load(models.get(position).getAlbumArtWorkUrl()
                 .replace("100x100", "200x200"))
                 .into(holder.albumImage, new Callback() {
@@ -56,7 +70,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 });
         holder.cv.setCardElevation(5);
     }
-
+    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
     @Override
     public int getItemCount() {
         if (models == null)

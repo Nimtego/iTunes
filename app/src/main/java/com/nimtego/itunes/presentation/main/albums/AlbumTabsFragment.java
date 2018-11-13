@@ -16,8 +16,14 @@ public class AlbumTabsFragment
 
     @Override
     public void render(Collection<AlbumModel> albumModel) {
-        RecyclerView.Adapter adapter = new AlbumAdapter(new ArrayList<>(albumModel),
+        AlbumAdapter adapter = new AlbumAdapter(new ArrayList<>(albumModel),
                 this.getActivity());
+        adapter.setOnItemClickListener(new AlbumAdapter.OnItemClickListener() {
+            @Override
+            public void onUserItemClicked(AlbumModel albumModel) {
+                mPresenter.albumClicked(albumModel);
+            }
+        });
         mRecyclerView.setAdapter(adapter);
     }
 

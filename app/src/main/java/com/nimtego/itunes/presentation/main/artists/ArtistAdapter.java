@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -19,8 +20,11 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
-
+    public interface OnItemClickListener {
+        void onUserItemClicked(ArtistModel albumModel);
+    }
     private List<ArtistModel> models;
+    private OnItemClickListener onItemClickListener;
 
     public ArtistAdapter(List<ArtistModel> model, Context parent) {
         this.models = model;
@@ -35,9 +39,18 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ArtistAdapter.ViewHolder holder, final int position) {
-        holder.albumName.setText(String.valueOf(models.get(position).getPrimaryGenreName()));
-        holder.artistName.setText(models.get(position).getArtistName());
+        final ArtistModel artistModel = this.models.get(position);
+        holder.albumName.setText(artistModel.getPrimaryGenreName());
+        holder.artistName.setText(artistModel.getArtistName());
         holder.pb.setVisibility(View.VISIBLE);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ArtistAdapter.this.onItemClickListener != null) {
+                    ArtistAdapter.this.onItemClickListener.onUserItemClicked(artistModel);
+                }
+            }
+        });
         Picasso.get().load(models.get(position).getArtistViewUrl())
                 .into(holder.albumImage, new Callback() {
                     @Override
@@ -53,6 +66,10 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
                     }
                 });
         holder.cv.setCardElevation(5);
+    }
+
+    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @Override
