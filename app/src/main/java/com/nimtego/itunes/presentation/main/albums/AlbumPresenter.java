@@ -1,8 +1,6 @@
-package com.nimtego.itunes.presentation.main;
+package com.nimtego.itunes.presentation.main.albums;
 
-import com.nimtego.itunes.App;
 import com.nimtego.itunes.domain.interactor.AlbumInteractor;
-import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
@@ -38,26 +36,29 @@ public class AlbumPresenter
 
     @Override
     public void search(String response) {
-        showViewLoading();
-        interactor.execute(new DisposableObserver<List<AlbumModel>>() {
-            @Override
-            public void onNext(List<AlbumModel> dataModel) {
-                AlbumPresenter.this.showAlbumsInView(dataModel);
-            }
+        if (!view.getCurrentSerch().equals(response)) {
+            view.setCurrentSearch(response);
+            showViewLoading();
+            interactor.execute(new DisposableObserver<List<AlbumModel>>() {
+                @Override
+                public void onNext(List<AlbumModel> dataModel) {
+                    AlbumPresenter.this.showAlbumsInView(dataModel);
+                }
 
-            @Override
-            public void onError(Throwable e) {
-                AlbumPresenter.this.hideViewLoading();
-                AlbumPresenter.this.toast("error" + e.getLocalizedMessage());
-                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
+                @Override
+                public void onError(Throwable e) {
+                    AlbumPresenter.this.hideViewLoading();
+                    AlbumPresenter.this.toast("error" + e.getLocalizedMessage());
+                    // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
-            }
+                }
 
-            @Override
-            public void onComplete() {
-                AlbumPresenter.this.hideViewLoading();
-            }
-        }, AlbumInteractor.Params.forRequest(response));
+                @Override
+                public void onComplete() {
+                    AlbumPresenter.this.hideViewLoading();
+                }
+            }, AlbumInteractor.Params.forRequest(response));
+        }
     }
 
     private void showViewLoading() {

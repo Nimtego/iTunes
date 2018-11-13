@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.main;
+package com.nimtego.itunes.presentation.main.songs;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsContract;

@@ -35,8 +35,8 @@ public class MainPresenter
 
     @Override
     public void search() {
-        showViewLoading();
-        view.render(getSearchText());
+       // showViewLoading();
+        view.render(view.getSearchText());
 /*        interactor.execute(new DisposableObserver<MainDataModel>() {
             @Override
             public void onNext(MainDataModel dataModel) {
@@ -61,8 +61,9 @@ public class MainPresenter
     @Override
     public void tabSelected(String tabName) {
         //interactor.dispose();
-        if (!view.getSearchText().isEmpty())
-            search();
+/*        if (!view.getSearchText().isEmpty()) {
+            if (view.emptyRv() || !textSearch.equals(view.getSearchText()))*/
+                search();
     }
 
 /*    private void showAlbumsInView(MainDataModel dataModel) {

@@ -1,14 +1,10 @@
-package com.nimtego.itunes.presentation.main.fragments;
+package com.nimtego.itunes.presentation.main.songs;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.nimtego.itunes.data.entity.Song;
-import com.nimtego.itunes.presentation.main.SongContract;
-import com.nimtego.itunes.presentation.main.SongPresenter;
-import com.nimtego.itunes.presentation.main.adapter.SongAdapter;
-import com.nimtego.itunes.presentation.main.model.MainDataModel;
+import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.ArrayList;

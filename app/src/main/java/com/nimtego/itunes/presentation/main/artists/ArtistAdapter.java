@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.main.adapter;
+package com.nimtego.itunes.presentation.main.artists;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;

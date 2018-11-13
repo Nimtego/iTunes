@@ -25,5 +25,7 @@ public interface MainContract {
         String getSearchText();
 
         void render(String response);
+
+        boolean emptyRv();
     }
 }
