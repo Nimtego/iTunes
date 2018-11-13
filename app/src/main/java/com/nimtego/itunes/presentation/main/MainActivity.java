@@ -18,6 +18,7 @@ import com.nimtego.itunes.presentation.base.BaseView;
 import com.nimtego.itunes.presentation.main.adapter.ViewPagerAdapter;
 import com.nimtego.itunes.presentation.main.fragments.AlbumTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.ArtistTabsFragment;
+import com.nimtego.itunes.presentation.main.fragments.MainTabsContract;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.SongTabsFragment;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
@@ -112,11 +113,10 @@ public class MainActivity extends BaseView<MainContract.Presenter>
     }
 
     @Override
-    public void render(MainDataModel dataModel) {
-        MainTabsFragment fragment =
-                (MainTabsFragment) mViewPagerAdapter
+    public void render(String response) {
+        MainTabsFragment fragment = mViewPagerAdapter
                         .getItem(mViewPager.getCurrentItem());
-        fragment.setSearchList(dataModel);
+        fragment.search(response);
     }
 
     @Override

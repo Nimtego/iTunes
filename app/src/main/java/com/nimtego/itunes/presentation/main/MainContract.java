@@ -24,6 +24,6 @@ public interface MainContract {
 
         String getSearchText();
 
-        void render(MainDataModel dataModel);
+        void render(String response);
     }
 }

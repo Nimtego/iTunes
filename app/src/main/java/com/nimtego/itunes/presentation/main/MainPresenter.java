@@ -1,5 +1,6 @@
 package com.nimtego.itunes.presentation.main;
 
+import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.repository.AppRepository;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
@@ -23,19 +24,20 @@ public class MainPresenter
     @Inject
     public MainPresenter(BaseContract.Interactor<MainDataModel,
             MainViewInteractor.Params> interactor) {
-        this.interactor = interactor;
+        super(interactor);
     }
 
 
     public MainPresenter() {
-        this(new MainViewInteractor(new AppRepository()));
+        this(null);
         // TODO: 29.10.2018 replaceable di
     }
 
     @Override
     public void search() {
         showViewLoading();
-        interactor.execute(new DisposableObserver<MainDataModel>() {
+        view.render(getSearchText());
+/*        interactor.execute(new DisposableObserver<MainDataModel>() {
             @Override
             public void onNext(MainDataModel dataModel) {
                 MainPresenter.this.showAlbumsInView(dataModel);
@@ -53,7 +55,7 @@ public class MainPresenter
             public void onComplete() {
                 MainPresenter.this.hideViewLoading();
             }
-        }, MainViewInteractor.Params.forRequest(getSearchText()));
+        }, MainViewInteractor.Params.forRequest(getSearchText()));*/
     }
 
     @Override
@@ -63,9 +65,9 @@ public class MainPresenter
             search();
     }
 
-    private void showAlbumsInView(MainDataModel dataModel) {
+/*    private void showAlbumsInView(MainDataModel dataModel) {
         view.render(dataModel);
-    }
+    }*/
 
     private String getSearchText() {
         return view.getSearchText();

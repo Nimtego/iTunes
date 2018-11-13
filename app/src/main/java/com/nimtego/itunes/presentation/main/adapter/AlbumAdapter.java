@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import static com.nimtego.itunes.presentation.main.adapter.BaseMainViewAdapter.*;
+
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
     private List<AlbumModel> models;
