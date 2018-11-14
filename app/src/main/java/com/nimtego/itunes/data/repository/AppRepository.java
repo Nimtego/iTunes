@@ -7,6 +7,7 @@ import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.domain.Repository;
+import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
@@ -52,17 +53,18 @@ public class AppRepository implements Repository {
 
 
     @Override
-    public Observable<SongModel> song(int id) {
+    public Observable<SongModel> song(String request) {
         return null;
     }
 
     @Override
-    public Observable<ArtistModel> artist(int id) {
+    public Observable<ArtistModel> artist(String request) {
         return null;
     }
 
     @Override
-    public Observable<AlbumModel> album(int id) {
-        return null;
+    public Observable<AlbumDetailsModel> album(String request) {
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+       return dataStore.album(request).map(s ->this.mapper.transformAlbumDetail(s));
     }
 }

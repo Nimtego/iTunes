@@ -12,4 +12,5 @@ public class ArtistModel {
     private String artistArtwork;
     private String primaryGenreName;
     private String artistViewUrl;
+    private String artistId;
 }

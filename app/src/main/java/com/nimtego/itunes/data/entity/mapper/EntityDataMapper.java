@@ -6,6 +6,7 @@ import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
@@ -20,6 +21,7 @@ public class EntityDataMapper {
                 .artistName(result.getArtistName())
                 .primaryGenreName(result.getPrimaryGenreName())
                 .artistViewUrl(result.getArtistLinkUrl())
+                .artistId(String.valueOf(result.getArtistId()))
                 .build();
     }
 
@@ -33,10 +35,10 @@ public class EntityDataMapper {
         return transformArtists(artistsRepository.getResults());
     }
 
-    private AlbumModel transformAlbum(final AlbumResult result) {
+    public AlbumModel transformAlbum(final AlbumResult result) {
         return AlbumModel.builder()
                 .albumName(result.getCollectionName())
-                .albumId(result.getCollectionId() == null ? 0 : result.getCollectionId())
+                .albumId(String.valueOf(result.getCollectionId()))
                 .albumArtistName(result.getArtistName())
                 .albumArtWorkUrl(result.getArtworkUrl100())
                 .build()
@@ -66,10 +68,18 @@ public class EntityDataMapper {
                 .trackArtistName(songResult.getArtistName())
                 .trackArtwork(songResult.getArtworkUrl100())
                 .trackAlbumName(songResult.getCollectionName())
+                .songId(String.valueOf(songResult.getTrackId()))
                 .build();
     }
 
     public List<SongModel> transformSongs(final SongsRepository songsRepository) {
         return transformSongs(songsRepository.getResults());
+    }
+
+    public AlbumDetailsModel transformAlbumDetail(final AlbumResult albumResult) {
+        return AlbumDetailsModel.builder()
+                .albumName(albumResult.getCollectionName())
+                .albumArtistName(albumResult.getArtistName())
+                .build();
     }
 }

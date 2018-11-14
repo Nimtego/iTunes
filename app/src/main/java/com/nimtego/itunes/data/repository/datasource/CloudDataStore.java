@@ -9,6 +9,7 @@ import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 
 import io.reactivex.Observable;
 
@@ -79,7 +80,7 @@ public class CloudDataStore implements DataStore {
     }
 
     @Override
-    public Observable<AlbumResult> album() {
-        return null;
+    public Observable<AlbumResult> album(String response) {
+        return restApi.getAlbum(FabricParam.lookupAlbum(response));
     }
 }

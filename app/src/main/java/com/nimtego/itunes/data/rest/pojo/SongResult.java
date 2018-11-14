@@ -107,6 +107,9 @@ public class SongResult {
     @Expose
     private Boolean isStreamable;
 
+    public Integer getTrackId() {
+        return trackId;
+    }
     public String getWrapperType() {
         return wrapperType;
     }

@@ -12,5 +12,6 @@ public class SongModel {
     private String trackAlbumName;
     private String trackArtistName;
     private String trackArtwork;
+    private String songId;
 
 }
