@@ -65,6 +65,8 @@ public class AppRepository implements Repository {
     @Override
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-       return dataStore.album(request).map(s ->this.mapper.transformAlbumDetail(s));
+       return dataStore.album(request)
+               .map(s ->this.mapper.transformAlbumDetail(s.getResults().get(0)));
+        // TODO: 14.11.2018  
     }
 }

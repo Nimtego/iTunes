@@ -21,5 +21,5 @@ public interface DataStore {
 
     Observable<ArtistResult> artist();
 
-    Observable<AlbumResult> album(String response);
+    Observable<AlbumsRepository> album(String response);
 }

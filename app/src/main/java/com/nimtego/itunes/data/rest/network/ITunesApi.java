@@ -29,5 +29,5 @@ public interface ITunesApi {
     Observable<ArtistsRepository> getArtist(@QueryMap Map<String, String> param);
 
     @GET("/lookup")
-    Observable<AlbumResult> getAlbum(@QueryMap Map<String, String> param);
+    Observable<AlbumsRepository> getAlbum(@QueryMap Map<String, String> param);
 }
