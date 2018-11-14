@@ -30,6 +30,14 @@ public class FabricParam {
         return param;
     }
 
+    //https://itunes.apple.com/lookup?id=579372950&entity=album
+    public static Map<String, String> lookupAlbum(String album){
+        Map<String, String> param = new HashMap<>();
+        param.put("id", album);
+        param.put("entity", "song");
+        return param;
+    }
+
     public static Map<String, String> searchSongParam(String song) {
          /*
          https://itunes.apple.com/search?media=music&entity=musicTrack&limit=5&attribute=songTerm&term=xxx

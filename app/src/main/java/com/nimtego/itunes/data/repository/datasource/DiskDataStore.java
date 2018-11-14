@@ -45,7 +45,7 @@ public class DiskDataStore implements DataStore {
     }
 
     @Override
-    public Observable<AlbumResult> album() {
+    public Observable<AlbumsRepository> album(String response) {
         return null;
     }
 }

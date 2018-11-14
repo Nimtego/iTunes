@@ -42,33 +42,4 @@ public class AlbumTabsFragment
     public AlbumContract.Presenter supplyPresenter() {
         return new AlbumPresenter();
     }
-
-
-/*    @Override
-    protected RecyclerView.LayoutManager rvLayoutManager(Context context) {
-        return new GridLayoutManager(context, 2);
-    }
-
-    @Override
-    public void setSearchList(MainDataModel dataModel) {
-        RecyclerView.Adapter adapter = new AlbumAdapter(dataModel.getAlbumModels(),
-                this.getActivity());
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public AlbumContract.Presenter supplyPresenter() {
-        return new AlbumPresenter();
-    }
-
-
-    @Override
-    public void render(Collection albumModel) {
-
-    }
-
-    @Override
-    public void search(String response) {
-
-    }*/
 }

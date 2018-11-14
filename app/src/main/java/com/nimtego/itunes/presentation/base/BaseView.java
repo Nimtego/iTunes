@@ -35,6 +35,7 @@ public abstract class BaseView<P extends BaseContract.Presenter>
         super.onDestroy();
     }
 
+
     @Override
     public void runOnMainThread(Runnable runnable) {
         runOnUiThread(runnable);

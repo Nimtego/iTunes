@@ -3,14 +3,19 @@ package com.nimtego.itunes.presentation.main.albums;
 import com.nimtego.itunes.domain.interactor.AlbumInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
+import com.nimtego.itunes.presentation.information_view.DetailedInformationContract;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableObserver;
+
+import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
 
 public class AlbumPresenter
         extends BasePresenter<AlbumContract.View, BaseContract.Interactor>
@@ -31,7 +36,15 @@ public class AlbumPresenter
 
     @Override
     public void albumClicked(AlbumModel albumModel) {
-        toast(albumModel.getAlbumName());
+        //toast(albumModel.getAlbumName());
+        Map<String, String> param = new HashMap<>();
+        param.put(ALBUM_ID.name(), albumModel.getAlbumId());
+        try {
+            view.showView(DetailedInformationContract.View.class, param);
+        } catch (IllegalArgumentException e) {
+            view.toast(e.getMessage());
+        }
+
     }
 
     @Override

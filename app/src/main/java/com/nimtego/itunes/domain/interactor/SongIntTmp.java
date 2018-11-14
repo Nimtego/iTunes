@@ -1,23 +1,19 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.domain.Repository;
-import com.nimtego.itunes.presentation.main.model.AlbumModel;
-
-import java.util.List;
+import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
+import io.reactivex.observers.DisposableObserver;
 
-public class AlbumInteractor
-        extends BaseInteractor<List<AlbumModel>, AlbumInteractor.Params> {
+public class SongIntTmp extends BaseInteractor<SongModel, SongIntTmp.Params> {
 
-    public AlbumInteractor() {
-    }
 
     @Override
-    protected Observable<List<AlbumModel>> buildUseCaseObservable(Params params) {
+    protected Observable<SongModel> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
-        return repository.albums(params.request);
+        return repository.song(params.request);
     }
 
     public static final class Params {
@@ -32,5 +28,4 @@ public class AlbumInteractor
             return new Params(request);
         }
     }
-
 }
