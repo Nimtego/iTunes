@@ -80,6 +80,7 @@ public class EntityDataMapper {
         return AlbumDetailsModel.builder()
                 .albumName(albumResult.getCollectionName())
                 .albumArtistName(albumResult.getArtistName())
+                .albumArtwork(albumResult.getArtworkUrl100())
                 .build();
     }
 }
