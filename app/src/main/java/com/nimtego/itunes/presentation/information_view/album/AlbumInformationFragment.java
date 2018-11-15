@@ -26,6 +26,7 @@ public class AlbumInformationFragment
         implements AlbumInformationContract.View<AlbumInformationContract.Presenter> {
 
     private TextView albumName;
+    private TextView artistName;
     private ImageView albumImage;
     private ProgressBar pb;
 
@@ -43,6 +44,7 @@ public class AlbumInformationFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_album_form, container, false);
+        artistName = view.findViewById(R.id.artist_name);
         albumName = view.findViewById(R.id.album_name);
         albumImage = view.findViewById(R.id.image_album);
         pb = view.findViewById(R.id.image_progress_bar);
@@ -59,6 +61,7 @@ public class AlbumInformationFragment
     @Override
     public void render(AlbumDetailsModel albumDetailsModel) {
         albumName.setText(albumDetailsModel.getAlbumName());
+        artistName.setText(albumDetailsModel.getAlbumArtistName());
         Picasso.get().load(albumDetailsModel.getAlbumArtwork()
                 .replace("100x100", "200x200"))
                 .into(albumImage, new Callback() {
