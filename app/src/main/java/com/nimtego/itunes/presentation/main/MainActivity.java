@@ -1,14 +1,11 @@
 package com.nimtego.itunes.presentation.main;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,6 +18,8 @@ import com.nimtego.itunes.presentation.main.artists.ArtistTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.songs.SongTabsFragment;
 
+import java.lang.reflect.Field;
+
 
 public class MainActivity extends BaseView<MainContract.Presenter>
         implements MainContract.View<MainContract.Presenter> {
@@ -28,40 +27,34 @@ public class MainActivity extends BaseView<MainContract.Presenter>
     private Toolbar mToolBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private EditText searchText;
+    private SearchView searchText;
     private ViewPagerAdapter mViewPagerAdapter;
     private ProgressBar pb;
+    private String search = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchText = findViewById(R.id.search_edit_text);
+/*        searchText.findViewById(android.support.v7.appcompat.R.id.search_src_text)
+                .setBackgroundResource(R.drawable.rounded_edittext);*/
         pb = findViewById(R.id.progressBar);
-        searchText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+
+        searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    searchText.setCursorVisible(true);
-                } else {
-                    searchText.setCursorVisible(false);
-                }
-            }
-        });
-        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    mPresenter.search();
-                    searchText.setCursorVisible(false);
-                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                    if (in != null) {
-                        in.hideSoftInputFromWindow(searchText.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                    }
-                    return true;
-                }
+            public boolean onQueryTextSubmit(String s) {
+                search = s;
+                searchText.onActionViewCollapsed();
+                mPresenter.search();
                 return false;
             }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+
         });
 
         mToolBar = findViewById(R.id.toolbar);
@@ -77,7 +70,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-               mPresenter.tabSelected(String.valueOf(tab.getText()));
+                mPresenter.tabSelected(String.valueOf(tab.getText()));
             }
 
             @Override
@@ -108,13 +101,13 @@ public class MainActivity extends BaseView<MainContract.Presenter>
 
     @Override
     public String getSearchText() {
-        return String.valueOf(searchText.getText());
+        return search;
     }
 
     @Override
     public void render(String response) {
         MainTabsFragment fragment = mViewPagerAdapter
-                        .getItem(mViewPager.getCurrentItem());
+                .getItem(mViewPager.getCurrentItem());
         fragment.search(response);
     }
 
