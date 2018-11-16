@@ -40,7 +40,6 @@ public class MainActivity extends BaseView<MainContract.Presenter>
 /*        searchText.findViewById(android.support.v7.appcompat.R.id.search_src_text)
                 .setBackgroundResource(R.drawable.rounded_edittext);*/
         pb = findViewById(R.id.progressBar);
-
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -67,9 +66,11 @@ public class MainActivity extends BaseView<MainContract.Presenter>
 
         mTabLayout = findViewById(R.id.tablayout);
         mTabLayout.setupWithViewPager(mViewPager);
+        setTitle(mTabLayout.getTabAt(mTabLayout.getSelectedTabPosition()).getText());
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                setTitle(String.valueOf(tab.getText()));
                 mPresenter.tabSelected(String.valueOf(tab.getText()));
             }
 
