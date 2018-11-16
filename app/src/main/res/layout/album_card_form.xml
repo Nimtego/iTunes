@@ -3,6 +3,7 @@
                                     xmlns:app="http://schemas.android.com/apk/res-auto"
                                     xmlns:tools="http://schemas.android.com/tools"
                                     android:id="@+id/cv"
+    android:background="@color/transparent"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
@@ -14,20 +15,20 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardBack"
+        android:background="@color/transparent"
         >
 
         <ImageView
             android:id="@+id/album_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/image_progress_bar"
@@ -49,9 +50,10 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="@color/with_grad"
+            android:background="@color/transparent"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/album_image">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/album_image">
 
             <TextView
                 android:id="@+id/album_name"

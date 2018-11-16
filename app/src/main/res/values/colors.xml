@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#465b65</color>
     <color name="colorAccent">#b0bec5</color>
     <color name="black_effective">#ffd6a7</color>
-    <color name="with_grad">#a3000000</color>
+    <color name="with_grad">#00000000</color>
     <color name="separator_gray">#98a6af</color>
     <color name="black_tr">#ad000000</color>
     <color name="w">#fff</color>
@@ -13,5 +13,6 @@
     <color name="grey">#dadada</color>
     <color name="cardBack">#e83c494e</color>
     <color name="reds">#9f5454</color>
+    <color name="transparent">#00ffffff</color>
 
 </resources>

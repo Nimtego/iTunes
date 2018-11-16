@@ -6,5 +6,7 @@
     android:layout_height="match_parent"
     android:scrollbars="vertical"
     android:text="@string/no_data_available"
+    android:clipToPadding="false"
+    android:paddingBottom="50dp"
     android:id="@+id/recycler_view">
 </android.support.v7.widget.RecyclerView>

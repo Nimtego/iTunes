@@ -42,16 +42,7 @@
                 android:hint="@string/search" />
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabGravity="fill"
-            app:tabIndicatorHeight="4dp"
-            app:tabMode="fixed"
-            app:tabPaddingEnd="2dp"
-            app:tabPaddingStart="0dp"
-            app:tabSelectedTextColor="@color/w" />
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
@@ -59,4 +50,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:tabIndicatorHeight="4dp"
+        android:layout_gravity="bottom"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabMaxWidth="0dp"
+        android:layout_alignParentBottom="true"
+        app:tabPaddingEnd="2dp"
+        app:tabPaddingStart="0dp"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:tabSelectedTextColor="@color/w"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 </android.support.design.widget.CoordinatorLayout>
