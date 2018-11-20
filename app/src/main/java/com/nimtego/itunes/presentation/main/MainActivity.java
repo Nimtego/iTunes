@@ -1,7 +1,11 @@
 package com.nimtego.itunes.presentation.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
@@ -11,8 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.presentation.base.BaseView;
-import com.nimtego.itunes.presentation.main.adapter.ViewPagerAdapter;
+import com.nimtego.itunes.presentation.main.adapter.MainPagerAdapter;
 import com.nimtego.itunes.presentation.main.albums.AlbumTabsFragment;
 import com.nimtego.itunes.presentation.main.artists.ArtistTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
@@ -24,11 +29,13 @@ import java.lang.reflect.Field;
 public class MainActivity extends BaseView<MainContract.Presenter>
         implements MainContract.View<MainContract.Presenter> {
 
+    final static String KEY_SEARCH = "key_search";
+
     private Toolbar mToolBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private SearchView searchText;
-    private ViewPagerAdapter mViewPagerAdapter;
+    private MainPagerAdapter mViewPagerAdapter;
     private ProgressBar pb;
     private String search = "";
 
@@ -37,8 +44,21 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchText = findViewById(R.id.search_edit_text);
-/*        searchText.findViewById(android.support.v7.appcompat.R.id.search_src_text)
-                .setBackgroundResource(R.drawable.rounded_edittext);*/
+        if (savedInstanceState != null) {
+            search = savedInstanceState.getString(KEY_SEARCH);
+        }
+
+        mToolBar = findViewById(R.id.toolbar);
+        setSupportActionBar(mToolBar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mViewPager = findViewById(R.id.viewpager);
+        setupViewPager(savedInstanceState);
+
+        mTabLayout = findViewById(R.id.tablayout);
+        mTabLayout.setupWithViewPager(mViewPager);
+
         pb = findViewById(R.id.progressBar);
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -55,18 +75,12 @@ public class MainActivity extends BaseView<MainContract.Presenter>
             }
 
         });
+        mPresenter.viewIsReady();
+    }
 
-        mToolBar = findViewById(R.id.toolbar);
-        setSupportActionBar(mToolBar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mViewPager = findViewById(R.id.viewpager);
-        setupViewPager();
-
-        mTabLayout = findViewById(R.id.tablayout);
-        mTabLayout.setupWithViewPager(mViewPager);
-        setTitle(mTabLayout.getTabAt(mTabLayout.getSelectedTabPosition()).getText());
+    @Override
+    protected void onStart() {
+        super.onStart();
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -86,13 +100,33 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         });
     }
 
-    private void setupViewPager() {
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mViewPagerAdapter.addFragment(new AlbumTabsFragment(), "Albums");
-        mViewPagerAdapter.addFragment(new ArtistTabsFragment(), "Artists");
-        mViewPagerAdapter.addFragment(new SongTabsFragment(), "Songs");
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString(KEY_SEARCH, search);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        search = savedInstanceState.getString(KEY_SEARCH);
+    }
+
+    private void setupViewPager(Bundle savedInstanceState) {
+        if(savedInstanceState != null) {
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+            }
+        }
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        mViewPagerAdapter = new MainPagerAdapter(this, fm);
+        mViewPagerAdapter.addFragment(AlbumTabsFragment.getInstance(search), "Albums");
+        mViewPagerAdapter.addFragment(ArtistTabsFragment.getInstance(search), "Artists");
+        mViewPagerAdapter.addFragment(SongTabsFragment.getInstance(search), "Songs");
         mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mViewPagerAdapter);
+        transaction.commit();
     }
 
     @Override

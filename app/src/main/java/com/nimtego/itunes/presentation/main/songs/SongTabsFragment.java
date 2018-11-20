@@ -1,6 +1,7 @@
 package com.nimtego.itunes.presentation.main.songs;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -13,6 +14,15 @@ import java.util.Collection;
 public class SongTabsFragment
         extends MainTabsFragment<SongContract.Presenter>
         implements SongContract.View<SongContract.Presenter>  {
+
+
+    public static SongTabsFragment getInstance(String response) {
+        final SongTabsFragment fragment = new SongTabsFragment();
+        final Bundle arguments = new Bundle();
+        arguments.putString(RESPONSE, response);
+        fragment.setArguments(arguments);
+        return fragment;
+    }
 
     @Override
     protected RecyclerView.LayoutManager rvLayoutManager(Context context) {
@@ -34,6 +44,10 @@ public class SongTabsFragment
 
     @Override
     public void search(String response) {
+        if (mPresenter == null) {
+            mPresenter = supplyPresenter();
+            mPresenter.attach(this);
+        }
         mPresenter.search(response);
     }
 
