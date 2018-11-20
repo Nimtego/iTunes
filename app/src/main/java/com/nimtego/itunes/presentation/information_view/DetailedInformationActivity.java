@@ -38,14 +38,14 @@ public class DetailedInformationActivity
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
         AlbumInformationContract.View fragment = AlbumInformationFragment.newInstance(getIntent().getExtras().getString(ALBUM_ID.name()));
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.frg, (android.support.v4.app.Fragment) fragment).commit();
+        if (savedInstanceState == null)
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.frg, (android.support.v4.app.Fragment) fragment).commit();
     }
 
     @Override
