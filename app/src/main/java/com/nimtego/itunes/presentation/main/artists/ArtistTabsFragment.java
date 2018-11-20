@@ -1,6 +1,7 @@
 package com.nimtego.itunes.presentation.main.artists;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -14,6 +15,15 @@ import java.util.Collection;
 public class ArtistTabsFragment
         extends MainTabsFragment<ArtistContract.Presenter>
         implements ArtistContract.View<ArtistContract.Presenter> {
+
+    public static ArtistTabsFragment getInstance(String response) {
+        final ArtistTabsFragment fragment = new ArtistTabsFragment();
+        final Bundle arguments = new Bundle();
+        arguments.putString(RESPONSE, response);
+        fragment.setArguments(arguments);
+        return fragment;
+    }
+
 
     @Override
     protected RecyclerView.LayoutManager rvLayoutManager(Context context) {
@@ -35,6 +45,10 @@ public class ArtistTabsFragment
 
     @Override
     public void search(String response) {
+        if (mPresenter == null) {
+            mPresenter = supplyPresenter();
+            mPresenter.attach(this);
+        }
         mPresenter.search(response);
     }
 

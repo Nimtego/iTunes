@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
@@ -22,6 +23,14 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     protected P mPresenter;
     private ProgressDialog mProgressDialog;
+    private MainContract.View parent;
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.parent = (MainContract.View) context;
+    }
 
     @Override
     @SuppressWarnings("unchecked")
@@ -34,6 +43,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
     @Override
     public void onDestroy() {
         mPresenter.detach();
+        parent = null;
         super.onDestroy();
     }
 
@@ -44,7 +54,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     @Override
     public void showLoading() {
-        ((MainContract.View)this.getActivity()).showLoading();
+        parent.showLoading();
     }
 
     @Override
@@ -76,4 +86,6 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
     public void showView(Class<? super BaseContract.View> view) {
         showView(view, Collections.<String, String>emptyMap());
     }
+
+
 }
