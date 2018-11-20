@@ -29,7 +29,8 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.parent = (MainContract.View) context;
+        if (context instanceof MainContract.View)
+            this.parent = (MainContract.View) context;
     }
 
     @Override

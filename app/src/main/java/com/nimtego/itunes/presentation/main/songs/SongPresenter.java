@@ -30,7 +30,7 @@ public class SongPresenter
 
     @Override
     public void search(String response) {
-        if (!view.getCurrentSerch().equals(response)) {
+        if (!view.getCurrentSerch().equals(response) || view.isRvEmpty()) {
             view.setCurrentSearch(response);
             showViewLoading();
             interactor.execute(new DisposableObserver<List<SongModel>>() {
