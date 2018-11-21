@@ -1,21 +1,16 @@
 package com.nimtego.itunes.presentation.main;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.presentation.base.BaseView;
 import com.nimtego.itunes.presentation.main.adapter.MainPagerAdapter;
 import com.nimtego.itunes.presentation.main.albums.AlbumTabsFragment;
@@ -23,7 +18,7 @@ import com.nimtego.itunes.presentation.main.artists.ArtistTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.songs.SongTabsFragment;
 
-import java.lang.reflect.Field;
+import java.util.Objects;
 
 
 public class MainActivity extends BaseView<MainContract.Presenter>
@@ -31,7 +26,6 @@ public class MainActivity extends BaseView<MainContract.Presenter>
 
     final static String KEY_SEARCH = "key_search";
 
-    private Toolbar mToolBar;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private SearchView searchText;
@@ -48,10 +42,10 @@ public class MainActivity extends BaseView<MainContract.Presenter>
             search = savedInstanceState.getString(KEY_SEARCH);
         }
 
-        mToolBar = findViewById(R.id.toolbar);
+        Toolbar mToolBar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mViewPager = findViewById(R.id.viewpager);
         setupViewPager(savedInstanceState);
@@ -113,7 +107,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
     }
 
     private void setupViewPager(Bundle savedInstanceState) {
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             for (Fragment fragment : getSupportFragmentManager().getFragments()) {
                 getSupportFragmentManager().beginTransaction().remove(fragment).commit();
             }

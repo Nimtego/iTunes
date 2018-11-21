@@ -1,6 +1,5 @@
 package com.nimtego.itunes.presentation.information_view.album;
 
-import com.nimtego.itunes.domain.interactor.BaseInteractor;
 import com.nimtego.itunes.domain.interactor.InformationAlbumInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
@@ -10,9 +9,9 @@ import io.reactivex.observers.DisposableObserver;
 
 class AlbumInformationPresenter
         extends BasePresenter<AlbumInformationContract.View,
-                              BaseContract.Interactor>
+        BaseContract.Interactor>
         implements AlbumInformationContract.Presenter<AlbumInformationContract.View,
-                                                      BaseContract.Interactor> {
+        BaseContract.Interactor> {
 
 
     public AlbumInformationPresenter(BaseContract.Interactor interactor) {

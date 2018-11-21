@@ -9,7 +9,8 @@ public interface AlbumInformationContract {
         void viewReady(String albumNameForResponse);
 
     }
-    interface View<P extends Presenter> extends BaseContract.View<P>{
+
+    interface View<P extends Presenter> extends BaseContract.View<P> {
         void render(AlbumDetailsModel albumDetailsModel);
     }
 }

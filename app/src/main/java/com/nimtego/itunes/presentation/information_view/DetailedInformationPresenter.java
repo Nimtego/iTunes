@@ -5,7 +5,6 @@ import com.nimtego.itunes.domain.interactor.SongIntTmp;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DetailedInformationPresenter

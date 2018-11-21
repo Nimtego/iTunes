@@ -1,6 +1,5 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 
 import java.util.List;

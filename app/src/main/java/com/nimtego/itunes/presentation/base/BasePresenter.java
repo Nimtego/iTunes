@@ -1,8 +1,6 @@
 package com.nimtego.itunes.presentation.base;
 
 
-import com.nimtego.itunes.presentation.utils.navigation.ViewRegistry;
-
 import io.reactivex.annotations.NonNull;
 
 public abstract class BasePresenter<V extends BaseContract.View,

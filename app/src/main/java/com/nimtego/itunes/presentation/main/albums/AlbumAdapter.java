@@ -12,12 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.entity.Album;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
@@ -25,6 +23,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public interface OnItemClickListener {
         void onUserItemClicked(AlbumModel albumModel);
     }
+
     private List<AlbumModel> models;
     private OnItemClickListener onItemClickListener;
 
@@ -70,9 +69,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 });
         holder.cv.setCardElevation(5);
     }
-    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
     @Override
     public int getItemCount() {
         if (models == null)

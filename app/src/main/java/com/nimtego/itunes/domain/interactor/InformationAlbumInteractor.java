@@ -1,6 +1,5 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 
 import dagger.internal.Preconditions;

@@ -1,15 +1,11 @@
 package com.nimtego.itunes.presentation.main;
 
-import com.nimtego.itunes.App;
-import com.nimtego.itunes.data.repository.AppRepository;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 import javax.inject.Inject;
-
-import io.reactivex.observers.DisposableObserver;
 
 public class MainPresenter
         extends BasePresenter<MainContract.View,
@@ -41,22 +37,6 @@ public class MainPresenter
     @Override
     public void tabSelected(String tabName) {
         search();
-    }
-
-    private String getSearchText() {
-        return view.getSearchText();
-    }
-
-    private void showViewLoading() {
-        view.showLoading();
-    }
-
-    private void hideViewLoading() {
-        view.hideLoading();
-    }
-
-    private void toast(String message) {
-        view.toast(message);
     }
 
     @Override

@@ -1,27 +1,13 @@
 package com.nimtego.itunes.presentation.information_view;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.presentation.base.BaseFragment;
 import com.nimtego.itunes.presentation.base.BaseView;
 import com.nimtego.itunes.presentation.information_view.album.AlbumInformationContract;
 import com.nimtego.itunes.presentation.information_view.album.AlbumInformationFragment;
-import com.nimtego.itunes.presentation.utils.IpTags;
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
 

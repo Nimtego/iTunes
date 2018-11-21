@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -23,6 +22,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     public interface OnItemClickListener {
         void onUserItemClicked(ArtistModel albumModel);
     }
+
     private List<ArtistModel> models;
     private OnItemClickListener onItemClickListener;
 
@@ -68,7 +68,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         holder.cv.setCardElevation(5);
     }
 
-    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 

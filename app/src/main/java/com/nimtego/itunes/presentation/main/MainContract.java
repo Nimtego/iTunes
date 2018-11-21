@@ -2,7 +2,6 @@ package com.nimtego.itunes.presentation.main;
 
 
 import com.nimtego.itunes.presentation.base.BaseContract;
-import com.nimtego.itunes.presentation.main.model.MainDataModel;
 
 public interface MainContract {
     interface Presenter<V extends View,

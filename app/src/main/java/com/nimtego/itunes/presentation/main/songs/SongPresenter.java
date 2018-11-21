@@ -12,7 +12,7 @@ import io.reactivex.observers.DisposableObserver;
 
 public class SongPresenter
         extends BasePresenter<SongContract.View, BaseContract.Interactor>
-        implements SongContract.Presenter<SongContract.View, BaseContract.Interactor>{
+        implements SongContract.Presenter<SongContract.View, BaseContract.Interactor> {
 
 
     public SongPresenter(BaseContract.Interactor interactor) {

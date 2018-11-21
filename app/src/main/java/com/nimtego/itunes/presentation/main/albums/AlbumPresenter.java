@@ -36,7 +36,6 @@ public class AlbumPresenter
 
     @Override
     public void albumClicked(AlbumModel albumModel) {
-        //toast(albumModel.getAlbumName());
         Map<String, String> param = new HashMap<>();
         param.put(ALBUM_ID.name(), albumModel.getAlbumId());
         try {
@@ -49,7 +48,7 @@ public class AlbumPresenter
 
     @Override
     public void search(String response) {
-        if (!view.getCurrentSerch().equals(response)|| view.isRvEmpty()) {
+        if (!view.getCurrentSerch().equals(response) || view.isRvEmpty()) {
             view.setCurrentSearch(response);
             showViewLoading();
             interactor.execute(new DisposableObserver<List<AlbumModel>>() {

@@ -12,7 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.data.entity.Song;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -23,6 +22,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     public interface OnItemClickListener {
         void onUserItemClicked(SongModel albumModel);
     }
+
     private List<SongModel> models;
     private OnItemClickListener onItemClickListener;
 
@@ -68,7 +68,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 });
         holder.cv.setCardElevation(5);
     }
-    public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 

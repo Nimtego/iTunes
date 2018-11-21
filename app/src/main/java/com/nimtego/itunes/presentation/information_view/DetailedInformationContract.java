@@ -2,8 +2,6 @@ package com.nimtego.itunes.presentation.information_view;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
 
-import java.util.List;
-
 public interface DetailedInformationContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor> extends BaseContract.Presenter<V, I> {
 

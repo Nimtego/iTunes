@@ -1,7 +1,6 @@
 package com.nimtego.itunes.domain.interactor;
 
 import com.nimtego.itunes.data.entity.Album;
-import com.nimtego.itunes.domain.Repository;
 
 import io.reactivex.Observable;
 

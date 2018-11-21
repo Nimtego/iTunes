@@ -1,16 +1,12 @@
 package com.nimtego.itunes.presentation.base;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.nimtego.itunes.presentation.main.MainContract;
-import com.nimtego.itunes.presentation.utils.navigation.ViewRegistry;
 import com.nimtego.itunes.presentation.utils.toast.SimpleToastAlarm;
 import com.nimtego.itunes.presentation.utils.toast.ToastAlarm;
 
-import java.util.Collections;
 import java.util.Map;
 
 public abstract class BaseFragment<P extends BaseContract.Presenter>
@@ -18,11 +14,11 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
         implements BaseContract.View<P> {
 
     protected P mPresenter;
-    private ProgressDialog mProgressDialog;
     protected MainContract.View parent;
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof MainContract.View)
@@ -66,16 +62,12 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     @Override
     public void showView(Class<? super BaseContract.View> view, Map<String, String> params) {
-        Intent intent = new Intent(getActivity(), ViewRegistry.getViewImplementation(view));
-        for (Map.Entry<String, String> pair : params.entrySet()) {
-            intent.putExtra(pair.getKey(), pair.getValue());
-        }
-        getActivity().startActivity(intent);
+        parent.showView(view, params);
     }
 
     @Override
     public void showView(Class<? super BaseContract.View> view) {
-        showView(view, Collections.<String, String>emptyMap());
+        parent.showView(view);
     }
 
 
