@@ -3,13 +3,9 @@ package com.nimtego.itunes.presentation.base;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.main.MainContract;
-import com.nimtego.itunes.presentation.utils.CommonUtils;
 import com.nimtego.itunes.presentation.utils.navigation.ViewRegistry;
 import com.nimtego.itunes.presentation.utils.toast.SimpleToastAlarm;
 import com.nimtego.itunes.presentation.utils.toast.ToastAlarm;
@@ -23,7 +19,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     protected P mPresenter;
     private ProgressDialog mProgressDialog;
-    private MainContract.View parent;
+    protected MainContract.View parent;
 
 
     @Override
@@ -31,12 +27,6 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
         super.onAttach(context);
         if (context instanceof MainContract.View)
             this.parent = (MainContract.View) context;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         mPresenter = supplyPresenter();
         mPresenter.attach(this);
     }
@@ -65,7 +55,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     @Override
     public void hideLoading() {
-        ((MainContract.View)this.getActivity()).hideLoading();
+        ((MainContract.View) this.getActivity()).hideLoading();
     }
 
     @Override

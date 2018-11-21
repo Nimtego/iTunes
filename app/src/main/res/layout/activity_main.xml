@@ -16,7 +16,7 @@
             android:layout_height="?attr/actionBarSize"
             android:minHeight="?attr/actionBarSize"
             app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|enterAlways"
+            app:layout_scrollFlags="scroll|snap|enterAlways"
             app:popupTheme="@style/MyMaterialTheme.Base">
 
             <ProgressBar
@@ -64,7 +64,7 @@
         android:layout_alignParentBottom="true"
         app:tabPaddingEnd="2dp"
         app:tabPaddingStart="0dp"
-        app:layout_scrollFlags="scroll|enterAlways"
+        app:layout_scrollFlags="scroll|snap|enterAlways"
         app:tabSelectedTextColor="@color/w"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 

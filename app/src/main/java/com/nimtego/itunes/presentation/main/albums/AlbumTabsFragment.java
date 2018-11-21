@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.nimtego.itunes.presentation.main.MainContract;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
@@ -15,7 +14,6 @@ import java.util.Collection;
 public class AlbumTabsFragment
         extends MainTabsFragment<AlbumContract.Presenter>
         implements AlbumContract.View<AlbumContract.Presenter> {
-
 
 
     public static AlbumTabsFragment getInstance(String response) {
@@ -48,10 +46,6 @@ public class AlbumTabsFragment
 
     @Override
     public void search(String response) {
-        if(mPresenter == null) {
-            mPresenter = supplyPresenter();
-            mPresenter.attach(this);
-        }
         mPresenter.search(response);
     }
 

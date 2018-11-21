@@ -13,7 +13,7 @@ import java.util.Collection;
 
 public class SongTabsFragment
         extends MainTabsFragment<SongContract.Presenter>
-        implements SongContract.View<SongContract.Presenter>  {
+        implements SongContract.View<SongContract.Presenter> {
 
 
     public static SongTabsFragment getInstance(String response) {
@@ -44,10 +44,6 @@ public class SongTabsFragment
 
     @Override
     public void search(String response) {
-        if (mPresenter == null) {
-            mPresenter = supplyPresenter();
-            mPresenter.attach(this);
-        }
         mPresenter.search(response);
     }
 
