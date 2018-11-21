@@ -2,6 +2,7 @@ package com.nimtego.itunes.presentation.information_view.album;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class AlbumInformationFragment
     private TextView artistName;
     private ImageView albumImage;
     private ProgressBar pb;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
 
     public static AlbumInformationContract.View newInstance(final String content) {
         final AlbumInformationContract.View fragment = new AlbumInformationFragment();
@@ -45,6 +47,8 @@ public class AlbumInformationFragment
         artistName = view.findViewById(R.id.artist_name);
         albumName = view.findViewById(R.id.album_name);
         albumImage = view.findViewById(R.id.image_album);
+        collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
+
         pb = view.findViewById(R.id.image_progress_bar);
         mPresenter.viewReady(getArguments().getString(ALBUM_ID.name()));
         return view;
@@ -60,8 +64,9 @@ public class AlbumInformationFragment
     public void render(AlbumDetailsModel albumDetailsModel) {
         albumName.setText(albumDetailsModel.getAlbumName());
         artistName.setText(albumDetailsModel.getAlbumArtistName());
+        collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
         Picasso.get().load(albumDetailsModel.getAlbumArtwork()
-                .replace("100x100", "200x200"))
+                .replace("100x100", "400x400"))
                 .into(albumImage, new Callback() {
                     @Override
                     public void onSuccess() {
