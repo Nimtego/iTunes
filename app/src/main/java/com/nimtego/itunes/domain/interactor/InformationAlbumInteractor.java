@@ -10,9 +10,19 @@ public class InformationAlbumInteractor
 
 
     @Override
-    protected Observable<AlbumDetailsModel> buildUseCaseObservable(Params param) {
-        Preconditions.checkNotNull(param);
-        return repository.album(param.request);
+    protected Observable<AlbumDetailsModel> buildUseCaseObservable(Params params) {
+/*        Preconditions.checkNotNull(params);
+        Observable<AlbumDetailsModel>> albumObs = repository.album(params.request);
+        Observable<List<SongModel>> songsObs = repository.songs(params.request);
+        Observable<List<ArtistModel>> artistsObs = repository.artists(params.request);
+        return Observable.combineLatest(albumsObs, songsObs, artistsObs, (albums, songs, artists) ->
+                MainDataModel.builder()
+                        .albumModels(albums)
+                        .songModels(songs)
+                        .artistModels(artists)
+                        .build());*/
+        Preconditions.checkNotNull(params);
+        return repository.album(params.request);
     }
 
     public static final class Params {

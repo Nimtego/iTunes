@@ -82,4 +82,8 @@ public class AlbumResult {
         return artworkUrl100;
     }
 
+    public Double getCollectionPrice() {return collectionPrice;}
+
+    public String getReleaseDate() {return releaseDate;}
+
 }
