@@ -6,6 +6,9 @@ import com.nimtego.itunes.data.cache.FileManager;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
+import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
+import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
@@ -65,8 +68,40 @@ public class AppRepository implements Repository {
     @Override
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-       return dataStore.album(request)
-               .map(s ->this.mapper.transformAlbumDetail(s.getResults().get(0)));
+        Observable<AlbumsRepository> albumDetails = dataStore.album(request);
+        Observable<WikiSearchResult> wikiSearch = dataStore.wikiSearch(request);
+        return Observable.combineLatest(albumDetails, wikiSearch,
+                (album, wiki) ->
+                        AlbumDetailsModel.builder()
+                                .albumName(album.getResults().get(0).getCollectionName())
+                                .albumArtistName(album.getResults().get(0).getArtistName())
+                                .albumArtwork(album.getResults().get(0).getArtworkUrl100())
+                                .collectionPrice(album.getResults().get(0).getCollectionPrice())
+                                .releaseDate(album.getResults().get(0).getReleaseDate())
+                                .wikiInformation(wiki.getQuery().getPages().getTitle())
+                                .build());
+
+        /*mapper.transformAlbumDetail(album.getResults().get(0)).setWikiInformation("  ");*/
+                       /*     album  ..map(s ->this.mapper.transformAlbumDetail(s.getResults().get(0)))
+                            album.setWikiInformation(wiki.getQuery().);*/
+
+
+
+/*        Observable<AlbumDetailsModel>> albumObs = this.album(params.request);
+        Observable<List<SongModel>> songsObs = repository.songs(params.request);
+        Observable<List<ArtistModel>> artistsObs = repository.artists(params.request);
+        return Observable.combineLatest(albumsObs, songsObs, artistsObs, (albums, songs, artists) ->
+                MainDataModel.builder()
+                        .albumModels(albums)
+                        .songModels(songs)
+                        .artistModels(artists)
+                        .build());
+
+
+
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return dataStore.album(request)
+                .map(s -> this.mapper.transformAlbumDetail(s.getResults().get(0)));*/
         // TODO: 14.11.2018
     }
 }

@@ -3,40 +3,50 @@ package com.nimtego.itunes.data.repository.datasource;
 import com.nimtego.itunes.data.cache.Cache;
 import com.nimtego.itunes.data.rest.network.FabricParam;
 import com.nimtego.itunes.data.rest.network.ITunesApi;
+import com.nimtego.itunes.data.rest.network.WikiApi;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 
 import io.reactivex.Observable;
 
 public class CloudDataStore implements DataStore {
 
-    private final ITunesApi restApi;
+    private final ITunesApi iTunesApi;
+    private final WikiApi wikiApi;
     private final Cache cache;
 
 
-    public CloudDataStore(ITunesApi restApi, Cache cache) {
-        this.restApi = restApi;
+    public CloudDataStore(ITunesApi restApi, WikiApi wikiApi, Cache cache) {
+        this.iTunesApi = restApi;
+        this.wikiApi = wikiApi;
         this.cache = cache;
+    }
+
+
+    @Override
+    public Observable<WikiSearchResult> wikiSearch(String response) {
+        return wikiApi.searchArtist(FabricParam.searchWikiInf(response));
     }
 
     @Override
     public Observable<SongsRepository> songs(String request) {
-        return restApi.searchSongs(FabricParam.searchSongParam(request));
+        return iTunesApi.searchSongs(FabricParam.searchSongParam(request));
     }
 
     @Override
     public Observable<ArtistsRepository> artists(String request) {
-        return restApi.searchArtist(FabricParam.searchArtistParam(request));
+        return iTunesApi.searchArtist(FabricParam.searchArtistParam(request));
     }
 
     @Override
     public Observable<AlbumsRepository> albums(String request) {
-        return restApi.searchAlbum(FabricParam.searchAlbumParam(request, 100));
+        return iTunesApi.searchAlbum(FabricParam.searchAlbumParam(request, 100));
 
 
 
@@ -81,6 +91,6 @@ public class CloudDataStore implements DataStore {
 
     @Override
     public Observable<AlbumsRepository> album(String response) {
-        return restApi.getAlbum(FabricParam.lookupAlbum(response));
+        return iTunesApi.getAlbum(FabricParam.lookupAlbum(response));
     }
 }

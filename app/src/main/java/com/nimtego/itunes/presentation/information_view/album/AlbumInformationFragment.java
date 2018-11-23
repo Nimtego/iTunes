@@ -65,7 +65,8 @@ public class AlbumInformationFragment
         StringBuilder sb = new StringBuilder();
         sb.append("Price - ")
                 .append(albumDetailsModel.getCollectionPrice())
-        .append("\n").append("Data - ").append(albumDetailsModel.getReleaseDate());
+        .append("\n")./*append("Data - ").append(albumDetailsModel.getReleaseDate())
+        .append("\n\n")*/append(albumDetailsModel.getWikiInformation());
         information.setText(String.valueOf(sb));
         artistName.setText(albumDetailsModel.getAlbumArtistName());
         collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());

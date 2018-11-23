@@ -20,4 +20,5 @@ public class AlbumDetailsModel {
     private List<SongModel> songs;
     private Double collectionPrice;
     private String releaseDate;
+    private String wikiInformation;
 }
