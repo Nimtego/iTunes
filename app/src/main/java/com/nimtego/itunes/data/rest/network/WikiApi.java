@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
 public interface WikiApi {
-    @GET("/w/api.php")
+    @GET("api.php")
     Observable<WikiSearchResult> searchArtist(@QueryMap Map<String, String> param);
 }

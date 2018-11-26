@@ -8,6 +8,9 @@ public class WikiSearchResult {
     @SerializedName("batchcomplete")
     @Expose
     private String batchcomplete;
+    @SerializedName("continue")
+    @Expose
+    private Continue _continue;
     @SerializedName("query")
     @Expose
     private Result query;
@@ -20,6 +23,14 @@ public class WikiSearchResult {
         this.batchcomplete = batchcomplete;
     }
 
+    public Continue getContinue() {
+        return _continue;
+    }
+
+    public void setContinue(Continue _continue) {
+        this._continue = _continue;
+    }
+
     public Result getQuery() {
         return query;
     }
@@ -27,4 +38,5 @@ public class WikiSearchResult {
     public void setQuery(Result query) {
         this.query = query;
     }
+
 }

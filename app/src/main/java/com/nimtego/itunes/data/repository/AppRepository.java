@@ -78,14 +78,18 @@ public class AppRepository implements Repository {
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         Observable<AlbumsRepository> albumDetails = dataStore.album(request);
-        Observable<WikiSearchResult> wikiSearch = dataStore.wikiSearch(request);
+        Observable<WikiSearchResult> wikiSearch = dataStore.wikiSearch("Metallica");
         return Observable.combineLatest(albumDetails, wikiSearch,
                 (album, wiki) -> {
                     AlbumDetailsModel albumDetail =
                             mapper.transformAlbumDetail(album.getResults().get(0));
                     albumSongsList(albumDetail.getAlbumId())
                             .subscribe(albumDetail::setSongs);
-                    albumDetail.setWikiInformation(wiki.getQuery().getPages().getTitle());
+                    dataStore.wikiSearch(album.getResults().get(0).getArtistName()).subscribe(s ->
+                            albumDetail.setWikiInformation(s.getQuery()
+                                    .getSearch()
+                                    .get(0)
+                                    .getSnippet()));
                     return albumDetail;
                 });
     }

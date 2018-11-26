@@ -37,7 +37,7 @@ public class App extends Application {
                 .create(ITunesApi.class);
 
         wikiApi = new Retrofit.Builder()
-                .baseUrl("http://en.wikipedia.org")
+                .baseUrl("https://en.wikipedia.org/w/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
