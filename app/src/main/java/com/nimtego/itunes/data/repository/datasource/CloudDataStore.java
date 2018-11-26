@@ -40,6 +40,11 @@ public class CloudDataStore implements DataStore {
     }
 
     @Override
+    public Observable<SongsRepository> songsByIdAlbum(int id) {
+        return iTunesApi.getSongs(FabricParam.lookupSongsAlbum(String.valueOf(id)));
+    }
+
+    @Override
     public Observable<ArtistsRepository> artists(String request) {
         return iTunesApi.searchArtist(FabricParam.searchArtistParam(request));
     }

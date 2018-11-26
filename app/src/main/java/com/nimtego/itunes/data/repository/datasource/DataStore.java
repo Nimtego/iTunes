@@ -17,6 +17,8 @@ public interface DataStore {
 
     Observable<SongsRepository> songs(String response);
 
+    Observable<SongsRepository> songsByIdAlbum(int id);
+
     Observable<ArtistsRepository> artists(String response);
 
     Observable<AlbumsRepository> albums(String response);

@@ -16,6 +16,8 @@ import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.util.stream.Stream;
+
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
 
 public class AlbumInformationFragment
@@ -25,6 +27,7 @@ public class AlbumInformationFragment
     private TextView price;
     private TextView date;
     private TextView artistName;
+    private TextView songs;
     private ImageView albumImage;
     private ProgressBar pb;
     private CollapsingToolbarLayout collapsingToolbarLayout;
@@ -48,6 +51,7 @@ public class AlbumInformationFragment
         artistName = view.findViewById(R.id.author);
         date = view.findViewById(R.id.release_date);
         price = view.findViewById(R.id.price);
+        songs = view.findViewById(R.id.songs);
         albumImage = view.findViewById(R.id.image_album);
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
 
@@ -72,6 +76,9 @@ public class AlbumInformationFragment
         artistName.setText(albumDetailsModel.getAlbumArtistName());
         price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
         date.setText(albumDetailsModel.getReleaseDate());
+        StringBuilder sb = new StringBuilder();
+        albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
+        songs.setText(sb);
         collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
         Picasso.get().load(albumDetailsModel.getAlbumArtwork()
                 .replace("100x100", "400x400"))

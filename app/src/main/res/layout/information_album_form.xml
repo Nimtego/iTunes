@@ -71,9 +71,9 @@
                 android:layout_marginBottom="8dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:text="Author"
+                android:text="@string/author"
                 android:textColor="@color/colorAccent"
-                android:textSize="24sp"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -86,9 +86,9 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="8dp"
                 android:singleLine="false"
-                android:text="Author"
+                android:text="@string/author"
                 android:textColor="@color/w"
-                android:textSize="24sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/author_text_view"
                 app:layout_constraintTop_toTopOf="@+id/author_text_view" />
@@ -97,12 +97,12 @@
                 android:id="@+id/release_date_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:text="Release date"
+                android:text="@string/release_date"
                 android:textColor="@color/colorAccent"
-                android:textSize="24sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/author" />
 
@@ -112,9 +112,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:singleLine="false"
-                android:text="release_date"
+                android:text="@string/release_date"
                 android:textColor="@color/w"
-                android:textSize="24sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/author"
                 app:layout_constraintTop_toTopOf="@+id/release_date_text_view" />
@@ -126,9 +126,9 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:text="Price"
+                android:text="@string/price"
                 android:textColor="@color/colorAccent"
-                android:textSize="24sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/release_date" />
 
@@ -138,13 +138,38 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:singleLine="false"
-                android:text="Price"
+                android:text="@string/price"
                 android:textColor="@color/w"
-                android:textSize="24sp"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/release_date"
                 app:layout_constraintTop_toTopOf="@+id/price_text_view" />
 
+            <TextView
+                android:id="@+id/songs_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:maxLines="2"
+                android:singleLine="false"
+                android:text="@string/songs"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/price_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/price" />
+
+            <TextView
+                android:id="@+id/songs"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:singleLine="false"
+                android:text="@string/songs"
+                android:textColor="@color/w"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/price"
+                app:layout_constraintTop_toTopOf="@+id/songs_text_view" />
 
         </android.support.constraint.ConstraintLayout>
 
