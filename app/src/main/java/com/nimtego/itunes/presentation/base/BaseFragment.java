@@ -14,15 +14,15 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
         implements BaseContract.View<P> {
 
     protected P mPresenter;
-    protected MainContract.View parent;
+    protected BaseContract.View parent;
 
 
     @Override
     @SuppressWarnings("unchecked")
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof MainContract.View)
-            this.parent = (MainContract.View) context;
+        if (context instanceof BaseContract.View)
+            this.parent = (BaseContract.View) context;
         mPresenter = supplyPresenter();
         mPresenter.attach(this);
     }
@@ -51,7 +51,7 @@ public abstract class BaseFragment<P extends BaseContract.Presenter>
 
     @Override
     public void hideLoading() {
-        ((MainContract.View) this.getActivity()).hideLoading();
+        parent.hideLoading();
     }
 
     @Override

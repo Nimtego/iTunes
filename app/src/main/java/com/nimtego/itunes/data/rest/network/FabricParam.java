@@ -71,8 +71,8 @@ public class FabricParam {
         param.put("format", "json");
         param.put("action", "query");
         param.put("prop", "extracts");
-        param.put("exintro", "");
-        param.put("explaintext", "");
+/*        param.put("exintro", "");
+        param.put("explaintext", "");*/
         param.put("redirects", "1");
         param.put("titles", response);
         return param;

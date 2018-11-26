@@ -16,6 +16,7 @@ import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.util.stream.Stream;
 
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
@@ -71,8 +72,8 @@ public class AlbumInformationFragment
         artistName.setText(albumDetailsModel.getAlbumArtistName());
         date.setText(albumDetailsModel.getReleaseDate());
         price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
-
         StringBuilder sb = new StringBuilder();
+        sb.append(albumDetailsModel.getWikiInformation());
         albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
         songs.setText(sb);
         collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
