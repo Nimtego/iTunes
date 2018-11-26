@@ -81,41 +81,13 @@ public class AppRepository implements Repository {
         Observable<WikiSearchResult> wikiSearch = dataStore.wikiSearch(request);
         return Observable.combineLatest(albumDetails, wikiSearch,
                 (album, wiki) -> {
-                    AlbumDetailsModel albumDetail = AlbumDetailsModel.builder()
-                            .albumName(album.getResults().get(0).getCollectionName())
-                            .albumArtistName(album.getResults().get(0).getArtistName())
-                            .albumArtwork(album.getResults().get(0).getArtworkUrl100())
-                            .collectionPrice(album.getResults().get(0).getCollectionPrice())
-                            .releaseDate(album.getResults().get(0).getReleaseDate())
-                            .albumId(album.getResults().get(0).getCollectionId())
-                            .wikiInformation(wiki.getQuery().getPages().getTitle())
-                            .build();
+                    AlbumDetailsModel albumDetail =
+                            mapper.transformAlbumDetail(album.getResults().get(0));
                     albumSongsList(albumDetail.getAlbumId())
                             .subscribe(albumDetail::setSongs);
+                    albumDetail.setWikiInformation(wiki.getQuery().getPages().getTitle());
                     return albumDetail;
                 });
     }
 }
 
-/*mapper.transformAlbumDetail(album.getResults().get(0)).setWikiInformation("  ");*/
-                       /*     album  ..map(s ->this.mapper.transformAlbumDetail(s.getResults().get(0)))
-                            album.setWikiInformation(wiki.getQuery().);*/
-
-
-
-/*        Observable<AlbumDetailsModel>> albumObs = this.album(params.request);
-        Observable<List<SongModel>> songsObs = repository.songs(params.request);
-        Observable<List<ArtistModel>> artistsObs = repository.artists(params.request);
-        return Observable.combineLatest(albumsObs, songsObs, artistsObs, (albums, songs, artists) ->
-                MainDataModel.builder()
-                        .albumModels(albums)
-                        .songModels(songs)
-                        .artistModels(artists)
-                        .build());
-
-
-
-        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-        return dataStore.album(request)
-                .map(s -> this.mapper.transformAlbumDetail(s.getResults().get(0)));*/
-// TODO: 14.11.2018

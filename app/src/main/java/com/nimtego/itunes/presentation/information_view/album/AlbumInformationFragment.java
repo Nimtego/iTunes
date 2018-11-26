@@ -68,14 +68,10 @@ public class AlbumInformationFragment
 
     @Override
     public void render(AlbumDetailsModel albumDetailsModel) {
-/*        StringBuilder sb = new StringBuilder();
-        sb.append("Price - ")
-                .append(albumDetailsModel.getCollectionPrice())
-        .append("\n").*//*append("Data - ").append(albumDetailsModel.getReleaseDate())
-        .append("\n\n")*//*append(albumDetailsModel.getWikiInformation());*/
         artistName.setText(albumDetailsModel.getAlbumArtistName());
-        price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
         date.setText(albumDetailsModel.getReleaseDate());
+        price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
+
         StringBuilder sb = new StringBuilder();
         albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
         songs.setText(sb);

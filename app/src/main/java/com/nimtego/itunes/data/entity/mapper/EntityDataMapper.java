@@ -83,6 +83,7 @@ public class EntityDataMapper {
                 .albumArtwork(albumResult.getArtworkUrl100())
                 .collectionPrice(albumResult.getCollectionPrice())
                 .releaseDate(albumResult.getReleaseDate())
+                .albumId(albumResult.getCollectionId())
                 .build();
     }
 }
