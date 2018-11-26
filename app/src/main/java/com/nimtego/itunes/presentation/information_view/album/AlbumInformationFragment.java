@@ -22,7 +22,8 @@ public class AlbumInformationFragment
         extends BaseFragment<AlbumInformationContract.Presenter>
         implements AlbumInformationContract.View<AlbumInformationContract.Presenter> {
 
-    private TextView information;
+    private TextView price;
+    private TextView date;
     private TextView artistName;
     private ImageView albumImage;
     private ProgressBar pb;
@@ -44,8 +45,9 @@ public class AlbumInformationFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_album_form, container, false);
-        artistName = view.findViewById(R.id.artist_name);
-        information = view.findViewById(R.id.information);
+        artistName = view.findViewById(R.id.author);
+        date = view.findViewById(R.id.release_date);
+        price = view.findViewById(R.id.price);
         albumImage = view.findViewById(R.id.image_album);
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
 
@@ -62,13 +64,14 @@ public class AlbumInformationFragment
 
     @Override
     public void render(AlbumDetailsModel albumDetailsModel) {
-        StringBuilder sb = new StringBuilder();
+/*        StringBuilder sb = new StringBuilder();
         sb.append("Price - ")
                 .append(albumDetailsModel.getCollectionPrice())
-        .append("\n")./*append("Data - ").append(albumDetailsModel.getReleaseDate())
-        .append("\n\n")*/append(albumDetailsModel.getWikiInformation());
-        information.setText(String.valueOf(sb));
+        .append("\n").*//*append("Data - ").append(albumDetailsModel.getReleaseDate())
+        .append("\n\n")*//*append(albumDetailsModel.getWikiInformation());*/
         artistName.setText(albumDetailsModel.getAlbumArtistName());
+        price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
+        date.setText(albumDetailsModel.getReleaseDate());
         collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
         Picasso.get().load(albumDetailsModel.getAlbumArtwork()
                 .replace("100x100", "400x400"))
