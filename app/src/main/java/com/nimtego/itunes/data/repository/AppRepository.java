@@ -1,5 +1,7 @@
 package com.nimtego.itunes.data.repository;
 
+import android.drm.DrmStore;
+
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.AlbumCache;
 import com.nimtego.itunes.data.cache.FileManager;
@@ -19,8 +21,13 @@ import com.nimtego.itunes.presentation.main.model.SongModel;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 
 public class AppRepository implements Repository {
@@ -78,20 +85,15 @@ public class AppRepository implements Repository {
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         Observable<AlbumsRepository> albumDetails = dataStore.album(request);
-        Observable<WikiSearchResult> wikiSearch = dataStore.wikiSearch("Metallica");
-        return Observable.combineLatest(albumDetails, wikiSearch,
-                (album, wiki) -> {
+        return albumDetails.flatMap(r -> Observable.combineLatest(dataStore.songsByIdAlbum(r.getResults().get(0).getCollectionId()),
+                dataStore.wikiSearch(r.getResults().get(0).getArtistName()),
+                (song, wiki) -> {
                     AlbumDetailsModel albumDetail =
-                            mapper.transformAlbumDetail(album.getResults().get(0));
-                    albumSongsList(albumDetail.getAlbumId())
-                            .subscribe(albumDetail::setSongs);
-                    dataStore.wikiSearch(album.getResults().get(0).getArtistName()).subscribe(s ->
-                            albumDetail.setWikiInformation(s.getQuery()
-                                    .getSearch()
-                                    .get(0)
-                                    .getSnippet()));
+                            mapper.transformAlbumDetail(r.getResults().get(0));
+                    albumDetail.setSongs(mapper.transformSongs(song));
+                    albumDetail.setWikiInformation(wiki.getQuery().getSearch().get(0).getSnippet());
                     return albumDetail;
-                });
+                }));
     }
 }
 
