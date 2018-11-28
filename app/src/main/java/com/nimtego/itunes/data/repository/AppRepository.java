@@ -1,17 +1,12 @@
 package com.nimtego.itunes.data.repository;
 
-import android.drm.DrmStore;
-
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.AlbumCache;
 import com.nimtego.itunes.data.cache.FileManager;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
-import com.nimtego.itunes.data.rest.pojo.SongsRepository;
-import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
@@ -21,14 +16,6 @@ import com.nimtego.itunes.presentation.main.model.SongModel;
 import java.util.List;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableSource;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.BiFunction;
-import io.reactivex.functions.Function;
-import io.reactivex.observers.DisposableObserver;
 
 public class AppRepository implements Repository {
 
