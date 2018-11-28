@@ -89,6 +89,10 @@ public class EntityDataMapper {
     }
 
     public String wikiInformationArtist(WikiSearchResult wiki) {
-        return wiki.getQuery().getSearch().get(0).getSnippet();
+        return wiki.getQuery()
+                .getSearch()
+                .get(0)
+                .getSnippet()
+                .replaceAll("\\<.*?\\>", " ");
     }
 }

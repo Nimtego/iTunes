@@ -30,6 +30,7 @@ public class AlbumInformationFragment
     private TextView artistName;
     private TextView songs;
     private ImageView albumImage;
+    private TextView information;
     private ProgressBar pb;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -53,6 +54,7 @@ public class AlbumInformationFragment
         date = view.findViewById(R.id.release_date);
         price = view.findViewById(R.id.price);
         songs = view.findViewById(R.id.songs);
+        information = view.findViewById(R.id.information);
         albumImage = view.findViewById(R.id.image_album);
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
 
@@ -72,8 +74,8 @@ public class AlbumInformationFragment
         artistName.setText(albumDetailsModel.getAlbumArtistName());
         date.setText(albumDetailsModel.getReleaseDate());
         price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
+        information.setText(albumDetailsModel.getWikiInformation());
         StringBuilder sb = new StringBuilder();
-        sb.append(albumDetailsModel.getWikiInformation());
         albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
         songs.setText(sb);
         collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
