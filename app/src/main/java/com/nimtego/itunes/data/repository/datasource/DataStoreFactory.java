@@ -5,6 +5,7 @@ import android.content.Context;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.Cache;
 import com.nimtego.itunes.data.rest.network.ITunesApi;
+import com.nimtego.itunes.data.rest.network.WikiApi;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,9 +37,9 @@ public class DataStoreFactory {
     }
 
     public DataStore createCloudDataStore() {
-        //final UserEntityJsonMapper userEntityJsonMapper = new UserEntityJsonMapper();
-        final ITunesApi restApi = App.getApi();//new RestApiImpl(this.context, userEntityJsonMapper);
 
-        return new CloudDataStore(restApi, this.cache);
+        final ITunesApi iTunesApi = App.getiTunesApi();
+        final WikiApi wikiApi = App.getWikiApi();
+        return new CloudDataStore(iTunesApi, wikiApi, this.cache);
     }
 }

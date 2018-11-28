@@ -7,6 +7,7 @@ import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 
 import io.reactivex.Observable;
 
@@ -19,7 +20,17 @@ public class DiskDataStore implements DataStore {
     }
 
     @Override
+    public Observable<WikiSearchResult> wikiSearch(String response) {
+        return null;
+    }
+
+    @Override
     public Observable<SongsRepository> songs(String request) {
+        return null;
+    }
+
+    @Override
+    public Observable<SongsRepository> songsByIdAlbum(int id) {
         return null;
     }
 

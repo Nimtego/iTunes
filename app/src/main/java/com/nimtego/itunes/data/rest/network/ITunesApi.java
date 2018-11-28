@@ -1,6 +1,5 @@
 package com.nimtego.itunes.data.rest.network;
 
-import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;

@@ -63,4 +63,20 @@ public class FabricParam {
         return param;
     }
 
+    public static Map<String,String> searchWikiInf(String response) {
+        /*
+        https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=XXXX
+         */
+
+        /*
+        https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=XXX
+         */
+        Map<String, String> param = new HashMap<>();
+        param.put("format", "json");
+        param.put("action", "query");
+        param.put("list", "search");
+        param.put("srsearch", response);
+        return param;
+
+    }
 }

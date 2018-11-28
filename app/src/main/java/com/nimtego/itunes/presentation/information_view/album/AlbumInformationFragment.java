@@ -16,15 +16,21 @@ import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.stream.Stream;
+
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
 
 public class AlbumInformationFragment
         extends BaseFragment<AlbumInformationContract.Presenter>
         implements AlbumInformationContract.View<AlbumInformationContract.Presenter> {
 
-    private TextView information;
+    private TextView price;
+    private TextView date;
     private TextView artistName;
+    private TextView songs;
     private ImageView albumImage;
+    private TextView information;
     private ProgressBar pb;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
@@ -44,7 +50,10 @@ public class AlbumInformationFragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_album_form, container, false);
-        artistName = view.findViewById(R.id.artist_name);
+        artistName = view.findViewById(R.id.author);
+        date = view.findViewById(R.id.release_date);
+        price = view.findViewById(R.id.price);
+        songs = view.findViewById(R.id.songs);
         information = view.findViewById(R.id.information);
         albumImage = view.findViewById(R.id.image_album);
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
@@ -62,12 +71,13 @@ public class AlbumInformationFragment
 
     @Override
     public void render(AlbumDetailsModel albumDetailsModel) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Price - ")
-                .append(albumDetailsModel.getCollectionPrice())
-        .append("\n").append("Data - ").append(albumDetailsModel.getReleaseDate());
-        information.setText(String.valueOf(sb));
         artistName.setText(albumDetailsModel.getAlbumArtistName());
+        date.setText(albumDetailsModel.getReleaseDate());
+        price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
+        information.setText(albumDetailsModel.getWikiInformation());
+        StringBuilder sb = new StringBuilder();
+        albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
+        songs.setText(sb);
         collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
         Picasso.get().load(albumDetailsModel.getAlbumArtwork()
                 .replace("100x100", "400x400"))

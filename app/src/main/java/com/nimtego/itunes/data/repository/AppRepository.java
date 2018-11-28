@@ -6,6 +6,7 @@ import com.nimtego.itunes.data.cache.FileManager;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
+import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
@@ -62,11 +63,24 @@ public class AppRepository implements Repository {
         return null;
     }
 
+    private Observable<List<SongModel>> albumSongsList(int id) {
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return dataStore.songsByIdAlbum(id).map(this.mapper::transformSongs);
+    }
+
     @Override
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-       return dataStore.album(request)
-               .map(s ->this.mapper.transformAlbumDetail(s.getResults().get(0)));
-        // TODO: 14.11.2018
+        Observable<AlbumsRepository> albumDetails = dataStore.album(request);
+        return albumDetails.flatMap(r -> Observable.combineLatest(dataStore.songsByIdAlbum(r.getResults().get(0).getCollectionId()),
+                dataStore.wikiSearch(r.getResults().get(0).getArtistName()),
+                (song, wiki) -> {
+                    AlbumDetailsModel albumDetail =
+                            mapper.transformAlbumDetail(r.getResults().get(0));
+                    albumDetail.setSongs(mapper.transformSongs(song));
+                    albumDetail.setWikiInformation(mapper.wikiInformationArtist(wiki));
+                    return albumDetail;
+                }));
     }
 }
+

@@ -6,12 +6,18 @@ import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 
 import io.reactivex.Observable;
 
 public interface DataStore {
+
+    Observable<WikiSearchResult> wikiSearch(String response);
+
     Observable<SongsRepository> songs(String response);
+
+    Observable<SongsRepository> songsByIdAlbum(int id);
 
     Observable<ArtistsRepository> artists(String response);
 
