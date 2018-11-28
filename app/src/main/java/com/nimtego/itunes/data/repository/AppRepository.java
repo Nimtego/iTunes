@@ -78,7 +78,7 @@ public class AppRepository implements Repository {
                     AlbumDetailsModel albumDetail =
                             mapper.transformAlbumDetail(r.getResults().get(0));
                     albumDetail.setSongs(mapper.transformSongs(song));
-                    albumDetail.setWikiInformation(wiki.getQuery().getSearch().get(0).getSnippet());
+                    albumDetail.setWikiInformation(mapper.wikiInformationArtist(wiki));
                     return albumDetail;
                 }));
     }

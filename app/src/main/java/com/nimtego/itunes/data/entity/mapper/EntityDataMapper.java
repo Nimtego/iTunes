@@ -6,6 +6,7 @@ import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
+import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
@@ -85,5 +86,9 @@ public class EntityDataMapper {
                 .releaseDate(albumResult.getReleaseDate())
                 .albumId(albumResult.getCollectionId())
                 .build();
+    }
+
+    public String wikiInformationArtist(WikiSearchResult wiki) {
+        return wiki.getQuery().getSearch().get(0).getSnippet();
     }
 }
