@@ -32,7 +32,7 @@ class AlbumInformationPresenter
 
             @Override
             public void onError(Throwable e) {
-                view.toast(e.getMessage());
+                view.toast(e.getClass().getCanonicalName() + e.getMessage());
                 view.hideLoading();
             }
 

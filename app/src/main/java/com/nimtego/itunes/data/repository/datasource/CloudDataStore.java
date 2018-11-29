@@ -13,6 +13,8 @@ import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
 
+import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
 
 public class CloudDataStore implements DataStore {
