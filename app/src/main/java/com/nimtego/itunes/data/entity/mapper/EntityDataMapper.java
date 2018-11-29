@@ -93,6 +93,6 @@ public class EntityDataMapper {
                 .getSearch()
                 .get(0)
                 .getSnippet()
-                .replaceAll("\\<.*?\\>", " ");
+                .replaceAll("\\<.*?\\>", " ").trim();
     }
 }

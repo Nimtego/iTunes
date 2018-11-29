@@ -39,4 +39,8 @@ public class WikiSearchResult {
         this.query = query;
     }
 
+    public boolean isEmpty() {
+        return query.getSearch().isEmpty();
+    }
+
 }

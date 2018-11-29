@@ -14,6 +14,7 @@ import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 
@@ -72,13 +73,15 @@ public class AppRepository implements Repository {
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         Observable<AlbumsRepository> albumDetails = dataStore.album(request);
-        return albumDetails.flatMap(r -> Observable.combineLatest(dataStore.songsByIdAlbum(r.getResults().get(0).getCollectionId()),
+        return albumDetails.flatMap(r -> Observable.zip(dataStore.songsByIdAlbum(r.getResults().get(0).getCollectionId()),
                 dataStore.wikiSearch(r.getResults().get(0).getArtistName()),
                 (song, wiki) -> {
                     AlbumDetailsModel albumDetail =
                             mapper.transformAlbumDetail(r.getResults().get(0));
                     albumDetail.setSongs(mapper.transformSongs(song));
-                    albumDetail.setWikiInformation(mapper.wikiInformationArtist(wiki));
+                    albumDetail.setWikiInformation(wiki.isEmpty() ?
+                                                    "No information in wiki"
+                                                    : mapper.wikiInformationArtist(wiki));
                     return albumDetail;
                 }));
     }
