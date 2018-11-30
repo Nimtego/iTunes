@@ -2,10 +2,8 @@ package com.nimtego.itunes.data.repository.datasource;
 
 import android.content.Context;
 
-import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.Cache;
-import com.nimtego.itunes.data.rest.network.ITunesApi;
-import com.nimtego.itunes.data.rest.network.WikiApi;
+import com.nimtego.itunes.data.rest.network.NetworkConnection;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -37,9 +35,6 @@ public class DataStoreFactory {
     }
 
     public DataStore createCloudDataStore() {
-
-        final ITunesApi iTunesApi = App.getiTunesApi();
-        final WikiApi wikiApi = App.getWikiApi();
-        return new CloudDataStore(iTunesApi, wikiApi, this.cache);
+        return new CloudDataStore(NetworkConnection.getInstance(), this.cache);
     }
 }
