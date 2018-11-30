@@ -1,8 +1,10 @@
 package com.nimtego.itunes.data.repository.datasource;
 
 import com.nimtego.itunes.data.cache.Cache;
+import com.nimtego.itunes.data.rest.network.AppNetwork;
 import com.nimtego.itunes.data.rest.network.FabricParam;
 import com.nimtego.itunes.data.rest.network.NetworkConnection;
+import com.nimtego.itunes.data.rest.network.wiki.RestCountries;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
@@ -10,15 +12,17 @@ import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 
+import java.util.regex.Pattern;
+
 import io.reactivex.Observable;
 
 public class CloudDataStore implements DataStore {
 
-    private NetworkConnection networkConnection;
+    private AppNetwork networkConnection;
     private final Cache cache;
 
 
-    public CloudDataStore(NetworkConnection networkConnection, Cache cache) {
+    public CloudDataStore(AppNetwork networkConnection, Cache cache) {
         this.networkConnection = networkConnection;
         this.cache = cache;
     }
@@ -26,7 +30,9 @@ public class CloudDataStore implements DataStore {
 
     @Override
     public Observable<WikiSearchResult> wikiSearch(String response) {
-        return networkConnection.getWikiClient()
+        RestCountries countries = Pattern.matches(".*\\p{InCyrillic}.*", response) ?
+                RestCountries.RUS : RestCountries.ENGLISH;
+        return networkConnection.getWikiClient(countries)
                 .searchArtist(FabricParam.searchWikiInf(response));
     }
 
