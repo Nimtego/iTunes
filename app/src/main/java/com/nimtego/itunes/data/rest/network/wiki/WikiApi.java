@@ -1,4 +1,4 @@
-package com.nimtego.itunes.data.rest.network;
+package com.nimtego.itunes.data.rest.network.wiki;
 
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 
