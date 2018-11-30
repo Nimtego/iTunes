@@ -56,7 +56,7 @@ public class NetworkConnection implements AppNetwork {
 
     private Retrofit getWiki(RestCountries restCountries) {
         return new Retrofit.Builder()
-                .baseUrl("https://ru.wikipedia.org/w/"/*BASE_URL_WIKI.replace("COUNTRY", restCountries.toString())*/)
+                .baseUrl(BASE_URL_WIKI.replace("COUNTRY", restCountries.toString()))
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
