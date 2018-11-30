@@ -15,7 +15,7 @@ public class NetworkConnection implements AppNetwork {
     private static AppNetwork appNetwork;
     private ITunesApi iTunesApi = null;
     private WikiApi wikiApi = null;
-    private final RestCountries restCountries = RestCountries.ENGLISH; //def
+    private RestCountries restCountries = RestCountries.ENGLISH; //def
 
     public static AppNetwork getInstance() {
         if (appNetwork == null) {
@@ -33,8 +33,10 @@ public class NetworkConnection implements AppNetwork {
 
     @Override
     public WikiApi getWikiClient(RestCountries restCountries) {
-        if (wikiApi == null)
-            wikiApi = getWiki(restCountries).create(WikiApi.class);
+        if (wikiApi == null || !this.restCountries.equals(restCountries)) {
+            this.restCountries = restCountries;
+            wikiApi = getWiki(this.restCountries).create(WikiApi.class);
+        }
         return wikiApi;
     }
 
@@ -54,7 +56,7 @@ public class NetworkConnection implements AppNetwork {
 
     private Retrofit getWiki(RestCountries restCountries) {
         return new Retrofit.Builder()
-                .baseUrl(BASE_URL_WIKI.replace("COUNTRY", restCountries.toString()))
+                .baseUrl("https://ru.wikipedia.org/w/"/*BASE_URL_WIKI.replace("COUNTRY", restCountries.toString())*/)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
