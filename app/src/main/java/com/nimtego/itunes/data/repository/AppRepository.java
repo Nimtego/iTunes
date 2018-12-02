@@ -6,6 +6,7 @@ import com.nimtego.itunes.data.cache.FileManager;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
+import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
@@ -72,18 +73,22 @@ public class AppRepository implements Repository {
     @Override
     public Observable<AlbumDetailsModel> album(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-        Observable<AlbumsRepository> albumDetails = dataStore.album(request);
-        return albumDetails.flatMap(r -> Observable.zip(dataStore.songsByIdAlbum(r.getResults().get(0).getCollectionId()),
-                dataStore.wikiSearch(r.getResults().get(0).getArtistName()),
-                (song, wiki) -> {
-                    AlbumDetailsModel albumDetail =
-                            mapper.transformAlbumDetail(r.getResults().get(0));
-                    albumDetail.setSongs(mapper.transformSongs(song));
-                    albumDetail.setWikiInformation(wiki.isEmpty() ?
-                                                    "No information in wiki"
-                                                    : mapper.wikiInformationArtist(wiki));
-                    return albumDetail;
-                }));
+        return dataStore.album(request)
+                .flatMap(album -> {
+                    AlbumResult albumResult = album.getFirst();
+                    return Observable.zip(dataStore
+                                    .songsByIdAlbum(albumResult.getCollectionId()),
+                            dataStore.wikiSearch(albumResult.getArtistName()),
+                            (song, wiki) -> {
+                                AlbumDetailsModel albumDetail =
+                                        mapper.transformAlbumDetail(albumResult);
+                                albumDetail.setSongs(mapper.transformSongs(song));
+                                albumDetail.setWikiInformation(wiki.isEmpty() ?
+                                        "No information in wiki"
+                                        : mapper.wikiInformationArtist(wiki));
+                                return albumDetail;
+                            });
+                });
     }
 }
 

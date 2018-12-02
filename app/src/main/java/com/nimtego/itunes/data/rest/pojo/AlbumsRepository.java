@@ -20,5 +20,9 @@ public class AlbumsRepository {
         return results;
     }
 
+    public AlbumResult getFirst() {
+        return results.get(0);
+    }
+
 
 }

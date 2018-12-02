@@ -18,7 +18,6 @@ public class AlbumCache implements Cache {
     private final Context context;
     private final File cacheDir;
     private final FileManager fileManager;
-    // private final ThreadExecutor threadExecutor;
 
     public AlbumCache(Context context,
                       FileManager fileManager) {
@@ -28,7 +27,6 @@ public class AlbumCache implements Cache {
         this.context = context.getApplicationContext();
         this.cacheDir = this.context.getCacheDir();
         this.fileManager = fileManager;
-        //  this.threadExecutor = executor;
     }
 
     @Override
