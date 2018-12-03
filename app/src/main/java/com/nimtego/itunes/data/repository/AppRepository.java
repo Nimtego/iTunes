@@ -7,15 +7,13 @@ import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
 import com.nimtego.itunes.domain.Repository;
-import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 

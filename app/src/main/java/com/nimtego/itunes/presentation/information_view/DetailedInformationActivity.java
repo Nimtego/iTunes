@@ -1,15 +1,23 @@
 package com.nimtego.itunes.presentation.information_view;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.nimtego.itunes.R;
+import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.presentation.base.BaseView;
 import com.nimtego.itunes.presentation.information_view.album.AlbumInformationContract;
 import com.nimtego.itunes.presentation.information_view.album.AlbumInformationFragment;
+import com.nimtego.itunes.presentation.information_view.artist.ArtistInformationFragment;
+import com.nimtego.itunes.presentation.information_view.song.SongInformationFragment;
+import com.nimtego.itunes.presentation.utils.FragmentType;
 
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
+import static com.nimtego.itunes.presentation.utils.IpTags.ARTIST_ID;
+import static com.nimtego.itunes.presentation.utils.IpTags.SONG_ID;
 
 public class DetailedInformationActivity
         extends BaseView<DetailedInformationContract.Presenter>
@@ -28,10 +36,23 @@ public class DetailedInformationActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
-        AlbumInformationContract.View fragment = AlbumInformationFragment.newInstance(getIntent().getExtras().getString(ALBUM_ID.name()));
-        if (savedInstanceState == null)
+        Fragment fragment = null;
+        if (getIntent().getExtras() != null) {
+            String type = getIntent().getExtras().getString(FragmentType.TYPE.name());
+            assert type != null;
+            if (type.equals(FragmentType.ALBUM.name()))
+                fragment = (Fragment) AlbumInformationFragment
+                        .newInstance(getIntent().getExtras().getString(ALBUM_ID.name()));
+            if (type.equals(FragmentType.SONG.name()))
+                fragment = (Fragment) SongInformationFragment
+                        .newInstance(getIntent().getExtras().getString(SONG_ID.name()));
+            if (type.equals(FragmentType.ARTIST.name()))
+                fragment = (Fragment) ArtistInformationFragment
+                        .newInstance(getIntent().getExtras().getString(ARTIST_ID.name()));
+        }
+        if (savedInstanceState == null && fragment != null)
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.frg, (android.support.v4.app.Fragment) fragment).commit();
+                    .add(R.id.frg, fragment).commit();
     }
 
     @Override

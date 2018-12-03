@@ -7,7 +7,7 @@ import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
-import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;

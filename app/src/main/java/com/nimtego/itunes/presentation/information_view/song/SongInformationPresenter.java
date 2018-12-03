@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.information_view.album;
+package com.nimtego.itunes.presentation.information_view.song;
 
 import com.nimtego.itunes.domain.interactor.InformationAlbumInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
@@ -7,18 +7,18 @@ import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetails
 
 import io.reactivex.observers.DisposableObserver;
 
-class AlbumInformationPresenter
-        extends BasePresenter<AlbumInformationContract.View,
+class SongInformationPresenter
+        extends BasePresenter<SongInformationContract.View,
         BaseContract.Interactor>
-        implements AlbumInformationContract.Presenter<AlbumInformationContract.View,
+        implements SongInformationContract.Presenter<SongInformationContract.View,
         BaseContract.Interactor> {
 
 
-    public AlbumInformationPresenter(BaseContract.Interactor interactor) {
+    public SongInformationPresenter(BaseContract.Interactor interactor) {
         super(interactor);
     }
 
-    public AlbumInformationPresenter() {
+    public SongInformationPresenter() {
         this(new InformationAlbumInteractor());
     }
 
@@ -27,7 +27,7 @@ class AlbumInformationPresenter
         interactor.execute(new DisposableObserver<AlbumDetailsModel>() {
             @Override
             public void onNext(AlbumDetailsModel albumDetailsModel) {
-                AlbumInformationPresenter.this.showAlbumsInView(albumDetailsModel);
+                SongInformationPresenter.this.showAlbumsInView(albumDetailsModel);
             }
 
             @Override

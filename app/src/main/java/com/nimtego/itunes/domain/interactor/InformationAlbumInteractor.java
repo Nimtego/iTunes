@@ -1,6 +1,6 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;

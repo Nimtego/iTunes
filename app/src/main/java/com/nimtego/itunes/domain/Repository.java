@@ -1,6 +1,6 @@
 package com.nimtego.itunes.domain;
 
-import com.nimtego.itunes.presentation.information_view.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;

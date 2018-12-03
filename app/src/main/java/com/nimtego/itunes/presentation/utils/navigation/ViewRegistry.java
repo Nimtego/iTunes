@@ -1,5 +1,6 @@
 package com.nimtego.itunes.presentation.utils.navigation;
 
+import com.nimtego.itunes.domain.interactor.SongIntTmp;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.information_view.DetailedInformationActivity;
 import com.nimtego.itunes.presentation.information_view.DetailedInformationContract;
