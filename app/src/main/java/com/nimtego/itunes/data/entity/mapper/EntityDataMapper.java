@@ -8,6 +8,7 @@ import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
@@ -85,6 +86,17 @@ public class EntityDataMapper {
                 .collectionPrice(albumResult.getCollectionPrice())
                 .releaseDate(albumResult.getReleaseDate())
                 .albumId(albumResult.getCollectionId())
+                .build();
+    }
+
+    public SongDetailsModel transformSongDetail(final SongResult songResult) {
+        return SongDetailsModel.builder()
+                .songName(songResult.getTrackName())
+                .songArtwork(songResult.getArtworkUrl100())
+                .songPrice(songResult.getTrackPrice())
+                .songArtistName(songResult.getArtistName())
+                .songAlbumName(songResult.getCollectionName())
+                .releaseDate(songResult.getReleaseDate())
                 .build();
     }
 

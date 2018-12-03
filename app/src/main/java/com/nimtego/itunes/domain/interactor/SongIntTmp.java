@@ -11,7 +11,7 @@ public class SongIntTmp extends BaseInteractor<SongModel, SongIntTmp.Params> {
     @Override
     protected Observable<SongModel> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
-        return repository.song(params.request);
+        return repository.songs(params.request).map(s -> s.get(0));
     }
 
     public static final class Params {

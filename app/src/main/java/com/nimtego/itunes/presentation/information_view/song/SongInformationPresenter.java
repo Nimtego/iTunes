@@ -1,9 +1,11 @@
 package com.nimtego.itunes.presentation.information_view.song;
 
 import com.nimtego.itunes.domain.interactor.InformationAlbumInteractor;
+import com.nimtego.itunes.domain.interactor.InformationSongInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -19,15 +21,15 @@ class SongInformationPresenter
     }
 
     public SongInformationPresenter() {
-        this(new InformationAlbumInteractor());
+        this(new InformationSongInteractor());
     }
 
     @Override
-    public void viewReady(String albumNameForResponse) {
-        interactor.execute(new DisposableObserver<AlbumDetailsModel>() {
+    public void viewReady(String songNameForResponse) {
+        interactor.execute(new DisposableObserver<SongDetailsModel>() {
             @Override
-            public void onNext(AlbumDetailsModel albumDetailsModel) {
-                SongInformationPresenter.this.showAlbumsInView(albumDetailsModel);
+            public void onNext(SongDetailsModel songDetailsModel) {
+                SongInformationPresenter.this.showSongInView(songDetailsModel);
             }
 
             @Override
@@ -40,11 +42,11 @@ class SongInformationPresenter
             public void onComplete() {
 
             }
-        }, InformationAlbumInteractor.Params.forRequest(albumNameForResponse));
+        }, InformationSongInteractor.Params.forRequest(songNameForResponse));
     }
 
-    private void showAlbumsInView(AlbumDetailsModel albumDetailsModel) {
-        view.toast(albumDetailsModel.getAlbumName());
-        this.view.render(albumDetailsModel);
+    private void showSongInView(SongDetailsModel songDetailsModel) {
+        view.toast(songDetailsModel.getSongName());
+        this.view.render(songDetailsModel);
     }
 }

@@ -63,7 +63,6 @@ public class AlbumInformationFragment
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /* this.mPresenter.viewReady(getArguments().getString(ALBUM_ID.name()));*/
     }
 
     @Override

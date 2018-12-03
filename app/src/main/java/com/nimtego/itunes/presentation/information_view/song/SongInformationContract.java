@@ -2,6 +2,7 @@ package com.nimtego.itunes.presentation.information_view.song;
 
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 
 public interface SongInformationContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor>
@@ -11,6 +12,6 @@ public interface SongInformationContract {
     }
 
     interface View<P extends Presenter> extends BaseContract.View<P> {
-        void render(AlbumDetailsModel albumDetailsModel);
+        void render(SongDetailsModel songDetailsModel);
     }
 }
