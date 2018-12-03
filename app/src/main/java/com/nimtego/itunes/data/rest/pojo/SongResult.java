@@ -142,6 +142,13 @@ public class SongResult {
         return trackTimeMillis;
     }
 
+    public Integer getTrackCount() {
+        return trackCount;
+    }
+
+    public Double getTrackPrice() {
+        return trackPrice;
+    }
 }
 
 

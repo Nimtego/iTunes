@@ -5,6 +5,7 @@ import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
 import com.nimtego.itunes.presentation.information_view.DetailedInformationContract;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
+import com.nimtego.itunes.presentation.utils.FragmentType;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,6 +38,7 @@ public class AlbumPresenter
     @Override
     public void albumClicked(AlbumModel albumModel) {
         Map<String, String> param = new HashMap<>();
+        param.put(FragmentType.TYPE.name(), FragmentType.ALBUM.name());
         param.put(ALBUM_ID.name(), albumModel.getAlbumId());
         try {
             view.showView(DetailedInformationContract.View.class, param);

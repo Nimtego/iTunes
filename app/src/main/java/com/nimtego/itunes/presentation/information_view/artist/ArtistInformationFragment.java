@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.information_view.album;
+package com.nimtego.itunes.presentation.information_view.artist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,10 +17,11 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
+import static com.nimtego.itunes.presentation.utils.IpTags.ARTIST_ID;
 
-public class AlbumInformationFragment
-        extends BaseFragment<AlbumInformationContract.Presenter>
-        implements AlbumInformationContract.View<AlbumInformationContract.Presenter> {
+public class ArtistInformationFragment
+        extends BaseFragment<ArtistInformationContract.Presenter>
+        implements ArtistInformationContract.View<ArtistInformationContract.Presenter> {
 
     private TextView price;
     private TextView date;
@@ -31,17 +32,17 @@ public class AlbumInformationFragment
     private ProgressBar pb;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
-    public static AlbumInformationContract.View newInstance(final String content) {
-        final AlbumInformationContract.View fragment = new AlbumInformationFragment();
+    public static ArtistInformationContract.View newInstance(final String content) {
+        final ArtistInformationContract.View fragment = new ArtistInformationFragment();
         final Bundle arguments = new Bundle();
-        arguments.putString(ALBUM_ID.name(), content);
+        arguments.putString(ARTIST_ID.name(), content);
         ((BaseFragment) fragment).setArguments(arguments);
         return fragment;
     }
 
     @Override
-    public AlbumInformationContract.Presenter supplyPresenter() {
-        return new AlbumInformationPresenter();
+    public ArtistInformationContract.Presenter supplyPresenter() {
+        return new ArtistInformationPresenter();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class AlbumInformationFragment
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
 
         pb = view.findViewById(R.id.image_progress_bar);
-        mPresenter.viewReady(getArguments().getString(ALBUM_ID.name()));
+        mPresenter.viewReady(getArguments().getString(ARTIST_ID.name()));
         return view;
     }
 

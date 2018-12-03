@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.information_view.model;
+package com.nimtego.itunes.presentation.information_view.album.model;
 
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
