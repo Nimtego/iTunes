@@ -1,9 +1,7 @@
 package com.nimtego.itunes.data.repository.datasource;
 
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
-import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
-import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 
