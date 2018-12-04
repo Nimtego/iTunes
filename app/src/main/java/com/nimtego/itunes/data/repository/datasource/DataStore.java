@@ -23,7 +23,7 @@ public interface DataStore {
 
     Observable<SongsRepository> songById(int id);
 
-    Observable<ArtistResult> artist();
+    Observable<ArtistsRepository> artistById(int id);
 
     Observable<AlbumsRepository> album(String response);
 }

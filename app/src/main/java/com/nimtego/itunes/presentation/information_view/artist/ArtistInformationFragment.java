@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.base.BaseFragment;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -47,7 +48,7 @@ public class ArtistInformationFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.information_album_form, container, false);
+        View view = inflater.inflate(R.layout.information_artist_form, container, false);
         artistName = view.findViewById(R.id.author);
         date = view.findViewById(R.id.release_date);
         price = view.findViewById(R.id.price);
@@ -67,16 +68,16 @@ public class ArtistInformationFragment
     }
 
     @Override
-    public void render(AlbumDetailsModel albumDetailsModel) {
-        artistName.setText(albumDetailsModel.getAlbumArtistName());
-        date.setText(albumDetailsModel.getReleaseDate());
-        price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
-        information.setText(albumDetailsModel.getWikiInformation());
+    public void render(ArtistDetailsModel artistDetailsModel) {
+        artistName.setText(artistDetailsModel.getArtistName());
+       // date.setText(artistDetailsModel.getArtistId());
+        price.setText(artistDetailsModel.getArtistArtwork());
+        information.setText(artistDetailsModel.getWikiInformation());
         StringBuilder sb = new StringBuilder();
-        albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
-        songs.setText(sb);
-        collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
-        Picasso.get().load(albumDetailsModel.getAlbumArtwork()
+//        artistDetailsModel.getAlbums().forEach(album -> sb.append(album.getAlbumName()).append("\n\n"));
+ //       songs.setText(sb);
+        collapsingToolbarLayout.setTitle(artistDetailsModel.getArtistName());
+        Picasso.get().load(artistDetailsModel.getArtistArtwork()
                 .replace("100x100", "400x400"))
                 .into(albumImage, new Callback() {
                     @Override

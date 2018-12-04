@@ -68,8 +68,9 @@ public class CloudDataStore implements DataStore {
     }
 
     @Override
-    public Observable<ArtistResult> artist() {
-        return null;
+    public Observable<ArtistsRepository> artistById(int id) {
+        return networkConnection.getITunesClient()
+                .getArtist(FabricParam.lookupArtist(String.valueOf(id)));
     }
 
     @Override

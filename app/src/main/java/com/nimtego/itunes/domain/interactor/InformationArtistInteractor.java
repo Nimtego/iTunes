@@ -1,18 +1,18 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.data.entity.Artist;
+import com.nimtego.itunes.presentation.base.BaseContract;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
-public class InformationAlbumInteractor
-        extends BaseInteractor<AlbumDetailsModel, InformationAlbumInteractor.Params> {
-
-
+public class InformationArtistInteractor
+        extends BaseInteractor<ArtistDetailsModel, InformationArtistInteractor.Params> {
     @Override
-    protected Observable<AlbumDetailsModel> buildUseCaseObservable(Params params) {
+    protected Observable<ArtistDetailsModel> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
-        return repository.albumDeteil(params.request);
+        return repository.artistDetail(params.request);
     }
 
     public static final class Params {

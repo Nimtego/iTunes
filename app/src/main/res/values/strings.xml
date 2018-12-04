@@ -8,4 +8,5 @@
     <string name="author">Author</string>
     <string name="songs">Songs</string>
     <string name="information">Information</string>
+    <string name="album_image">Album image</string>
 </resources>

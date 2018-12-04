@@ -9,6 +9,7 @@ import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
@@ -55,7 +56,7 @@ public class AppRepository implements Repository {
 
 
     @Override
-    public Observable<SongDetailsModel> song(String request) {
+    public Observable<SongDetailsModel> songDeteil(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songById(Integer.valueOf(request)).map(result ->
                 this.mapper.transformSongDetail(result.getResults().get(0)));
@@ -67,7 +68,7 @@ public class AppRepository implements Repository {
     }
 
     @Override
-    public Observable<AlbumDetailsModel> album(String request) {
+    public Observable<AlbumDetailsModel> albumDeteil(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.album(request)
                 .flatMap(album -> {
@@ -85,6 +86,13 @@ public class AppRepository implements Repository {
                                 return albumDetail;
                             });
                 });
+    }
+
+    @Override
+    public Observable<ArtistDetailsModel> artistDetail(String id) {
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return dataStore.artistById(Integer.valueOf(id))
+                .map(result -> mapper.transformArtistDetail(result.getResults().get(0)));
     }
 }
 

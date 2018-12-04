@@ -50,11 +50,12 @@ public class DiskDataStore implements DataStore {
         return null;
     }
 
-
     @Override
-    public Observable<ArtistResult> artist() {
+    public Observable<ArtistsRepository> artistById(int id) {
         return null;
     }
+
+
 
     @Override
     public Observable<AlbumsRepository> album(String response) {

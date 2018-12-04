@@ -7,6 +7,7 @@ import com.nimtego.itunes.presentation.information_view.DetailedInformationContr
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.utils.FragmentType;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;

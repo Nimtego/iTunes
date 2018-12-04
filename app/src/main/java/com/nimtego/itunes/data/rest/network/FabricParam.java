@@ -79,4 +79,11 @@ public class FabricParam {
         return param;
 
     }
+
+    public static Map<String,String> lookupArtist(String s) {
+        Map<String, String> param = new HashMap<>();
+        param.put("id", s);
+        param.put("entity", "musicArtist");
+        return param;
+    }
 }

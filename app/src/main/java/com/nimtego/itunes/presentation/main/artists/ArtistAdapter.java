@@ -40,7 +40,7 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ArtistAdapter.ViewHolder holder, final int position) {
         final ArtistModel artistModel = this.models.get(position);
-        holder.albumName.setText(artistModel.getPrimaryGenreName());
+        holder.albumName.setText(artistModel.getArtistId());
         holder.artistName.setText(artistModel.getArtistName());
         holder.pb.setVisibility(View.VISIBLE);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
