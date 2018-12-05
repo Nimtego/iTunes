@@ -59,6 +59,11 @@ public abstract class MainTabsFragment<P extends MainTabsContract.Presenter>
     }
 
     @Override
+    public void clearList() {
+        mRecyclerView.setAdapter(null);
+    }
+
+    @Override
     public String getCurrentSerch() {
         return searchText;
     }
