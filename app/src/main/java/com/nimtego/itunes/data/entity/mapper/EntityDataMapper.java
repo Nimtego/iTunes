@@ -50,6 +50,7 @@ public class EntityDataMapper {
 
     private List<AlbumModel> transformAlbums(final Collection<AlbumResult> results) {
         return results.stream()
+                .filter(r -> !r.getWrapperType().equals("artist"))
                 .map(this::transformAlbum)
                 .collect(Collectors.toList())
                 ;

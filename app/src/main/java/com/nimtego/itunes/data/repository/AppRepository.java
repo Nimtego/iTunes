@@ -15,7 +15,11 @@ import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import io.reactivex.Observable;
 
@@ -91,8 +95,12 @@ public class AppRepository implements Repository {
     @Override
     public Observable<ArtistDetailsModel> artistDetail(String id) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-        return dataStore.artistById(Integer.valueOf(id))
-                .map(result -> mapper.transformArtistDetail(result.getResults().get(0)));
+        return Observable.zip(dataStore.artistById(Integer.valueOf(id)),
+                dataStore.album(id), (artist, albums) -> {
+                    ArtistDetailsModel artistDetails = mapper.transformArtistDetail(artist.getResults().get(0));
+                    artistDetails.setAlbums(mapper.transformAlbums(albums));
+                    return artistDetails;
+                });
     }
 }
 

@@ -27,6 +27,7 @@ public class FabricParam {
         Map<String, String> param = new HashMap<>();
         param.put("id", album);
         param.put("entity", "song");
+        param.put("limit", String.valueOf(limit));
         return param;
     }
 
@@ -35,6 +36,7 @@ public class FabricParam {
         Map<String, String> param = new HashMap<>();
         param.put("id", album);
         param.put("entity", "song");
+        param.put("limit", String.valueOf(limit));
         return param;
     }
 

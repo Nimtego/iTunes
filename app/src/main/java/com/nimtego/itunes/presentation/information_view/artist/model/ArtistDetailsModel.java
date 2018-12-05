@@ -1,6 +1,6 @@
 package com.nimtego.itunes.presentation.information_view.artist.model;
 
-import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
 import java.util.List;
 
@@ -15,6 +15,6 @@ public class ArtistDetailsModel {
     private String artistName;
     private String artistArtwork;
     private int artistId;
-    private List<AlbumDetailsModel> albums;
+    private List<AlbumModel> albums;
     private String wikiInformation;
 }

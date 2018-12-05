@@ -25,6 +25,7 @@
                 android:id="@+id/image_album"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/artist_image"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
@@ -180,25 +181,27 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:text="@string/songs"
+                android:text="@string/albums"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/price_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/price" />
 
-            <TextView
-                android:id="@+id/songs"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:singleLine="false"
-                android:text="@string/songs"
-                android:textColor="@color/w"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/price"
-                app:layout_constraintTop_toTopOf="@+id/songs_text_view" />
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/album_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingBottom="50dp"
+                android:scrollbars="vertical"
+                android:text="@string/no_data_available"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_constraintEnd_toEndOf="@+id/author"
+                app:layout_constraintStart_toStartOf="@+id/author"
+                app:layout_constraintTop_toBottomOf="@+id/songs_text_view">
+
+            </android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>
 
 

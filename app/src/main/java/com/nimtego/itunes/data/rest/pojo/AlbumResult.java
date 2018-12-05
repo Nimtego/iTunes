@@ -3,6 +3,8 @@ package com.nimtego.itunes.data.rest.pojo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Arrays;
+
 public class AlbumResult {
 
     @SerializedName("wrapperType")
@@ -86,4 +88,7 @@ public class AlbumResult {
 
     public String getReleaseDate() {return releaseDate;}
 
+    public String getWrapperType() {
+        return wrapperType;
+    }
 }
