@@ -1,9 +1,7 @@
 package com.nimtego.itunes.data.repository.datasource;
 
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
-import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
-import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 
@@ -23,7 +21,7 @@ public interface DataStore {
 
     Observable<SongsRepository> songById(int id);
 
-    Observable<ArtistResult> artist();
+    Observable<ArtistsRepository> artistById(int id);
 
     Observable<AlbumsRepository> album(String response);
 }

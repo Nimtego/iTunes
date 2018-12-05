@@ -8,6 +8,7 @@ import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
@@ -49,6 +50,7 @@ public class EntityDataMapper {
 
     private List<AlbumModel> transformAlbums(final Collection<AlbumResult> results) {
         return results.stream()
+                .filter(r -> !r.getWrapperType().equals("artist"))
                 .map(this::transformAlbum)
                 .collect(Collectors.toList())
                 ;
@@ -106,5 +108,13 @@ public class EntityDataMapper {
                 .get(0)
                 .getSnippet()
                 .replaceAll("\\<.*?\\>", " ").trim();
+    }
+
+    public ArtistDetailsModel transformArtistDetail(final ArtistResult artistResult) {
+        return ArtistDetailsModel.builder()
+                .artistArtwork(artistResult.getArtistLinkUrl())
+                .artistId(artistResult.getArtistId())
+                .artistName(artistResult.getArtistName())
+                .build();
     }
 }

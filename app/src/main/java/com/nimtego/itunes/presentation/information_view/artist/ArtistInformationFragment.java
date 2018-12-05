@@ -3,6 +3,11 @@ package com.nimtego.itunes.presentation.information_view.artist;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +17,12 @@ import android.widget.TextView;
 
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.base.BaseFragment;
-import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.adapter.AlbumsAdapterForArtist;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
 import static com.nimtego.itunes.presentation.utils.IpTags.ARTIST_ID;
 
 public class ArtistInformationFragment
@@ -30,6 +36,7 @@ public class ArtistInformationFragment
     private ImageView albumImage;
     private TextView information;
     private ProgressBar pb;
+    private RecyclerView albumsRv;
     private CollapsingToolbarLayout collapsingToolbarLayout;
 
     public static ArtistInformationContract.View newInstance(final String content) {
@@ -47,7 +54,7 @@ public class ArtistInformationFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.information_album_form, container, false);
+        View view = inflater.inflate(R.layout.information_artist_form, container, false);
         artistName = view.findViewById(R.id.author);
         date = view.findViewById(R.id.release_date);
         price = view.findViewById(R.id.price);
@@ -55,10 +62,19 @@ public class ArtistInformationFragment
         information = view.findViewById(R.id.information);
         albumImage = view.findViewById(R.id.image_album);
         collapsingToolbarLayout = view.findViewById(R.id.collapsing_toolbar);
+        initRV(view, container);
 
         pb = view.findViewById(R.id.image_progress_bar);
         mPresenter.viewReady(getArguments().getString(ARTIST_ID.name()));
         return view;
+    }
+
+    protected void initRV(View view, ViewGroup viewGroup) {
+        albumsRv = view.findViewById(R.id.album_rv);
+        albumsRv.setHasFixedSize(true);
+        albumsRv.setLayoutManager(new LinearLayoutManager(viewGroup.getContext()));
+        ViewCompat.setNestedScrollingEnabled(albumsRv, false);
+        albumsRv.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
@@ -67,16 +83,21 @@ public class ArtistInformationFragment
     }
 
     @Override
-    public void render(AlbumDetailsModel albumDetailsModel) {
-        artistName.setText(albumDetailsModel.getAlbumArtistName());
-        date.setText(albumDetailsModel.getReleaseDate());
-        price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));
-        information.setText(albumDetailsModel.getWikiInformation());
-        StringBuilder sb = new StringBuilder();
-        albumDetailsModel.getSongs().forEach(s -> sb.append(s.getTrackName()).append("\n\n"));
-        songs.setText(sb);
-        collapsingToolbarLayout.setTitle(albumDetailsModel.getAlbumName());
-        Picasso.get().load(albumDetailsModel.getAlbumArtwork()
+    public void render(ArtistDetailsModel artistDetailsModel) {
+        artistName.setText(artistDetailsModel.getArtistName());
+        price.setText(artistDetailsModel.getArtistArtwork());
+        information.setText(artistDetailsModel.getWikiInformation());
+        collapsingToolbarLayout.setTitle(artistDetailsModel.getArtistName());
+        AlbumsAdapterForArtist albumsAdapter = new AlbumsAdapterForArtist(artistDetailsModel.getAlbums(),
+                this.getActivity());
+        albumsAdapter.setOnItemClickListener(new AlbumsAdapterForArtist.OnItemClickListener() {
+            @Override
+            public void onUserItemClicked(AlbumModel albumModel) {
+                mPresenter.albumClicked(albumModel);
+            }
+        });
+        albumsRv.setAdapter(albumsAdapter);
+        Picasso.get().load(artistDetailsModel.getArtistArtwork()
                 .replace("100x100", "400x400"))
                 .into(albumImage, new Callback() {
                     @Override

@@ -10,7 +10,7 @@ public class InformationSongInteractor
     @Override
     protected Observable<SongDetailsModel> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
-        return repository.song(params.request);
+        return repository.songDeteil(params.request);
     }
 
     public static final class Params {

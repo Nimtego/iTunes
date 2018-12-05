@@ -9,12 +9,17 @@ import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import io.reactivex.Observable;
 
@@ -55,7 +60,7 @@ public class AppRepository implements Repository {
 
 
     @Override
-    public Observable<SongDetailsModel> song(String request) {
+    public Observable<SongDetailsModel> songDeteil(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songById(Integer.valueOf(request)).map(result ->
                 this.mapper.transformSongDetail(result.getResults().get(0)));
@@ -67,7 +72,7 @@ public class AppRepository implements Repository {
     }
 
     @Override
-    public Observable<AlbumDetailsModel> album(String request) {
+    public Observable<AlbumDetailsModel> albumDeteil(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.album(request)
                 .flatMap(album -> {
@@ -84,6 +89,17 @@ public class AppRepository implements Repository {
                                         : mapper.wikiInformationArtist(wiki));
                                 return albumDetail;
                             });
+                });
+    }
+
+    @Override
+    public Observable<ArtistDetailsModel> artistDetail(String id) {
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return Observable.zip(dataStore.artistById(Integer.valueOf(id)),
+                dataStore.album(id), (artist, albums) -> {
+                    ArtistDetailsModel artistDetails = mapper.transformArtistDetail(artist.getResults().get(0));
+                    artistDetails.setAlbums(mapper.transformAlbums(albums));
+                    return artistDetails;
                 });
     }
 }

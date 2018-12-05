@@ -1,6 +1,7 @@
 package com.nimtego.itunes.domain;
 
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
@@ -17,10 +18,12 @@ public interface Repository {
 
     Observable<List<AlbumModel>> albums(String request);
 
-    Observable<SongDetailsModel> song(String name);
+    Observable<SongDetailsModel> songDeteil(String name);
 
     Observable<ArtistModel> artist(String name);
 
-    Observable<AlbumDetailsModel> album(String name);
+    Observable<AlbumDetailsModel> albumDeteil(String name);
+
+    Observable<ArtistDetailsModel> artistDetail(String name);
 
 }
