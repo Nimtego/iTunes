@@ -1,4 +1,4 @@
-package com.nimtego.itunes.presentation.main.artists;
+package com.nimtego.itunes.presentation.information_view.artist.adapter;
 
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
@@ -12,46 +12,51 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.nimtego.itunes.R;
-import com.nimtego.itunes.presentation.main.model.ArtistModel;
+import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.main.albums.AlbumAdapter;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
+public class AlbumsAdapterForArtist extends RecyclerView.Adapter<AlbumsAdapterForArtist.ViewHolder> {
+
     public interface OnItemClickListener {
-        void onUserItemClicked(ArtistModel albumModel);
+        void onUserItemClicked(AlbumModel albumModel);
     }
 
-    private List<ArtistModel> models;
+    private List<AlbumModel> models;
     private OnItemClickListener onItemClickListener;
 
-    public ArtistAdapter(List<ArtistModel> model, Context parent) {
+    public AlbumsAdapterForArtist(List<AlbumModel> model, Context parent) {
         this.models = model;
     }
 
     @Override
-    public ArtistAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.album_card_form, parent, false);
-        return new ArtistAdapter.ViewHolder(v);
+    public AlbumsAdapterForArtist.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.album_form_for_artist, parent, false);
+        return new AlbumsAdapterForArtist.ViewHolder(v);
     }
 
 
     @Override
-    public void onBindViewHolder(final ArtistAdapter.ViewHolder holder, final int position) {
-        final ArtistModel artistModel = this.models.get(position);
-        holder.albumName.setText(artistModel.getArtistId());
-        holder.artistName.setText(artistModel.getArtistName());
+    public void onBindViewHolder(final AlbumsAdapterForArtist.ViewHolder holder, final int position) {
+        final AlbumModel albumModel = this.models.get(position);
+        holder.albumName.setText(albumModel.getAlbumName());
+        holder.artistName.setText(albumModel.getAlbumArtistName());
         holder.pb.setVisibility(View.VISIBLE);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ArtistAdapter.this.onItemClickListener != null) {
-                    ArtistAdapter.this.onItemClickListener.onUserItemClicked(artistModel);
+                if (AlbumsAdapterForArtist.this.onItemClickListener != null) {
+                    AlbumsAdapterForArtist.this.onItemClickListener.onUserItemClicked(albumModel);
                 }
             }
         });
-        Picasso.get().load(models.get(position).getArtistViewUrl())
+        Picasso.get().load(models.get(position).getAlbumArtWorkUrl()
+                .replace("100x100", "200x200"))
                 .into(holder.albumImage, new Callback() {
                     @Override
                     public void onSuccess() {

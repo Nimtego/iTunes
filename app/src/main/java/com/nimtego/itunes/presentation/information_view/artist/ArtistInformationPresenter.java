@@ -1,9 +1,12 @@
 package com.nimtego.itunes.presentation.information_view.artist;
 
-import com.nimtego.itunes.domain.interactor.InformationAlbumInteractor;
+import com.nimtego.itunes.domain.interactor.InformationArtistInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
-import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
+import com.nimtego.itunes.presentation.main.model.AlbumModel;
+
+import java.util.Arrays;
 
 import io.reactivex.observers.DisposableObserver;
 
@@ -19,20 +22,21 @@ class ArtistInformationPresenter
     }
 
     public ArtistInformationPresenter() {
-        this(new InformationAlbumInteractor());
+        this(new InformationArtistInteractor());
     }
 
     @Override
     public void viewReady(String albumNameForResponse) {
-        interactor.execute(new DisposableObserver<AlbumDetailsModel>() {
+        interactor.execute(new DisposableObserver<ArtistDetailsModel>() {
             @Override
-            public void onNext(AlbumDetailsModel albumDetailsModel) {
-                ArtistInformationPresenter.this.showAlbumsInView(albumDetailsModel);
+            public void onNext(ArtistDetailsModel artistDetailsModel) {
+                ArtistInformationPresenter.this.showArtistInView(artistDetailsModel);
             }
 
             @Override
             public void onError(Throwable e) {
-                view.toast(e.getClass().getCanonicalName() + e.getMessage());
+                view.toast(e.getClass().getCanonicalName() + e.getMessage() + "\n"
+                        + Arrays.toString(e.getStackTrace()));
                 view.hideLoading();
             }
 
@@ -40,11 +44,17 @@ class ArtistInformationPresenter
             public void onComplete() {
 
             }
-        }, InformationAlbumInteractor.Params.forRequest(albumNameForResponse));
+        }, InformationArtistInteractor.Params.forRequest(albumNameForResponse));
     }
 
-    private void showAlbumsInView(AlbumDetailsModel albumDetailsModel) {
-        view.toast(albumDetailsModel.getAlbumName());
-        this.view.render(albumDetailsModel);
+    @Override
+    public void albumClicked(AlbumModel album) {
+        view.toast(album.getAlbumName());
+    }
+
+    private void showArtistInView(ArtistDetailsModel artistDetailsModel) {
+        view.toast(artistDetailsModel.getArtistName()
+                + "\n" + artistDetailsModel.getAlbums().size());
+        this.view.render(artistDetailsModel);
     }
 }
