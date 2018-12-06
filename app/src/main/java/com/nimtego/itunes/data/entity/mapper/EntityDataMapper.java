@@ -62,6 +62,7 @@ public class EntityDataMapper {
 
     private List<SongModel> transformSongs(final Collection<SongResult> results) {
         return results.stream()
+                .filter(r -> r.getWrapperType().equals("track"))
                 .map(this::transformSong)
                 .collect(Collectors.toList());
     }
