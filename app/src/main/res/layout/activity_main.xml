@@ -19,31 +19,36 @@
             app:layout_scrollFlags="scroll|snap|enterAlways"
             app:popupTheme="@style/MyMaterialTheme.Base">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:theme="@style/AppTheme.WhiteAccent"
-                android:visibility="invisible" />
-
             <android.support.v7.widget.SearchView
                 android:id="@+id/search_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
                 android:elevation="2dp"
                 android:gravity="center_vertical"
-
                 android:hint="@string/search"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:theme="@style/MySearchViewStyle" />
         </android.support.v7.widget.Toolbar>
-
-
     </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/framlytt"
+        android:layout_width="match_parent"
+        android:layout_height="9dp"
+        android:layout_marginTop="-4dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_marginTop="2dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/click_accent"
+            android:progress="30" />
+
+    </FrameLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

@@ -7,6 +7,7 @@ import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
@@ -15,6 +16,9 @@ import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +55,21 @@ public class AppRepository implements Repository {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.artists(request).map(this.mapper::transformArtists);
     }
-
+/*    private ArtistResult changeLink(ArtistResult artistResult) {
+        String link = artistResult.getArtistLinkUrl();
+        try {
+            link = Jsoup.connect(artistResult.getArtistLinkUrl())
+                    .get()
+                    .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border")
+                    .select("img")
+                    .get(0)
+                    .attr("src");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        artistResult.setArtistLinkUrl(link);
+        return artistResult;
+    }*/
     @Override
     public Observable<List<AlbumModel>> albums(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();

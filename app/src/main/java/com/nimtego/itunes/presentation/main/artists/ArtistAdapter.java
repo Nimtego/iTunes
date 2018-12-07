@@ -16,6 +16,9 @@ import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
