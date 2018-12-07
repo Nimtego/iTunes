@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#617e8c</color>
-    <color name="colorPrimaryDark">#465b65</color>
-    <color name="colorAccent">#b0bec5</color>
-    <color name="black_effective">#ffd6a7</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#303030</color>
+    <color name="black_effective">#424242</color>
     <color name="with_grad">#00000000</color>
     <color name="separator_gray">#98a6af</color>
     <color name="black_tr">#ad000000</color>
@@ -12,7 +12,7 @@
     <color name="colorPrimaryDarkTransparent">#e2424768</color>
     <color name="grey">#dadada</color>
     <color name="cardBack">#e83c494e</color>
-    <color name="reds">#9f5454</color>
+    <color name="click_accent">#9f5454</color>
     <color name="transparent">#00ffffff</color>
 
 </resources>

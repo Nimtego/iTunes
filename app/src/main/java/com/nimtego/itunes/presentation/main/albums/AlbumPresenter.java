@@ -53,6 +53,7 @@ public class AlbumPresenter
     public void search(String response) {
         if (!view.getCurrentSerch().equals(response) || view.isRvEmpty()) {
             view.setCurrentSearch(response);
+            view.clearList();
             showViewLoading();
             interactor.execute(new DisposableObserver<List<AlbumModel>>() {
                 @Override

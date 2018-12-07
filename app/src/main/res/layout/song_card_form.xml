@@ -14,7 +14,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/with_grad">
+        android:background="@drawable/custom_ripple_effect_after_21">
 
         <ImageView
             android:id="@+id/song_image"

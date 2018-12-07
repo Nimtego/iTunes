@@ -13,6 +13,8 @@ public interface MainTabsContract {
 
         boolean isRvEmpty();
 
+        void clearList();
+
         String getCurrentSerch();
 
         void setCurrentSearch(String response);
