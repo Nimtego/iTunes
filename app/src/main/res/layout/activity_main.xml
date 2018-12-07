@@ -35,11 +35,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp"
-                app:theme="@style/MySearchViewStyle"
+                android:elevation="2dp"
                 android:gravity="center_vertical"
 
-                android:elevation="2dp"
-                android:hint="@string/search" />
+                android:hint="@string/search"
+                app:theme="@style/MySearchViewStyle" />
         </android.support.v7.widget.Toolbar>
 
 
@@ -49,24 +49,23 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorHeight="4dp"
-        android:layout_gravity="bottom"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        app:tabMaxWidth="0dp"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_scrollFlags="scroll|snap|enterAlways"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="4dp"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
         app:tabPaddingEnd="2dp"
         app:tabPaddingStart="0dp"
-        app:layout_scrollFlags="scroll|snap|enterAlways"
-        app:tabSelectedTextColor="@color/w"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:tabSelectedTextColor="@color/w" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -46,8 +46,11 @@ public abstract class MainTabsFragment<P extends MainTabsContract.Presenter>
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(rvLayoutManager(viewGroup.getContext()));
+        mRecyclerView.addItemDecoration(itemDecorator());
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
+
+    protected abstract RecyclerView.ItemDecoration itemDecorator();
 
     protected abstract RecyclerView.LayoutManager rvLayoutManager(Context context);
 

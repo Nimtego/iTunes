@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.nimtego.itunes.presentation.main.adapter.SpacesItemDecoration;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 
@@ -23,6 +24,13 @@ public class ArtistTabsFragment
         return fragment;
     }
 
+
+    @Override
+    protected RecyclerView.ItemDecoration itemDecorator() {
+        return new SpacesItemDecoration(2,
+                30,
+                true);
+    }
 
     @Override
     protected RecyclerView.LayoutManager rvLayoutManager(Context context) {

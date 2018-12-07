@@ -8,6 +8,6 @@
     </stroke>
     <gradient
         android:startColor="#d8e2d4d4"
-        android:endColor="@color/reds">
+        android:endColor="@color/click_accent">
     </gradient>
 </shape>
