@@ -48,6 +48,8 @@ dependencies {
     //expand
     implementation 'com.alespero:expandable-cardview:0.8'
     //jsoup
+    implementation 'pl.droidsonroids:jspoon:1.0.0'
+    implementation 'pl.droidsonroids.retrofit2:converter-jspoon:1.0.0'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:26.1.0'

@@ -26,21 +26,11 @@ import java.util.stream.Collectors;
 
 public class EntityDataMapper {
     private ArtistModel transformArtist(final ArtistResult result) {
-/*        String link = models.get(position).getArtistViewUrl();
-        try {
-            link = Jsoup.connect(result.getArtistLinkUrl())
-                    .get()
-                    .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border")
-                    .select("img")
-                    .get(0)
-                    .attr("src");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
+        String link = result.getArtistLinkUrl();
         return ArtistModel.builder()
                 .artistName(result.getArtistName())
                 .primaryGenreName(result.getPrimaryGenreName())
-                .artistViewUrl(result.getArtistLinkUrl())
+                .artistViewUrl(link)
                 .artistId(String.valueOf(result.getArtistId()))
                 .build();
     }
