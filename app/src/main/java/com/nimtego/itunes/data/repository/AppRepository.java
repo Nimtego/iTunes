@@ -3,12 +3,10 @@ package com.nimtego.itunes.data.repository;
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.AlbumCache;
 import com.nimtego.itunes.data.cache.FileManager;
-import com.nimtego.itunes.data.entity.Artist;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
-import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
@@ -20,18 +18,10 @@ import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import org.jsoup.Jsoup;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 
 public class AppRepository implements Repository {
 
@@ -61,16 +51,21 @@ public class AppRepository implements Repository {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.artists(request)
                 .map(ArtistsRepository::getResults)
-                .flatMap(list -> {
-                    int size = list.size();
-                    return Observable.fromIterable(list)
+                .flatMap(list -> Observable.fromIterable(list)
+                        .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
+                                .map(url -> {
+                                    artistResult.setArtistLinkUrl(url);
+                                    return artistResult;
+                                })).toList().toObservable().map(mapper::transformArtists));
+/*        return dataStore.artists(request)
+                .map(ArtistsRepository::getResults)
+                .flatMap(list -> Observable.fromIterable(list)
                         .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
                                 .map(url -> {
                                     artistResult.setArtistLinkUrl(url);
                                     return artistResult;
                                 }))
-                        .map(mapper::transformArtist).buffer(size);
-                });
+                        .map(mapper::transformArtist).toList().toObservable());*/
     }
 
     private Observable<String> changeLink(String oldUrl) {
