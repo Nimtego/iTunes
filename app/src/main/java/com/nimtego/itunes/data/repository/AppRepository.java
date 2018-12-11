@@ -58,65 +58,33 @@ public class AppRepository implements Repository {
 
     @Override
     public Observable<List<ArtistModel>> artists(String request) {
-        return null;
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        return dataStore.artists(request)
+                .map(ArtistsRepository::getResults)
+                .flatMap(list -> {
+                    int size = list.size();
+                    return Observable.fromIterable(list)
+                        .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
+                                .map(url -> {
+                                    artistResult.setArtistLinkUrl(url);
+                                    return artistResult;
+                                }))
+                        .map(mapper::transformArtist).buffer(size);
+                });
     }
-/*        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-        *//*return dataStore.artists(request).map(this.mapper::transformArtists);*//*
-        return dataStore.artists(request).flatMap(result -> {
-            List<ArtistResult> artistResults = result.getResults();
-            return Observable.zip(dataStore
-                            .songsByIdAlbum(request),
-                    changeLink(artistResults.),
-                    (song, wiki) -> {
-                        AlbumDetailsModel albumDetail =
-                                mapper.transformAlbumDetail(albumResult);
-                        albumDetail.setSongs(mapper.transformSongs(song));
-                        albumDetail.setWikiInformation(wiki.isEmpty() ?
-                                "No information in wiki"
-                                : mapper.wikiInformationArtist(wiki));
-                        return albumDetail;
-                    });
-        });
-    }*/
-
-    /*       return dataStore.artists(request).map(this.mapper::transformArtists)
-                   .flatMap(result -> {
-               return Observable.fromCallable(new Callable<List<ArtistModel>>() {
-                   @Override
-                   public List<ArtistModel> call() {
-                       return result.stream()
-                               .map(re -> {
-                                   String url = changeLink2(re.getArtistViewUrl());
-                                   re.setArtistViewUrl(url);
-                                   return re;
-                               }).collect(Collectors.toList());
-                   }
-               });
-           });
-       }*/
 
     private Observable<String> changeLink(String oldUrl) {
         return Observable.fromCallable(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                return changeLink2(oldUrl);
+                return Jsoup.connect(oldUrl)
+                        .get()
+                        .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border")
+                        .select("img")
+                        .get(0)
+                        .attr("src");
             }
         });
-/*        return Observable.create(new ObservableOnSubscribe<String>() {
-            @Override
-            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                emitter.onNext(changeLink2(oldUrl));
-            }
-        });*/
-    }
-
-    private String changeLink2(String oldUrl) throws IOException {
-        return Jsoup.connect(oldUrl)
-                .get()
-                .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border")
-                .select("img")
-                .get(0)
-                .attr("src");
     }
 
     @Override

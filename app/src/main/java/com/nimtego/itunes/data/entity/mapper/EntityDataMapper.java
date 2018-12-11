@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class EntityDataMapper {
-    private ArtistModel transformArtist(final ArtistResult result) {
+    public ArtistModel transformArtist(final ArtistResult result) {
         String link = result.getArtistLinkUrl();
         return ArtistModel.builder()
                 .artistName(result.getArtistName())
@@ -35,8 +35,7 @@ public class EntityDataMapper {
                 .build();
     }
 
-    private List<ArtistModel> transformArtists(final Collection<ArtistResult> artistResultCollection) {
-
+    public List<ArtistModel> transformArtists(final Collection<ArtistResult> artistResultCollection) {
         return artistResultCollection.stream()
                 .map(this::transformArtist)
                 .collect(Collectors.toList());
@@ -126,4 +125,5 @@ public class EntityDataMapper {
                 .artistName(artistResult.getArtistName())
                 .build();
     }
+
 }
