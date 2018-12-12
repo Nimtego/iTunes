@@ -16,6 +16,9 @@ import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import org.jsoup.Jsoup;
+
+import java.io.IOException;
 import java.util.List;
 
 public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder> {
@@ -51,7 +54,8 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
                 }
             }
         });
-        Picasso.get().load(models.get(position).getArtistViewUrl())
+        Picasso.get().load(models.get(position).getArtistViewUrl()
+                .replace("135x135", "570x570"))
                 .into(holder.albumImage, new Callback() {
                     @Override
                     public void onSuccess() {

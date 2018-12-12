@@ -98,7 +98,7 @@ public class ArtistInformationFragment
         });
         albumsRv.setAdapter(albumsAdapter);
         Picasso.get().load(artistDetailsModel.getArtistArtwork()
-                .replace("100x100", "400x400"))
+                .replace("135x135", "570x570"))
                 .into(albumImage, new Callback() {
                     @Override
                     public void onSuccess() {

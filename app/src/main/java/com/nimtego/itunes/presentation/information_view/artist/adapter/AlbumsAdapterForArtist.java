@@ -55,8 +55,7 @@ public class AlbumsAdapterForArtist extends RecyclerView.Adapter<AlbumsAdapterFo
                 }
             }
         });
-        Picasso.get().load(models.get(position).getAlbumArtWorkUrl()
-                .replace("100x100", "200x200"))
+        Picasso.get().load(models.get(position).getAlbumArtWorkUrl())
                 .into(holder.albumImage, new Callback() {
                     @Override
                     public void onSuccess() {

@@ -14,21 +14,28 @@ import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class EntityDataMapper {
-    private ArtistModel transformArtist(final ArtistResult result) {
+    public ArtistModel transformArtist(final ArtistResult result) {
+        String link = result.getArtistLinkUrl();
         return ArtistModel.builder()
                 .artistName(result.getArtistName())
                 .primaryGenreName(result.getPrimaryGenreName())
-                .artistViewUrl(result.getArtistLinkUrl())
+                .artistViewUrl(link)
                 .artistId(String.valueOf(result.getArtistId()))
                 .build();
     }
 
-    private List<ArtistModel> transformArtists(final Collection<ArtistResult> artistResultCollection) {
+    public List<ArtistModel> transformArtists(final Collection<ArtistResult> artistResultCollection) {
         return artistResultCollection.stream()
                 .map(this::transformArtist)
                 .collect(Collectors.toList());
@@ -118,4 +125,5 @@ public class EntityDataMapper {
                 .artistName(artistResult.getArtistName())
                 .build();
     }
+
 }

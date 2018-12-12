@@ -12,6 +12,7 @@ public class App extends Application {
     private static Repository repository;
 
     public static Repository getRepository() {
+
         if(repository != null)
             return repository;
         return new AppRepository();
