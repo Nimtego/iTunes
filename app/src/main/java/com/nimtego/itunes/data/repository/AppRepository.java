@@ -7,6 +7,7 @@ import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.datasource.DataStore;
 import com.nimtego.itunes.data.repository.datasource.DataStoreFactory;
 import com.nimtego.itunes.data.rest.pojo.AlbumResult;
+import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
@@ -15,11 +16,12 @@ import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
-import java.util.HashMap;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 
@@ -49,7 +51,42 @@ public class AppRepository implements Repository {
     @Override
     public Observable<List<ArtistModel>> artists(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-        return dataStore.artists(request).map(this.mapper::transformArtists);
+        return dataStore.artists(request)
+                .map(ArtistsRepository::getResults)
+                .flatMap(list -> Observable.fromIterable(list)
+                        .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
+                                .map(url -> {
+                                    artistResult.setArtistLinkUrl(url);
+                                    return artistResult;
+                                })).toList().toObservable().map(mapper::transformArtists));
+/*        return dataStore.artists(request)
+                .map(ArtistsRepository::getResults)
+                .flatMap(list -> Observable.fromIterable(list)
+                        .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
+                                .map(url -> {
+                                    artistResult.setArtistLinkUrl(url);
+                                    return artistResult;
+                                }))
+                        .map(mapper::transformArtist).toList().toObservable());*/
+    }
+
+    private Observable<String> changeLink(String oldUrl) {
+        return Observable.fromCallable(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                String url = "EMPTY";
+                Elements element = Jsoup.connect(oldUrl)
+                        .get()
+                        .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border");
+                if (!element.isEmpty()) {
+                    url = element.select("img")
+                            .get(0)
+                            .attr("src");
+                }
+                return url;
+            }
+
+        });
     }
 
     @Override
@@ -100,7 +137,11 @@ public class AppRepository implements Repository {
                     ArtistDetailsModel artistDetails = mapper.transformArtistDetail(artist.getResults().get(0));
                     artistDetails.setAlbums(mapper.transformAlbums(albums));
                     return artistDetails;
-                });
+                }).flatMap(result -> changeLink(result.getArtistArtwork())
+                        .map(url -> {
+                            result.setArtistArtwork(url);
+                            return result;
+                }));
     }
 }
 

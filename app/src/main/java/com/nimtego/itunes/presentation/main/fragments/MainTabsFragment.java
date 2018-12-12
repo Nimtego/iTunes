@@ -63,7 +63,8 @@ public abstract class MainTabsFragment<P extends MainTabsContract.Presenter>
 
     @Override
     public void clearList() {
-        mRecyclerView.setAdapter(null);
+        if (mRecyclerView != null)
+            mRecyclerView.setAdapter(null);
     }
 
     @Override
