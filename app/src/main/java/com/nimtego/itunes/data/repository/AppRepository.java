@@ -17,6 +17,8 @@ import com.nimtego.itunes.presentation.main.model.ArtistModel;
 import com.nimtego.itunes.presentation.main.model.SongModel;
 
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -72,13 +74,18 @@ public class AppRepository implements Repository {
         return Observable.fromCallable(new Callable<String>() {
             @Override
             public String call() throws Exception {
-                return Jsoup.connect(oldUrl)
+                String url = "EMPTY";
+                Elements element = Jsoup.connect(oldUrl)
                         .get()
-                        .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border")
-                        .select("img")
-                        .get(0)
-                        .attr("src");
+                        .getElementsByClass("we-artwork ember-view we-artist-header__background we-artwork--round we-artwork--no-border");
+                if (!element.isEmpty()) {
+                    url = element.select("img")
+                            .get(0)
+                            .attr("src");
+                }
+                return url;
             }
+
         });
     }
 
