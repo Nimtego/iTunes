@@ -30,25 +30,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:theme="@style/MySearchViewStyle" />
         </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/framlytt"
-        android:layout_width="match_parent"
-        android:layout_height="9dp"
-        android:layout_marginTop="-4dp">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        <FrameLayout
+            android:id="@+id/framlytt"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="2dp"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/click_accent"
-            android:progress="30" />
+            android:layout_height="9dp"
+            android:layout_marginTop="-4dp">
 
-    </FrameLayout>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="2dp"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/click_accent"
+                android:progress="30" />
+
+        </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

@@ -23,6 +23,10 @@ import com.nimtego.itunes.presentation.main.model.AlbumModel;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import static com.nimtego.itunes.presentation.utils.IpTags.ARTIST_ID;
 
 public class ArtistInformationFragment
@@ -97,6 +101,7 @@ public class ArtistInformationFragment
             }
         });
         albumsRv.setAdapter(albumsAdapter);
+
         Picasso.get().load(artistDetailsModel.getArtistArtwork()
                 .replace("135x135", "570x570"))
                 .into(albumImage, new Callback() {
