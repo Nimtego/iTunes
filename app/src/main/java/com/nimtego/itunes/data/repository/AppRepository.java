@@ -137,7 +137,11 @@ public class AppRepository implements Repository {
                     ArtistDetailsModel artistDetails = mapper.transformArtistDetail(artist.getResults().get(0));
                     artistDetails.setAlbums(mapper.transformAlbums(albums));
                     return artistDetails;
-                });
+                }).flatMap(result -> changeLink(result.getArtistArtwork())
+                        .map(url -> {
+                            result.setArtistArtwork(url);
+                            return result;
+                }));
     }
 }
 
