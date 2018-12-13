@@ -17,8 +17,12 @@ import com.nimtego.itunes.presentation.main.albums.AlbumTabsFragment;
 import com.nimtego.itunes.presentation.main.artists.ArtistTabsFragment;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.songs.SongTabsFragment;
+import com.nimtego.itunes.presentation.utils.TabSelectedListener;
 
 import java.util.Objects;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class MainActivity extends BaseView<MainContract.Presenter>
@@ -26,9 +30,9 @@ public class MainActivity extends BaseView<MainContract.Presenter>
 
     final static String KEY_SEARCH = "key_search";
 
+    @BindView(R.id.search_edit_text) SearchView searchText;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private SearchView searchText;
     private MainPagerAdapter mViewPagerAdapter;
     private ProgressBar pb;
     private String search = "";
@@ -37,23 +41,23 @@ public class MainActivity extends BaseView<MainContract.Presenter>
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        searchText = findViewById(R.id.search_edit_text);
+        ButterKnife.bind(this);
         if (savedInstanceState != null) {
             search = savedInstanceState.getString(KEY_SEARCH);
         }
 
-        Toolbar mToolBar = findViewById(R.id.toolbar);
+        Toolbar mToolBar = findViewById(R.id.tool_bar);
         setSupportActionBar(mToolBar);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        mViewPager = findViewById(R.id.viewpager);
+        mViewPager = findViewById(R.id.view_pager);
         setupViewPager(savedInstanceState);
 
-        mTabLayout = findViewById(R.id.tablayout);
+        mTabLayout = findViewById(R.id.tab_layout);
         mTabLayout.setupWithViewPager(mViewPager);
 
-        pb = findViewById(R.id.progressBar);
+        pb = findViewById(R.id.progress_bar);
         searchText.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -75,22 +79,9 @@ public class MainActivity extends BaseView<MainContract.Presenter>
     @Override
     protected void onStart() {
         super.onStart();
-        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                setTitle(String.valueOf(tab.getText()));
-                mPresenter.tabSelected(String.valueOf(tab.getText()));
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+        mTabLayout.addOnTabSelectedListener((TabSelectedListener) tab -> {
+            setTitle(String.valueOf(tab.getText()));
+            mPresenter.tabSelected(String.valueOf(tab.getText()));
         });
     }
 
