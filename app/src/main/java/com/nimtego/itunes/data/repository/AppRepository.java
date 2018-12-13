@@ -53,21 +53,15 @@ public class AppRepository implements Repository {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.artists(request)
                 .map(ArtistsRepository::getResults)
-                .flatMap(list -> Observable.fromIterable(list)
-                        .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
-                                .map(url -> {
-                                    artistResult.setArtistLinkUrl(url);
-                                    return artistResult;
-                                })).toList().toObservable().map(mapper::transformArtists));
-/*        return dataStore.artists(request)
-                .map(ArtistsRepository::getResults)
-                .flatMap(list -> Observable.fromIterable(list)
+                .flatMap(list -> Observable.fromIterable(list).take(3)
                         .flatMap(artistResult -> changeLink(artistResult.getArtistLinkUrl())
                                 .map(url -> {
                                     artistResult.setArtistLinkUrl(url);
                                     return artistResult;
                                 }))
-                        .map(mapper::transformArtist).toList().toObservable());*/
+                        .toList()
+                        .toObservable()
+                        .map(mapper::transformArtists));
     }
 
     private Observable<String> changeLink(String oldUrl) {

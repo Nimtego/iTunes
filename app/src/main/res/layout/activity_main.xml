@@ -11,7 +11,7 @@
         android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:minHeight="?attr/actionBarSize"
@@ -30,34 +30,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:theme="@style/MySearchViewStyle" />
         </android.support.v7.widget.Toolbar>
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="9dp"
+            android:background="@color/transparent"
+            android:layout_marginTop="-4dp">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="2dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                android:indeterminateTint="@color/click_accent"
+                android:progress="30" />
+
+        </FrameLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/framlytt"
-        android:layout_width="match_parent"
-        android:layout_height="9dp"
-        android:layout_marginTop="-4dp">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="2dp"
-            android:indeterminate="true"
-            android:indeterminateTint="@color/click_accent"
-            android:progress="30" />
-
-    </FrameLayout>
-
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/tablayout"
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
