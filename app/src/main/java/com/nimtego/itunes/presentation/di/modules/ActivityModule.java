@@ -1,6 +1,5 @@
 package com.nimtego.itunes.presentation.di.modules;
 
-import android.app.Activity;
 import android.content.Context;
 
 import dagger.Module;

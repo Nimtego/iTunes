@@ -23,6 +23,8 @@ import org.jsoup.select.Elements;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 public class AppRepository implements Repository {
@@ -35,7 +37,7 @@ public class AppRepository implements Repository {
         this.dataStoreFactory = dataStoreFactory;
         this.mapper = mapper;
     }
-
+    @Inject
     public AppRepository() {
         this(new DataStoreFactory(App.getAppContext(),
                 new AlbumCache(App.getAppContext(),
