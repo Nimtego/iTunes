@@ -1,20 +1,21 @@
 package com.nimtego.itunes.presentation.di.modules;
 
 import android.app.Activity;
+import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
 public class ActivityModule {
-    private final Activity activity;
+    Context context;
 
-    public ActivityModule(Activity activity) {
-        this.activity = activity;
+    public ActivityModule(Context context) {
+        this.context = context;
     }
 
     @Provides
-    Activity activity() {
-        return this.activity;
+    public Context context() {
+        return this.context.getApplicationContext();
     }
 }
