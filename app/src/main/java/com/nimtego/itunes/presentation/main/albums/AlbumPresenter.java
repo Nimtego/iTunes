@@ -25,12 +25,12 @@ public class AlbumPresenter
 
     private final String TAG = this.getClass().getCanonicalName();
 
-    @Inject
+
     public AlbumPresenter(BaseContract.Interactor interactor) {
         super(interactor);
     }
 
-
+    @Inject
     public AlbumPresenter() {
         this(new AlbumInteractor());
         // TODO: 29.10.2018 replaceable di

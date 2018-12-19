@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import io.reactivex.observers.DisposableObserver;
 
 import static com.nimtego.itunes.presentation.utils.IpTags.ALBUM_ID;
@@ -26,6 +28,7 @@ public class SongPresenter
         super(interactor);
     }
 
+    @Inject
     public SongPresenter() {
         this(new SongInteractor());
     }
