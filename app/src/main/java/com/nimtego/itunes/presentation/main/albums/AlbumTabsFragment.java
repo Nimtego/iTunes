@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.nimtego.itunes.App;
 import com.nimtego.itunes.presentation.main.adapter.SpacesItemDecoration;
 import com.nimtego.itunes.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
@@ -58,6 +59,6 @@ public class AlbumTabsFragment
 
     @Override
     public AlbumContract.Presenter supplyPresenter() {
-        return new AlbumPresenter();
+        return App.getComponent().mainAlbumPresenter();
     }
 }

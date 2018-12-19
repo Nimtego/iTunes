@@ -1,5 +1,7 @@
 package com.nimtego.itunes.presentation.di.modules.presentation;
 
+import com.nimtego.itunes.presentation.main.MainContract;
+import com.nimtego.itunes.presentation.main.MainPresenter;
 import com.nimtego.itunes.presentation.main.albums.AlbumContract;
 import com.nimtego.itunes.presentation.main.albums.AlbumPresenter;
 import com.nimtego.itunes.presentation.main.artists.ArtistContract;
@@ -26,5 +28,10 @@ public class PresenterModule {
     @Provides
     public SongContract.Presenter mainSongPresenter() {
         return new SongPresenter();
+    }
+
+    @Provides
+    public MainContract.Presenter mainPresenter() {
+        return new MainPresenter();
     }
 }

@@ -18,7 +18,6 @@ public abstract class BaseInteractor<T, P> implements BaseContract.Interactor<T,
     protected final CompositeDisposable disposables;
     protected Repository repository;
 
-    @Inject
     public BaseInteractor() {
         disposables = new CompositeDisposable();
         this.repository = App.getRepository();
