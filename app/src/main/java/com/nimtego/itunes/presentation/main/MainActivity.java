@@ -10,6 +10,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ProgressBar;
 
+import com.nimtego.itunes.App;
 import com.nimtego.itunes.R;
 import com.nimtego.itunes.presentation.base.BaseView;
 import com.nimtego.itunes.presentation.main.adapter.MainPagerAdapter;
@@ -116,7 +117,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
 
     @Override
     public MainContract.Presenter supplyPresenter() {
-        return new MainPresenter();
+        return App.getComponent().mainPresenter();
     }
 
     @Override
