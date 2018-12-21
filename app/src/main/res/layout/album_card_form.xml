@@ -35,13 +35,13 @@
             android:layout_marginBottom="8dp"
             android:theme="@style/AppTheme.WhiteAccent"
             android:visibility="visible"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintBottom_toTopOf="@+id/cl_information"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_information"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:background="@color/transparent"
@@ -54,37 +54,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="2"
                 android:singleLine="false"
                 android:textColor="@color/w"
+
                 android:textSize="16sp"
                 app:layout_constraintBottom_toTopOf="@+id/artist_name"
-                app:layout_constraintEnd_toEndOf="@+id/album_image"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="@+id/album_image" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/artist_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
+
                 android:singleLine="false"
                 android:textColor="@color/separator_gray"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/album_image"
-                app:layout_constraintEnd_toEndOf="@+id/album_image"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="@+id/album_image" />
-        </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 
