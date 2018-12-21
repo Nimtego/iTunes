@@ -45,6 +45,7 @@
                 android:layout_marginTop="2dp"
                 android:indeterminate="true"
                 android:visibility="gone"
+                android:background="@color/transparent"
                 android:indeterminateTint="@color/click_accent"
                 android:progress="30" />
 
