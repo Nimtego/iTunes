@@ -30,12 +30,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:theme="@style/MySearchViewStyle" />
         </android.support.v7.widget.Toolbar>
+
         <FrameLayout
             android:id="@+id/frame_layout"
             android:layout_width="match_parent"
             android:layout_height="9dp"
-            android:background="@color/transparent"
-            android:layout_marginTop="-4dp">
+            android:layout_marginTop="-4dp"
+            android:background="@color/transparent">
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -43,11 +44,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
                 android:layout_marginTop="2dp"
-                android:indeterminate="true"
-                android:visibility="gone"
                 android:background="@color/transparent"
+                android:indeterminate="true"
                 android:indeterminateTint="@color/click_accent"
-                android:progress="30" />
+                android:progress="30"
+                android:visibility="gone" />
 
         </FrameLayout>
     </android.support.design.widget.AppBarLayout>
