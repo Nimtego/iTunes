@@ -1,6 +1,5 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -102,8 +101,8 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:textColor="@color/separator_gray"
                 android:text="@string/release_date"
+                android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/information" />
@@ -128,8 +127,8 @@
                 android:layout_marginTop="8dp"
                 android:maxLines="2"
                 android:singleLine="false"
-                android:textColor="@color/separator_gray"
                 android:text="@string/price"
+                android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
                 app:layout_constraintTop_toBottomOf="@+id/release_date" />
@@ -190,10 +189,10 @@
                 android:id="@+id/album_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/transparent"
                 android:clipToPadding="false"
                 android:paddingBottom="50dp"
                 android:scrollbars="vertical"
-                android:background="@color/transparent"
                 android:text="@string/no_data_available"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintEnd_toEndOf="@+id/author"
