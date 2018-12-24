@@ -4,8 +4,6 @@ import com.nimtego.itunes.App;
 import com.nimtego.itunes.domain.Repository;
 import com.nimtego.itunes.presentation.base.BaseContract;
 
-import javax.inject.Inject;
-
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

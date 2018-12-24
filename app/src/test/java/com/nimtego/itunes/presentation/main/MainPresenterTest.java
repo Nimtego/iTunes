@@ -33,7 +33,7 @@ public class MainPresenterTest {
 
     @Before
     public void setUp() {
-        presenter = new MainPresenter(mockInteracter, mockModelDataMapper);
+        presenter = new MainPresenter();
         presenter.attach(mockMainView);
     }
     @Test

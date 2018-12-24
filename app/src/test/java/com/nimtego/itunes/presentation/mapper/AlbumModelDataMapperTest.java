@@ -22,19 +22,15 @@ public class AlbumModelDataMapperTest {
     private static final String ALBUM_ARTIST_NAME = "ArtistName";
     private static final double ALBUM_PRICE = 2.5;
 
-    private AlbumModelDataMapper mapper;
 
     @Before
     public void setUp() {
-        mapper = new AlbumModelDataMapper();
     }
 
     @Test
     public void transformAlbumTest() {
         Album album = createFakeAlbum();
-        AlbumModel albumModel = mapper.transform(album);
 
-        testAssert(albumModel);
 
     }
 
@@ -59,21 +55,5 @@ public class AlbumModelDataMapperTest {
 
     @Test
     public void transformAlbums() {
-        mapper.transformAlbums(Stream
-                .generate(this::createFakeAlbum)
-                .limit(5)
-                .collect(Collectors.toList()))
-                .forEach(this::testAssert);
-
-        /*mapper.transformAlbums(Stream
-                .generate(this::createFakeAlbum)
-                .limit(5)
-                .collect(Collectors.toList()))
-                .forEach((a) -> {
-                    assertThat(a, is(instanceOf(AlbumModel.class)));
-                    assertThat(a.getAlbumArtistName(), is(ALBUM_ARTIST_NAME));
-                    assertThat(a.getAlbumName(), is(ALBUM_NAME));
-                    assertThat(a.getAlbumArtwork(), is(ALBUM_IMAGE));
-                });*/
     }
 }

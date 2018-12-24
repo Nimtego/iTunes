@@ -1,7 +1,5 @@
 package com.nimtego.itunes.domain.interactor;
 
-import com.nimtego.itunes.data.entity.Artist;
-import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.itunes.presentation.main.model.AlbumModel;
 
@@ -9,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
@@ -32,6 +29,7 @@ public class InformationArtistInteractor
                 .forEach(album -> duplicateCheck.put(album.getAlbumName(), album));
         return new ArrayList<>(duplicateCheck.values());
     }
+
     public static final class Params {
 
         private final String request;
