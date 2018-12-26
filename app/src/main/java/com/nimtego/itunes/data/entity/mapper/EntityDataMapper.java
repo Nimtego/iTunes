@@ -109,7 +109,9 @@ public class EntityDataMapper {
                 .getSearch()
                 .get(0)
                 .getSnippet()
-                .replaceAll("\\<.*?\\>", " ").trim();
+                .replaceAll("\\<.*?\\>", " ")
+                .replace("&quot;", "")
+                .trim();
     }
 
     public ArtistDetailsModel transformArtistDetail(final ArtistResult artistResult) {
