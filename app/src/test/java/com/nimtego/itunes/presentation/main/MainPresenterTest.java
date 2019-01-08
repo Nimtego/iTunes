@@ -2,8 +2,8 @@ package com.nimtego.itunes.presentation.main;
 
 import android.content.Context;
 
+import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.domain.interactor.MainViewInteractor;
-import com.nimtego.itunes.presentation.mapper.AlbumModelDataMapper;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public class MainPresenterTest {
     @Mock
     private MainViewInteractor mockInteracter;
     @Mock
-    private AlbumModelDataMapper mockModelDataMapper;
+    private EntityDataMapper mockModelDataMapper;
 
     @Before
     public void setUp() {
