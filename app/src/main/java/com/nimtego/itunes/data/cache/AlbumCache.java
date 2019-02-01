@@ -9,10 +9,10 @@ import java.io.File;
 import io.reactivex.Observable;
 
 public class AlbumCache implements Cache {
-    private static final String SETTINGS_FILE_NAME = "com.fernandocejas.android10.SETTINGS";
+    private static final String SETTINGS_FILE_NAME = "SETTINGS";
     private static final String SETTINGS_KEY_LAST_CACHE_UPDATE = "last_cache_update";
 
-    private static final String DEFAULT_FILE_NAME = "user_";
+    private static final String DEFAULT_FILE_NAME = "u";
     private static final long EXPIRATION_TIME = 60 * 10 * 1000;
 
     private final Context context;
