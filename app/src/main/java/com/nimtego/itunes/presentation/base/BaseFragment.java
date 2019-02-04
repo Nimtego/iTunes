@@ -3,7 +3,6 @@ package com.nimtego.itunes.presentation.base;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.nimtego.itunes.presentation.main.MainContract;
 import com.nimtego.itunes.presentation.utils.toast.SimpleToastAlarm;
 import com.nimtego.itunes.presentation.utils.toast.ToastAlarm;
 

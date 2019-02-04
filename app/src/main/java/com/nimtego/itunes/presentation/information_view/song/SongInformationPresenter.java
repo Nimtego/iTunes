@@ -1,10 +1,8 @@
 package com.nimtego.itunes.presentation.information_view.song;
 
-import com.nimtego.itunes.domain.interactor.InformationAlbumInteractor;
 import com.nimtego.itunes.domain.interactor.InformationSongInteractor;
 import com.nimtego.itunes.presentation.base.BaseContract;
 import com.nimtego.itunes.presentation.base.BasePresenter;
-import com.nimtego.itunes.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.itunes.presentation.information_view.song.model.SongDetailsModel;
 
 import io.reactivex.observers.DisposableObserver;

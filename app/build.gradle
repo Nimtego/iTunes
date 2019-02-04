@@ -6,6 +6,7 @@ android {
     defaultConfig {
         applicationId "com.nimtego.itunes"
         minSdkVersion 24
+        //noinspection OldTargetApi
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
