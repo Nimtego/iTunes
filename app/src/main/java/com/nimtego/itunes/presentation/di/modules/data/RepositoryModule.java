@@ -1,10 +1,7 @@
 package com.nimtego.itunes.presentation.di.modules.data;
 
-import android.content.Context;
-
 import com.nimtego.itunes.App;
 import com.nimtego.itunes.data.cache.AlbumCache;
-import com.nimtego.itunes.data.cache.Cache;
 import com.nimtego.itunes.data.cache.FileManager;
 import com.nimtego.itunes.data.entity.mapper.EntityDataMapper;
 import com.nimtego.itunes.data.repository.AppRepository;

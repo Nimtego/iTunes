@@ -3,12 +3,9 @@ package com.nimtego.itunes.data.repository.datasource;
 import com.nimtego.itunes.data.cache.Cache;
 import com.nimtego.itunes.data.rest.network.AppNetwork;
 import com.nimtego.itunes.data.rest.network.FabricParam;
-import com.nimtego.itunes.data.rest.network.NetworkConnection;
 import com.nimtego.itunes.data.rest.network.wiki.RestCountries;
 import com.nimtego.itunes.data.rest.pojo.AlbumsRepository;
-import com.nimtego.itunes.data.rest.pojo.ArtistResult;
 import com.nimtego.itunes.data.rest.pojo.ArtistsRepository;
-import com.nimtego.itunes.data.rest.pojo.SongResult;
 import com.nimtego.itunes.data.rest.pojo.SongsRepository;
 import com.nimtego.itunes.data.rest.pojo.wiki.WikiSearchResult;
 
