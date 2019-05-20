@@ -33,13 +33,26 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+<!--    <style name="TextViewValue" parent="Base.Widget.MaterialComponents.TextInputEditText">
+        <item name="android:textSize">@dimen/value_text_view</item>
+        <item name="android:textColor">@color/edit_text_color</item>
+        <item name="android:textColorHint">@color/color_vendor_dark_grey_blue</item>
+        <item name="android:textColorHighlight">@color/edit_text_color</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:drawablePadding">2dp</item>
+    </style>-->
+
     <style name="AppTheme.WhiteAccent">
         <item name="colorAccent">@color/click_accent</item> <!-- Whatever color you want-->
     </style>
 
     <style name="MySearchViewStyle" parent="Widget.AppCompat.SearchView">
-        <item name="queryBackground">@color/colorPrimaryDark</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/value_text_view</item>
+        <item name="android:textColor">@color/edit_text_color</item>
+        <item name="android:textColorHint">@color/color_vendor_dark_grey_blue</item>
+        <item name="android:textColorHighlight">@color/edit_text_color</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:drawablePadding">2dp</item>
     </style>
 
 </resources>
