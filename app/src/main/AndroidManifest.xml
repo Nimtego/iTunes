@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nimtego.itunes">
+    package="com.nimtego.plectrum">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".App"
+        android:name="com.nimtego.plectrum.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:theme="@style/MyMaterialTheme.Base"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name="com.nimtego.plectrum.presentation.main.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.information_view.DetailedInformationActivity">
+        <activity android:name="com.nimtego.plectrum.presentation.information_view.DetailedInformationActivity">
         </activity>
     </application>
 

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        app:layout_behavior="com.nimtego.itunes.presentation.utils.AppBarLayoutBehaviorFix">
+        app:layout_behavior="com.nimtego.plectrum.presentation.utils.AppBarLayoutBehaviorFix">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tool_bar"
