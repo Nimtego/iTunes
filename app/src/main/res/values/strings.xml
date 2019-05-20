@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">iTunes</string>
+    <string name="app_name">Plectrum</string>
     <string name="search">Search</string>
     <string name="artist">Artist</string>
     <string name="no_data_available">No data</string>
