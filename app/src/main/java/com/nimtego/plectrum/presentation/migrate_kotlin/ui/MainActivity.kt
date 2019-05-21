@@ -1,10 +1,10 @@
-package com.nimtego.plectrum.presentation.ui
+package com.nimtego.plectrum.presentation.migrate_kotlin.ui
 
 import android.os.Bundle
 import android.view.WindowManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.MainView
+import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.MainView
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {

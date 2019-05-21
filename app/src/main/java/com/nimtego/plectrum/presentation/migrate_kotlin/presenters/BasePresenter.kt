@@ -1,8 +1,8 @@
-package com.nimtego.plectrum.presentation.presenters
+package com.nimtego.plectrum.presentation.migrate_kotlin.presenters
 
 import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
-import com.nimtego.plectrum.presentation.mvp.BaseView
+import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.BaseView
 
 abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
 

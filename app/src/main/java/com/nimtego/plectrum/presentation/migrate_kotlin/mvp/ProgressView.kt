@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.mvp
+package com.nimtego.plectrum.presentation.migrate_kotlin.mvp
 
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
