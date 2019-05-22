@@ -7,6 +7,9 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.MainView
 import ru.terrakok.cicerone.NavigatorHolder
 import javax.inject.Inject
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
+
+
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
@@ -36,4 +39,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun hideProgress() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+//Mark: private
+
 }
