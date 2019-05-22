@@ -4,7 +4,9 @@ import com.nimtego.plectrum.domain.interactor.InformationArtistInteractor;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModel;
+import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
+import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 
 import java.util.Arrays;
 
@@ -27,9 +29,9 @@ class ArtistInformationPresenter
 
     @Override
     public void viewReady(String albumNameForResponse) {
-        interactor.execute(new DisposableObserver<ArtistDetailsModel>() {
+        interactor.execute(new DisposableObserver<ArtistDetailsModelK>() {
             @Override
-            public void onNext(ArtistDetailsModel artistDetailsModel) {
+            public void onNext(ArtistDetailsModelK artistDetailsModel) {
                 ArtistInformationPresenter.this.showArtistInView(artistDetailsModel);
             }
 
@@ -48,11 +50,11 @@ class ArtistInformationPresenter
     }
 
     @Override
-    public void albumClicked(AlbumModel album) {
+    public void albumClicked(AlbumModelK album) {
         view.toast(album.getAlbumName());
     }
 
-    private void showArtistInView(ArtistDetailsModel artistDetailsModel) {
+    private void showArtistInView(ArtistDetailsModelK artistDetailsModel) {
         view.toast(artistDetailsModel.getArtistName()
                 + "\n" + artistDetailsModel.getAlbums().size());
         this.view.render(artistDetailsModel);

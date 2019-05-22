@@ -2,6 +2,7 @@ package com.nimtego.plectrum.presentation.information_view.album;
 
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK;
 
 public interface AlbumInformationContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor>
@@ -11,6 +12,6 @@ public interface AlbumInformationContract {
     }
 
     interface View<P extends Presenter> extends BaseContract.View<P> {
-        void render(AlbumDetailsModel albumDetailsModel);
+        void render(AlbumDetailsModelK albumDetailsModel);
     }
 }

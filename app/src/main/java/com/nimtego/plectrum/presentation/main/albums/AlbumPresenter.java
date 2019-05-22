@@ -5,6 +5,7 @@ import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
+import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 import com.nimtego.plectrum.presentation.utils.FragmentType;
 
 import java.util.Collection;
@@ -36,7 +37,7 @@ public class AlbumPresenter
     }
 
     @Override
-    public void albumClicked(AlbumModel albumModel) {
+    public void albumClicked(AlbumModelK albumModel) {
         Map<String, String> param = new HashMap<>();
         param.put(FragmentType.TYPE.name(), FragmentType.ALBUM.name());
         param.put(ALBUM_ID.name(), albumModel.getAlbumId());

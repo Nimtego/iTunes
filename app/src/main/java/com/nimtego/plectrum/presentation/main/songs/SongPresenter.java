@@ -5,6 +5,7 @@ import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
 import com.nimtego.plectrum.presentation.main.model.SongModel;
+import com.nimtego.plectrum.presentation.main.model.SongModelK;
 import com.nimtego.plectrum.presentation.utils.FragmentType;
 import com.nimtego.plectrum.presentation.utils.IpTags;
 
@@ -32,7 +33,7 @@ public class SongPresenter
     }
 
     @Override
-    public void songClicked(SongModel songModel) {
+    public void songClicked(SongModelK songModel) {
         Map<String, String> param = new HashMap<>();
         param.put(FragmentType.TYPE.name(), FragmentType.SONG.name());
         param.put(IpTags.SONG_ID.name(), songModel.getSongId());

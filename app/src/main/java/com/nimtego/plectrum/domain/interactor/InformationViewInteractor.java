@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.domain.interactor;
 
 import com.nimtego.plectrum.data.entity.Album;
+import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
 
 import io.reactivex.Observable;
 

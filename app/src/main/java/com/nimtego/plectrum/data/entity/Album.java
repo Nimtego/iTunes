@@ -8,6 +8,7 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@Deprecated
 public class Album {
     private Integer albumId;
     private Integer albumArtistId;

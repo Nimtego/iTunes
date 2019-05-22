@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.base.BaseFragment;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
+import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -53,7 +54,7 @@ public class SongInformationFragment
     }
 
     @Override
-    public void render(SongDetailsModel songDetailsModel) {
+    public void render(SongDetailsModelK songDetailsModel) {
         StringBuilder sb = new StringBuilder();
         sb.append(songDetailsModel.getSongName()).append("\n\n")
                 .append(songDetailsModel.getSongAlbumName()).append("\n\n")

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
@@ -48,8 +49,8 @@ dependencies {
     kapt 'com.arello-mobile:moxy-compiler:1.5.5'
 
     //dager 2
-    implementation 'com.google.dagger:dagger:2.18'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
+    implementation "com.google.dagger:dagger:2.18"
+    kapt "com.google.dagger:dagger-compiler:2.18"
 
     //mockito
     testImplementation 'org.mockito:mockito-core:2.21.0'
