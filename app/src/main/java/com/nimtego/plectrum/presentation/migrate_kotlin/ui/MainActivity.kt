@@ -5,10 +5,13 @@ import android.view.WindowManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.MainView
-
+import ru.terrakok.cicerone.NavigatorHolder
+import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
+    @Inject
+    var navigatorHolder: NavigatorHolder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
