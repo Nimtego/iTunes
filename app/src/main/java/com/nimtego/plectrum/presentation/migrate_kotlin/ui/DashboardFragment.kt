@@ -9,7 +9,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.DashboardView
+import com.nimtego.plectrum.presentation.mvp.DashboardView
 import com.nimtego.plectrum.presentation.migrate_kotlin.presenters.DashboardPresenter
 import com.nimtego.plectrum.presentation.migrate_kotlin.view_model.DashboardViewModel
 

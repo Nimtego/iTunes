@@ -3,7 +3,7 @@ package com.nimtego.plectrum.presentation.migrate_kotlin.presenters
 import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
 import com.nimtego.plectrum.presentation.migrate_kotlin.Screens
-import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.BaseView
+import com.nimtego.plectrum.presentation.mvp.BaseView
 import ru.terrakok.cicerone.Router
 
 abstract class BasePresenter<T : BaseView>(private val router: Router?,

@@ -19,6 +19,7 @@ import io.reactivex.observers.DisposableObserver;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ALBUM_ID;
 
+@Deprecated
 public class AlbumPresenter
         extends BasePresenter<AlbumContract.View, BaseContract.Interactor>
         implements AlbumContract.Presenter<AlbumContract.View, BaseContract.Interactor> {

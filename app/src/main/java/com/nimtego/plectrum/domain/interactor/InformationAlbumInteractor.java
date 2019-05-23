@@ -5,6 +5,7 @@ import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetai
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+@Deprecated
 public class InformationAlbumInteractor
         extends BaseInteractor<AlbumDetailsModelK, InformationAlbumInteractor.Params> {
 

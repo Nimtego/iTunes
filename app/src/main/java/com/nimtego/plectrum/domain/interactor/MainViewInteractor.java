@@ -1,12 +1,8 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.main.model.AlbumModel;
 import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
-import com.nimtego.plectrum.presentation.main.model.ArtistModel;
 import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
-import com.nimtego.plectrum.presentation.main.model.MainDataModel;
 import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
-import com.nimtego.plectrum.presentation.main.model.SongModel;
 import com.nimtego.plectrum.presentation.main.model.SongModelK;
 
 import java.util.List;
@@ -14,6 +10,7 @@ import java.util.List;
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+@Deprecated
 public class MainViewInteractor
         extends BaseInteractor<MainDataModelK, MainViewInteractor.Params> {
 

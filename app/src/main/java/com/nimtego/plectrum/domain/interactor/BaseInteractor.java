@@ -3,7 +3,6 @@ package com.nimtego.plectrum.domain.interactor;
 import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.domain.Repository;
 import com.nimtego.plectrum.presentation.base.BaseContract;
-import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
@@ -13,6 +12,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+@Deprecated
 public abstract class BaseInteractor<T, P> implements BaseContract.Interactor<T, P> {
     protected final CompositeDisposable disposables;
     protected Repository repository;

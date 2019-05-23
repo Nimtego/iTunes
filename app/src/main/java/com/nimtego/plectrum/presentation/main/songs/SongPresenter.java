@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.main.songs;
 
 import com.nimtego.plectrum.domain.interactor.SongInteractor;
+import com.nimtego.plectrum.domain.interactor.SongInteractorK;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
@@ -29,7 +30,7 @@ public class SongPresenter
 
     @Inject
     public SongPresenter() {
-        this(new SongInteractor());
+        this(new SongInteractorK());
     }
 
     @Override
@@ -51,9 +52,9 @@ public class SongPresenter
             view.setCurrentSearch(response);
             view.clearList();
             showViewLoading();
-            interactor.execute(new DisposableObserver<List<SongModel>>() {
+            interactor.execute(new DisposableObserver<List<SongModelK>>() {
                 @Override
-                public void onNext(List<SongModel> songModel) {
+                public void onNext(List<SongModelK> songModel) {
                     SongPresenter.this.showSongsInView(songModel);
                 }
 
@@ -77,7 +78,7 @@ public class SongPresenter
         view.showLoading();
     }
 
-    private void showSongsInView(Collection<SongModel> songModels) {
+    private void showSongsInView(Collection<SongModelK> songModels) {
         view.render(songModels);
     }
 

@@ -1,10 +1,7 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
-import com.nimtego.plectrum.presentation.main.model.AlbumModel;
 import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
-import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +12,7 @@ import java.util.Objects;
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+@Deprecated
 public class InformationArtistInteractor
         extends BaseInteractor<ArtistDetailsModelK, InformationArtistInteractor.Params> {
     @Override

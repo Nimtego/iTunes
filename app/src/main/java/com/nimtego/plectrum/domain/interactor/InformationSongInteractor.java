@@ -5,6 +5,7 @@ import com.nimtego.plectrum.presentation.information_view.song.model.SongDetails
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+@Deprecated
 public class InformationSongInteractor
         extends BaseInteractor<SongDetailsModelK, InformationSongInteractor.Params> {
     @Override

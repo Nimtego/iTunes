@@ -1,14 +1,13 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.main.model.AlbumModel;
 import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
-import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
 
 import java.util.List;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+@Deprecated
 public class AlbumInteractor
         extends BaseInteractor<List<AlbumModelK>, AlbumInteractor.Params> {
 

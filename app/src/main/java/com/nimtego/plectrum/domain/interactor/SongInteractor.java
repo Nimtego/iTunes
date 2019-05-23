@@ -7,6 +7,7 @@ import java.util.List;
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+@Deprecated
 public class SongInteractor extends BaseInteractor<List<SongModelK>, SongInteractor.Params> {
 
     public SongInteractor() {

@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.main.artists;
 
 import com.nimtego.plectrum.domain.interactor.ArtistInteractor;
+import com.nimtego.plectrum.domain.interactor.ArtistInteractorK;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
@@ -29,7 +30,7 @@ public class ArtistPresenter
 
     @Inject
     public ArtistPresenter() {
-        this(new ArtistInteractor());
+        this(new ArtistInteractorK());
         // TODO: 29.10.2018 replaceable di
     }
 
@@ -52,9 +53,9 @@ public class ArtistPresenter
             view.setCurrentSearch(response);
             view.clearList();
             showViewLoading();
-            interactor.execute(new DisposableObserver<List<ArtistModel>>() {
+            interactor.execute(new DisposableObserver<List<ArtistModelK>>() {
                 @Override
-                public void onNext(List<ArtistModel> dataModel) {
+                public void onNext(List<ArtistModelK> dataModel) {
                     ArtistPresenter.this.showAlbumsInView(dataModel);
                 }
 
@@ -78,7 +79,7 @@ public class ArtistPresenter
         view.showLoading();
     }
 
-    private void showAlbumsInView(Collection<ArtistModel> albumModels) {
+    private void showAlbumsInView(Collection<ArtistModelK> albumModels) {
         view.render(albumModels);
     }
 

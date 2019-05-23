@@ -4,12 +4,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.migrate_kotlin.App
-import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.MainView
-import ru.terrakok.cicerone.NavigatorHolder
-import javax.inject.Inject
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
-
+import com.nimtego.plectrum.presentation.mvp.MainView
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {

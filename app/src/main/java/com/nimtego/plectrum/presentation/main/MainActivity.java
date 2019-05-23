@@ -18,6 +18,7 @@ import com.nimtego.plectrum.presentation.main.albums.AlbumTabsFragment;
 import com.nimtego.plectrum.presentation.main.artists.ArtistTabsFragment;
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.plectrum.presentation.main.songs.SongTabsFragment;
+import com.nimtego.plectrum.presentation.mvp.MainView;
 import com.nimtego.plectrum.presentation.utils.TabSelectedListener;
 
 import java.util.Objects;
@@ -26,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
+@Deprecated
 public class MainActivity extends BaseView<MainContract.Presenter>
         implements MainContract.View<MainContract.Presenter> {
 
@@ -106,7 +108,7 @@ public class MainActivity extends BaseView<MainContract.Presenter>
         }
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        mViewPagerAdapter = new MainPagerAdapter(this, fm);
+        mViewPagerAdapter = new MainPagerAdapter( this, fm);
         mViewPagerAdapter.addFragment(AlbumTabsFragment.getInstance(search), "Albums");
         mViewPagerAdapter.addFragment(ArtistTabsFragment.getInstance(search), "Artists");
         mViewPagerAdapter.addFragment(SongTabsFragment.getInstance(search), "Songs");

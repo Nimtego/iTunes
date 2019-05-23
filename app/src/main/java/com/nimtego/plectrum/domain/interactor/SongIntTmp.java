@@ -5,6 +5,7 @@ import com.nimtego.plectrum.presentation.main.model.SongModelK;
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
+//todo this class is really need?
 public class SongIntTmp extends BaseInteractor<SongModelK, SongIntTmp.Params> {
 
 
