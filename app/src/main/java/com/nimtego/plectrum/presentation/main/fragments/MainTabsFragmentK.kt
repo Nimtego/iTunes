@@ -7,12 +7,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.base.BaseFragmentK
 
 
-abstract class MainTabsFragmentK: BaseFragmentK(), MainTabsView {
+abstract class MainTabsFragmentK : BaseFragmentK(), MainTabsView {
 
     protected var mRecyclerView: RecyclerView? = null
     protected var searchText: String? = ""

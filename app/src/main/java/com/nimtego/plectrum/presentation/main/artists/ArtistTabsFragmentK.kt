@@ -33,14 +33,6 @@ class ArtistTabsFragmentK : MainTabsFragmentK(), ArtistTabView {
         mRecyclerView?.adapter = adapter
     }
 
-    override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun itemDecorator(): RecyclerView.ItemDecoration {
         return SpacesItemDecoration(2,
                 30,
