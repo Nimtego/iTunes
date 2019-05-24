@@ -9,6 +9,7 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@Deprecated
 public class MainDataModel {
     private List<ArtistModel> artistModels;
     private List<AlbumModel> albumModels;

@@ -1,10 +1,12 @@
 package com.nimtego.plectrum.presentation.main.artists;
 
 import com.nimtego.plectrum.domain.interactor.ArtistInteractor;
+import com.nimtego.plectrum.domain.interactor.ArtistInteractorK;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
 import com.nimtego.plectrum.presentation.main.model.ArtistModel;
+import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
 import com.nimtego.plectrum.presentation.utils.FragmentType;
 
 import java.util.Collection;
@@ -18,6 +20,7 @@ import io.reactivex.observers.DisposableObserver;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ARTIST_ID;
 
+@Deprecated
 public class ArtistPresenter 
         extends BasePresenter<ArtistContract.View, BaseContract.Interactor>
         implements ArtistContract.Presenter<ArtistContract.View, BaseContract.Interactor> {
@@ -28,12 +31,12 @@ public class ArtistPresenter
 
     @Inject
     public ArtistPresenter() {
-        this(new ArtistInteractor());
+        this(new ArtistInteractorK());
         // TODO: 29.10.2018 replaceable di
     }
 
     @Override
-    public void artistClicked(ArtistModel artistModel) {
+    public void artistClicked(ArtistModelK artistModel) {
         Map<String, String> param = new HashMap<>();
         param.put(FragmentType.TYPE.name(), FragmentType.ARTIST.name());
         param.put(ARTIST_ID.name(), artistModel.getArtistId());
@@ -51,9 +54,9 @@ public class ArtistPresenter
             view.setCurrentSearch(response);
             view.clearList();
             showViewLoading();
-            interactor.execute(new DisposableObserver<List<ArtistModel>>() {
+            interactor.execute(new DisposableObserver<List<ArtistModelK>>() {
                 @Override
-                public void onNext(List<ArtistModel> dataModel) {
+                public void onNext(List<ArtistModelK> dataModel) {
                     ArtistPresenter.this.showAlbumsInView(dataModel);
                 }
 
@@ -77,7 +80,7 @@ public class ArtistPresenter
         view.showLoading();
     }
 
-    private void showAlbumsInView(Collection<ArtistModel> albumModels) {
+    private void showAlbumsInView(Collection<ArtistModelK> albumModels) {
         view.render(albumModels);
     }
 

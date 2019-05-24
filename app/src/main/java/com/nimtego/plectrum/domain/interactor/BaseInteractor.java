@@ -12,6 +12,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+@Deprecated
 public abstract class BaseInteractor<T, P> implements BaseContract.Interactor<T, P> {
     protected final CompositeDisposable disposables;
     protected Repository repository;

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.base.BaseFragment;
 
+@Deprecated
 public abstract class MainTabsFragment<P extends MainTabsContract.Presenter>
         extends BaseFragment<P>
         implements MainTabsContract.View<P> {

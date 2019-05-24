@@ -11,6 +11,7 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
+@Deprecated
 public class AlbumDetailsModel {
     private String albumName;
     private String albumArtistName;

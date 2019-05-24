@@ -4,9 +4,11 @@ import com.nimtego.plectrum.domain.interactor.InformationSongInteractor;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
+import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK;
 
 import io.reactivex.observers.DisposableObserver;
 
+@Deprecated
 class SongInformationPresenter
         extends BasePresenter<SongInformationContract.View,
         BaseContract.Interactor>
@@ -24,9 +26,9 @@ class SongInformationPresenter
 
     @Override
     public void viewReady(String songNameForResponse) {
-        interactor.execute(new DisposableObserver<SongDetailsModel>() {
+        interactor.execute(new DisposableObserver<SongDetailsModelK>() {
             @Override
-            public void onNext(SongDetailsModel songDetailsModel) {
+            public void onNext(SongDetailsModelK songDetailsModel) {
                 SongInformationPresenter.this.showSongInView(songDetailsModel);
             }
 
@@ -43,7 +45,7 @@ class SongInformationPresenter
         }, InformationSongInteractor.Params.forRequest(songNameForResponse));
     }
 
-    private void showSongInView(SongDetailsModel songDetailsModel) {
+    private void showSongInView(SongDetailsModelK songDetailsModel) {
         view.toast(songDetailsModel.getSongName());
         this.view.render(songDetailsModel);
     }

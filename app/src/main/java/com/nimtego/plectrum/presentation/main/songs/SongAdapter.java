@@ -13,20 +13,22 @@ import android.widget.TextView;
 
 import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.main.model.SongModel;
+import com.nimtego.plectrum.presentation.main.model.SongModelK;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+@Deprecated
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     public interface OnItemClickListener {
-        void onUserItemClicked(SongModel albumModel);
+        void onUserItemClicked(SongModelK albumModel);
     }
 
-    private List<SongModel> models;
+    private List<SongModelK> models;
     private OnItemClickListener onItemClickListener;
 
-    public SongAdapter(List<SongModel> model, Context parent) {
+    public SongAdapter(List<SongModelK> model, Context parent) {
         this.models = model;
     }
 
@@ -39,7 +41,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final SongAdapter.ViewHolder holder, final int position) {
-        final SongModel songModel = this.models.get(position);
+        final SongModelK songModel = this.models.get(position);
         holder.songName.setText(songModel.getTrackName());
         holder.songAlbumName.setText(songModel.getTrackAlbumName());
         holder.songArtistName.setText(songModel.getTrackArtistName());

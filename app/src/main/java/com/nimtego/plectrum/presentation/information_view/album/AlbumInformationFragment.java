@@ -13,11 +13,13 @@ import android.widget.TextView;
 import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.base.BaseFragment;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ALBUM_ID;
 
+@Deprecated
 public class AlbumInformationFragment
         extends BaseFragment<AlbumInformationContract.Presenter>
         implements AlbumInformationContract.View<AlbumInformationContract.Presenter> {
@@ -66,7 +68,7 @@ public class AlbumInformationFragment
     }
 
     @Override
-    public void render(AlbumDetailsModel albumDetailsModel) {
+    public void render(AlbumDetailsModelK albumDetailsModel) {
         artistName.setText(albumDetailsModel.getAlbumArtistName());
         date.setText(albumDetailsModel.getReleaseDate());
         price.setText(String.valueOf(albumDetailsModel.getCollectionPrice()));

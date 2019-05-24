@@ -9,10 +9,12 @@ import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration;
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.plectrum.presentation.main.model.SongModel;
+import com.nimtego.plectrum.presentation.main.model.SongModelK;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Deprecated
 public class SongTabsFragment
         extends MainTabsFragment<SongContract.Presenter>
         implements SongContract.View<SongContract.Presenter> {
@@ -39,7 +41,7 @@ public class SongTabsFragment
     }
 
     @Override
-    public void render(Collection<SongModel> songModels) {
+    public void render(Collection<SongModelK> songModels) {
         SongAdapter adapter = new SongAdapter(new ArrayList<>(songModels),
                 this.getActivity());
         adapter.setOnItemClickListener(artistModel -> mPresenter.songClicked(artistModel));

@@ -3,6 +3,7 @@ package com.nimtego.plectrum.presentation.main;
 
 import com.nimtego.plectrum.presentation.base.BaseContract;
 
+@Deprecated
 public interface MainContract {
     interface Presenter<V extends View,
             I extends BaseContract.Interactor>

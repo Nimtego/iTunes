@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/color_bottom_sheet_navigation_bar">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:elevation="4dp"
+            android:background="@color/color_vendor_dark_grey_blue_lighter">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/confirmation_layout_padding_bottom"
+                android:orientation="horizontal">
+            <TextView
+                    android:layout_marginStart="@dimen/rounded_edit_text"
+                    android:textColor="@color/edit_text_color"
+                    android:textSize="14sp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="!!!!"/>
+            <TextView
+                    android:id="@+id/current"
+                    android:textColor="@color/edit_text_color"
+                    android:layout_marginStart="@dimen/rounded_edit_text"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:background="@drawable/rounded_shape"
+                    android:layout_height="wrap_content"
+                    android:text="!!!!"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_vendor_dark_grey_blue_lighter">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="vertical"
+                      android:paddingBottom="@dimen/confirmation_layout_padding_bottom"
+                      android:descendantFocusability="beforeDescendants"
+                      android:focusableInTouchMode="true">
+
+            <EditText
+                      android:id="@+id/power"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:inputType="numberDecimal"
+                      android:layout_marginStart="54dp"
+                      android:layout_marginEnd="54dp"
+                      android:layout_gravity="center"
+                      android:hint="!!!!"
+                      android:background="@drawable/rounded_shape"
+                      android:layout_marginTop="@dimen/confirmation_layout_padding_bottom" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+</LinearLayout>
