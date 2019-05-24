@@ -17,7 +17,6 @@ import com.nimtego.plectrum.presentation.main.artists.ArtistTabsFragmentK
 import com.nimtego.plectrum.presentation.main.songs.SongTabsFragmentK
 import com.nimtego.plectrum.presentation.mvp.MainView
 import com.nimtego.plectrum.presentation.utils.TabSelectedListener
-import java.util.*
 
 
 class MainActivityK : MvpAppCompatActivity(), MainView {
@@ -44,7 +43,7 @@ class MainActivityK : MvpAppCompatActivity(), MainView {
         val mToolBar = findViewById<Toolbar>(R.id.tool_bar)
         setSupportActionBar(mToolBar)
 
-        Objects.requireNonNull<ActionBar>(supportActionBar).setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mViewPager = findViewById(R.id.view_pager)
         setupViewPager(savedInstanceState)
