@@ -9,9 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.base.BaseFragmentK
 
 
-abstract class MainTabsFragmentK: MvpAppCompatFragment(), MainTabsView {
+abstract class MainTabsFragmentK: BaseFragmentK(), MainTabsView {
 
     protected var mRecyclerView: RecyclerView? = null
     protected var searchText: String? = ""
@@ -61,8 +62,8 @@ abstract class MainTabsFragmentK: MvpAppCompatFragment(), MainTabsView {
         this.searchText = response
     }
 
-    protected companion object {
+    companion object {
 
-        protected val RESPONSE = "response_content"
+        val RESPONSE = "response_content"
     }
 }

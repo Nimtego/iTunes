@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ARTIST_ID;
 
+@Deprecated
 public class ArtistInformationFragment
         extends BaseFragment<ArtistInformationContract.Presenter>
         implements ArtistInformationContract.View<ArtistInformationContract.Presenter> {

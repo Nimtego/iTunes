@@ -7,6 +7,7 @@ import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
 
 import java.util.Collection;
 
+@Deprecated
 public interface ArtistContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor> extends MainTabsContract.Presenter<V, I> {
         void artistClicked(ArtistModelK albumModel);

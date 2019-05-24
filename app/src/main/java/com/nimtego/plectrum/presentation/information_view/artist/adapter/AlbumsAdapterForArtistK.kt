@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.main.artists
+package com.nimtego.plectrum.presentation.information_view.artist.adapter
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -11,37 +11,35 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModelK
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class ArtistAdapterK(private val models: List<ArtistModelK>?, parent: Context)
-    : RecyclerView.Adapter<ArtistAdapterK.ViewHolder>() {
-
+class AlbumsAdapterForArtistK(private val models: List<AlbumModelK>?, parent: Context) : RecyclerView.Adapter<AlbumsAdapterForArtistK.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onUserItemClicked(artistModel: ArtistModelK)
+        fun onUserItemClicked(albumModel: AlbumModelK)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.album_card_form, parent, false)
+        val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.album_form_for_artist, parent, false)
         return ViewHolder(v)
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val artistModel = this.models!![position]
-        holder.albumName.text = artistModel.artistId
-        holder.artistName.text = artistModel.artistName
+        val albumModel = this.models!![position]
+        holder.albumName.text = albumModel.albumName
+        holder.artistName.text = albumModel.albumArtistName
         holder.pb!!.visibility = View.VISIBLE
         holder.itemView.setOnClickListener {
-            if (this@ArtistAdapterK.onItemClickListener != null) {
-                this@ArtistAdapterK.onItemClickListener!!.onUserItemClicked(artistModel)
+            if (this@AlbumsAdapterForArtistK.onItemClickListener != null) {
+                this@AlbumsAdapterForArtistK.onItemClickListener!!.onUserItemClicked(albumModel)
             }
         }
-        Picasso.get().load(models[position].artistViewUrl!!
-                .replace("135x135", "570x570"))
+        Picasso.get().load(models[position].albumArtWorkUrl)
                 .into(holder.albumImage, object : Callback {
                     override fun onSuccess() {
                         if (holder.pb != null)

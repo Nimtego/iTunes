@@ -14,6 +14,7 @@ import com.nimtego.plectrum.presentation.main.model.SongModelK;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Deprecated
 public class SongTabsFragment
         extends MainTabsFragment<SongContract.Presenter>
         implements SongContract.View<SongContract.Presenter> {

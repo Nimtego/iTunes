@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.nimtego.plectrum.presentation.information_view.artist.ArtistInformationPresenterImpl
 import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragmentK
 import com.nimtego.plectrum.presentation.main.model.AlbumModelK
@@ -12,16 +14,13 @@ import java.util.*
 
 class AlbumTabsFragmentK : MainTabsFragmentK(), AlbumTabView {
 
-    override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     @InjectPresenter
-    internal lateinit var presenter: AlbumPresenterK
+    internal lateinit var presenter: AlbumPresenterImpl
+
+    @ProvidePresenter
+    fun provideRepositoryPresenter(): AlbumPresenterImpl {
+        return AlbumPresenterImpl()
+    }
 
     override fun render(albumModel: Collection<AlbumModelK>) {
         val adapter = AlbumAdapterK(ArrayList(albumModel),
@@ -59,8 +58,7 @@ class AlbumTabsFragmentK : MainTabsFragmentK(), AlbumTabView {
         fun getInstance(response: String): AlbumTabsFragmentK {
             val fragment = AlbumTabsFragmentK()
             val arguments = Bundle()
-            //todo
-            /*arguments.putString(MainTabsFragmentK.RESPONSE, response)*/
+            arguments.putString(RESPONSE, response)
             fragment.arguments = arguments
             return fragment
         }

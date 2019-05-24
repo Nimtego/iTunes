@@ -1,33 +1,32 @@
-package com.nimtego.plectrum.presentation.main.artists
+package com.nimtego.plectrum.presentation.main.songs
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration
 import com.nimtego.plectrum.presentation.main.albums.AlbumPresenterImpl
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragmentK
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
+import com.nimtego.plectrum.presentation.main.model.SongModelK
 
-class ArtistTabsFragmentK : MainTabsFragmentK(), ArtistTabView {
+class SongTabsFragmentK : MainTabsFragmentK(), SongTabView {
 
     @InjectPresenter
-    internal lateinit var presenter: ArtistPresenterImpl
+    internal lateinit var presenter: SongPresenterImpl
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): ArtistPresenterImpl {
-        return ArtistPresenterImpl()
+    fun provideRepositoryPresenter(): SongPresenterImpl {
+        return SongPresenterImpl()
     }
 
-    override fun render(artistModels: Collection<ArtistModelK>) {
-        val adapter = ArtistAdapterK(ArrayList(artistModels),
+    override fun render(songModels: Collection<SongModelK>) {
+        val adapter = SongAdapterK(ArrayList(songModels),
                 this.activity)
-        adapter.setOnItemClickListener( object : ArtistAdapterK.OnItemClickListener {
-            override fun onUserItemClicked(artistModel: ArtistModelK) {
-                presenter.itemClick(artistModel)
+        adapter.setOnItemClickListener( object : SongAdapterK.OnItemClickListener {
+            override fun onUserItemClicked(songModel: SongModelK) {
+                presenter.itemClick(songModel)
             }
         })
         mRecyclerView?.adapter = adapter
@@ -42,13 +41,13 @@ class ArtistTabsFragmentK : MainTabsFragmentK(), ArtistTabView {
     }
 
     override fun itemDecorator(): RecyclerView.ItemDecoration {
-        return SpacesItemDecoration(2,
-                30,
+        return SpacesItemDecoration(1,
+                20,
                 true)
     }
 
     override fun rvLayoutManager(context: Context): RecyclerView.LayoutManager {
-        return GridLayoutManager(context, 2)
+        return LinearLayoutManager(context)
     }
 
     override fun search(response: String) {
@@ -57,8 +56,8 @@ class ArtistTabsFragmentK : MainTabsFragmentK(), ArtistTabView {
 
     companion object {
 
-        fun getInstance(response: String): ArtistTabsFragmentK {
-            val fragment = ArtistTabsFragmentK()
+        fun getInstance(response: String): SongTabsFragmentK {
+            val fragment =SongTabsFragmentK()
             val arguments = Bundle()
             arguments.putString(RESPONSE, response)
             fragment.arguments = arguments

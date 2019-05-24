@@ -6,6 +6,7 @@ import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDet
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
 import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 
+@Deprecated
 public interface ArtistInformationContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor>
             extends BaseContract.Presenter<V, I> {

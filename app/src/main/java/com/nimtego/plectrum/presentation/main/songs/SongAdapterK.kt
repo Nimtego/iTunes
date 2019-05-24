@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.main.artists
+package com.nimtego.plectrum.presentation.main.songs
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -11,38 +11,36 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
+import com.nimtego.plectrum.presentation.main.model.SongModelK
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class ArtistAdapterK(private val models: List<ArtistModelK>?, parent: Context)
-    : RecyclerView.Adapter<ArtistAdapterK.ViewHolder>() {
-
+class SongAdapterK(private val models: List<SongModelK>?, parent: Context) : RecyclerView.Adapter<SongAdapterK.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onUserItemClicked(artistModel: ArtistModelK)
+        fun onUserItemClicked(songModel: SongModelK)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.album_card_form, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.song_card_form, parent, false)
         return ViewHolder(v)
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val artistModel = this.models!![position]
-        holder.albumName.text = artistModel.artistId
-        holder.artistName.text = artistModel.artistName
+        val songModel = this.models!![position]
+        holder.songName.text = songModel.trackName
+        holder.songAlbumName.text = songModel.trackAlbumName
+        holder.songArtistName.text = songModel.trackArtistName
         holder.pb!!.visibility = View.VISIBLE
         holder.itemView.setOnClickListener {
-            if (this@ArtistAdapterK.onItemClickListener != null) {
-                this@ArtistAdapterK.onItemClickListener!!.onUserItemClicked(artistModel)
+            if (this@SongAdapterK.onItemClickListener != null) {
+                this@SongAdapterK.onItemClickListener!!.onUserItemClicked(songModel)
             }
         }
-        Picasso.get().load(models[position].artistViewUrl!!
-                .replace("135x135", "570x570"))
-                .into(holder.albumImage, object : Callback {
+        Picasso.get().load(models[position].trackArtwork!!.replace("100x100", "200x200"))
+                .into(holder.songImage, object : Callback {
                     override fun onSuccess() {
                         if (holder.pb != null)
                             holder.pb!!.visibility = View.GONE
@@ -65,17 +63,19 @@ class ArtistAdapterK(private val models: List<ArtistModelK>?, parent: Context)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var albumImage: ImageView
-        var albumName: TextView
-        var artistName: TextView
+        var songImage: ImageView
+        var songName: TextView
+        var songAlbumName: TextView
+        var songArtistName: TextView
         var pb: ProgressBar? = null
         var cv: CardView
         var card: ConstraintLayout
 
         init {
-            albumImage = itemView.findViewById(R.id.album_image)
-            albumName = itemView.findViewById(R.id.artist_name)
-            artistName = itemView.findViewById(R.id.album_name)
+            songImage = itemView.findViewById(R.id.song_image)
+            songName = itemView.findViewById(R.id.song_name)
+            songAlbumName = itemView.findViewById(R.id.song_album_name)
+            songArtistName = itemView.findViewById(R.id.song_artist_name)
             pb = itemView.findViewById(R.id.image_progress_bar)
             card = itemView.findViewById(R.id.card)
             cv = itemView.findViewById(R.id.cv)

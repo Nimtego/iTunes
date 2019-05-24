@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.main
 
 import com.arellomobile.mvp.InjectViewState
+import com.nimtego.plectrum.data.rest.pojo.wiki.Search
 import com.nimtego.plectrum.domain.interactor.MainViewInteractorK
 import com.nimtego.plectrum.presentation.base.BaseContract
 import com.nimtego.plectrum.presentation.base.BasePresenterK
@@ -20,12 +21,12 @@ constructor(interactor: BaseContract.Interactor<MainDataModelK, MainViewInteract
         // TODO: 29.10.2018 replaceable di
     }
 
-    fun search() {
-        viewState.render("") //todo remove
+    fun search(search: String) {
+        viewState.render(search) //todo remove
     }
 
     fun tabSelected(tabName: String) {
-        search()
+        //search() //todo
     }
 
     fun viewIsReady() {

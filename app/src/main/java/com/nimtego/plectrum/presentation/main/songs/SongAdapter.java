@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+@Deprecated
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     public interface OnItemClickListener {
         void onUserItemClicked(SongModelK albumModel);

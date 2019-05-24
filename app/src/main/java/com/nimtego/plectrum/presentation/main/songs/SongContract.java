@@ -7,6 +7,7 @@ import com.nimtego.plectrum.presentation.main.model.SongModelK;
 
 import java.util.Collection;
 
+@Deprecated
 public interface SongContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor> extends MainTabsContract.Presenter<V, I> {
         void songClicked(SongModelK songModel);

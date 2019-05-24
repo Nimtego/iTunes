@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import io.reactivex.observers.DisposableObserver;
 
+@Deprecated
 class ArtistInformationPresenter
         extends BasePresenter<ArtistInformationContract.View,
         BaseContract.Interactor>

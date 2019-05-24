@@ -4,6 +4,7 @@ import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK;
 
+@Deprecated
 public interface SongInformationContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor>
             extends BaseContract.Presenter<V, I> {

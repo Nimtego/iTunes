@@ -7,6 +7,7 @@ import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetai
 
 import io.reactivex.observers.DisposableObserver;
 
+@Deprecated
 class AlbumInformationPresenter
         extends BasePresenter<AlbumInformationContract.View,
         BaseContract.Interactor>

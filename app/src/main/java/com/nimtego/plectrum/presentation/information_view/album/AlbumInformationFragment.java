@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ALBUM_ID;
 
+@Deprecated
 public class AlbumInformationFragment
         extends BaseFragment<AlbumInformationContract.Presenter>
         implements AlbumInformationContract.View<AlbumInformationContract.Presenter> {

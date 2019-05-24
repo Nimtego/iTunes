@@ -8,16 +8,13 @@ import android.support.v7.widget.SearchView
 import android.support.v7.widget.Toolbar
 import android.widget.ProgressBar
 import butterknife.BindView
-import butterknife.ButterKnife
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.main.adapter.MainPagerAdapterK
-import com.nimtego.plectrum.presentation.main.albums.AlbumTabsFragment
 import com.nimtego.plectrum.presentation.main.albums.AlbumTabsFragmentK
-import com.nimtego.plectrum.presentation.main.artists.ArtistTabsFragment
 import com.nimtego.plectrum.presentation.main.artists.ArtistTabsFragmentK
-import com.nimtego.plectrum.presentation.main.songs.SongTabsFragment
+import com.nimtego.plectrum.presentation.main.songs.SongTabsFragmentK
 import com.nimtego.plectrum.presentation.mvp.MainView
 import com.nimtego.plectrum.presentation.utils.TabSelectedListener
 import java.util.*
@@ -31,7 +28,7 @@ class MainActivityK : MvpAppCompatActivity(), MainView {
     private var mTabLayout: TabLayout? = null
     private var mViewPagerAdapter: MainPagerAdapterK? = null
     private var pb: ProgressBar? = null
-    private var search: String? = ""
+    private var search: String = ""
 
     @InjectPresenter
     internal lateinit var presenter: MainPresenterK
@@ -39,7 +36,7 @@ class MainActivityK : MvpAppCompatActivity(), MainView {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ButterKnife.bind(this)
+        //ButterKnife.bind(this)
         if (savedInstanceState != null) {
             search = savedInstanceState.getString(KEY_SEARCH)
         }
@@ -56,11 +53,12 @@ class MainActivityK : MvpAppCompatActivity(), MainView {
         mTabLayout!!.setupWithViewPager(mViewPager)
 
         pb = findViewById(R.id.progress_bar)
+        searchText = findViewById(R.id.search_edit_text)
         searchText!!.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String): Boolean {
                 search = s
                 searchText!!.onActionViewCollapsed()
-                presenter.search()
+                presenter.search(search)
                 return false
             }
 
@@ -99,6 +97,7 @@ class MainActivityK : MvpAppCompatActivity(), MainView {
         val fm = supportFragmentManager
         val transaction = fm.beginTransaction()
         mViewPagerAdapter = MainPagerAdapterK(this, fm)
+        //todo search NULL
         mViewPagerAdapter!!.addFragment(AlbumTabsFragmentK.getInstance(search), "Albums")
         mViewPagerAdapter!!.addFragment(ArtistTabsFragmentK.getInstance(search), "Artists")
         mViewPagerAdapter!!.addFragment(SongTabsFragmentK.getInstance(search), "Songs")
@@ -131,9 +130,11 @@ class MainActivityK : MvpAppCompatActivity(), MainView {
         fragment.search(response)
     }
 
-    override fun emptyRv(): Boolean {
-        return mViewPagerAdapter!!.getItem(mViewPager!!.currentItem).isRvEmpty
-    }
+//    override fun emptyRv(): Boolean {
+//        //todo its need?
+////        return mViewPagerAdapter!!.getItem(mViewPager!!.currentItem).isRvEmpty
+//        return false
+//    }
 
 //    override fun showLoading() {
 //        pb!!.visibility = ProgressBar.VISIBLE

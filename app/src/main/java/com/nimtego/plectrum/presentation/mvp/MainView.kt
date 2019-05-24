@@ -6,5 +6,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface MainView : ProgressView {
     fun render(response: String)
-    fun emptyRv(): Boolean
+    //fun emptyRv(): Boolean
 }

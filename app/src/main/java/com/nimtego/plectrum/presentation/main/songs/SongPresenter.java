@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableObserver;
 
+@Deprecated
 public class SongPresenter
         extends BasePresenter<SongContract.View, BaseContract.Interactor>
         implements SongContract.Presenter<SongContract.View, BaseContract.Interactor> {

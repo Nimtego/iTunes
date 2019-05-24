@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.presentation.main.fragments
 
-import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.nimtego.plectrum.presentation.mvp.ProgressView

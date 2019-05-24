@@ -8,6 +8,7 @@ import com.nimtego.plectrum.presentation.information_view.song.model.SongDetails
 
 import io.reactivex.observers.DisposableObserver;
 
+@Deprecated
 class SongInformationPresenter
         extends BasePresenter<SongInformationContract.View,
         BaseContract.Interactor>
