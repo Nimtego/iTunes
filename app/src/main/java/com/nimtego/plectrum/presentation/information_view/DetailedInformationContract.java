@@ -2,7 +2,6 @@ package com.nimtego.plectrum.presentation.information_view;
 
 import com.nimtego.plectrum.presentation.base.BaseContract;
 
-@Deprecated
 public interface DetailedInformationContract {
     interface Presenter<V extends View, I extends BaseContract.Interactor> extends BaseContract.Presenter<V, I> {
 

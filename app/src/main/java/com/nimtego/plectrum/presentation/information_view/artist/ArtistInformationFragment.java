@@ -18,15 +18,12 @@ import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.base.BaseFragment;
 import com.nimtego.plectrum.presentation.information_view.artist.adapter.AlbumsAdapterForArtist;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModel;
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ARTIST_ID;
 
-@Deprecated
 public class ArtistInformationFragment
         extends BaseFragment<ArtistInformationContract.Presenter>
         implements ArtistInformationContract.View<ArtistInformationContract.Presenter> {
@@ -85,7 +82,7 @@ public class ArtistInformationFragment
     }
 
     @Override
-    public void render(ArtistDetailsModelK artistDetailsModel) {
+    public void render(ArtistDetailsModel artistDetailsModel) {
         artistName.setText(artistDetailsModel.getArtistName());
         price.setText(artistDetailsModel.getArtistArtwork());
         information.setText(artistDetailsModel.getWikiInformation());
@@ -94,7 +91,7 @@ public class ArtistInformationFragment
                 this.getActivity());
         albumsAdapter.setOnItemClickListener(new AlbumsAdapterForArtist.OnItemClickListener() {
             @Override
-            public void onUserItemClicked(AlbumModelK albumModel) {
+            public void onUserItemClicked(AlbumModel albumModel) {
                 mPresenter.albumClicked(albumModel);
             }
         });

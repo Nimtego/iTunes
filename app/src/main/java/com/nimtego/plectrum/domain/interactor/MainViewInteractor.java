@@ -1,30 +1,33 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
-import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
-import com.nimtego.plectrum.presentation.main.model.SongModelK;
+import com.nimtego.plectrum.presentation.main.model.AlbumModel;
+import com.nimtego.plectrum.presentation.main.model.ArtistModel;
+import com.nimtego.plectrum.presentation.main.model.MainDataModel;
+import com.nimtego.plectrum.presentation.main.model.SongModel;
 
 import java.util.List;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
-@Deprecated
 public class MainViewInteractor
-        extends BaseInteractor<MainDataModelK, MainViewInteractor.Params> {
+        extends BaseInteractor<MainDataModel, MainViewInteractor.Params> {
 
     public MainViewInteractor() {
     }
 
     @Override
-    protected Observable<MainDataModelK> buildUseCaseObservable(MainViewInteractor.Params params) {
+    protected Observable<MainDataModel> buildUseCaseObservable(MainViewInteractor.Params params) {
         Preconditions.checkNotNull(params);
-        Observable<List<AlbumModelK>> albumsObs = repository.albums(params.request);
-        Observable<List<SongModelK>> songsObs = repository.songs(params.request);
-        Observable<List<ArtistModelK>> artistsObs = repository.artists(params.request);
+        Observable<List<AlbumModel>> albumsObs = repository.albums(params.request);
+        Observable<List<SongModel>> songsObs = repository.songs(params.request);
+        Observable<List<ArtistModel>> artistsObs = repository.artists(params.request);
         return Observable.combineLatest(albumsObs, songsObs, artistsObs, (albums, songs, artists) ->
-                new MainDataModelK(artists, albums, songs));
+                MainDataModel.builder()
+                        .albumModels(albums)
+                        .songModels(songs)
+                        .artistModels(artists)
+                        .build());
     }
 
     public static final class Params {

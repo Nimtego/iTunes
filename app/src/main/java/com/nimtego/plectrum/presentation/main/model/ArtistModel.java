@@ -7,7 +7,6 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-@Deprecated
 public class ArtistModel {
     private String artistName;
     private String artistArtwork;

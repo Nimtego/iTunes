@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 
 import com.nimtego.plectrum.R;
 
-@Deprecated
 public final class CommonUtils {
 
     private static final String TAG = "CommonUtils";

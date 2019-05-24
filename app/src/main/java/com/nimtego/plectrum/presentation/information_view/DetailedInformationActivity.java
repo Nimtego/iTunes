@@ -17,7 +17,6 @@ import static com.nimtego.plectrum.presentation.utils.IpTags.ALBUM_ID;
 import static com.nimtego.plectrum.presentation.utils.IpTags.ARTIST_ID;
 import static com.nimtego.plectrum.presentation.utils.IpTags.SONG_ID;
 
-@Deprecated
 public class DetailedInformationActivity
         extends BaseView<DetailedInformationContract.Presenter>
         implements DetailedInformationContract.View<DetailedInformationContract.Presenter> {

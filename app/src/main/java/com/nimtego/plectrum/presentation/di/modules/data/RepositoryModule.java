@@ -4,7 +4,6 @@ import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.data.cache.AlbumCache;
 import com.nimtego.plectrum.data.cache.FileManager;
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
-import com.nimtego.plectrum.data.entity.mapper.EntityDataMapperK;
 import com.nimtego.plectrum.data.repository.AppRepository;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
 import com.nimtego.plectrum.domain.Repository;
@@ -21,7 +20,7 @@ public class RepositoryModule {
     @Provides
     @Singleton
     Repository provaideAppRepository(DataStoreFactory dataStoreFactory,
-                                     EntityDataMapperK mapper) {
+                                     EntityDataMapper mapper) {
         return new AppRepository(dataStoreFactory, mapper);
     }
 
@@ -33,8 +32,8 @@ public class RepositoryModule {
     }
 
     @Provides
-    EntityDataMapperK entityDataMapper() {
-        return new EntityDataMapperK();
+    EntityDataMapper entityDataMapper() {
+        return new EntityDataMapper();
     }
 
 }

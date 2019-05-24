@@ -4,7 +4,6 @@ import com.nimtego.plectrum.domain.interactor.SongIntTmp;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 
-@Deprecated
 public class DetailedInformationPresenter
         extends BasePresenter<DetailedInformationContract.View,
                 BaseContract.Interactor>

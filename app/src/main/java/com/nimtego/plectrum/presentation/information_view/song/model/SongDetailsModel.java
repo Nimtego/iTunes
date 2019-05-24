@@ -7,7 +7,6 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-@Deprecated
 public class SongDetailsModel {
     private String songName;
     private String songArtistName;
