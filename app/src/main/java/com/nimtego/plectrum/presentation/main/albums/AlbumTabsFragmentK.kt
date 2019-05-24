@@ -24,9 +24,13 @@ class AlbumTabsFragmentK : MainTabsFragmentK(), AlbumTabView {
     internal lateinit var presenter: AlbumPresenterK
 
     override fun render(albumModel: Collection<AlbumModelK>) {
-        val adapter = AlbumAdapter(ArrayList(albumModel),
+        val adapter = AlbumAdapterK(ArrayList(albumModel),
                 this.activity)
-        adapter.setOnItemClickListener { albumModel -> presenter.albumClicked(albumModel) }
+        adapter.setOnItemClickListener( object : AlbumAdapterK.OnItemClickListener {
+            override fun onUserItemClicked(albumModel: AlbumModelK) {
+                presenter.albumClicked(albumModel)
+            }
+        })
         mRecyclerView?.adapter = adapter
     }
 

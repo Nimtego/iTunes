@@ -61,7 +61,7 @@ abstract class MainTabsFragmentK: MvpAppCompatFragment(), MainTabsView {
         this.searchText = response
     }
 
-    companion object {
+    protected companion object {
 
         protected val RESPONSE = "response_content"
     }
