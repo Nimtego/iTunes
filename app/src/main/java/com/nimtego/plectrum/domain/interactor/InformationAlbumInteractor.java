@@ -1,17 +1,16 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK;
+import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
-@Deprecated
 public class InformationAlbumInteractor
-        extends BaseInteractor<AlbumDetailsModelK, InformationAlbumInteractor.Params> {
+        extends BaseInteractor<AlbumDetailsModel, InformationAlbumInteractor.Params> {
 
 
     @Override
-    protected Observable<AlbumDetailsModelK> buildUseCaseObservable(Params params) {
+    protected Observable<AlbumDetailsModel> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
         return repository.albumDeteil(params.request);
     }

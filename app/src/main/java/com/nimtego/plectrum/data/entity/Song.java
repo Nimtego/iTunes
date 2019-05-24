@@ -7,8 +7,8 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString
-@Deprecated
 public class Song {
+
     private Integer artistId;
     private Integer collectionId;
     private Integer trackId;

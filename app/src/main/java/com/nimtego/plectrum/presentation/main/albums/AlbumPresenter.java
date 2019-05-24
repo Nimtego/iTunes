@@ -5,7 +5,6 @@ import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 import com.nimtego.plectrum.presentation.utils.FragmentType;
 
 import java.util.Collection;
@@ -19,7 +18,6 @@ import io.reactivex.observers.DisposableObserver;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.ALBUM_ID;
 
-@Deprecated
 public class AlbumPresenter
         extends BasePresenter<AlbumContract.View, BaseContract.Interactor>
         implements AlbumContract.Presenter<AlbumContract.View, BaseContract.Interactor> {
@@ -38,7 +36,7 @@ public class AlbumPresenter
     }
 
     @Override
-    public void albumClicked(AlbumModelK albumModel) {
+    public void albumClicked(AlbumModel albumModel) {
         Map<String, String> param = new HashMap<>();
         param.put(FragmentType.TYPE.name(), FragmentType.ALBUM.name());
         param.put(ALBUM_ID.name(), albumModel.getAlbumId());

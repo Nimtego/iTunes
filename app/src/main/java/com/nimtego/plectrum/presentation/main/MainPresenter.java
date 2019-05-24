@@ -1,26 +1,25 @@
 package com.nimtego.plectrum.presentation.main;
 
-import com.nimtego.plectrum.domain.interactor.MainViewInteractorK;
+import com.nimtego.plectrum.domain.interactor.MainViewInteractor;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
-import com.nimtego.plectrum.presentation.main.model.MainDataModelK;
+import com.nimtego.plectrum.presentation.main.model.MainDataModel;
 
 import javax.inject.Inject;
 
-@Deprecated
 public class MainPresenter
         extends BasePresenter<MainContract.View,
-        BaseContract.Interactor<MainDataModelK,
-                MainViewInteractorK.Params>>
+                BaseContract.Interactor<MainDataModel,
+                        MainViewInteractor.Params>>
         implements MainContract.Presenter<MainContract.View,
-        BaseContract.Interactor<MainDataModelK,
-                MainViewInteractorK.Params>> {
+        BaseContract.Interactor<MainDataModel,
+                        MainViewInteractor.Params>> {
 
     private final String TAG = this.getClass().getCanonicalName();
 
     @Inject
-    public MainPresenter(BaseContract.Interactor<MainDataModelK,
-            MainViewInteractorK.Params> interactor) {
+    public MainPresenter(BaseContract.Interactor<MainDataModel,
+            MainViewInteractor.Params> interactor) {
         super(interactor);
     }
 

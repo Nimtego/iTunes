@@ -3,11 +3,10 @@ package com.nimtego.plectrum.presentation.information_view.album;
 import com.nimtego.plectrum.domain.interactor.InformationAlbumInteractor;
 import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK;
+import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 
 import io.reactivex.observers.DisposableObserver;
 
-@Deprecated
 class AlbumInformationPresenter
         extends BasePresenter<AlbumInformationContract.View,
         BaseContract.Interactor>
@@ -25,9 +24,9 @@ class AlbumInformationPresenter
 
     @Override
     public void viewReady(String albumNameForResponse) {
-        interactor.execute(new DisposableObserver<AlbumDetailsModelK>() {
+        interactor.execute(new DisposableObserver<AlbumDetailsModel>() {
             @Override
-            public void onNext(AlbumDetailsModelK albumDetailsModel) {
+            public void onNext(AlbumDetailsModel albumDetailsModel) {
                 AlbumInformationPresenter.this.showAlbumsInView(albumDetailsModel);
             }
 
@@ -44,7 +43,7 @@ class AlbumInformationPresenter
         }, InformationAlbumInteractor.Params.forRequest(albumNameForResponse));
     }
 
-    private void showAlbumsInView(AlbumDetailsModelK albumDetailsModel) {
+    private void showAlbumsInView(AlbumDetailsModel albumDetailsModel) {
         view.toast(albumDetailsModel.getAlbumName());
         this.view.render(albumDetailsModel);
     }

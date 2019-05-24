@@ -9,12 +9,10 @@ import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration;
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragment;
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Deprecated
 public class AlbumTabsFragment
         extends MainTabsFragment<AlbumContract.Presenter>
         implements AlbumContract.View<AlbumContract.Presenter> {
@@ -29,12 +27,12 @@ public class AlbumTabsFragment
     }
 
     @Override
-    public void render(Collection<AlbumModelK> albumModel) {
+    public void render(Collection<AlbumModel> albumModel) {
         AlbumAdapter adapter = new AlbumAdapter(new ArrayList<>(albumModel),
                 this.getActivity());
         adapter.setOnItemClickListener(new AlbumAdapter.OnItemClickListener() {
             @Override
-            public void onUserItemClicked(AlbumModelK albumModel) {
+            public void onUserItemClicked(AlbumModel albumModel) {
                 mPresenter.albumClicked(albumModel);
             }
         });

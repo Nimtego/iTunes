@@ -11,13 +11,11 @@ import android.widget.TextView;
 import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.base.BaseFragment;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import static com.nimtego.plectrum.presentation.utils.IpTags.SONG_ID;
 
-@Deprecated
 public class SongInformationFragment
         extends BaseFragment<SongInformationContract.Presenter>
         implements SongInformationContract.View<SongInformationContract.Presenter> {
@@ -55,7 +53,7 @@ public class SongInformationFragment
     }
 
     @Override
-    public void render(SongDetailsModelK songDetailsModel) {
+    public void render(SongDetailsModel songDetailsModel) {
         StringBuilder sb = new StringBuilder();
         sb.append(songDetailsModel.getSongName()).append("\n\n")
                 .append(songDetailsModel.getSongAlbumName()).append("\n\n")
