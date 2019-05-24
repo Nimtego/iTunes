@@ -1,13 +1,12 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
-import dagger.internal.Preconditions
+import com.nimtego.plectrum.presentation.main.model.ArtistModel
 import io.reactivex.Observable
 
 
-class ArtistInteractorK : BaseInteractorK<List<ArtistModelK>, ArtistInteractorK.Params>() {
+class ArtistInteractorK : BaseInteractorK<List<ArtistModel>, ArtistInteractorK.Params>() {
 
-    override fun buildUseCaseObservable(params: Params): Observable<List<ArtistModelK>> {
+    override fun buildUseCaseObservable(params: Params): Observable<List<ArtistModel>> {
 //        Preconditions.checkNotNull(params)
         return repository.artists(params.request)
     }

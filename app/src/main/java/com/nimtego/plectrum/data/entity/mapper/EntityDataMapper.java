@@ -1,29 +1,10 @@
 package com.nimtego.plectrum.data.entity.mapper;
 
-import com.nimtego.plectrum.data.rest.pojo.AlbumResult;
-import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
-import com.nimtego.plectrum.data.rest.pojo.ArtistResult;
-import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
-import com.nimtego.plectrum.data.rest.pojo.SongResult;
-import com.nimtego.plectrum.data.rest.pojo.SongsRepository;
-import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult;
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModel;
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
-import com.nimtego.plectrum.presentation.main.model.AlbumModel;
-import com.nimtego.plectrum.presentation.main.model.ArtistModel;
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
-import com.nimtego.plectrum.presentation.main.model.SongModel;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Deprecated
 public class EntityDataMapper {
 //    public ArtistModel transformArtist(final ArtistResult result) {
 //        String link = result.getArtistLinkUrl();
-//        return ArtistModelK.builder()
+//        return ArtistModel.builder()
 //                .artistName(result.getArtistName())
 //                .primaryGenreName(result.getPrimaryGenreName())
 //                .artistViewUrl(link)

@@ -1,18 +1,14 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
-import com.nimtego.plectrum.presentation.main.model.MainDataModelK
-import com.nimtego.plectrum.presentation.main.model.SongModelK
+import com.nimtego.plectrum.presentation.main.model.MainDataModel
 import dagger.internal.Preconditions
 import io.reactivex.Observable
 import io.reactivex.functions.Function3
-import java.util.function.BiFunction
 
 
-class MainViewInteractorK : BaseInteractorK<MainDataModelK, MainViewInteractorK.Params>() {
+class MainViewInteractorK : BaseInteractorK<MainDataModel, MainViewInteractorK.Params>() {
 
-    override fun buildUseCaseObservable(params: MainViewInteractorK.Params): Observable<MainDataModelK> {
+    override fun buildUseCaseObservable(params: MainViewInteractorK.Params): Observable<MainDataModel> {
         Preconditions.checkNotNull(params)
         val albumsObs = repository.albums(params.request)
         val songsObs = repository.songs(params.request)
@@ -25,7 +21,7 @@ class MainViewInteractorK : BaseInteractorK<MainDataModelK, MainViewInteractorK.
                     Function3 { albums,
                                 songs,
                                 artists ->
-                        MainDataModelK(artists, albums, songs)
+                        MainDataModel(artists, albums, songs)
                 })
     }
 

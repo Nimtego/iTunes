@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.InformationArtistInteractorK
 import com.nimtego.plectrum.presentation.base.BasePresenterK
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
@@ -29,7 +29,7 @@ class ArtistInformationPresenterImpl(val interactor: InformationArtistInteractor
         }, InformationArtistInteractorK.Params.forRequest(artistNameForResponse))
     }
 
-    override fun albumClicked(album: AlbumModelK) {
+    override fun albumClicked(album: AlbumModel) {
         //todo
 //        viewState.toast(album.albumName)
     }

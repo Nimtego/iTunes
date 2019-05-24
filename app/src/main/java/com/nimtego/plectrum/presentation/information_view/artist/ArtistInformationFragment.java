@@ -17,10 +17,8 @@ import android.widget.TextView;
 import com.nimtego.plectrum.R;
 import com.nimtego.plectrum.presentation.base.BaseFragment;
 import com.nimtego.plectrum.presentation.information_view.artist.adapter.AlbumsAdapterForArtist;
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
 import com.nimtego.plectrum.presentation.main.model.AlbumModel;
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -94,7 +92,7 @@ public class ArtistInformationFragment
                 this.getActivity());
         albumsAdapter.setOnItemClickListener(new AlbumsAdapterForArtist.OnItemClickListener() {
             @Override
-            public void onUserItemClicked(AlbumModelK albumModel) {
+            public void onUserItemClicked(AlbumModel albumModel) {
                 mPresenter.albumClicked(albumModel);
             }
         });

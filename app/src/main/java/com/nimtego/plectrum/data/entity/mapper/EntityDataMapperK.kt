@@ -5,56 +5,58 @@ import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
-import com.nimtego.plectrum.presentation.main.model.SongModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModel
+import com.nimtego.plectrum.presentation.main.model.ArtistModel
+import com.nimtego.plectrum.presentation.main.model.SongModel
 
 class EntityDataMapperK {
-    fun transformArtist(result: ArtistResult): ArtistModelK {
-        return ArtistModelK(artistName = result.artistName,
-                            primaryGenreName = result.primaryGenreName,
+    fun transformArtist(result: ArtistResult): ArtistModel {
+        return ArtistModel(artistName = result.artistName,
+                           primaryGenreName = result.primaryGenreName,
                             artistViewUrl = result.artistLinkUrl,
-                            artistId = result.artistId.toString())
+                            artistId = result.artistId.toString(),
+                            artistArtwork = result.artistLinkUrl)
     }
 
-    fun transformArtists(artistResultCollection: Collection<ArtistResult>): List<ArtistModelK> {
+    fun transformArtists(artistResultCollection: Collection<ArtistResult>): List<ArtistModel> {
         return artistResultCollection.map { this.transformArtist(it) }
     }
 
-    fun transformAlbum(result: AlbumResult): AlbumModelK {
-        return AlbumModelK(albumName = result.collectionName,
+    fun transformAlbum(result: AlbumResult): AlbumModel {
+        return AlbumModel(albumName = result.collectionName,
                            albumId = result.collectionId.toString(),
                            albumArtistName = result.artistName,
-                           albumArtWorkUrl = result.artworkUrl100)
+                           albumArtWorkUrl = result.artworkUrl100,
+                           albumArtwork = result.artworkUrl100)
     }
 
-    private fun transformAlbums(results: Collection<AlbumResult>): List<AlbumModelK> {
+    private fun transformAlbums(results: Collection<AlbumResult>): List<AlbumModel> {
         return results.asSequence()
                 .filter { it.wrapperType != "artist" }
                 .map { this.transformAlbum(it) }
                 .toList()
     }
 
-    fun transformAlbums(albumsRepository: AlbumsRepository): List<AlbumModelK> {
+    fun transformAlbums(albumsRepository: AlbumsRepository): List<AlbumModel> {
         return transformAlbums(albumsRepository.results)
     }
 
-    private fun transformSongs(results: Collection<SongResult>): List<SongModelK> {
+    private fun transformSongs(results: Collection<SongResult>): List<SongModel> {
         return results.asSequence()
                 .filter { it.wrapperType != "track" }
                 .map { this.transformSong(it) }
                 .toList()
     }
 
-    private fun transformSong(songResult: SongResult): SongModelK {
-        return SongModelK(trackName = songResult.trackName,
+    private fun transformSong(songResult: SongResult): SongModel {
+        return SongModel(trackName = songResult.trackName,
                           trackArtistName = songResult.artistName,
                           trackArtwork = songResult.artworkUrl100,
                           trackAlbumName = songResult.collectionName,
                           songId = songResult.trackId.toString())
     }
 
-    fun transformSongs(songsRepository: SongsRepository): List<SongModelK> {
+    fun transformSongs(songsRepository: SongsRepository): List<SongModel> {
         return transformSongs(songsRepository.results)
     }
 

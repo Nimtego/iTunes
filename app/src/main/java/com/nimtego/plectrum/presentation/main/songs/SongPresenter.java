@@ -6,7 +6,6 @@ import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
 import com.nimtego.plectrum.presentation.main.model.SongModel;
-import com.nimtego.plectrum.presentation.main.model.SongModelK;
 import com.nimtego.plectrum.presentation.utils.FragmentType;
 import com.nimtego.plectrum.presentation.utils.IpTags;
 
@@ -35,7 +34,7 @@ public class SongPresenter
     }
 
     @Override
-    public void songClicked(SongModelK songModel) {
+    public void songClicked(SongModel songModel) {
         Map<String, String> param = new HashMap<>();
         param.put(FragmentType.TYPE.name(), FragmentType.SONG.name());
         param.put(IpTags.SONG_ID.name(), songModel.getSongId());
@@ -53,9 +52,9 @@ public class SongPresenter
             view.setCurrentSearch(response);
             view.clearList();
             showViewLoading();
-            interactor.execute(new DisposableObserver<List<SongModelK>>() {
+            interactor.execute(new DisposableObserver<List<SongModel>>() {
                 @Override
-                public void onNext(List<SongModelK> songModel) {
+                public void onNext(List<SongModel> songModel) {
                     SongPresenter.this.showSongsInView(songModel);
                 }
 
@@ -79,7 +78,7 @@ public class SongPresenter
         view.showLoading();
     }
 
-    private void showSongsInView(Collection<SongModelK> songModels) {
+    private void showSongsInView(Collection<SongModel> songModels) {
         view.render(songModels);
     }
 

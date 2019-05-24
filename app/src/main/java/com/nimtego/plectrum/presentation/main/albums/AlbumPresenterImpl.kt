@@ -1,10 +1,9 @@
 package com.nimtego.plectrum.presentation.main.albums
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.AlbumInteractor
 import com.nimtego.plectrum.domain.interactor.AlbumInteractorK
 import com.nimtego.plectrum.presentation.base.BasePresenterK
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModel
 import com.nimtego.plectrum.presentation.utils.FragmentTypeK
 import io.reactivex.observers.DisposableObserver
 import java.util.*
@@ -22,7 +21,7 @@ class AlbumPresenterImpl(val interactor: AlbumInteractorK = AlbumInteractorK())
 //        // TODO: 29.10.2018 replaceable di
 //    }
 
-    override fun albumClicked(albumModel: AlbumModelK) {
+    override fun albumClicked(albumModel: AlbumModel) {
         val param = HashMap<String, String>()
         param[FragmentTypeK.TYPE.name] = FragmentTypeK.ALBUM.name
         //todo
@@ -41,8 +40,8 @@ class AlbumPresenterImpl(val interactor: AlbumInteractorK = AlbumInteractorK())
             viewState.setCurrentSearch(response)
             viewState.clearList()
             showViewLoading()
-            interactor.execute(object : DisposableObserver<List<AlbumModelK>>() {
-                override fun onNext(dataModel: List<AlbumModelK>) {
+            interactor.execute(object : DisposableObserver<List<AlbumModel>>() {
+                override fun onNext(dataModel: List<AlbumModel>) {
                     this@AlbumPresenterImpl.showAlbumsInView(dataModel)
                 }
 
@@ -64,7 +63,7 @@ class AlbumPresenterImpl(val interactor: AlbumInteractorK = AlbumInteractorK())
         viewState.showProgress()
     }
 
-    private fun showAlbumsInView(albumModels: Collection<AlbumModelK>) {
+    private fun showAlbumsInView(albumModels: Collection<AlbumModel>) {
         viewState.render(albumModels)
     }
 

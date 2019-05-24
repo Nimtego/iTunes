@@ -1,7 +1,7 @@
 package com.nimtego.plectrum.domain.interactor;
 
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
+import com.nimtego.plectrum.presentation.main.model.AlbumModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,15 +19,15 @@ public class InformationArtistInteractor
     protected Observable<ArtistDetailsModelK> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
         return repository.artistDetail(params.request).map(result -> {
-            List<AlbumModelK> albumModels = duplicateRemove(Objects.requireNonNull(result.getAlbums()));
+            List<AlbumModel> albumModels = duplicateRemove(Objects.requireNonNull(result.getAlbums()));
             //todo
             //result.setAlbums(albumModels);
             return result;
         });
     }
 
-    private List<AlbumModelK> duplicateRemove(List<AlbumModelK> albumModels) {
-        Map<String, AlbumModelK> duplicateCheck = new HashMap<>();
+    private List<AlbumModel> duplicateRemove(List<AlbumModel> albumModels) {
+        Map<String, AlbumModel> duplicateCheck = new HashMap<>();
         albumModels
                 .forEach(album -> duplicateCheck.put(album.getAlbumName(), album));
         return new ArrayList<>(duplicateCheck.values());

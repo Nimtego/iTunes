@@ -1,8 +1,8 @@
 package com.nimtego.plectrum.presentation.main.artists
 
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
+import com.nimtego.plectrum.presentation.main.model.ArtistModel
 
 interface ArtistPresenterK {
-    fun itemClick(artistModel: ArtistModelK)
+    fun itemClick(artistModel: ArtistModel)
     fun search(response: String)
 }

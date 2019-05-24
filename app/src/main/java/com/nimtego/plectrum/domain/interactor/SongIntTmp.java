@@ -1,16 +1,16 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.main.model.SongModelK;
+import com.nimtego.plectrum.presentation.main.model.SongModel;
 
 import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
 //todo this class is really need?
-public class SongIntTmp extends BaseInteractor<SongModelK, SongIntTmp.Params> {
+public class SongIntTmp extends BaseInteractor<SongModel, SongIntTmp.Params> {
 
 
     @Override
-    protected Observable<SongModelK> buildUseCaseObservable(Params params) {
+    protected Observable<SongModel> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
         return repository.songs(params.request).map(s -> s.get(0));
     }

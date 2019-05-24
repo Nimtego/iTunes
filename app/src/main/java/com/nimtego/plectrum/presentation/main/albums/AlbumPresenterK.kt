@@ -1,8 +1,8 @@
 package com.nimtego.plectrum.presentation.main.albums
 
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModel
 
 interface AlbumPresenterK {
-    fun albumClicked(albumModel: AlbumModelK)
+    fun albumClicked(albumModel: AlbumModel)
     fun search(response: String)
 }

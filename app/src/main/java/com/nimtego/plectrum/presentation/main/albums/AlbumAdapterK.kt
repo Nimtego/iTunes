@@ -11,15 +11,15 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class AlbumAdapterK(private val models: List<AlbumModelK>?, parent: Context) : RecyclerView.Adapter<AlbumAdapterK.ViewHolder>() {
+class AlbumAdapterK(private val models: List<AlbumModel>?, parent: Context) : RecyclerView.Adapter<AlbumAdapterK.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onUserItemClicked(albumModel: AlbumModelK)
+        fun onUserItemClicked(albumModel: AlbumModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {

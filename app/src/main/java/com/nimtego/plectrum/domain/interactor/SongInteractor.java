@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.presentation.main.model.SongModelK;
+import com.nimtego.plectrum.presentation.main.model.SongModel;
 
 import java.util.List;
 
@@ -8,13 +8,13 @@ import dagger.internal.Preconditions;
 import io.reactivex.Observable;
 
 @Deprecated
-public class SongInteractor extends BaseInteractor<List<SongModelK>, SongInteractor.Params> {
+public class SongInteractor extends BaseInteractor<List<SongModel>, SongInteractor.Params> {
 
     public SongInteractor() {
     }
 
     @Override
-    protected Observable<List<SongModelK>> buildUseCaseObservable(Params params) {
+    protected Observable<List<SongModel>> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
         return repository.songs(params.request);
     }

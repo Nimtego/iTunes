@@ -1,17 +1,17 @@
 package com.nimtego.plectrum.domain.interactor;
 
-import com.nimtego.plectrum.data.entity.AlbumK;
+import com.nimtego.plectrum.data.entity.Album;
 
 import io.reactivex.Observable;
 
 @Deprecated
-public class InformationViewInteractor extends BaseInteractor<AlbumK, InformationViewInteractor.Params> {
+public class InformationViewInteractor extends BaseInteractor<Album, InformationViewInteractor.Params> {
 
     public InformationViewInteractor() {
     }
 
     @Override
-    protected Observable<AlbumK> buildUseCaseObservable(Params param) {
+    protected Observable<Album> buildUseCaseObservable(Params param) {
         return null;
     }
 

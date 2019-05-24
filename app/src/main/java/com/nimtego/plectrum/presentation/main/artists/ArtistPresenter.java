@@ -6,7 +6,6 @@ import com.nimtego.plectrum.presentation.base.BaseContract;
 import com.nimtego.plectrum.presentation.base.BasePresenter;
 import com.nimtego.plectrum.presentation.information_view.DetailedInformationContract;
 import com.nimtego.plectrum.presentation.main.model.ArtistModel;
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
 import com.nimtego.plectrum.presentation.utils.FragmentType;
 
 import java.util.Collection;
@@ -36,7 +35,7 @@ public class ArtistPresenter
     }
 
     @Override
-    public void artistClicked(ArtistModelK artistModel) {
+    public void artistClicked(ArtistModel artistModel) {
         Map<String, String> param = new HashMap<>();
         param.put(FragmentType.TYPE.name(), FragmentType.ARTIST.name());
         param.put(ARTIST_ID.name(), artistModel.getArtistId());
@@ -54,9 +53,9 @@ public class ArtistPresenter
             view.setCurrentSearch(response);
             view.clearList();
             showViewLoading();
-            interactor.execute(new DisposableObserver<List<ArtistModelK>>() {
+            interactor.execute(new DisposableObserver<List<ArtistModel>>() {
                 @Override
-                public void onNext(List<ArtistModelK> dataModel) {
+                public void onNext(List<ArtistModel> dataModel) {
                     ArtistPresenter.this.showAlbumsInView(dataModel);
                 }
 
@@ -80,7 +79,7 @@ public class ArtistPresenter
         view.showLoading();
     }
 
-    private void showAlbumsInView(Collection<ArtistModelK> albumModels) {
+    private void showAlbumsInView(Collection<ArtistModel> albumModels) {
         view.render(albumModels);
     }
 

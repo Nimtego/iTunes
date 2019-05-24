@@ -3,7 +3,7 @@ package com.nimtego.plectrum.presentation.main.artists
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.ArtistInteractorK
 import com.nimtego.plectrum.presentation.base.BasePresenterK
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
+import com.nimtego.plectrum.presentation.main.model.ArtistModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
@@ -20,8 +20,8 @@ class ArtistPresenterImpl(val interactor: ArtistInteractorK = ArtistInteractorK(
         viewState.setCurrentSearch(response)
         viewState.clearList()
         showViewLoading()
-        interactor.execute(object : DisposableObserver<List<ArtistModelK>>() {
-            override fun onNext(dataModel: List<ArtistModelK>) {
+        interactor.execute(object : DisposableObserver<List<ArtistModel>>() {
+            override fun onNext(dataModel: List<ArtistModel>) {
                 this@ArtistPresenterImpl.showArtistInView(dataModel)
             }
 
@@ -39,7 +39,7 @@ class ArtistPresenterImpl(val interactor: ArtistInteractorK = ArtistInteractorK(
 //        }
     }
 
-    override fun itemClick(artistModel: ArtistModelK) {
+    override fun itemClick(artistModel: ArtistModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -51,7 +51,7 @@ class ArtistPresenterImpl(val interactor: ArtistInteractorK = ArtistInteractorK(
         viewState.hideProgress()
     }
 
-    private fun showArtistInView(artistModel: Collection<ArtistModelK>) {
+    private fun showArtistInView(artistModel: Collection<ArtistModel>) {
         viewState.render(artistModel)
     }
 

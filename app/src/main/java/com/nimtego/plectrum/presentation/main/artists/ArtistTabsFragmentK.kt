@@ -7,10 +7,8 @@ import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration
-import com.nimtego.plectrum.presentation.main.albums.AlbumPresenterImpl
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragmentK
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK
+import com.nimtego.plectrum.presentation.main.model.ArtistModel
 
 class ArtistTabsFragmentK : MainTabsFragmentK(), ArtistTabView {
 
@@ -22,11 +20,11 @@ class ArtistTabsFragmentK : MainTabsFragmentK(), ArtistTabView {
         return ArtistPresenterImpl()
     }
 
-    override fun render(artistModels: Collection<ArtistModelK>) {
+    override fun render(artistModels: Collection<ArtistModel>) {
         val adapter = ArtistAdapterK(ArrayList(artistModels),
                 this.activity)
         adapter.setOnItemClickListener( object : ArtistAdapterK.OnItemClickListener {
-            override fun onUserItemClicked(artistModel: ArtistModelK) {
+            override fun onUserItemClicked(artistModel: ArtistModel) {
                 presenter.itemClick(artistModel)
             }
         })

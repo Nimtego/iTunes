@@ -11,15 +11,15 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.main.model.SongModelK
+import com.nimtego.plectrum.presentation.main.model.SongModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class SongAdapterK(private val models: List<SongModelK>?, parent: Context) : RecyclerView.Adapter<SongAdapterK.ViewHolder>() {
+class SongAdapterK(private val models: List<SongModel>?, parent: Context) : RecyclerView.Adapter<SongAdapterK.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onUserItemClicked(songModel: SongModelK)
+        fun onUserItemClicked(songModel: SongModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
