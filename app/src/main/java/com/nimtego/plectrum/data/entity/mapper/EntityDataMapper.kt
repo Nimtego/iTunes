@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.data.entity.mapper
 
+import android.util.Log
 import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.DashBoardModel
 import com.nimtego.plectrum.data.entity.Song
@@ -99,6 +100,7 @@ class EntityDataMapper {
 
     //todo
     fun dashBoardModel(topSongs: Feed, topAlbum: Feed): DashBoardModel {
+        Log.i("Presenter", topSongs.title)
         val songs = topSongs.results.map {
             Song(artistName = it.artistName,
                     artistId = it.artistId.toInt(),

@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.presentation.migrate_kotlin.presenters
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.DashBoardModel
@@ -16,25 +17,25 @@ class DashboardPresenter(private val router: Router?,
                          private val interactor: DashBoardInteractor)
     : BasePresenter<DashBoardView>(router, screenNumber) {
 
-    override fun attachView(view: DashBoardView) {
-        super.attachView(view)
+    fun viewIsReady() {
         interactor.execute(object : DisposableObserver<DashBoardModel>() {
             override fun onComplete() {
-                //To change body of created functions use File | Settings | File Templates.
+                Log.i("Presenter", "onComplete()")
             }
 
             override fun onNext(dataModel: DashBoardModel) {
+                Log.i("Presenter", "onnext")
                 this@DashboardPresenter.showModel(dataModel)
             }
 
             override fun onError(e: Throwable) {
+                Log.i("Presenter", "onerror $e")
 //                this@DashboardPresenter.hideViewLoading()
 //                this@DashboardPresenter.toast("error" + e.localizedMessage)
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
             }
         }, DashBoardInteractor.Params.forRequest(""))
-
     }
 
     private fun showModel(dataModel: DashBoardModel) {

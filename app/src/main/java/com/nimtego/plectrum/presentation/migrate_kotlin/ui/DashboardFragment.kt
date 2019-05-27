@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,13 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_fragment, container, false)
         initRV(view, container)
+        print("oncreate in fragment")
         return view
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.viewIsReady()
     }
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {

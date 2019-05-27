@@ -2,6 +2,7 @@ package com.nimtego.plectrum.data.repository.datasource;
 
 import com.nimtego.plectrum.data.cache.Cache;
 import com.nimtego.plectrum.data.model.rss_itunes.Feed;
+import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
 import com.nimtego.plectrum.data.rest.pojo.SongsRepository;
@@ -60,27 +61,27 @@ public class DiskDataStore implements DataStore {
     }
 
     @Override
-    public Observable<Feed> recent() {
+    public Observable<PopularResponse> recent() {
         return null;
     }
 
     @Override
-    public Observable<Feed> topSong() {
+    public Observable<PopularResponse> topSong() {
         return null;
     }
 
     @Override
-    public Observable<Feed> topAlbum() {
+    public Observable<PopularResponse> topAlbum() {
         return null;
     }
 
     @Override
-    public Observable<Feed> hot() {
+    public Observable<PopularResponse> hot() {
         return null;
     }
 
     @Override
-    public Observable<Feed> newMusick() {
+    public Observable<PopularResponse> newMusick() {
         return null;
     }
 }

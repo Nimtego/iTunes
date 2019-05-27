@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.data.rest.network.rss_itunes
 
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
+import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository
 import com.nimtego.plectrum.data.rest.pojo.SongsRepository
@@ -15,17 +16,17 @@ interface RssItunesApi {
     // top albums - https://rss.itunes.apple.com/api/v1/us/itunes-music/top-albums/all/10/explicit.json
     // top songs - https://rss.itunes.apple.com/api/v1/us/itunes-music/top-songs/all/10/explicit.json
     @GET("top-albums/all/10/explicit.json")
-    fun topAlbums(): Observable<Feed>
+    fun topAlbums(): Observable<PopularResponse>
 
     @GET("top-songs/all/10/explicit.json")
-    fun topSong(): Observable<Feed>
+    fun topSong(): Observable<PopularResponse>
 
     @GET("hot-tracks/all/10/explicit.json")
-    fun hotTrack(): Observable<Feed>
+    fun hotTrack(): Observable<PopularResponse>
 
     @GET("new-music/all/10/explicit.json")
-    fun newMusic(): Observable<Feed>
+    fun newMusic(): Observable<PopularResponse>
 
     @GET("recent-releases/all/10/explicit.json")
-    fun recent(): Observable<Feed>
+    fun recent(): Observable<PopularResponse>
 }

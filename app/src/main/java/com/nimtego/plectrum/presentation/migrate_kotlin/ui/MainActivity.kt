@@ -27,11 +27,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
-        this.conteiner = this.findViewById(R.id.bottom_sheet_container)
+        this.conteiner = this.findViewById(R.id.main_container)
         supportFragmentManager
                 .beginTransaction()
                 .add(
-                        R.id.bottom_sheet_container,
+                        R.id.main_container,
                         DashboardFragment.getInstance()
                 )
                 .commit()
