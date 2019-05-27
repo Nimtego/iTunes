@@ -24,7 +24,7 @@ class TopSongAdapter(private val models: List<Song>?, parent: Context) : Recycle
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.album_card_form, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.song_form_dashboard, parent, false)
         return ViewHolder(v)
     }
 

@@ -15,7 +15,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_new_media"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp">
 
@@ -40,7 +40,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:background="@color/color_default_card_indicator_checked"
                 android:elevation="4dp"
                 android:orientation="vertical">
@@ -48,7 +48,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_hot_media"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp">
 
@@ -61,7 +61,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:background="@color/color_default_card_indicator_checked"
                 android:elevation="4dp"
                 android:orientation="vertical">
@@ -69,7 +69,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_top_songs"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp">
 
@@ -82,7 +82,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:background="@color/color_default_card_indicator_checked"
                 android:elevation="4dp"
                 android:orientation="vertical">
@@ -90,7 +90,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_top_albums"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp">
 
@@ -103,7 +103,7 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:background="@color/color_default_card_indicator_checked"
                 android:elevation="4dp"
                 android:orientation="vertical">
@@ -111,7 +111,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_top_video"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp">
 
