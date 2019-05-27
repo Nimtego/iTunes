@@ -6,7 +6,6 @@ import io.reactivex.Observable
 class InformationAlbumInteractor : BaseInteractor<AlbumDetailsModel, InformationAlbumInteractor.Params>() {
 
     override fun buildUseCaseObservable(params: Params): Observable<AlbumDetailsModel> {
-//        Preconditions.checkNotNull(params)
         return repository.albumDeteil(params.request)
     }
 

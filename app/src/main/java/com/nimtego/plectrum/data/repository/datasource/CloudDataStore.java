@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
 import com.nimtego.plectrum.data.cache.Cache;
+import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.rest.network.AppNetwork;
 import com.nimtego.plectrum.data.rest.network.FabricParam;
 import com.nimtego.plectrum.data.rest.network.wiki.RestCountries;
@@ -74,5 +75,30 @@ public class CloudDataStore implements DataStore {
     public Observable<AlbumsRepository> album(String response) {
         return networkConnection.getITunesClient()
                 .getAlbum(FabricParam.lookupAlbum(response));
+    }
+
+    @Override
+    public Observable<Feed> recent() {
+        return networkConnection.getRssItunesAPi().recent();
+    }
+
+    @Override
+    public Observable<Feed> topSong() {
+        return networkConnection.getRssItunesAPi().topSong();
+    }
+
+    @Override
+    public Observable<Feed> topAlbum() {
+        return networkConnection.getRssItunesAPi().topAlbums();
+    }
+
+    @Override
+    public Observable<Feed> hot() {
+        return networkConnection.getRssItunesAPi().hotTrack();
+    }
+
+    @Override
+    public Observable<Feed> newMusick() {
+        return networkConnection.getRssItunesAPi().newMusic();
     }
 }

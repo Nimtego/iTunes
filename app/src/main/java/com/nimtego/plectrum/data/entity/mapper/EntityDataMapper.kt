@@ -1,5 +1,9 @@
 package com.nimtego.plectrum.data.entity.mapper
 
+import com.nimtego.plectrum.data.entity.Album
+import com.nimtego.plectrum.data.entity.DashBoardModel
+import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.data.model.rss_itunes.Feed
 import com.nimtego.plectrum.data.rest.pojo.*
 import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel
@@ -91,6 +95,33 @@ class EntityDataMapper {
         return ArtistDetailsModelK(artistArtwork = artistResult.artistLinkUrl,
                                    artistId = artistResult.artistId,
                                    artistName = artistResult.artistName)
+    }
+
+    //todo
+    fun dashBoardModel(topSongs: Feed, topAlbum: Feed): DashBoardModel {
+        val songs = topSongs.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0)
+        }
+        val albums = topAlbum.results.map {
+            Album(albumId = it.id.toInt(),
+                    albumArtistId = it.artistId.toInt(),
+                    albumName = it.name,
+                    albumArtistName = it.artistName,
+                    albumArtWorkUrl = it.artworkUrl100,
+                    albumPrice = 0.0,
+                    albumRealiseDate = it.releaseDate,
+                    albumTrackCount = 0)
+        }
+        topSongs.results.asSequence()
+        topSongs.results.forEach { it.artistName}
+        return DashBoardModel(songs,albums)
     }
 
 }

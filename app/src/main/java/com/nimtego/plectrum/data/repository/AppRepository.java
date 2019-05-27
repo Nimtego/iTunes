@@ -3,7 +3,9 @@ package com.nimtego.plectrum.data.repository;
 import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.data.cache.AlbumCache;
 import com.nimtego.plectrum.data.cache.FileManager;
+import com.nimtego.plectrum.data.entity.DashBoardModel;
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
+import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.repository.datasource.DataStore;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
 import com.nimtego.plectrum.data.rest.pojo.AlbumResult;
@@ -141,6 +143,25 @@ public class AppRepository implements Repository {
 //                            result.setArtistArtwork(url);
                     return result;
                 }));
+    }
+
+    @Override
+    public Observable<DashBoardModel> dashBoardModel() {
+        //todo
+        final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
+        Observable<Feed> hotOb = dataStore.hot();
+        Observable<Feed> newMusickOb = dataStore.newMusick();
+        Observable<Feed> recentOb = dataStore.recent();
+        Observable<Feed> topAlbumOb = dataStore.topAlbum();
+        Observable<Feed> topSongOb = dataStore.topSong();
+        return Observable.zip(hotOb,
+                              newMusickOb,
+                              recentOb,
+                              topAlbumOb,
+                              topSongOb,
+                (hot, newMusick, recent, topAlbum, topSong) -> {
+                    return mapper.dashBoardModel(topSong, topAlbum);
+                });
     }
 }
 

@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
+import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
 import com.nimtego.plectrum.data.rest.pojo.SongsRepository;
@@ -24,4 +25,14 @@ public interface DataStore {
     Observable<ArtistsRepository> artistById(int id);
 
     Observable<AlbumsRepository> album(String response);
+
+    Observable<Feed> recent();
+
+    Observable<Feed> topSong();
+
+    Observable<Feed> topAlbum();
+
+    Observable<Feed> hot();
+
+    Observable<Feed> newMusick();
 }

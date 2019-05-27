@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.domain;
 
+import com.nimtego.plectrum.data.entity.DashBoardModel;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
@@ -26,4 +27,5 @@ public interface Repository {
 
     Observable<ArtistDetailsModelK> artistDetail(String name);
 
+    Observable<DashBoardModel> dashBoardModel();
 }

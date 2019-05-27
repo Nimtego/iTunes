@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.presentation.migrate_kotlin.di
 
+import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
 import com.nimtego.plectrum.presentation.migrate_kotlin.presenters.DashboardPresenter
 import dagger.Module
 import javax.inject.Singleton
@@ -14,6 +15,6 @@ class BaseNavigationModule {
     @Singleton
     internal fun provideLocalNavigationHolder(): DashboardPresenter {
         //todo prepare
-        return DashboardPresenter(Router(), 1)
+        return DashboardPresenter(Router(), 1, DashBoardInteractor())
     }
 }

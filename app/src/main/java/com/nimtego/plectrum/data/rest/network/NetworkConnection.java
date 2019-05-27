@@ -2,6 +2,7 @@ package com.nimtego.plectrum.data.rest.network;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.nimtego.plectrum.data.rest.network.itunes.ITunesApi;
+import com.nimtego.plectrum.data.rest.network.rss_itunes.RssItunesApi;
 import com.nimtego.plectrum.data.rest.network.wiki.RestCountries;
 import com.nimtego.plectrum.data.rest.network.wiki.WikiApi;
 
@@ -11,10 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkConnection implements AppNetwork {
     private final static String BASE_URL_WIKI = "https://COUNTRY.wikipedia.org/w/";
     private final static String BASE_URL_ITUNES = "https://itunes.apple.com";
+    private final static String BASE_URL_RSS_ITUNES = "https://rss.itunes.apple.com/api/v1/us/itunes-music/";
 
     private static AppNetwork appNetwork;
     private ITunesApi iTunesApi = null;
     private WikiApi wikiApi = null;
+    private RssItunesApi rssItunesApi = null;
     private RestCountries restCountries = RestCountries.ENGLISH; //def
 
     public static AppNetwork getInstance() {
@@ -45,6 +48,20 @@ public class NetworkConnection implements AppNetwork {
         return getWikiClient(restCountries);
     }
 
+    @Override
+    public RssItunesApi getRssItunesAPi() {
+        if (rssItunesApi == null)
+            rssItunesApi = getRssItunes().create(RssItunesApi.class);
+        return rssItunesApi;
+    }
+
+    private Retrofit getRssItunes() {
+        return new Retrofit.Builder()
+                .baseUrl(BASE_URL_RSS_ITUNES)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+    }
 
     private Retrofit getITunes() {
         return new Retrofit.Builder()
