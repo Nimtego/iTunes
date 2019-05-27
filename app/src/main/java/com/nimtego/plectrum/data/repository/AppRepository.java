@@ -3,18 +3,18 @@ package com.nimtego.plectrum.data.repository;
 import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.data.cache.AlbumCache;
 import com.nimtego.plectrum.data.cache.FileManager;
-import com.nimtego.plectrum.data.entity.mapper.EntityDataMapperK;
+import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
 import com.nimtego.plectrum.data.repository.datasource.DataStore;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
 import com.nimtego.plectrum.data.rest.pojo.AlbumResult;
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
 import com.nimtego.plectrum.domain.Repository;
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK;
+import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK;
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK;
-import com.nimtego.plectrum.presentation.main.model.ArtistModelK;
-import com.nimtego.plectrum.presentation.main.model.SongModelK;
+import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
+import com.nimtego.plectrum.presentation.main.model.AlbumModel;
+import com.nimtego.plectrum.presentation.main.model.ArtistModel;
+import com.nimtego.plectrum.presentation.main.model.SongModel;
 
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
@@ -29,10 +29,10 @@ import io.reactivex.Observable;
 public class AppRepository implements Repository {
 
     private DataStoreFactory dataStoreFactory;
-    private EntityDataMapperK mapper;
+    private EntityDataMapper mapper;
 
 
-    public AppRepository(DataStoreFactory dataStoreFactory, EntityDataMapperK mapper) {
+    public AppRepository(DataStoreFactory dataStoreFactory, EntityDataMapper mapper) {
         this.dataStoreFactory = dataStoreFactory;
         this.mapper = mapper;
     }
@@ -41,17 +41,17 @@ public class AppRepository implements Repository {
     public AppRepository() {
         this(new DataStoreFactory(App.getAppContext(),
                 new AlbumCache(App.getAppContext(),
-                        new FileManager())), new EntityDataMapperK());
+                        new FileManager())), new EntityDataMapper());
     }
 
     @Override
-    public Observable<List<SongModelK>> songs(String request) {
+    public Observable<List<SongModel>> songs(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songs(request).map(this.mapper::transformSongs);
     }
 
     @Override
-    public Observable<List<ArtistModelK>> artists(String request) {
+    public Observable<List<ArtistModel>> artists(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.artists(request)
                 .map(ArtistsRepository::getResults)
@@ -86,26 +86,26 @@ public class AppRepository implements Repository {
     }
 
     @Override
-    public Observable<List<AlbumModelK>> albums(String request) {
+    public Observable<List<AlbumModel>> albums(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.albums(request).map(this.mapper::transformAlbums);
     }
 
 
     @Override
-    public Observable<SongDetailsModelK> songDeteil(String request) {
+    public Observable<SongDetailsModel> songDeteil(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songById(Integer.valueOf(request)).map(result ->
                 this.mapper.transformSongDetail(result.getResults().get(0)));
     }
 
     @Override
-    public Observable<ArtistModelK> artist(String request) {
+    public Observable<ArtistModel> artist(String request) {
         return null;
     }
 
     @Override
-    public Observable<AlbumDetailsModelK> albumDeteil(String request) {
+    public Observable<AlbumDetailsModel> albumDeteil(String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.album(request)
                 .flatMap(album -> {
@@ -114,7 +114,7 @@ public class AppRepository implements Repository {
                                     .songsByIdAlbum(albumResult.getCollectionId()),
                             dataStore.wikiSearch(albumResult.getArtistName()),
                             (song, wiki) -> {
-                                AlbumDetailsModelK albumDetail =
+                                AlbumDetailsModel albumDetail =
                                         mapper.transformAlbumDetail(albumResult);
                                 //todo imut
 //                                albumDetail.setSongs(mapper.transformSongs(song));

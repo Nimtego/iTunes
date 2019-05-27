@@ -1,15 +1,15 @@
 package com.nimtego.plectrum.presentation.information_view.artist
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.InformationArtistInteractorK
-import com.nimtego.plectrum.presentation.base.BasePresenterK
+import com.nimtego.plectrum.domain.interactor.InformationArtistInteractor
+import com.nimtego.plectrum.presentation.base.BasePresenter
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.main.model.AlbumModelK
+import com.nimtego.plectrum.presentation.main.model.AlbumModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
-class ArtistInformationPresenterImpl(val interactor: InformationArtistInteractorK = InformationArtistInteractorK())
-    : BasePresenterK<ArtistInformationViewK>(), ArtistInformationPresenterK {
+class ArtistInformationPresenterImpl(val interactor: InformationArtistInteractor = InformationArtistInteractor())
+    : BasePresenter<ArtistInformationView>(), ArtistInformationPresenter {
     override fun viewReady(artistNameForResponse: String) {
         interactor.execute(object : DisposableObserver<ArtistDetailsModelK>() {
             override fun onNext(artistDetailsModel: ArtistDetailsModelK) {
@@ -26,10 +26,10 @@ class ArtistInformationPresenterImpl(val interactor: InformationArtistInteractor
             override fun onComplete() {
 
             }
-        }, InformationArtistInteractorK.Params.forRequest(artistNameForResponse))
+        }, InformationArtistInteractor.Params.forRequest(artistNameForResponse))
     }
 
-    override fun albumClicked(album: AlbumModelK) {
+    override fun albumClicked(album: AlbumModel) {
         //todo
 //        viewState.toast(album.albumName)
     }

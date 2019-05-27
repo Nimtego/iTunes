@@ -1,15 +1,15 @@
 package com.nimtego.plectrum.presentation.main.songs
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.SongInteractorK
-import com.nimtego.plectrum.presentation.base.BasePresenterK
-import com.nimtego.plectrum.presentation.main.model.SongModelK
+import com.nimtego.plectrum.domain.interactor.SongInteractor
+import com.nimtego.plectrum.presentation.base.BasePresenter
+import com.nimtego.plectrum.presentation.main.model.SongModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
-class SongPresenterImpl(val interactor: SongInteractorK = SongInteractorK())
-    : BasePresenterK<SongTabView>(), SongPresenterK {
-    override fun itemClick(artistModel: SongModelK) {
+class SongPresenterImpl(val interactor: SongInteractor = SongInteractor())
+    : BasePresenter<SongTabView>(), SongPresenter {
+    override fun itemClick(artistModel: SongModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -17,8 +17,8 @@ class SongPresenterImpl(val interactor: SongInteractorK = SongInteractorK())
         viewState.setCurrentSearch(response)
         viewState.clearList()
         showViewLoading()
-        interactor.execute(object : DisposableObserver<List<SongModelK>>() {
-            override fun onNext(songModel: List<SongModelK>) {
+        interactor.execute(object : DisposableObserver<List<SongModel>>() {
+            override fun onNext(songModel: List<SongModel>) {
                 this@SongPresenterImpl.showSongsInView(songModel)
             }
 
@@ -32,7 +32,7 @@ class SongPresenterImpl(val interactor: SongInteractorK = SongInteractorK())
             override fun onComplete() {
                 this@SongPresenterImpl.hideViewLoading()
             }
-        }, SongInteractorK.Params.forRequest(response))
+        }, SongInteractor.Params.forRequest(response))
     }
 
     private fun showViewLoading() {
@@ -43,7 +43,7 @@ class SongPresenterImpl(val interactor: SongInteractorK = SongInteractorK())
         viewState.hideProgress()
     }
 
-    private fun showSongsInView(songModel: Collection<SongModelK>) {
+    private fun showSongsInView(songModel: Collection<SongModel>) {
         viewState.render(songModel)
     }
 }
