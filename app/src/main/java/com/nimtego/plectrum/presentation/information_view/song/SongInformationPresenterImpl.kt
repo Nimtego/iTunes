@@ -1,19 +1,16 @@
 package com.nimtego.plectrum.presentation.information_view.song
 
 import com.nimtego.plectrum.domain.interactor.InformationSongInteractor
-import com.nimtego.plectrum.domain.interactor.InformationSongInteractorK
-import com.nimtego.plectrum.presentation.base.BaseContract
 import com.nimtego.plectrum.presentation.base.BasePresenter
-import com.nimtego.plectrum.presentation.base.BasePresenterK
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModelK
+import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel
 import io.reactivex.observers.DisposableObserver
 
-class SongInformationPresenterImpl (val interactor: InformationSongInteractorK = InformationSongInteractorK())
-    : BasePresenterK<SongInformationView>(), SongInformationPresenterK {
+class SongInformationPresenterImpl (val interactor: InformationSongInteractor = InformationSongInteractor())
+    : BasePresenter<SongInformationView>(), SongInformationPresenter {
 
     override fun viewReady(songNameForResponse: String) {
-        interactor.execute(object : DisposableObserver<SongDetailsModelK>() {
-            override fun onNext(songDetailsModel: SongDetailsModelK) {
+        interactor.execute(object : DisposableObserver<SongDetailsModel>() {
+            override fun onNext(songDetailsModel: SongDetailsModel) {
                 this@SongInformationPresenterImpl.showSongInView(songDetailsModel)
             }
 
@@ -26,10 +23,10 @@ class SongInformationPresenterImpl (val interactor: InformationSongInteractorK =
             override fun onComplete() {
 
             }
-        }, InformationSongInteractorK.Params.forRequest(songNameForResponse))
+        }, InformationSongInteractor.Params.forRequest(songNameForResponse))
     }
 
-    private fun showSongInView(songDetailsModel: SongDetailsModelK) {
+    private fun showSongInView(songDetailsModel: SongDetailsModel) {
         //todo
 //        viewState.toast(songDetailsModel.songName)
 //        viewState.render(songDetailsModel)

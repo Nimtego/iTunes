@@ -2,9 +2,6 @@ package com.nimtego.plectrum.presentation.main;
 
 import android.content.Context;
 
-import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
-import com.nimtego.plectrum.domain.interactor.MainViewInteractor;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

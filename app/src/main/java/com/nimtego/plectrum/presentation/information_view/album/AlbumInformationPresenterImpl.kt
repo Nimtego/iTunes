@@ -1,18 +1,18 @@
 package com.nimtego.plectrum.presentation.information_view.album
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.InformationAlbumInteractorK
-import com.nimtego.plectrum.presentation.base.BasePresenterK
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModelK
+import com.nimtego.plectrum.domain.interactor.InformationAlbumInteractor
+import com.nimtego.plectrum.presentation.base.BasePresenter
+import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
-class AlbumInformationPresenterImpl (val interactor: InformationAlbumInteractorK = InformationAlbumInteractorK())
-    : BasePresenterK<AlbumInformationViewK>(), AlbumInformationPreseneterK {
+class AlbumInformationPresenterImpl (val interactor: InformationAlbumInteractor = InformationAlbumInteractor())
+    : BasePresenter<AlbumInformationView>(), AlbumInformationPreseneter {
 
     override fun viewReady(albumNameForResponse: String) {
-        interactor.execute(object : DisposableObserver<AlbumDetailsModelK>() {
-            override fun onNext(albumDetailsModel: AlbumDetailsModelK) {
+        interactor.execute(object : DisposableObserver<AlbumDetailsModel>() {
+            override fun onNext(albumDetailsModel: AlbumDetailsModel) {
                 this@AlbumInformationPresenterImpl.showAlbumsInView(albumDetailsModel)
             }
 
@@ -25,10 +25,10 @@ class AlbumInformationPresenterImpl (val interactor: InformationAlbumInteractorK
             override fun onComplete() {
 
             }
-        }, InformationAlbumInteractorK.Params.forRequest(albumNameForResponse))
+        }, InformationAlbumInteractor.Params.forRequest(albumNameForResponse))
     }
 
-    private fun showAlbumsInView(albumDetailsModel: AlbumDetailsModelK) {
+    private fun showAlbumsInView(albumDetailsModel: AlbumDetailsModel) {
         //todo
 //        viewState.toast(albumDetailsModel.albumName)
 //        this.view.render(albumDetailsModel)

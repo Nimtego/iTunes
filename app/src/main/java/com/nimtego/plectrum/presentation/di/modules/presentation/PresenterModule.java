@@ -1,12 +1,11 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation;
 
-import com.nimtego.plectrum.presentation.main.MainContract;
 import com.nimtego.plectrum.presentation.main.MainPresenter;
-import com.nimtego.plectrum.presentation.main.albums.AlbumContract;
+import com.nimtego.plectrum.presentation.main.albums.AlbumPresenterImpl;
 import com.nimtego.plectrum.presentation.main.albums.AlbumPresenter;
-import com.nimtego.plectrum.presentation.main.artists.ArtistContract;
+import com.nimtego.plectrum.presentation.main.artists.ArtistPresenterImpl;
 import com.nimtego.plectrum.presentation.main.artists.ArtistPresenter;
-import com.nimtego.plectrum.presentation.main.songs.SongContract;
+import com.nimtego.plectrum.presentation.main.songs.SongPresenterImpl;
 import com.nimtego.plectrum.presentation.main.songs.SongPresenter;
 
 import dagger.Module;
@@ -16,22 +15,22 @@ import dagger.Provides;
 public class PresenterModule {
 
     @Provides
-    public ArtistContract.Presenter mainArtistPresenter() {
-        return new ArtistPresenter();
+    public ArtistPresenter mainArtistPresenter() {
+        return new ArtistPresenterImpl();
     }
 
     @Provides
-    public AlbumContract.Presenter mainAlbumPresenter() {
-        return new AlbumPresenter();
+    public AlbumPresenter mainAlbumPresenter() {
+        return new AlbumPresenterImpl();
     }
 
     @Provides
-    public SongContract.Presenter mainSongPresenter() {
-        return new SongPresenter();
+    public SongPresenter mainSongPresenter() {
+        return new SongPresenterImpl();
     }
 
     @Provides
-    public MainContract.Presenter mainPresenter() {
+    public MainPresenter mainPresenter() {
         return new MainPresenter();
     }
 }

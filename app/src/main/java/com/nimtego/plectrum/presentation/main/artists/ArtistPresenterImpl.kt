@@ -1,14 +1,14 @@
 package com.nimtego.plectrum.presentation.main.artists
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.ArtistInteractorK
-import com.nimtego.plectrum.presentation.base.BasePresenterK
+import com.nimtego.plectrum.domain.interactor.ArtistInteractor
+import com.nimtego.plectrum.presentation.base.BasePresenter
 import com.nimtego.plectrum.presentation.main.model.ArtistModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
-class ArtistPresenterImpl(val interactor: ArtistInteractorK = ArtistInteractorK())
-    : BasePresenterK<ArtistTabView>(), ArtistPresenterK {
+class ArtistPresenterImpl(val interactor: ArtistInteractor = ArtistInteractor())
+    : BasePresenter<ArtistTabView>(), ArtistPresenter {
 
     private val TAG = this.javaClass.canonicalName
 
@@ -35,7 +35,7 @@ class ArtistPresenterImpl(val interactor: ArtistInteractorK = ArtistInteractorK(
             override fun onComplete() {
                 this@ArtistPresenterImpl.hideViewLoading()
             }
-        }, ArtistInteractorK.Params.forRequest(response))
+        }, ArtistInteractor.Params.forRequest(response))
 //        }
     }
 

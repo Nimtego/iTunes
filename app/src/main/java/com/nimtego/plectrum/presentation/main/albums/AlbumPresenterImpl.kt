@@ -1,16 +1,16 @@
 package com.nimtego.plectrum.presentation.main.albums
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.AlbumInteractorK
-import com.nimtego.plectrum.presentation.base.BasePresenterK
+import com.nimtego.plectrum.domain.interactor.AlbumInteractor
+import com.nimtego.plectrum.presentation.base.BasePresenter
 import com.nimtego.plectrum.presentation.main.model.AlbumModel
 import com.nimtego.plectrum.presentation.utils.FragmentTypeK
 import io.reactivex.observers.DisposableObserver
 import java.util.*
 
 @InjectViewState
-class AlbumPresenterImpl(val interactor: AlbumInteractorK = AlbumInteractorK())
-    : BasePresenterK<AlbumTabView>(), AlbumPresenterK {
+class AlbumPresenterImpl(val interactor: AlbumInteractor = AlbumInteractor())
+    : BasePresenter<AlbumTabView>(), AlbumPresenter {
 
     private val TAG = this.javaClass.canonicalName
 
@@ -55,7 +55,7 @@ class AlbumPresenterImpl(val interactor: AlbumInteractorK = AlbumInteractorK())
                 override fun onComplete() {
                     this@AlbumPresenterImpl.hideViewLoading()
                 }
-            }, AlbumInteractorK.Params.forRequest(response))
+            }, AlbumInteractor.Params.forRequest(response))
 //        }
     }
 

@@ -1,14 +1,14 @@
 package com.nimtego.plectrum.presentation.main.songs
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.domain.interactor.SongInteractorK
-import com.nimtego.plectrum.presentation.base.BasePresenterK
+import com.nimtego.plectrum.domain.interactor.SongInteractor
+import com.nimtego.plectrum.presentation.base.BasePresenter
 import com.nimtego.plectrum.presentation.main.model.SongModel
 import io.reactivex.observers.DisposableObserver
 
 @InjectViewState
-class SongPresenterImpl(val interactor: SongInteractorK = SongInteractorK())
-    : BasePresenterK<SongTabView>(), SongPresenterK {
+class SongPresenterImpl(val interactor: SongInteractor = SongInteractor())
+    : BasePresenter<SongTabView>(), SongPresenter {
     override fun itemClick(artistModel: SongModel) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -32,7 +32,7 @@ class SongPresenterImpl(val interactor: SongInteractorK = SongInteractorK())
             override fun onComplete() {
                 this@SongPresenterImpl.hideViewLoading()
             }
-        }, SongInteractorK.Params.forRequest(response))
+        }, SongInteractor.Params.forRequest(response))
     }
 
     private fun showViewLoading() {
