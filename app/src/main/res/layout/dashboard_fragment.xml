@@ -2,125 +2,133 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_bottom_sheet_navigation_bar"
+    android:background="@color/color_navigation_item_inactive"
     android:orientation="vertical">
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_vendor_dark_grey_blue_lighter"
-            android:elevation="4dp"
-            android:orientation="vertical">
-
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_new_media"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp">
-
-            </android.support.v7.widget.RecyclerView>
-        </android.support.v7.widget.CardView>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/signupColor">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/click_accent"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hot" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="New"
+                android:textColor="@color/signupColor"
+                android:textSize="14sp" />
 
-            <android.support.v7.widget.CardView
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_new_media"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_default_card_indicator_checked"
-                android:elevation="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Hot"
+                android:textColor="@color/signupColor"
+                android:textSize="14sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_hot_media"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
 
                 </android.support.v7.widget.RecyclerView>
-            </android.support.v7.widget.CardView>
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Songs" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Songs"
+                android:textColor="@color/signupColor"
+                android:textSize="14sp" />
 
-            <android.support.v7.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_default_card_indicator_checked"
-                android:elevation="4dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_top_songs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
 
                 </android.support.v7.widget.RecyclerView>
-            </android.support.v7.widget.CardView>
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Albums" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Albums"
+                android:textColor="@color/signupColor"
+                android:textSize="14sp" />
 
-            <android.support.v7.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_default_card_indicator_checked"
-                android:elevation="4dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_top_albums"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
 
                 </android.support.v7.widget.RecyclerView>
-            </android.support.v7.widget.CardView>
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Video" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Video"
+                android:textColor="@color/signupColor"
+                android:textSize="14sp" />
 
-            <android.support.v7.widget.CardView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_default_card_indicator_checked"
-                android:elevation="4dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view_top_video"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
 
                 </android.support.v7.widget.RecyclerView>
-            </android.support.v7.widget.CardView>
+            </FrameLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

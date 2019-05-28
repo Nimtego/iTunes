@@ -3,7 +3,7 @@ package com.nimtego.plectrum.presentation.main.adapter;
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
+@Deprecated
 public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
     private int spanCount;
@@ -22,6 +22,12 @@ public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
         int column = position % spanCount;
 
         if (includeEdge) {
+            if (position == 0 ) {
+                outRect.left = spacing;
+            }
+            outRect.right = spacing;
+            outRect.bottom = spacing;
+            outRect.top = spacing;
             outRect.left = spacing - column * spacing / spanCount;
             outRect.right = (column + 1) * spacing / spanCount;
 

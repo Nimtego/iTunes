@@ -156,7 +156,7 @@
     <color name="color_bottom_sheet_navigation_bar">@android:color/white</color>
 
     <color name="color_navigation_item_active">@color/color_vendor_dark_grey_blue</color>
-    <color name="color_navigation_item_inactive">#ffb1b9cf</color>
+    <color name="color_navigation_item_inactive">#E6E6E6</color>
 
     <color name="color_font_card_ripple_blue">#ff01adfe</color>
 

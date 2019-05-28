@@ -23,6 +23,9 @@ import com.nimtego.plectrum.presentation.migrate_kotlin.view_model.TopAlbumAdapt
 import com.nimtego.plectrum.presentation.migrate_kotlin.view_model.TopSongAdapter
 import ru.terrakok.cicerone.Router
 import java.util.*
+import android.support.v7.widget.DividerItemDecoration
+import com.nimtego.plectrum.presentation.main.adapter.SpaceItemDecorator
+
 
 class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
 
@@ -63,9 +66,8 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
             layoutManager = LinearLayoutManager(this@DashboardFragment.context,
                     LinearLayoutManager.HORIZONTAL,
                     false)
-            addItemDecoration(SpacesItemDecoration(2,
-                    30,
-                    true))
+            addItemDecoration(SpaceItemDecorator(spacing = 30))
+//            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.HORIZONTAL))
             itemAnimator = DefaultItemAnimator()
         }
         this.topAlbumRecyclerView?.apply {
@@ -73,9 +75,7 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
             layoutManager = LinearLayoutManager(this@DashboardFragment.context,
                     LinearLayoutManager.HORIZONTAL,
                     false)
-            addItemDecoration(SpacesItemDecoration(2,
-                    30,
-                    true))
+            addItemDecoration(SpaceItemDecorator(spacing = 30))
             itemAnimator = DefaultItemAnimator()
         }
         this.newMediaRecyclerView?.apply {
@@ -83,9 +83,7 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
             layoutManager = LinearLayoutManager(this@DashboardFragment.context,
                     LinearLayoutManager.HORIZONTAL,
                     false)
-            addItemDecoration(SpacesItemDecoration(2,
-                    30,
-                    true))
+            addItemDecoration(SpaceItemDecorator(spacing = 30))
             itemAnimator = DefaultItemAnimator()
         }
 
@@ -94,9 +92,7 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
             layoutManager = LinearLayoutManager(this@DashboardFragment.context,
                     LinearLayoutManager.HORIZONTAL,
                     false)
-            addItemDecoration(SpacesItemDecoration(2,
-                    30,
-                    true))
+            addItemDecoration(SpaceItemDecorator(spacing = 30))
             itemAnimator = DefaultItemAnimator()
         }
     }
