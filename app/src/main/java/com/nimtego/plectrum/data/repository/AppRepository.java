@@ -150,15 +150,22 @@ public class AppRepository implements Repository {
     public Observable<DashBoardModel> dashBoardModel() {
         //todo
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
-//        Observable<Feed> hotOb = dataStore.hot();
-//        Observable<Feed> newMusickOb = dataStore.newMusick();
+        Observable<PopularResponse> hotOb = dataStore.hot();
+        Observable<PopularResponse> newMusickOb = dataStore.newMusick();
 //        Observable<Feed> recentOb = dataStore.recent();
         Observable<PopularResponse> topAlbumOb = dataStore.topAlbum();
         Observable<PopularResponse> topSongOb = dataStore.topSong();
         return Observable.zip(topAlbumOb,
                               topSongOb,
-                (topAlbum, topSong) ->
-                        mapper.dashBoardModel(topSong.getFeed(), topAlbum.getFeed()));
+                              hotOb,
+                              newMusickOb,
+                              (topAlbum, topSong, hotSong, newMusic) ->
+                                     mapper.dashBoardModel(topSong.getFeed(),
+                                                           topAlbum.getFeed(),
+                                                           newMusic.getFeed(),
+                                                           hotSong.getFeed()
+                                     )
+        );
     }
 }
 

@@ -8,4 +8,5 @@ data class Song (
     val wrapperType: String,
     val trackName: String,
     val trackPrice: Double,
+    val trackArtWorkUrl: String,
     val trackTimeMillis: Int)

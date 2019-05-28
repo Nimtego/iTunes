@@ -39,7 +39,7 @@ class TopAlbumAdapter(private val models: List<Album>?, parent: Context) : Recyc
                 this.onItemClickListener!!.onUserItemClicked(albumModel)
             }
         }
-        Picasso.get().load(models[position].albumArtWorkUrl!!
+        Picasso.get().load(models[position].albumArtWorkUrl
                 .replace("100x100", "200x200"))
                 .into(holder.albumImage, object : Callback {
                     override fun onSuccess() {

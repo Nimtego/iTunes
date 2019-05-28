@@ -28,6 +28,8 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
 
     private var topSongRecyclerView: RecyclerView? = null
     private var topAlbumRecyclerView: RecyclerView? = null
+    private var newMediaRecyclerView: RecyclerView? = null
+    private var hotMediaRecyclerView: RecyclerView? = null
 
     @InjectPresenter
     internal lateinit var presenter: DashboardPresenter
@@ -53,6 +55,9 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
         //todo refac
         this.topSongRecyclerView = view.findViewById(R.id.recycler_view_top_songs)
         this.topAlbumRecyclerView = view.findViewById(R.id.recycler_view_top_albums)
+        this.newMediaRecyclerView = view.findViewById(R.id.recycler_view_new_media)
+        this.hotMediaRecyclerView = view.findViewById(R.id.recycler_view_hot_media)
+
         this.topSongRecyclerView?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@DashboardFragment.context,
@@ -73,25 +78,69 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
                     true))
             itemAnimator = DefaultItemAnimator()
         }
+        this.newMediaRecyclerView?.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@DashboardFragment.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false)
+            addItemDecoration(SpacesItemDecoration(2,
+                    30,
+                    true))
+            itemAnimator = DefaultItemAnimator()
+        }
+
+        this.hotMediaRecyclerView?.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(this@DashboardFragment.context,
+                    LinearLayoutManager.HORIZONTAL,
+                    false)
+            addItemDecoration(SpacesItemDecoration(2,
+                    30,
+                    true))
+            itemAnimator = DefaultItemAnimator()
+        }
     }
     override fun showViewState(dashboardModel: DashBoardModel) {
-        val adapterAlbum = TopAlbumAdapter(ArrayList(dashboardModel.topAlbums),
+        val adapterTopAlbum = TopAlbumAdapter(ArrayList(dashboardModel.topAlbums),
                 this.activity)
-        adapterAlbum.setOnItemClickListener( object : TopAlbumAdapter.OnItemClickListener {
+        adapterTopAlbum.setOnItemClickListener( object : TopAlbumAdapter.OnItemClickListener {
             override fun onUserItemClicked(albumModel: Album) {
                 presenter.albumClicked(albumModel)
             }
         })
-        topAlbumRecyclerView?.adapter = adapterAlbum
 
-        val adapterSong = TopSongAdapter(ArrayList(dashboardModel.topSongs),
+        val adapterTopSong = TopSongAdapter(ArrayList(dashboardModel.topSongs),
                 this.activity)
-        adapterSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
+        adapterTopSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
             override fun onUserItemClicked(songModel: Song) {
                 presenter.songClicked(songModel)
             }
         })
-        topSongRecyclerView?.adapter = adapterSong
+
+        val adapterNewSong = TopSongAdapter(ArrayList(dashboardModel.newMusic),
+                this.activity)
+        adapterTopSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
+            override fun onUserItemClicked(songModel: Song) {
+                presenter.songClicked(songModel)
+            }
+        })
+
+        val adapterHotSong = TopSongAdapter(ArrayList(dashboardModel.hotTrack),
+                this.activity)
+        adapterTopSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
+            override fun onUserItemClicked(songModel: Song) {
+                presenter.songClicked(songModel)
+            }
+        })
+
+        topAlbumRecyclerView?.adapter = adapterTopAlbum
+
+        topSongRecyclerView?.adapter = adapterTopSong
+
+        newMediaRecyclerView?.adapter = adapterNewSong
+
+        hotMediaRecyclerView?.adapter = adapterHotSong
+
     }
 
     override fun showProgress() {

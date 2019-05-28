@@ -40,19 +40,19 @@ class TopSongAdapter(private val models: List<Song>?, parent: Context) : Recycle
             }
         }
         //todo
-//        Picasso.get().load(models[position].songArtWorkUrl!!
-//                .replace("100x100", "200x200"))
-//                .into(holder.albumImage, object : Callback {
-//                    override fun onSuccess() {
-//                        if (holder.pb != null)
-//                            holder.pb!!.visibility = View.GONE
-//                    }
-//
-//                    override fun onError(e: Exception) {
-//                        if (holder.pb != null)
-//                            holder.pb!!.visibility = View.GONE
-//                    }
-//                })
+        Picasso.get().load(models[position].trackArtWorkUrl
+                .replace("100x100", "200x200"))
+                .into(holder.albumImage, object : Callback {
+                    override fun onSuccess() {
+                        if (holder.pb != null)
+                            holder.pb!!.visibility = View.GONE
+                    }
+
+                    override fun onError(e: Exception) {
+                        if (holder.pb != null)
+                            holder.pb!!.visibility = View.GONE
+                    }
+                })
         holder.cv.cardElevation = 5f
     }
 

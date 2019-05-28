@@ -99,9 +99,14 @@ class EntityDataMapper {
     }
 
     //todo
-    fun dashBoardModel(topSongs: Feed, topAlbum: Feed): DashBoardModel {
+    fun dashBoardModel(topSongs: Feed,
+                       topAlbum: Feed,
+                       newMusic: Feed,
+                       hotTrack: Feed): DashBoardModel {
+
         Log.i("Presenter", topSongs.title)
-        val songs = topSongs.results.map {
+
+        val topSongsResult = topSongs.results.map {
             Song(artistName = it.artistName,
                     artistId = it.artistId.toInt(),
                     trackName = it.name,
@@ -109,9 +114,35 @@ class EntityDataMapper {
                     collectionId = 0,
                     trackPrice = 0.0,
                     wrapperType = it.copyright,
-                    trackTimeMillis = 0)
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
         }
-        val albums = topAlbum.results.map {
+
+        val newMusicResult = newMusic.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
+
+        val hotTrackResult = hotTrack.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
+
+        val topAlbumsResult = topAlbum.results.map {
             Album(albumId = it.id.toInt(),
                     albumArtistId = it.artistId.toInt(),
                     albumName = it.name,
@@ -121,9 +152,10 @@ class EntityDataMapper {
                     albumRealiseDate = it.releaseDate,
                     albumTrackCount = 0)
         }
-        topSongs.results.asSequence()
-        topSongs.results.forEach { it.artistName}
-        return DashBoardModel(songs,albums)
+        return DashBoardModel(topSongs =  topSongsResult,
+                              topAlbums = topAlbumsResult,
+                              newMusic = newMusicResult,
+                              hotTrack =  hotTrackResult)
     }
 
 }
