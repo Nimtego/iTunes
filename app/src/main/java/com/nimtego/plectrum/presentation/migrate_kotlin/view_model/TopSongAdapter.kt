@@ -53,7 +53,7 @@ class TopSongAdapter(private val models: List<Song>?, parent: Context) : Recycle
                             holder.pb!!.visibility = View.GONE
                     }
                 })
-        holder.cv.cardElevation = 5f
+//        holder.cv.cardElevation = 5f
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {

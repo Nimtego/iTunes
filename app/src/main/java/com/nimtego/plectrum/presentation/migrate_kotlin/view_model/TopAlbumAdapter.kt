@@ -52,7 +52,7 @@ class TopAlbumAdapter(private val models: List<Album>?, parent: Context) : Recyc
                             holder.pb!!.visibility = View.GONE
                     }
                 })
-        holder.cv.cardElevation = 5f
+//        holder.cv.cardElevation = 5f
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
