@@ -45,7 +45,6 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_fragment, container, false)
         initRV(view, container)
-        print("oncreate in fragment")
         return view
     }
 
