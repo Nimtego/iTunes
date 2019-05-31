@@ -23,14 +23,14 @@
         <item name="android:textColor">@color/w</item>
     </style>
 
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.NoActionBar">
-        <item name="editTextColor">@color/w</item>
-        <item name="android:textColor">@color/w</item>
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="editTextColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
     </style>
 
 <!--    <style name="TextViewValue" parent="Base.Widget.MaterialComponents.TextInputEditText">
