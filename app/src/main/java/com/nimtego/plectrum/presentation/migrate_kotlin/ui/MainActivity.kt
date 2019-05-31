@@ -8,6 +8,9 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.MainView
 import kotlinx.android.synthetic.main.activity_main.*
+import android.graphics.Color.parseColor
+import android.os.Build
+import android.graphics.Color
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
