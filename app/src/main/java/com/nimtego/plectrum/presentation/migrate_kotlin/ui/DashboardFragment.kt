@@ -4,30 +4,36 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.DashBoardModel
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
-import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration
+import com.nimtego.plectrum.presentation.main.adapter.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.DashBoardView
 import com.nimtego.plectrum.presentation.migrate_kotlin.presenters.DashboardPresenter
 import com.nimtego.plectrum.presentation.migrate_kotlin.view_model.TopAlbumAdapter
 import com.nimtego.plectrum.presentation.migrate_kotlin.view_model.TopSongAdapter
-import ru.terrakok.cicerone.Router
+import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
+import com.nimtego.plectrum.presentation.utils.toast.ToastAlarm
 import java.util.*
-import android.support.v7.widget.DividerItemDecoration
-import com.nimtego.plectrum.presentation.main.adapter.SpaceItemDecorator
+import ru.terrakok.cicerone.commands.Command
+import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 
 class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
+    lateinit var  toast: ToastAlarm
+    override fun message(message: String?) {
+        toast.message(message)
+    }
 
     private var topSongRecyclerView: RecyclerView? = null
     private var topAlbumRecyclerView: RecyclerView? = null
@@ -39,11 +45,24 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): DashboardPresenter {
-        return DashboardPresenter(Router(),5, DashBoardInteractor())
+        return DashboardPresenter(App.INSTANCE.getRouter(), 5, DashBoardInteractor())
     }
+
+    override fun onResume() {
+        super.onResume()
+//        App.INSTANCE.getNavigatorHolder()?.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        App.INSTANCE.getNavigatorHolder()?.removeNavigator()
+    }
+
+    //private val navigator = object : SupportAppNavigator(this.context, R.id.container)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_fragment, container, false)
+        toast = SimpleToastAlarm(this.context)
         initRV(view, container)
         return view
     }
@@ -95,10 +114,11 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
             itemAnimator = DefaultItemAnimator()
         }
     }
+
     override fun showViewState(dashboardModel: DashBoardModel) {
         val adapterTopAlbum = TopAlbumAdapter(ArrayList(dashboardModel.topAlbums),
                 this.activity)
-        adapterTopAlbum.setOnItemClickListener( object : TopAlbumAdapter.OnItemClickListener {
+        adapterTopAlbum.setOnItemClickListener(object : TopAlbumAdapter.OnItemClickListener {
             override fun onUserItemClicked(albumModel: Album) {
                 presenter.albumClicked(albumModel)
             }
@@ -106,7 +126,7 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
 
         val adapterTopSong = TopSongAdapter(ArrayList(dashboardModel.topSongs),
                 this.activity)
-        adapterTopSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
+        adapterTopSong.setOnItemClickListener(object : TopSongAdapter.OnItemClickListener {
             override fun onUserItemClicked(songModel: Song) {
                 presenter.songClicked(songModel)
             }
@@ -114,7 +134,7 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
 
         val adapterNewSong = TopSongAdapter(ArrayList(dashboardModel.newMusic),
                 this.activity)
-        adapterTopSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
+        adapterTopSong.setOnItemClickListener(object : TopSongAdapter.OnItemClickListener {
             override fun onUserItemClicked(songModel: Song) {
                 presenter.songClicked(songModel)
             }
@@ -122,7 +142,7 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
 
         val adapterHotSong = TopSongAdapter(ArrayList(dashboardModel.hotTrack),
                 this.activity)
-        adapterTopSong.setOnItemClickListener( object : TopSongAdapter.OnItemClickListener {
+        adapterTopSong.setOnItemClickListener(object : TopSongAdapter.OnItemClickListener {
             override fun onUserItemClicked(songModel: Song) {
                 presenter.songClicked(songModel)
             }

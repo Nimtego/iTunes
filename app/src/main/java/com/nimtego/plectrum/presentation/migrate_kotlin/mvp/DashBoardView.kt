@@ -5,4 +5,5 @@ import com.nimtego.plectrum.presentation.mvp.ProgressView
 
 interface DashBoardView : ProgressView {
     fun showViewState(dashboardModel: DashBoardModel)
+    fun message(message: String?)
 }

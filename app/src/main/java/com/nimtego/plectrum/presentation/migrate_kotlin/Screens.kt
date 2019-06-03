@@ -4,6 +4,8 @@ import android.content.Context
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import android.content.Intent
 import android.support.v4.app.Fragment
+import com.nimtego.plectrum.presentation.information_view.album.AlbumInformationFragment
+import com.nimtego.plectrum.presentation.information_view.song.SongInformationFragment
 import com.nimtego.plectrum.presentation.migrate_kotlin.ui.DashboardFragment
 import com.nimtego.plectrum.presentation.migrate_kotlin.ui.MainActivity
 
@@ -45,12 +47,17 @@ class Screens {
 //        }
 //    }
 
-    class ForwardScreen(private val containerName: String, private val number: Int) : SupportAppScreen() {
+    class AlbumInformationDetail(private val id: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return AlbumInformationFragment.newInstance(id)
+        }
+    }
 
-//        override fun getFragment(): Fragment {
-//            return ForwardFragment.getNewInstance(containerName, number)
-//        }
-//    }
+    class SongInformationDetail(private val id: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SongInformationFragment.newInstance(id)
+        }
+    }
 //
 //    class GithubScreen : SupportAppScreen() {
 //        fun getActivityIntent(context: Context): Intent {
@@ -64,15 +71,9 @@ class Screens {
 //        }
 //    }
 //
-//    class ProfileInfoScreen : SupportAppScreen() {
-//        override fun getFragment(): Fragment {
-//            return ProfileFragment()
-//        }
-//    }
 //
 //    class SelectPhotoScreen : SupportAppScreen() {
 //        override fun getFragment(): Fragment {
 //            return SelectPhotoFragment()
 //        }
-    }
 }

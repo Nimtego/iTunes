@@ -6,6 +6,7 @@ import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.DashBoardModel
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
+import com.nimtego.plectrum.presentation.migrate_kotlin.Screens
 import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.DashBoardView
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
@@ -43,11 +44,13 @@ class DashboardPresenter(router: Router?,
     }
 
     fun albumClicked(albumModel: Album) {
-        //todo
+        viewState.message("fun albumClicked(albumModel: Album)")
+        router?.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
     }
 
-    fun songClicked(albumModel: Song) {
-        //todo
+    fun songClicked(songModel: Song) {
+        viewState.message("fun songClicked(songModel: Song)")
+        router?.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
 
 }

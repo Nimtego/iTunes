@@ -5,7 +5,6 @@ import com.nimtego.plectrum.data.cache.AlbumCache;
 import com.nimtego.plectrum.data.cache.FileManager;
 import com.nimtego.plectrum.data.entity.DashBoardModel;
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
-import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.repository.datasource.DataStore;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
@@ -42,8 +41,8 @@ public class AppRepository implements Repository {
 
     @Inject
     public AppRepository() {
-        this(new DataStoreFactory(App.getAppContext(),
-                new AlbumCache(App.getAppContext(),
+        this(new DataStoreFactory(App.Companion.getINSTANCE(),
+                new AlbumCache(App.Companion.getINSTANCE(),
                         new FileManager())), new EntityDataMapper());
     }
 

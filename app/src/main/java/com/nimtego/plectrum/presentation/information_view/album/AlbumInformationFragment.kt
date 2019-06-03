@@ -13,6 +13,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.base.BaseFragment
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.information_view.song.SongInformationFragment
+import com.nimtego.plectrum.presentation.information_view.song.SongInformationView
 import com.nimtego.plectrum.presentation.utils.IpTagsK
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
