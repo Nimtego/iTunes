@@ -27,7 +27,7 @@ class SongInformationFragment : BaseFragment(), SongInformationView  {
         return SongInformationPresenterImpl()
     }
 companion object {
-    fun newInstance(content: String): SongInformationView {
+    fun newInstance(content: String): SongInformationFragment {
         val fragment = SongInformationFragment()
         val arguments = Bundle()
         arguments.putString(IpTagsK.SONG_ID.name, content)

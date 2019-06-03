@@ -22,9 +22,9 @@ class NavigationModule {
         return cicerone.router
     }
 
-    @Provides
-    @Singleton
-    internal fun provideNavigatorHolder(): NavigatorHolder {
-        return cicerone.navigatorHolder
-    }
+//    @Provides
+//    @Singleton
+//    internal fun provideNavigatorHolder(): NavigatorHolder {
+//        return cicerone.navigatorHolder
+//    }
 }

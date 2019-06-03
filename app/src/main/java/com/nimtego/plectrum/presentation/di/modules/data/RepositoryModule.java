@@ -26,8 +26,8 @@ public class RepositoryModule {
 
     @Provides
     DataStoreFactory dataStoreFactory() {
-        return new DataStoreFactory(App.getAppContext(),
-                new AlbumCache(App.getAppContext(),
+        return new DataStoreFactory(App.Companion.getINSTANCE(),
+                new AlbumCache(App.Companion.getINSTANCE(),
                         new FileManager()));
     }
 

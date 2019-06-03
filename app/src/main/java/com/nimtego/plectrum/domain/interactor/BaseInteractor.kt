@@ -17,7 +17,7 @@ abstract class BaseInteractor<T, P> : Interactor<T, P> {
 
     init {
         disposables = CompositeDisposable()
-        this.repository = App.getRepository()
+        this.repository = App.INSTANCE.getRepository()
     }
 
     protected abstract fun buildUseCaseObservable(params: P): Observable<T>
