@@ -31,6 +31,6 @@ class AlbumInformationPresenterImpl (val interactor: InformationAlbumInteractor 
     private fun showAlbumsInView(albumDetailsModel: AlbumDetailsModel) {
         //todo
 //        viewState.toast(albumDetailsModel.albumName)
-//        this.view.render(albumDetailsModel)
+        viewState.render(albumDetailsModel)
     }
 }

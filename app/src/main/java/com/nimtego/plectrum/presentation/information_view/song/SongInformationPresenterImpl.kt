@@ -1,10 +1,12 @@
 package com.nimtego.plectrum.presentation.information_view.song
 
+import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.InformationSongInteractor
 import com.nimtego.plectrum.presentation.base.BasePresenter
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel
 import io.reactivex.observers.DisposableObserver
 
+@InjectViewState
 class SongInformationPresenterImpl (val interactor: InformationSongInteractor = InformationSongInteractor())
     : BasePresenter<SongInformationView>(), SongInformationPresenter {
 
@@ -28,7 +30,7 @@ class SongInformationPresenterImpl (val interactor: InformationSongInteractor = 
 
     private fun showSongInView(songDetailsModel: SongDetailsModel) {
         //todo
-//        viewState.toast(songDetailsModel.songName)
-//        viewState.render(songDetailsModel)
+        //viewState.toast(songDetailsModel.songName)
+        viewState.render(songDetailsModel)
     }
 }

@@ -44,12 +44,10 @@ class DashboardPresenter(router: Router?,
     }
 
     fun albumClicked(albumModel: Album) {
-        viewState.message("fun albumClicked(albumModel: Album)")
         router?.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
     }
 
     fun songClicked(songModel: Song) {
-        viewState.message("fun songClicked(songModel: Song)")
         router?.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
 

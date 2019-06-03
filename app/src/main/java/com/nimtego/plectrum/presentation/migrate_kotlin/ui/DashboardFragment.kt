@@ -48,18 +48,6 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
         return DashboardPresenter(App.INSTANCE.getRouter(), 5, DashBoardInteractor())
     }
 
-    override fun onResume() {
-        super.onResume()
-//        App.INSTANCE.getNavigatorHolder()?.setNavigator(navigator)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        App.INSTANCE.getNavigatorHolder()?.removeNavigator()
-    }
-
-    //private val navigator = object : SupportAppNavigator(this.context, R.id.container)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_fragment, container, false)
         toast = SimpleToastAlarm(this.context)
@@ -85,7 +73,6 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
                     LinearLayoutManager.HORIZONTAL,
                     false)
             addItemDecoration(SpaceItemDecorator(spacing = 30))
-//            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.HORIZONTAL))
             itemAnimator = DefaultItemAnimator()
         }
         this.topAlbumRecyclerView?.apply {
