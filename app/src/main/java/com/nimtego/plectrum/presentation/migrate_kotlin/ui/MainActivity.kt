@@ -1,28 +1,31 @@
 package com.nimtego.plectrum.presentation.migrate_kotlin.ui
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.view.WindowManager
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.migrate_kotlin.App
 import com.nimtego.plectrum.presentation.mvp.MainView
-import kotlinx.android.synthetic.main.activity_main.*
-import android.graphics.Color.parseColor
-import android.os.Build
-import android.graphics.Color
+import ru.terrakok.cicerone.NavigatorHolder
+import javax.inject.Inject
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
+
+
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
 
-//    @Inject
-//    var navigatorHolder: NavigatorHolder? = null
+    @Inject
+    var navigatorHolder: NavigatorHolder? = null
+
+    private val navigator = SupportAppNavigator(this, -1)
 
     private var conteiner: FrameLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //todo add module
-        //App.INSTANCE.getAppComponent().inject(this);
+        App.INSTANCE.getAppComponent()?.inject(this);
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_k)
         //set transparent status bar

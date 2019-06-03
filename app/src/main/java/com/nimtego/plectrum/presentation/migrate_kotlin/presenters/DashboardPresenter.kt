@@ -12,8 +12,8 @@ import ru.terrakok.cicerone.Router
 
 
 @InjectViewState
-class DashboardPresenter(private val router: Router?,
-                         private val screenNumber: Int,
+class DashboardPresenter(router: Router?,
+                         screenNumber: Int,
                          private val interactor: DashBoardInteractor)
     : BasePresenter<DashBoardView>(router, screenNumber) {
 

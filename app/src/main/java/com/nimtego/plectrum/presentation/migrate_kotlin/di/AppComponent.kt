@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 
 @Singleton
-@Component(modules = [BaseNavigationModule::class])
+@Component(modules = [NavigationModule::class])
 interface AppComponent {
 
     fun inject(activity: MainActivity)
