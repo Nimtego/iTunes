@@ -13,7 +13,7 @@ import ru.terrakok.cicerone.Router
 
 
 @InjectViewState
-class DashboardPresenter(router: Router?,
+class DashboardPresenter(router: Router,
                          screenNumber: Int,
                          private val interactor: DashBoardInteractor)
     : BasePresenter<DashBoardView>(router, screenNumber) {
@@ -44,11 +44,11 @@ class DashboardPresenter(router: Router?,
     }
 
     fun albumClicked(albumModel: Album) {
-        router?.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
+        router.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
     }
 
     fun songClicked(songModel: Song) {
-        router?.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
+        router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
 
 }

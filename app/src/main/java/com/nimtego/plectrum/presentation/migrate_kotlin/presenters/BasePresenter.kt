@@ -6,7 +6,7 @@ import com.nimtego.plectrum.presentation.migrate_kotlin.Screens
 import com.nimtego.plectrum.presentation.mvp.BaseView
 import ru.terrakok.cicerone.Router
 
-abstract class BasePresenter<T : BaseView>(protected val router: Router?,
+abstract class BasePresenter<T : BaseView>(protected val router: Router,
                                            protected val screenNumber: Int)
     : MvpPresenter<T>() {
 
@@ -31,19 +31,19 @@ abstract class BasePresenter<T : BaseView>(protected val router: Router?,
 //Mark: navigation
 
     fun onBackCommandClick() {
-        router?.exit()
+        router.exit()
     }
 
     fun onForwardCommandClick() {
-        router?.navigateTo(Screens.SampleScreen(1))
+        router.navigateTo(Screens.SampleScreen(1))
     }
 
     fun onReplaceCommandClick() {
-        router?.replaceScreen(Screens.SampleScreen(1))
+        router.replaceScreen(Screens.SampleScreen(1))
     }
 
     fun onNewChainCommandClick() {
-        router?.newChain(
+        router.newChain(
                 Screens.SampleScreen(screenNumber + 1),
                 Screens.SampleScreen(screenNumber + 2),
                 Screens.SampleScreen(screenNumber + 3)
@@ -51,11 +51,11 @@ abstract class BasePresenter<T : BaseView>(protected val router: Router?,
     }
 
     fun onFinishChainCommandClick() {
-        router?.finishChain()
+        router.finishChain()
     }
 
     fun onNewRootCommandClick() {
-        router?.newRootScreen(Screens.SampleScreen(screenNumber + 1))
+        router.newRootScreen(Screens.SampleScreen(screenNumber + 1))
     }
 
     fun onForwardWithDelayCommandClick() {
@@ -69,6 +69,6 @@ abstract class BasePresenter<T : BaseView>(protected val router: Router?,
     }
 
     fun onBackToCommandClick() {
-        router?.backTo(Screens.SampleScreen(3))
+        router.backTo(Screens.SampleScreen(3))
     }
 }

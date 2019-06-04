@@ -15,7 +15,7 @@ class App : Application() {
     private var appComponent: AppComponent? = null
     private val repository: Repository? = null
     private var presenterComponent: PresenterComponent? = null
-    private var cicerone: Cicerone<Router>? = null
+    private lateinit var cicerone: Cicerone<Router>
 
     fun getRepository(): Repository {
         return repository ?: AppRepository()
@@ -45,10 +45,10 @@ class App : Application() {
     }
 
     fun getNavigatorHolder(): NavigatorHolder? {
-        return cicerone?.getNavigatorHolder()
+        return cicerone.getNavigatorHolder()
     }
 
-    fun getRouter(): Router? {
-        return cicerone?.getRouter()
+    fun getRouter(): Router {
+        return cicerone.getRouter()
     }
 }

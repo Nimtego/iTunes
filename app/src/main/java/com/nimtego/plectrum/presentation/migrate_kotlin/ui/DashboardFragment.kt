@@ -24,10 +24,6 @@ import com.nimtego.plectrum.presentation.migrate_kotlin.view_model.TopSongAdapte
 import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import com.nimtego.plectrum.presentation.utils.toast.ToastAlarm
 import java.util.*
-import ru.terrakok.cicerone.commands.Command
-import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
-
 
 class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
     lateinit var  toast: ToastAlarm
