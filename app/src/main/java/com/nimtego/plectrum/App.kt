@@ -4,8 +4,8 @@ import android.app.Application
 import com.nimtego.plectrum.data.repository.AppRepository
 import com.nimtego.plectrum.domain.Repository
 import com.nimtego.plectrum.presentation.di.components.PresenterComponent
-import com.nimtego.plectrum.presentation.migrate_kotlin.di.AppComponent
-import com.nimtego.plectrum.presentation.migrate_kotlin.di.DaggerAppComponent
+import com.nimtego.plectrum.presentation.di.AppComponent
+import com.nimtego.plectrum.presentation.di.DaggerAppComponent
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router

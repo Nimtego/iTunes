@@ -1,17 +1,15 @@
-package com.nimtego.plectrum.presentation.migrate_kotlin.ui
+package com.nimtego.plectrum.presentation.ui.activity
 
 import android.os.Bundle
 import android.view.WindowManager
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.MainView
+import com.nimtego.plectrum.presentation.mvp.view.MainView
+import com.nimtego.plectrum.presentation.ui.fragment.DashboardFragment
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 class MainActivity : MvpAppCompatActivity(), MainView {
-
-//    @Inject
-//    var navigatorHolder: NavigatorHolder? = null
 
     private lateinit var navigator: SupportAppNavigator
 

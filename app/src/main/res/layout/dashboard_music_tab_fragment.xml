@@ -1,0 +1,8 @@
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/recycler_view_music_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="fill_vertical"
+    android:focusableInTouchMode="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+</android.support.v7.widget.RecyclerView>

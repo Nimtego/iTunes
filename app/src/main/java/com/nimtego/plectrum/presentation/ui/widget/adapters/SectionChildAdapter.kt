@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.migrate_kotlin.view_model
+package com.nimtego.plectrum.presentation.ui.widget.adapters
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -11,36 +11,38 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class TopSongAdapter(private val models: List<Song>?, parent: Context) : RecyclerView.Adapter<TopSongAdapter.ViewHolder>() {
+class SectionChildAdapter (
+        val models: List<ChildViewModel>,
+        parent: Context
+) : RecyclerView.Adapter<SectionChildAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onUserItemClicked(songModel: Song)
+        fun onUserItemClicked(childViewModel: ChildViewModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.song_form_dashboard, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.dashboard_child_item, parent, false)
         return ViewHolder(v)
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val song = this.models!![position]
-        holder.albumName.text = song.artistName
-        holder.artistName.text = song.trackName
+        val sectionModel = this.models[position]
+        holder.albumName.text = sectionModel.mainName()
+        holder.artistName.text = sectionModel.minorName()
         holder.pb!!.visibility = View.VISIBLE
         holder.itemView.setOnClickListener {
             if (this.onItemClickListener != null) {
-                this.onItemClickListener!!.onUserItemClicked(song)
+                this.onItemClickListener!!.onUserItemClicked(sectionModel)
             }
         }
         //todo
-        Picasso.get().load(models[position].trackArtWorkUrl
+        Picasso.get().load(models[position].imageUrl()
                 .replace("100x100", "200x200"))
                 .into(holder.albumImage, object : Callback {
                     override fun onSuccess() {
@@ -56,7 +58,7 @@ class TopSongAdapter(private val models: List<Song>?, parent: Context) : Recycle
 //        holder.cv.cardElevation = 5f
     }
 
-    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+    fun setOnItemClickListener(onItemClickListener: SectionChildAdapter.OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
 

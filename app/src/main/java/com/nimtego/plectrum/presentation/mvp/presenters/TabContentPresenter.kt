@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.migrate_kotlin.presenters
+package com.nimtego.plectrum.presentation.mvp.presenters
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
@@ -6,17 +6,20 @@ import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.DashBoardModel
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
-import com.nimtego.plectrum.presentation.migrate_kotlin.Screens
-import com.nimtego.plectrum.presentation.migrate_kotlin.mvp.DashBoardView
+import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.DashBoardModelContainer
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 
-
 @InjectViewState
-class DashboardPresenter(router: Router,
-                         screenNumber: Int,
-                         private val interactor: DashBoardInteractor)
-    : BasePresenter<DashBoardView>(router, screenNumber) {
+class TabContentPresenter(router: Router,
+                          screenNumber: Int,
+                          private val interactor: DashBoardInteractor)
+    : BasePresenter<TabContentView>(router, screenNumber) {
 
     fun viewIsReady() {
         interactor.execute(object : DisposableObserver<DashBoardModel>() {
@@ -26,7 +29,7 @@ class DashboardPresenter(router: Router,
 
             override fun onNext(dataModel: DashBoardModel) {
                 Log.i("Presenter", "onnext")
-                this@DashboardPresenter.showModel(dataModel)
+                this@TabContentPresenter.showModel(dataModel)
             }
 
             override fun onError(e: Throwable) {
@@ -40,7 +43,15 @@ class DashboardPresenter(router: Router,
     }
 
     private fun showModel(dataModel: DashBoardModel) {
-        viewState.showViewState(dataModel)
+        //todo create res for title or...
+        val data = BaseParentViewModel (listOf<DashBoardModelContainer<ChildViewModel>>(
+                SectionViewModel("Top album", dataModel.topAlbums),
+                SectionViewModel("Top song", dataModel.topSongs),
+                SectionViewModel("Hot song", dataModel.hotTrack),
+                SectionViewModel("New music", dataModel.newMusic))
+        )
+
+        viewState.showViewState(data)
     }
 
     fun albumClicked(albumModel: Album) {

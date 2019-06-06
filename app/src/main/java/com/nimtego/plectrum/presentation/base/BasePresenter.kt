@@ -2,7 +2,7 @@ package com.nimtego.plectrum.presentation.base
 
 import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
-import com.nimtego.plectrum.presentation.mvp.BaseView
+import com.nimtego.plectrum.presentation.mvp.view.BaseView
 
 abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
 

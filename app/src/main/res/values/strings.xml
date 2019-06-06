@@ -13,4 +13,6 @@
     <string name="albums">Albums:</string>
     <string name="movie">Movie</string>
     <string name="books">Books</string>
+    <!-- Dashboard item. -->
+    <string name="text_header_more">More</string>
 </resources>
