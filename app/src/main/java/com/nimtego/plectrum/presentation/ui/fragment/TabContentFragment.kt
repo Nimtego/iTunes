@@ -51,7 +51,10 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
             layoutManager = LinearLayoutManager(this@TabContentFragment.context,
                     LinearLayoutManager.VERTICAL,
                     false)
-            addItemDecoration(SpaceItemDecorator(spacing = 30, spanCount = 1))
+            addItemDecoration(SpaceItemDecorator(spacing = 32,
+                                                 spanCount = 1,
+                                                 paddingTop = 24,
+                                                 paddingBottom = 24))
             itemAnimator = DefaultItemAnimator()
         }
     }
