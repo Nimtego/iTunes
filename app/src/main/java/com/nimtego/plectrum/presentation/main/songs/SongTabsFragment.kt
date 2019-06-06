@@ -6,9 +6,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.nimtego.plectrum.presentation.main.adapter.SpacesItemDecoration
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragment
 import com.nimtego.plectrum.presentation.main.model.SongModel
+import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 
 class SongTabsFragment : MainTabsFragment(), SongTabView {
 
@@ -32,7 +32,7 @@ class SongTabsFragment : MainTabsFragment(), SongTabView {
     }
 
     override fun itemDecorator(): RecyclerView.ItemDecoration {
-        return SpacesItemDecoration(1,
+        return SpaceItemDecorator(1,
                 20,
                 true)
     }
