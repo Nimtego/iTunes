@@ -4,7 +4,7 @@ import android.content.Context
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import com.nimtego.plectrum.presentation.main.fragments.MainTabsFragment
-import com.nimtego.plectrum.presentation.mvp.MainView
+import com.nimtego.plectrum.presentation.mvp.view.MainView
 import java.util.*
 
 class MainPagerAdapter(private val parent: MainView, manager: FragmentManager) : FragmentPagerAdapter(manager) {

@@ -14,7 +14,7 @@ import com.nimtego.plectrum.presentation.main.adapter.MainPagerAdapter
 import com.nimtego.plectrum.presentation.main.albums.AlbumTabsFragment
 import com.nimtego.plectrum.presentation.main.artists.ArtistTabsFragment
 import com.nimtego.plectrum.presentation.main.songs.SongTabsFragment
-import com.nimtego.plectrum.presentation.mvp.MainView
+import com.nimtego.plectrum.presentation.mvp.view.MainView
 import com.nimtego.plectrum.presentation.utils.TabSelectedListener
 
 

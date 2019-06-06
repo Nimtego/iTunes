@@ -4,8 +4,8 @@ import android.app.Application
 import com.nimtego.plectrum.data.repository.AppRepository
 import com.nimtego.plectrum.domain.Repository
 import com.nimtego.plectrum.presentation.di.components.PresenterComponent
-import com.nimtego.plectrum.presentation.migrate_kotlin.di.AppComponent
-import com.nimtego.plectrum.presentation.migrate_kotlin.di.DaggerAppComponent
+import com.nimtego.plectrum.presentation.di.AppComponent
+import com.nimtego.plectrum.presentation.di.DaggerAppComponent
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -15,7 +15,7 @@ class App : Application() {
     private var appComponent: AppComponent? = null
     private val repository: Repository? = null
     private var presenterComponent: PresenterComponent? = null
-    private var cicerone: Cicerone<Router>? = null
+    private lateinit var cicerone: Cicerone<Router>
 
     fun getRepository(): Repository {
         return repository ?: AppRepository()
@@ -45,10 +45,10 @@ class App : Application() {
     }
 
     fun getNavigatorHolder(): NavigatorHolder? {
-        return cicerone?.getNavigatorHolder()
+        return cicerone.getNavigatorHolder()
     }
 
-    fun getRouter(): Router? {
-        return cicerone?.getRouter()
+    fun getRouter(): Router {
+        return cicerone.getRouter()
     }
 }

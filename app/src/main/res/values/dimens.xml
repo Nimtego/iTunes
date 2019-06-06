@@ -23,6 +23,7 @@
     <dimen name="value_text_view">8sp</dimen>
 
     <!-- Text size -->
+    <dimen name="text_view_size_header">18sp</dimen>
     <!-- Standard Styles -->
     <!-- @link https://www.google.com/design/spec/style/typography.html#typography-styles -->
     <eat-comment />

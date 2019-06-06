@@ -11,4 +11,8 @@
     <string name="album_image">Album image</string>
     <string name="artist_image">Artist image</string>
     <string name="albums">Albums:</string>
+    <string name="movie">Movie</string>
+    <string name="books">Books</string>
+    <!-- Dashboard item. -->
+    <string name="text_header_more">More</string>
 </resources>

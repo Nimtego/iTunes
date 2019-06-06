@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.migrate_kotlin
+package com.nimtego.plectrum.presentation.navigation
 
 import android.content.Context
 import ru.terrakok.cicerone.android.support.SupportAppScreen
@@ -6,8 +6,9 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import com.nimtego.plectrum.presentation.information_view.album.AlbumInformationFragment
 import com.nimtego.plectrum.presentation.information_view.song.SongInformationFragment
-import com.nimtego.plectrum.presentation.migrate_kotlin.ui.DashboardFragment
-import com.nimtego.plectrum.presentation.migrate_kotlin.ui.MainActivity
+import com.nimtego.plectrum.presentation.ui.fragment.DashboardFragment
+import com.nimtego.plectrum.presentation.ui.activity.MainActivity
+import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
 
 
 class Screens {
@@ -58,6 +59,13 @@ class Screens {
             return SongInformationFragment.newInstance(id)
         }
     }
+
+    class MusicTabView() : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return TabContentFragment.getInstance()
+        }
+    }
+
 //
 //    class GithubScreen : SupportAppScreen() {
 //        fun getActivityIntent(context: Context): Intent {

@@ -1,11 +1,9 @@
-package com.nimtego.plectrum.presentation.mvp
+package com.nimtego.plectrum.presentation.mvp.view
 
+import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.nimtego.plectrum.presentation.mvp.BaseView
 
 @StateStrategyType(OneExecutionStateStrategy::class)
-interface ProgressView : BaseView {
-    fun showProgress()
-    fun hideProgress()
+interface BaseView : MvpView {
 }

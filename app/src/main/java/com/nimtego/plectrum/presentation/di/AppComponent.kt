@@ -1,6 +1,6 @@
-package com.nimtego.plectrum.presentation.migrate_kotlin.di
+package com.nimtego.plectrum.presentation.di
 
-import com.nimtego.plectrum.presentation.migrate_kotlin.ui.MainActivity
+import com.nimtego.plectrum.presentation.ui.activity.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 

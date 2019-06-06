@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.migrate_kotlin.di
+package com.nimtego.plectrum.presentation.di
 
 import dagger.Module
 import dagger.Provides

@@ -2,7 +2,7 @@ package com.nimtego.plectrum.presentation.main
 
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.base.BasePresenter
-import com.nimtego.plectrum.presentation.mvp.MainView
+import com.nimtego.plectrum.presentation.mvp.view.MainView
 
 @InjectViewState
 class MainPresenter : BasePresenter<MainView>() {
