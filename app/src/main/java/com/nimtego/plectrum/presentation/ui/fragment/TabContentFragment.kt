@@ -13,7 +13,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
-import com.nimtego.plectrum.presentation.main.adapter.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
@@ -51,7 +51,10 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
             layoutManager = LinearLayoutManager(this@TabContentFragment.context,
                     LinearLayoutManager.VERTICAL,
                     false)
-            addItemDecoration(SpaceItemDecorator(spacing = 30, spanCount = 1))
+            addItemDecoration(SpaceItemDecorator(spacing = 32,
+                                                 spanCount = 1,
+                                                 paddingTop = 24,
+                                                 paddingBottom = 24))
             itemAnimator = DefaultItemAnimator()
         }
     }

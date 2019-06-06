@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.data.entity.Song
-import com.nimtego.plectrum.presentation.main.adapter.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 
