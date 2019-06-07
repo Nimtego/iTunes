@@ -20,7 +20,7 @@ class SearchViewScrollBehavior(context: Context?,
             slideDown(child)
         }
         if (dyConsumed < 0) {
-                slideUp(child)
+            slideUp(child)
         }
     }
 
