@@ -55,7 +55,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
                                                  spanCount = 1,
                                                  paddingTop = 24,
                                                  paddingBottom = 24))
-            itemAnimator = DefaultItemAnimator()
+//            itemAnimator = DefaultItemAnimator()
         }
     }
 

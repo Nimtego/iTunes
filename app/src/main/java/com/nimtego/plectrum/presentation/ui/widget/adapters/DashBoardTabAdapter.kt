@@ -41,7 +41,7 @@ class DashBoardTabAdapter(
             setHasFixedSize(true)
             layoutManager = childLayoutManager
             addItemDecoration(SpaceItemDecorator(spacing = 30))
-            itemAnimator = DefaultItemAnimator()
+//            itemAnimator = DefaultItemAnimator()
             adapter = SectionChildAdapter(sectionModel.getModels(), this.context)
             recycledViewPool = viewPool
         }

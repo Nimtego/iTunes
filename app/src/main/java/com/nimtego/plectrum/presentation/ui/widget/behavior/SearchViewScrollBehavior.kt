@@ -9,7 +9,7 @@ import android.view.View
 
 class SearchViewScrollBehavior(context: Context?,
                                attrs: AttributeSet?
-) :  AppBarLayout.Behavior(context, attrs) {
+) : AppBarLayout.Behavior(context, attrs) {
 
 // MARK: - Methods
 
@@ -53,6 +53,6 @@ class SearchViewScrollBehavior(context: Context?,
     companion object {
         private const val VIEW_HIDDEN_HEIGHT = 0f
         private const val VIEW_SHOWN_HEIGHT: Float = -200f
-        private const val ANIMATION_DURATION = 300L
+        private const val ANIMATION_DURATION = 150L
     }
 }

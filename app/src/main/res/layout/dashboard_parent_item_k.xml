@@ -49,6 +49,7 @@
             android:id="@+id/recycler_view_child_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/layout_animation_fall_down"
             android:nestedScrollingEnabled="false">
 
         </android.support.v7.widget.RecyclerView>
