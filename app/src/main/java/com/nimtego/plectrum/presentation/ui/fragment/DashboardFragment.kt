@@ -13,14 +13,11 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.mvp.presenters.DashboardPresenter
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
-import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import com.nimtego.plectrum.presentation.mvp.view.DashBoardView
 import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import com.nimtego.plectrum.presentation.utils.toast.ToastAlarm
 
-class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
+class DashboardFragment : BaseFragment(), DashBoardView {
 
     override fun message(message: String?) {
 
@@ -40,16 +37,11 @@ class DashboardFragment : MvpAppCompatFragment(), DashBoardView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_fragment_k, container, false)
         toast = SimpleToastAlarm(this.context)
-        initRV(view, container)
+        initRV(view)
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-       // presenter.viewIsReady()
-    }
-
-    protected fun initRV(view: View, viewGroup: ViewGroup?) {
+    protected fun initRV(view: View) {
         this.dashBoardContainer = view.findViewById(R.id.dash_board_container)
 
         //todo navigation
