@@ -26,8 +26,17 @@ class SectionChildAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.dashboard_child_item, parent, false)
-        return ViewHolder(v)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.dashboard_child_item, parent, false)
+        val holder = ViewHolder(view)
+        view.setOnClickListener{ _: View ->
+            val adapterPosition = holder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                this.models.get(adapterPosition).let {
+                    this.onItemClickListener?.onUserItemClicked(it)
+                }
+            }
+        }
+        return ViewHolder(view)
     }
 
 
@@ -36,11 +45,11 @@ class SectionChildAdapter (
         holder.albumName.text = sectionModel.mainName()
         holder.artistName.text = sectionModel.minorName()
         holder.pb!!.visibility = View.VISIBLE
-        holder.itemView.setOnClickListener {
-            if (this.onItemClickListener != null) {
-                this.onItemClickListener!!.onUserItemClicked(sectionModel)
-            }
-        }
+//        holder.itemView.setOnClickListener {
+//            if (this.onItemClickListener != null) {
+//                this.onItemClickListener!!.onUserItemClicked(sectionModel)
+//            }
+//        }
         //todo
         Picasso.get().load(models[position].imageUrl()
                 .replace("100x100", "200x200"))

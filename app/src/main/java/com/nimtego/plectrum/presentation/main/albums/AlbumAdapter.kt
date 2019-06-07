@@ -15,6 +15,8 @@ import com.nimtego.plectrum.presentation.main.model.AlbumModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
+
+
 class AlbumAdapter(private val models: List<AlbumModel>?, parent: Context) : RecyclerView.Adapter<AlbumAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -23,8 +25,17 @@ class AlbumAdapter(private val models: List<AlbumModel>?, parent: Context) : Rec
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.album_card_form, parent, false)
-        return ViewHolder(v)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.album_card_form, parent, false)
+        val holder = ViewHolder(view)
+        view.setOnClickListener{ _: View ->
+            val adapterPosition = holder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                this.models?.get(adapterPosition)?.let {
+                    this.onItemClickListener?.onUserItemClicked(it)
+                }
+            }
+        }
+        return ViewHolder(view)
     }
 
 
@@ -33,11 +44,11 @@ class AlbumAdapter(private val models: List<AlbumModel>?, parent: Context) : Rec
         holder.albumName.text = albumModel.albumName
         holder.artistName.text = albumModel.albumArtistName
         holder.pb!!.visibility = View.VISIBLE
-        holder.itemView.setOnClickListener {
-            if (this.onItemClickListener != null) {
-                this.onItemClickListener!!.onUserItemClicked(albumModel)
-            }
-        }
+//        holder.itemView.setOnClickListener {
+//            if (this.onItemClickListener != null) {
+//                this.onItemClickListener!!.onUserItemClicked(albumModel)
+//            }
+//        }
         Picasso.get().load(models[position].albumArtWorkUrl!!
                 .replace("100x100", "200x200"))
                 .into(holder.albumImage, object : Callback {
