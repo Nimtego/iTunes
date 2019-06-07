@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import com.nimtego.plectrum.R
 
-object CommonUtilsK {
+object CommonUtils {
 
     private val TAG = "CommonUtils"
 

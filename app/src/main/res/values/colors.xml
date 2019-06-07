@@ -15,6 +15,18 @@
     <color name="click_accent">#9f5454</color>
     <color name="transparent">#00ffffff</color>
 
+    <!--Status bar-->
+    <color name="status_bar_dark_color">#066e8a</color>
+    <color name="status_bar_light_color">#ffffffff</color>
+
+    <!--Navigation bar-->
+    <color name="color_navigation_item_inactive">@color/color_vendor_dark_grey_blue</color>
+    <color name="color_navigation_item_active">@color/click_accent</color>
+    <color name="color_bottom_sheet_navigation_bar">@android:color/white</color>
+
+    <!--Search view-->
+    <color name="color_search_view">@android:color/white</color>
+
     <!--Edit text-->
     <color name="edit_text_hint_color">#60646D</color>
     <color name="edit_text_color">#FFFFFF</color>
@@ -156,11 +168,6 @@
     </array>
 
     <color name="color_vendor_status_bar">@color/color_vendor_redesign_green</color>
-
-    <color name="color_bottom_sheet_navigation_bar">@android:color/white</color>
-
-    <color name="color_navigation_item_active">@color/color_vendor_dark_grey_blue</color>
-    <color name="color_navigation_item_inactive">#E6E6E6</color>
 
     <color name="color_font_card_ripple_blue">#ff01adfe</color>
 
