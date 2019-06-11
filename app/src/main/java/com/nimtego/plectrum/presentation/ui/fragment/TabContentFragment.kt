@@ -38,11 +38,6 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
         return view
     }
 
-    override fun onStart() {
-        super.onStart()
-        presenter.viewIsReady()
-    }
-
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
         this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_music_container)
 

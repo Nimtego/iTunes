@@ -12,5 +12,4 @@ import dagger.Component;
 @Component(modules = {RepositoryModule.class, PresenterModule.class})
 public interface ApplicationComponent {
     Repository appRepository();
-
 }

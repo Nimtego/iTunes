@@ -1,6 +1,7 @@
 package com.nimtego.plectrum
 
 import android.app.Application
+import android.content.Context
 import com.nimtego.plectrum.data.repository.AppRepository
 import com.nimtego.plectrum.domain.Repository
 import com.nimtego.plectrum.presentation.di.components.PresenterComponent
