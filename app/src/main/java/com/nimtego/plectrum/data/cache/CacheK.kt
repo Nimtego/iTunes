@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.data.cache
 
-import com.nimtego.plectrum.data.entity.Album
 import io.reactivex.Observable
 
 interface CacheK<E> {

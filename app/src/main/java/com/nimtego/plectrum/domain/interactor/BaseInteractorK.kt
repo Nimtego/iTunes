@@ -2,6 +2,7 @@ package com.nimtego.plectrum.domain.interactor
 
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.domain.repository.Repository
+import com.nimtego.plectrum.domain.repository.RepositoryK
 import com.nimtego.plectrum.presentation.base.Interactor
 import dagger.internal.Preconditions
 import io.reactivex.Observable
@@ -11,18 +12,15 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseInteractor<T, P> : Interactor<T, P> {
-    protected val disposables: CompositeDisposable
-    protected var repository: Repository
+abstract class BaseInteractorK<R, P>(
+        protected var repository: RepositoryK<R>
+) : Interactor<R, P> {
 
-    init {
-        disposables = CompositeDisposable()
-        this.repository = App.INSTANCE.getRepository()
-    }
+    private var disposables: CompositeDisposable = CompositeDisposable()
 
-    protected abstract fun buildUseCaseObservable(params: P): Observable<T>
+    protected abstract fun buildUseCaseObservable(params: P): Observable<R>
 
-    override fun execute(observer: DisposableObserver<T>, params: P) {
+    override fun execute(observer: DisposableObserver<R>, params: P) {
         val observable = this.buildUseCaseObservable(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,5 +36,14 @@ abstract class BaseInteractor<T, P> : Interactor<T, P> {
         Preconditions.checkNotNull(disposable)
         Preconditions.checkNotNull(disposables)
         disposables.add(disposable)
+    }
+
+    class Params private constructor(val request: String) {
+        companion object {
+
+            fun forRequest(request: String): Params {
+                return Params(request)
+            }
+        }
     }
 }

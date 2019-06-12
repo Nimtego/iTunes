@@ -13,6 +13,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
+import com.nimtego.plectrum.domain.interactor.DashBoardInteractorK
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
@@ -29,7 +30,8 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): TabContentPresenter {
-        return TabContentPresenter(App.INSTANCE.getRouter(), 5, DashBoardInteractor())
+        val dashBoardInteractor = App.INSTANCE.getRepository()
+        return TabContentPresenter(App.INSTANCE.getRouter(), 5, dashBoardInteractor)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

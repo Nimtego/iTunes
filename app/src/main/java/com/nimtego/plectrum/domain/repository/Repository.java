@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.domain;
+package com.nimtego.plectrum.domain.repository;
 
 import com.nimtego.plectrum.data.entity.DashBoardModel;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;

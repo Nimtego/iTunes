@@ -11,6 +11,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
+import com.nimtego.plectrum.domain.interactor.DashBoardInteractorK
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.mvp.presenters.DashboardPresenter
 import com.nimtego.plectrum.presentation.mvp.view.DashBoardView
@@ -31,6 +32,7 @@ class DashboardFragment : BaseFragment(), DashBoardView {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): DashboardPresenter {
+        //todo inject dagger and ref
         return DashboardPresenter(App.INSTANCE.getRouter(), 5, DashBoardInteractor())
     }
 

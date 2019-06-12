@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.data.repository;
+package com.nimtego.plectrum.data.repository.repository;
 
 import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.data.cache.DashBoardEntityCache;
@@ -12,7 +12,7 @@ import com.nimtego.plectrum.data.repository.datasource.DataStore;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
 import com.nimtego.plectrum.data.rest.pojo.AlbumResult;
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
-import com.nimtego.plectrum.domain.Repository;
+import com.nimtego.plectrum.domain.repository.Repository;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
