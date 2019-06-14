@@ -2,8 +2,10 @@ package com.nimtego.plectrum.domain.interactor
 
 import com.nimtego.plectrum.data.entity.DashBoardModel
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class DashBoardInteractor : BaseInteractor<DashBoardModel, DashBoardInteractor.Params>() {
+
+class DashBoardInteractor @Inject constructor() : BaseInteractor<DashBoardModel, DashBoardInteractor.Params>() {
     override fun buildUseCaseObservable(params: Params): Observable<DashBoardModel> {
         return repository.dashBoardModel()
     }
