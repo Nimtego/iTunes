@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
-import com.nimtego.plectrum.domain.interactor.DashBoardInteractorK
-import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.mvp.presenters.DashboardPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.DashBoardPresenter
 import com.nimtego.plectrum.presentation.mvp.view.DashBoardView
+import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import com.nimtego.plectrum.presentation.utils.toast.ToastAlarm
+import javax.inject.Inject
 
 class DashboardFragment : BaseFragment(), DashBoardView {
 
@@ -27,13 +25,18 @@ class DashboardFragment : BaseFragment(), DashBoardView {
     lateinit var  toast: ToastAlarm
     private var dashBoardContainer: FrameLayout? = null
 
+    @Inject
     @InjectPresenter
-    internal lateinit var presenter: DashboardPresenter
+    internal lateinit var presenter: DashBoardPresenter
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): DashboardPresenter {
-        //todo inject dagger and ref
-        return DashboardPresenter(App.INSTANCE.getRouter(), 5, DashBoardInteractor())
+    fun provideRepositoryPresenter(): DashBoardPresenter {
+        return presenter
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.INSTANCE.getAppComponent().inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

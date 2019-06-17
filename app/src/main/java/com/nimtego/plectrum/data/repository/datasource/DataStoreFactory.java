@@ -19,7 +19,7 @@ public class DataStoreFactory<E> {
 
     @Inject
     public DataStoreFactory(@NonNull Context context, @NonNull CacheK<E> cache) {
-        this.context = context.getApplicationContext();
+        this.context = context;
         this.cache = cache;
     }
 

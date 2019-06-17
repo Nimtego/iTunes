@@ -21,7 +21,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //todo add module
-//        App.INSTANCE.getAppComponent()?.inject(this);
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main_k)

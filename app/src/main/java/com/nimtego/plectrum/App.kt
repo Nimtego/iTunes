@@ -3,14 +3,15 @@ package com.nimtego.plectrum
 import android.app.Application
 import com.nimtego.plectrum.data.repository.repository.AppRepository
 import com.nimtego.plectrum.domain.repository.Repository
-import com.nimtego.plectrum.presentation.di.AppComponent
-import com.nimtego.plectrum.presentation.di.DaggerAppComponent
+import com.nimtego.plectrum.presentation.di.components.ApplicationComponent
+import com.nimtego.plectrum.presentation.di.components.DaggerApplicationComponent
+import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 
 class App : Application() {
 
-    private lateinit var appComponent: AppComponent
+    private lateinit var appComponent: ApplicationComponent
     private val repository: Repository? = null
     private lateinit var cicerone: Cicerone<Router>
 
@@ -27,7 +28,8 @@ class App : Application() {
     }
 
     private fun initAppComponent() {
-        this.appComponent = DaggerAppComponent.builder().build()
+        this.appComponent =
+                DaggerApplicationComponent.builder().contextModule(ContextModule(this)).build()
     }
 
     companion object {

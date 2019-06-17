@@ -33,7 +33,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        App.INSTANCE.getAppComponent()?.inject(this)
+        App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
     }
 

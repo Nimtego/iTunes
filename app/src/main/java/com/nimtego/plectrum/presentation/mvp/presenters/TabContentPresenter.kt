@@ -5,7 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.DashBoardModel
 import com.nimtego.plectrum.data.entity.Song
-import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
+import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
@@ -16,10 +16,11 @@ import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class TabContentPresenter(router: Router,
-                          screenNumber: Int,
-                          private val interactor: DashBoardInteractor)
-    : BasePresenter<TabContentView>(router, screenNumber) {
+class TabContentPresenter(
+        router: Router,
+        screenNumber: Int,
+        private val interactor: TabContentInteractor
+) : BasePresenter<TabContentView>(router, screenNumber) {
 
     private var dataModel: DashBoardModel? = null
 
@@ -43,12 +44,12 @@ class TabContentPresenter(router: Router,
 
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
-//                this@DashboardPresenter.hideViewLoading()
-//                this@DashboardPresenter.toast("error" + e.localizedMessage)
+//                this@DashBoardPresenter.hideViewLoading()
+//                this@DashBoardPresenter.toast("error" + e.localizedMessage)
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }
-            }, DashBoardInteractor.Params.forRequest(""))
+            }, TabContentInteractor.Params.forRequest(""))
         }
     }
 

@@ -8,7 +8,7 @@ import com.nimtego.plectrum.presentation.mvp.view.DashBoardView
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class DashboardPresenter(router: Router,
+class DashBoardPresenter(router: Router,
                          screenNumber: Int,
                          private val interactor: DashBoardInteractor)
     : BasePresenter<DashBoardView>(router, screenNumber) {

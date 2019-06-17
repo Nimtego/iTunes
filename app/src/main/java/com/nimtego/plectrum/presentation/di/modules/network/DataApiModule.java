@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -19,6 +20,7 @@ public class DataApiModule {
 
     @Provides
     @Singleton
+    @Named("itunes")
     public Retrofit itunesApi(GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL_ITUNES)
@@ -29,6 +31,7 @@ public class DataApiModule {
 
     @Provides
     @Singleton
+    @Named("wiki")
     public Retrofit wikiApi(GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL_WIKI)

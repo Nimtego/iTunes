@@ -6,9 +6,10 @@ import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
 import ru.terrakok.cicerone.Router
 
-abstract class BasePresenter<T : BaseView>(protected val router: Router,
-                                           protected val screenNumber: Int)
-    : MvpPresenter<T>() {
+abstract class BasePresenter<T : BaseView>(
+        protected val router: Router,
+        protected val screenNumber: Int
+) : MvpPresenter<T>() {
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 

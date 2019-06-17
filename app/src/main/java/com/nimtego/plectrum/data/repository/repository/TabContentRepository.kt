@@ -8,7 +8,7 @@ import com.nimtego.plectrum.domain.repository.RepositoryK
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
 
-class DashBoardRepository(
+class TabContentRepository(
         private val dataStoreFactory: DataStoreFactory<PopularResponse>,
         private val mapper: EntityDataMapper
 ) : RepositoryK<DashBoardModel> {
