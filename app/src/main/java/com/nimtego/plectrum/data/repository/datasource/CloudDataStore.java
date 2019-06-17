@@ -1,8 +1,6 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
-import com.nimtego.plectrum.data.cache.Cache;
 import com.nimtego.plectrum.data.cache.CacheK;
-import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.rest.network.AppNetwork;
 import com.nimtego.plectrum.data.rest.network.FabricParam;

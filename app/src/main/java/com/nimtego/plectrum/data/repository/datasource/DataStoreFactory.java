@@ -2,7 +2,6 @@ package com.nimtego.plectrum.data.repository.datasource;
 
 import android.content.Context;
 
-import com.nimtego.plectrum.data.cache.Cache;
 import com.nimtego.plectrum.data.cache.CacheK;
 import com.nimtego.plectrum.data.rest.network.NetworkConnection;
 
