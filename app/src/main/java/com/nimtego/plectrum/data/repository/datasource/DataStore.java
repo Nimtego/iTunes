@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
-import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;

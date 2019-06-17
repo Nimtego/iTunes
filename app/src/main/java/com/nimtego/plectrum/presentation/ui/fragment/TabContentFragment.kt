@@ -1,7 +1,6 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,35 +11,36 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
-import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
+import javax.inject.Inject
 
 class TabContentFragment : MvpAppCompatFragment(), TabContentView {
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
+    @Inject
     @InjectPresenter
     internal lateinit var presenter: TabContentPresenter
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): TabContentPresenter {
-        return TabContentPresenter(App.INSTANCE.getRouter(), 5, DashBoardInteractor())
+        return presenter
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.INSTANCE.getAppComponent().inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.dashboard_music_tab_fragment, container, false)
         initRV(view, container)
         return view
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.viewIsReady()
     }
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
@@ -52,14 +52,14 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
                     LinearLayoutManager.VERTICAL,
                     false)
             addItemDecoration(SpaceItemDecorator(spacing = 32,
-                                                 spanCount = 1,
-                                                 paddingTop = 24,
-                                                 paddingBottom = 24))
+                    spanCount = 1,
+                    paddingTop = 24,
+                    paddingBottom = 24))
 //            itemAnimator = DefaultItemAnimator()
         }
     }
 
-//Mark: view override
+    //Mark: view override
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
             adapter = DashBoardTabAdapter(data, this.context)

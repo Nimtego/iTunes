@@ -1,16 +1,18 @@
-package com.nimtego.plectrum.data.repository;
+package com.nimtego.plectrum.data.repository.repository;
 
 import com.nimtego.plectrum.App;
-import com.nimtego.plectrum.data.cache.AlbumCache;
+import com.nimtego.plectrum.data.cache.DashBoardEntityCache;
 import com.nimtego.plectrum.data.cache.FileManager;
+import com.nimtego.plectrum.data.cache.Serializer;
 import com.nimtego.plectrum.data.entity.DashBoardModel;
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
+import com.nimtego.plectrum.data.executor.BaseExecutor;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.repository.datasource.DataStore;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
 import com.nimtego.plectrum.data.rest.pojo.AlbumResult;
 import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
-import com.nimtego.plectrum.domain.Repository;
+import com.nimtego.plectrum.domain.repository.Repository;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
@@ -41,9 +43,14 @@ public class AppRepository implements Repository {
 
     @Inject
     public AppRepository() {
-        this(new DataStoreFactory(App.Companion.getINSTANCE(),
-                new AlbumCache(App.Companion.getINSTANCE(),
-                        new FileManager())), new EntityDataMapper());
+        this(new DataStoreFactory<PopularResponse>(App.Companion.getINSTANCE().getApplicationContext(),
+                        new DashBoardEntityCache<>(
+                                App.Companion.getINSTANCE(),
+                                new Serializer(),
+                                new FileManager(),
+                                new BaseExecutor())
+                ),
+                new EntityDataMapper());
     }
 
     @Override
@@ -151,19 +158,18 @@ public class AppRepository implements Repository {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         Observable<PopularResponse> hotOb = dataStore.hot();
         Observable<PopularResponse> newMusickOb = dataStore.newMusick();
-//        Observable<Feed> recentOb = dataStore.recent();
         Observable<PopularResponse> topAlbumOb = dataStore.topAlbum();
         Observable<PopularResponse> topSongOb = dataStore.topSong();
         return Observable.zip(topAlbumOb,
-                              topSongOb,
-                              hotOb,
-                              newMusickOb,
-                              (topAlbum, topSong, hotSong, newMusic) ->
-                                     mapper.dashBoardModel(topSong.getFeed(),
-                                                           topAlbum.getFeed(),
-                                                           newMusic.getFeed(),
-                                                           hotSong.getFeed()
-                                     )
+                topSongOb,
+                hotOb,
+                newMusickOb,
+                (topAlbum, topSong, hotSong, newMusic) ->
+                        mapper.dashBoardModel(topSong.getFeed(),
+                                topAlbum.getFeed(),
+                                newMusic.getFeed(),
+                                hotSong.getFeed()
+                        )
         );
     }
 }

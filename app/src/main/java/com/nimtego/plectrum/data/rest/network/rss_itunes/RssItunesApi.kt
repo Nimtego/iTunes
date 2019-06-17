@@ -1,13 +1,8 @@
 package com.nimtego.plectrum.data.rest.network.rss_itunes
 
-import com.nimtego.plectrum.data.model.rss_itunes.Feed
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
-import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository
-import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository
-import com.nimtego.plectrum.data.rest.pojo.SongsRepository
 import io.reactivex.Observable
 import retrofit2.http.GET
-import retrofit2.http.QueryMap
 
 interface RssItunesApi {
     // recent realises - https://rss.itunes.apple.com/api/v1/us/itunes-music/recent-releases/all/10/explicit.json

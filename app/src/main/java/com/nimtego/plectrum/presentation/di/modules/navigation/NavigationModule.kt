@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.di
+package com.nimtego.plectrum.presentation.di.modules.navigation
 
 import dagger.Module
 import dagger.Provides
@@ -10,11 +10,7 @@ import javax.inject.Singleton
 
 @Module
 class NavigationModule {
-    private val cicerone: Cicerone<Router>
-
-    init {
-        cicerone = Cicerone.create()
-    }
+    private val cicerone: Cicerone<Router> = Cicerone.create()
 
     @Provides
     @Singleton

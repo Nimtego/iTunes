@@ -1,7 +1,6 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
-import com.nimtego.plectrum.data.cache.Cache;
-import com.nimtego.plectrum.data.model.rss_itunes.Feed;
+import com.nimtego.plectrum.data.cache.CacheK;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.rest.network.AppNetwork;
 import com.nimtego.plectrum.data.rest.network.FabricParam;
@@ -15,13 +14,13 @@ import java.util.regex.Pattern;
 
 import io.reactivex.Observable;
 
-public class CloudDataStore implements DataStore {
+public class CloudDataStore<E> implements DataStore {
 
     private AppNetwork networkConnection;
-    private final Cache cache;
+    private final CacheK<E> cache;
 
 
-    public CloudDataStore(AppNetwork networkConnection, Cache cache) {
+    public CloudDataStore(AppNetwork networkConnection, CacheK<E> cache) {
         this.networkConnection = networkConnection;
         this.cache = cache;
     }

@@ -44,6 +44,9 @@ dependencies {
     //cicerone
     implementation 'ru.terrakok.cicerone:cicerone:4.0.0'
 
+    //json
+    implementation 'com.google.code.gson:gson:2.8.5'
+
     //moxy
     implementation 'com.arello-mobile:moxy-app-compat:1.5.5'
     kapt 'com.arello-mobile:moxy-compiler:1.5.5'

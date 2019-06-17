@@ -1,20 +1,18 @@
 package com.nimtego.plectrum
 
 import android.app.Application
-import com.nimtego.plectrum.data.repository.AppRepository
-import com.nimtego.plectrum.domain.Repository
-import com.nimtego.plectrum.presentation.di.components.PresenterComponent
-import com.nimtego.plectrum.presentation.di.AppComponent
-import com.nimtego.plectrum.presentation.di.DaggerAppComponent
+import com.nimtego.plectrum.data.repository.repository.AppRepository
+import com.nimtego.plectrum.domain.repository.Repository
+import com.nimtego.plectrum.presentation.di.components.ApplicationComponent
+import com.nimtego.plectrum.presentation.di.components.DaggerApplicationComponent
+import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
 class App : Application() {
 
-    private var appComponent: AppComponent? = null
+    private lateinit var appComponent: ApplicationComponent
     private val repository: Repository? = null
-    private var presenterComponent: PresenterComponent? = null
     private lateinit var cicerone: Cicerone<Router>
 
     fun getRepository(): Repository {
@@ -26,6 +24,12 @@ class App : Application() {
         super.onCreate()
         INSTANCE = this
         initCicerone()
+        initAppComponent()
+    }
+
+    private fun initAppComponent() {
+        this.appComponent =
+                DaggerApplicationComponent.builder().contextModule(ContextModule(this)).build()
     }
 
     companion object {
@@ -33,22 +37,13 @@ class App : Application() {
             private set
     }
 
-    fun getAppComponent(): AppComponent? {
-        if (appComponent == null) {
-            appComponent = DaggerAppComponent.builder().build()
-        }
-        return appComponent
-    }
+    fun getAppComponent() = appComponent
 
     private fun initCicerone() {
         cicerone = Cicerone.create()
     }
 
-    fun getNavigatorHolder(): NavigatorHolder? {
-        return cicerone.getNavigatorHolder()
-    }
+    fun getNavigatorHolder() = cicerone.getNavigatorHolder()
 
-    fun getRouter(): Router {
-        return cicerone.getRouter()
-    }
+    fun getRouter() = cicerone.getRouter()
 }
