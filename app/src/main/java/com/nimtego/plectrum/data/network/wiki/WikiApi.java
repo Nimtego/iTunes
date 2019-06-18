@@ -1,6 +1,6 @@
-package com.nimtego.plectrum.data.rest.network.wiki;
+package com.nimtego.plectrum.data.network.wiki;
 
-import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult;
+import com.nimtego.plectrum.data.model.wiki.WikiSearchResult;
 
 import java.util.Map;
 

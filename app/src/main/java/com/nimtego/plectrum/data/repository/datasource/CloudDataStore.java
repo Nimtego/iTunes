@@ -1,14 +1,14 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
-import com.nimtego.plectrum.data.cache.CacheK;
+import com.nimtego.plectrum.data.cache.Cache;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
-import com.nimtego.plectrum.data.rest.network.AppNetwork;
-import com.nimtego.plectrum.data.rest.network.FabricParam;
-import com.nimtego.plectrum.data.rest.network.wiki.RestCountries;
-import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
-import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
-import com.nimtego.plectrum.data.rest.pojo.SongsRepository;
-import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult;
+import com.nimtego.plectrum.data.network.AppNetwork;
+import com.nimtego.plectrum.data.network.FabricParam;
+import com.nimtego.plectrum.data.network.wiki.RestCountries;
+import com.nimtego.plectrum.data.model.itunes.AlbumsRepository;
+import com.nimtego.plectrum.data.model.itunes.ArtistsRepository;
+import com.nimtego.plectrum.data.model.itunes.SongsRepository;
+import com.nimtego.plectrum.data.model.wiki.WikiSearchResult;
 
 import java.util.regex.Pattern;
 
@@ -17,10 +17,10 @@ import io.reactivex.Observable;
 public class CloudDataStore<E> implements DataStore {
 
     private AppNetwork networkConnection;
-    private final CacheK<E> cache;
+    private final Cache<E> cache;
 
 
-    public CloudDataStore(AppNetwork networkConnection, CacheK<E> cache) {
+    public CloudDataStore(AppNetwork networkConnection, Cache<E> cache) {
         this.networkConnection = networkConnection;
         this.cache = cache;
     }

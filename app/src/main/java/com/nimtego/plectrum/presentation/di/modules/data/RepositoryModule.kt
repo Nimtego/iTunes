@@ -1,7 +1,7 @@
 package com.nimtego.plectrum.presentation.di.modules.data
 
 import android.content.Context
-import com.nimtego.plectrum.data.cache.CacheK
+import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.cache.DashBoardEntityCache
 import com.nimtego.plectrum.data.cache.FileManager
 import com.nimtego.plectrum.data.cache.Serializer
@@ -49,21 +49,21 @@ class RepositoryModule {
     }
 
     @Provides
+    @Singleton
     internal fun fileManager(): FileManager {
         return FileManager()
     }
 
-    //todo change cache
     @Provides
     internal fun cache(appContext: Context,
                        serializer: Serializer,
                        fileManager: FileManager,
-                       threadExecutor: ThreadExecutor): CacheK<PopularResponse> {
+                       threadExecutor: ThreadExecutor): Cache<PopularResponse> {
         return DashBoardEntityCache(appContext, serializer, fileManager, threadExecutor)
     }
 
     @Provides
-    internal fun storeFactory(appContext: Context, cache: CacheK<PopularResponse>): DataStoreFactory<PopularResponse> {
+    internal fun storeFactory(appContext: Context, cache: Cache<PopularResponse>): DataStoreFactory<PopularResponse> {
         return DataStoreFactory(appContext, cache)
     }
 

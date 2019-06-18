@@ -3,7 +3,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.DashBoardModel
+import com.nimtego.plectrum.data.entity.DashBoardSongsModel
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
@@ -22,7 +22,7 @@ class TabContentPresenter(
         private val interactor: TabContentInteractor
 ) : BasePresenter<TabContentView>(router, screenNumber) {
 
-    private var dataModel: DashBoardModel? = null
+    private var dataSongsModel: DashBoardSongsModel? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -30,16 +30,16 @@ class TabContentPresenter(
     }
 
     fun viewIsReady() {
-        dataModel?.let { showModel(it) }.run {
-            interactor.execute(object : DisposableObserver<DashBoardModel>() {
+        dataSongsModel?.let { showModel(it) }.run {
+            interactor.execute(object : DisposableObserver<DashBoardSongsModel>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
                 }
 
-                override fun onNext(dataModel: DashBoardModel) {
+                override fun onNext(dataSongsModel: DashBoardSongsModel) {
                     Log.i("Presenter", "onnext")
-                    this@TabContentPresenter.dataModel = dataModel
-                    this@TabContentPresenter.showModel(dataModel)
+                    this@TabContentPresenter.dataSongsModel = dataSongsModel
+                    this@TabContentPresenter.showModel(dataSongsModel)
                 }
 
                 override fun onError(e: Throwable) {
@@ -53,13 +53,13 @@ class TabContentPresenter(
         }
     }
 
-    private fun showModel(dataModel: DashBoardModel) {
+    private fun showModel(dataSongsModel: DashBoardSongsModel) {
         //todo create res for title or...
         val data = BaseParentViewModel(listOf<DashBoardModelContainer<ChildViewModel>>(
-                SectionViewModel("Top album", dataModel.topAlbums),
-                SectionViewModel("Top song", dataModel.topSongs),
-                SectionViewModel("Hot song", dataModel.hotTrack),
-                SectionViewModel("New music", dataModel.newMusic))
+                SectionViewModel("Top album", dataSongsModel.topAlbums),
+                SectionViewModel("Top song", dataSongsModel.topSongs),
+                SectionViewModel("Hot song", dataSongsModel.hotTrack),
+                SectionViewModel("New music", dataSongsModel.newMusic))
         )
 
         viewState.showViewState(data)

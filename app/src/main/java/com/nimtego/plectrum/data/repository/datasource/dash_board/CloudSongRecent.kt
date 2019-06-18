@@ -1,14 +1,14 @@
 package com.nimtego.plectrum.data.repository.datasource.dash_board
 
-import com.nimtego.plectrum.data.cache.CacheK
+import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
-import com.nimtego.plectrum.data.rest.network.rss_itunes.RssItunesApi
+import com.nimtego.plectrum.data.network.rss_itunes.RssItunesApi
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class CloudSongRecent<R : PopularResponse> @Inject constructor (
         private val rssItunesApi: RssItunesApi,
-        private val cache: CacheK<R>
+        private val cache: Cache<R>
 ) : SongRecentDataStore {
     override fun recent(): Observable<PopularResponse> {
         return rssItunesApi.recent()

@@ -2,11 +2,11 @@ package com.nimtego.plectrum.data.entity.mapper
 
 import android.util.Log
 import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.DashBoardModel
+import com.nimtego.plectrum.data.entity.DashBoardSongsModel
 import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.data.model.itunes.*
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
-import com.nimtego.plectrum.data.rest.pojo.*
-import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult
+import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
 import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel
@@ -102,7 +102,7 @@ class EntityDataMapper {
     fun dashBoardModel(topSongs: Feed,
                        topAlbum: Feed,
                        newMusic: Feed,
-                       hotTrack: Feed): DashBoardModel {
+                       hotTrack: Feed): DashBoardSongsModel {
 
         Log.i("Presenter", topSongs.title)
 
@@ -152,7 +152,7 @@ class EntityDataMapper {
                     albumRealiseDate = it.releaseDate,
                     albumTrackCount = 0)
         }
-        return DashBoardModel(topSongs =  topSongsResult,
+        return DashBoardSongsModel(topSongs =  topSongsResult,
                               topAlbums = topAlbumsResult,
                               newMusic = newMusicResult,
                               hotTrack =  hotTrackResult)

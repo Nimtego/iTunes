@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.data.rest.network.wiki;
+package com.nimtego.plectrum.data.network.wiki;
 
 public enum RestCountries {
     RUS("ru"), ENGLISH("en");

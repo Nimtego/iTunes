@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.data.rest.pojo;
+package com.nimtego.plectrum.data.model.itunes;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

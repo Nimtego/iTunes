@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import java.io.File
 
 
-class DashBoardEntityCache<E : PopularResponse> : CacheK<E> {
+class DashBoardEntityCache<E : PopularResponse> : Cache<E> {
 
     private val SETTINGS_FILE_NAME = "dash_board_cache_1"
     private val SETTINGS_KEY_LAST_CACHE_UPDATE = "last_cache_update"

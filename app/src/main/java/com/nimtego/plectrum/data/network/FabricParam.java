@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.data.rest.network;
+package com.nimtego.plectrum.data.network;
 
 import java.util.HashMap;
 import java.util.Map;

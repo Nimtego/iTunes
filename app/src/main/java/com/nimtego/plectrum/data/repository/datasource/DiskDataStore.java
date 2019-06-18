@@ -1,21 +1,19 @@
 package com.nimtego.plectrum.data.repository.datasource;
 
 import com.nimtego.plectrum.data.cache.Cache;
-import com.nimtego.plectrum.data.cache.CacheK;
-import com.nimtego.plectrum.data.model.rss_itunes.Feed;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
-import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
-import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
-import com.nimtego.plectrum.data.rest.pojo.SongsRepository;
-import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult;
+import com.nimtego.plectrum.data.model.itunes.AlbumsRepository;
+import com.nimtego.plectrum.data.model.itunes.ArtistsRepository;
+import com.nimtego.plectrum.data.model.itunes.SongsRepository;
+import com.nimtego.plectrum.data.model.wiki.WikiSearchResult;
 
 import io.reactivex.Observable;
 
 public class DiskDataStore<E> implements DataStore {
 
-    private final CacheK<E> cache;
+    private final Cache<E> cache;
 
-    public DiskDataStore(CacheK<E> cache) {
+    public DiskDataStore(Cache<E> cache) {
         this.cache = cache;
     }
 

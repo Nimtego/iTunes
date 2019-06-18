@@ -2,8 +2,8 @@ package com.nimtego.plectrum.data.repository.datasource;
 
 import android.content.Context;
 
-import com.nimtego.plectrum.data.cache.CacheK;
-import com.nimtego.plectrum.data.rest.network.NetworkConnection;
+import com.nimtego.plectrum.data.cache.Cache;
+import com.nimtego.plectrum.data.network.NetworkConnection;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,10 +14,10 @@ import io.reactivex.annotations.NonNull;
 public class DataStoreFactory<E> {
 
     private final Context context;
-    private final CacheK<E> cache;
+    private final Cache<E> cache;
 
     @Inject
-    public DataStoreFactory(@NonNull Context context, @NonNull CacheK<E> cache) {
+    public DataStoreFactory(@NonNull Context context, @NonNull Cache<E> cache) {
         this.context = context;
         this.cache = cache;
     }

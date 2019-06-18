@@ -1,10 +1,10 @@
-package com.nimtego.plectrum.data.rest.network;
+package com.nimtego.plectrum.data.network;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import com.nimtego.plectrum.data.rest.network.itunes.ITunesApi;
-import com.nimtego.plectrum.data.rest.network.rss_itunes.RssItunesApi;
-import com.nimtego.plectrum.data.rest.network.wiki.RestCountries;
-import com.nimtego.plectrum.data.rest.network.wiki.WikiApi;
+import com.nimtego.plectrum.data.network.itunes.ITunesApi;
+import com.nimtego.plectrum.data.network.rss_itunes.RssItunesApi;
+import com.nimtego.plectrum.data.network.wiki.RestCountries;
+import com.nimtego.plectrum.data.network.wiki.WikiApi;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

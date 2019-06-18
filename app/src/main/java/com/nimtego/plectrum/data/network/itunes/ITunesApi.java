@@ -1,8 +1,8 @@
-package com.nimtego.plectrum.data.rest.network.itunes;
+package com.nimtego.plectrum.data.network.itunes;
 
-import com.nimtego.plectrum.data.rest.pojo.AlbumsRepository;
-import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
-import com.nimtego.plectrum.data.rest.pojo.SongsRepository;
+import com.nimtego.plectrum.data.model.itunes.AlbumsRepository;
+import com.nimtego.plectrum.data.model.itunes.ArtistsRepository;
+import com.nimtego.plectrum.data.model.itunes.SongsRepository;
 
 import java.util.Map;
 

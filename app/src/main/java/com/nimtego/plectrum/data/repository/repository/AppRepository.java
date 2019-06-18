@@ -4,14 +4,14 @@ import com.nimtego.plectrum.App;
 import com.nimtego.plectrum.data.cache.DashBoardEntityCache;
 import com.nimtego.plectrum.data.cache.FileManager;
 import com.nimtego.plectrum.data.cache.Serializer;
-import com.nimtego.plectrum.data.entity.DashBoardModel;
+import com.nimtego.plectrum.data.entity.DashBoardSongsModel;
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper;
 import com.nimtego.plectrum.data.executor.BaseExecutor;
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse;
 import com.nimtego.plectrum.data.repository.datasource.DataStore;
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
-import com.nimtego.plectrum.data.rest.pojo.AlbumResult;
-import com.nimtego.plectrum.data.rest.pojo.ArtistsRepository;
+import com.nimtego.plectrum.data.model.itunes.AlbumResult;
+import com.nimtego.plectrum.data.model.itunes.ArtistsRepository;
 import com.nimtego.plectrum.domain.repository.Repository;
 import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
 import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
@@ -123,14 +123,12 @@ public class AppRepository implements Repository {
                                     .songsByIdAlbum(albumResult.getCollectionId()),
                             dataStore.wikiSearch(albumResult.getArtistName()),
                             (song, wiki) -> {
-                                AlbumDetailsModel albumDetail =
-                                        mapper.transformAlbumDetail(albumResult);
                                 //todo imut
 //                                albumDetail.setSongs(mapper.transformSongs(song));
 //                                albumDetail.setWikiInformation(wiki.isEmpty() ?
 //                                        "No information in wiki"
 //                                        : mapper.wikiInformationArtist(wiki));
-                                return albumDetail;
+                                return mapper.transformAlbumDetail(albumResult);
                             });
                 });
     }
@@ -140,10 +138,9 @@ public class AppRepository implements Repository {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return Observable.zip(dataStore.artistById(Integer.valueOf(id)),
                 dataStore.album(id), (artist, albums) -> {
-                    ArtistDetailsModelK artistDetails = mapper.transformArtistDetail(artist.getResults().get(0));
                     //todo imut
 //                    artistDetails.setAlbums(mapper.transformAlbums(albums));
-                    return artistDetails;
+                    return mapper.transformArtistDetail(artist.getResults().get(0));
                 }).flatMap(result -> changeLink(result.getArtistArtwork())
                 .map(url -> {
                     //todo  imut
@@ -153,7 +150,7 @@ public class AppRepository implements Repository {
     }
 
     @Override
-    public Observable<DashBoardModel> dashBoardModel() {
+    public Observable<DashBoardSongsModel> dashBoardModel() {
         //todo
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         Observable<PopularResponse> hotOb = dataStore.hot();

@@ -2,7 +2,7 @@ package com.nimtego.plectrum.data.cache
 
 import io.reactivex.Observable
 
-interface CacheK<E> {
+interface Cache<E> {
 
     fun get(id: String): Observable<E>
 

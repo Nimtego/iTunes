@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.data.rest.network.rss_itunes
+package com.nimtego.plectrum.data.network.rss_itunes
 
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import io.reactivex.Observable
