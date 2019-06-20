@@ -3,11 +3,10 @@ package com.nimtego.plectrum.presentation.mvp.view
 import com.arellomobile.mvp.viewstate.strategy.OneExecutionStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.data.entity.Song
 
 @StateStrategyType(OneExecutionStateStrategy::class)
-interface TabContentView : BaseView {
+interface MoreSectionView : BaseView {
     @StateStrategyType(SkipStrategy::class)
-    fun showViewState(data: BaseParentViewModel<ChildViewModel>)
+    fun showViewState(data: List<Song>)
 }

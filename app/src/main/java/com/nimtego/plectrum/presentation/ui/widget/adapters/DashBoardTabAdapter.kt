@@ -22,6 +22,7 @@ class DashBoardTabAdapter(
     private val viewPool = RecyclerView.RecycledViewPool()
     private var onItemClickListener: OnItemClickListener? = null
 
+    //todo change onclick: for section
     interface OnItemClickListener {
         fun onUserItemClicked(model: Song)
     }
