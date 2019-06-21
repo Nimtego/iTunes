@@ -10,4 +10,6 @@ import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 interface TabContentView : BaseView {
     @StateStrategyType(SkipStrategy::class)
     fun showViewState(data: BaseParentViewModel<ChildViewModel>)
+    fun message(message: String)
+    fun next(section: String)
 }

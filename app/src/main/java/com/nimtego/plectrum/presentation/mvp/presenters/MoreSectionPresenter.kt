@@ -26,12 +26,7 @@ class MoreSectionPresenter(
 
     private var dataSongsModel: List<Song>? = null
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        viewIsReady()
-    }
-
-    fun viewIsReady() {
+    fun viewReady(section: String) {
         dataSongsModel?.let { showModel(it) }.run {
             interactor.execute(object : DisposableObserver<List<Song>>() {
                 override fun onComplete() {
@@ -40,7 +35,7 @@ class MoreSectionPresenter(
 
                 override fun onNext(songs: List<Song>) {
                     Log.i("Presenter", "onnext")
-                    this@MoreSectionPresenter.dataSongsModel = dataSongsModel
+                    this@MoreSectionPresenter.dataSongsModel = songs
                     this@MoreSectionPresenter.showModel(songs)
                 }
 
@@ -51,7 +46,7 @@ class MoreSectionPresenter(
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }
-            }, MoreSectionInteractor.Params.forRequest(""))
+            }, MoreSectionInteractor.Params.forRequest(section))
         }
     }
 

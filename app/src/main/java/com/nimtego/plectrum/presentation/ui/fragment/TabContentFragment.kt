@@ -17,9 +17,17 @@ import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentView
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
+import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import javax.inject.Inject
 
 class TabContentFragment : MvpAppCompatFragment(), TabContentView {
+    override fun next(section: String) {
+
+    }
+
+    override fun message(message: String) {
+        SimpleToastAlarm(this.context).message(message)
+    }
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
@@ -62,7 +70,9 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
     //Mark: view override
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = DashBoardTabAdapter(data, this.context)
+            adapter = DashBoardTabAdapter(data, this.context).apply {
+                setOnItemClickListener(presenter)
+            }
         }
     }
 

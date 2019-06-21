@@ -40,6 +40,7 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.more_section_fragment, container, false)
         initRV(view, container)
+        presenter.viewReady(arguments.getString("SECTION"))
         return view
     }
 
@@ -67,6 +68,12 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView {
     }
 
     companion object {
-        fun getInstance() = TabContentFragment()
+        fun getInstance(sectionName: String) : MoreSectionFragment {
+            val fragment = MoreSectionFragment()
+            val arguments = Bundle()
+            arguments.putString("SECTION", sectionName)
+            fragment.arguments = arguments
+            return fragment
+        }
     }
 }

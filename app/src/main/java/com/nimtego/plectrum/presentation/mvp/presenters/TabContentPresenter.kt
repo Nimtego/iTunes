@@ -12,6 +12,8 @@ import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.DashBoardModelContainer
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.SectionViewModel
 import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.SectionChildAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 
@@ -20,7 +22,17 @@ class TabContentPresenter(
         router: Router,
         screenNumber: Int,
         private val interactor: TabContentInteractor
-) : BasePresenter<TabContentView>(router, screenNumber) {
+) : BasePresenter<TabContentView>(router, screenNumber), DashBoardTabAdapter.OnItemClickListener {
+
+    override fun childItemClicked(id: String) {
+        viewState.message(id)
+    }
+
+    override fun sectionClicked(sectionName: String) {
+        router.navigateTo(Screens.MoreContentView(sectionName))
+        viewState.message(sectionName)
+
+    }
 
     private var dataSongsModel: DashBoardSongsModel? = null
 

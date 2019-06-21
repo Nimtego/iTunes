@@ -8,6 +8,7 @@ import com.nimtego.plectrum.presentation.information_view.album.AlbumInformation
 import com.nimtego.plectrum.presentation.information_view.song.SongInformationFragment
 import com.nimtego.plectrum.presentation.ui.fragment.DashboardFragment
 import com.nimtego.plectrum.presentation.ui.activity.MainActivity
+import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
 
 
@@ -63,6 +64,12 @@ class Screens {
     class MusicTabView() : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return TabContentFragment.getInstance()
+        }
+    }
+
+    class MoreContentView(private val sectionName: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MoreSectionFragment.getInstance(sectionName)
         }
     }
 

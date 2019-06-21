@@ -19,17 +19,31 @@ class DashBoardTabAdapter(
         private val models: BaseParentViewModel<ChildViewModel>,
         parent: Context
 ) : RecyclerView.Adapter<DashBoardTabAdapter.ViewHolder>() {
+
     private val viewPool = RecyclerView.RecycledViewPool()
     private var onItemClickListener: OnItemClickListener? = null
 
     //todo change onclick: for section
     interface OnItemClickListener {
-        fun onUserItemClicked(model: Song)
+        fun sectionClicked(sectionName: String)
+        fun childItemClicked(id: String)
+    }
+    fun onUserItemClicked(childViewModel: ChildViewModel) {
+        onItemClickListener?.childItemClicked(childViewModel.id())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.dashboard_parent_item_k, parent, false)
-        return ViewHolder(v)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.dashboard_parent_item_k, parent, false)
+        val holder = ViewHolder(view)
+        view.findViewById<LinearLayout>(R.id.section_header).setOnClickListener{ _: View ->
+            val adapterPosition = holder.adapterPosition
+            if (adapterPosition != RecyclerView.NO_POSITION) {
+                this.models.sectionViewModel.get(adapterPosition).let {
+                    this.onItemClickListener?.sectionClicked(it.title())
+                }
+            }
+        }
+        return holder
     }
 
 
@@ -43,7 +57,13 @@ class DashBoardTabAdapter(
             layoutManager = childLayoutManager
             addItemDecoration(SpaceItemDecorator(spacing = 30))
 //            itemAnimator = DefaultItemAnimator()
-            adapter = SectionChildAdapter(sectionModel.getModels(), this.context)
+            adapter = SectionChildAdapter(sectionModel.getModels(), this.context).apply {
+                    setOnItemClickListener(object : SectionChildAdapter.OnItemClickListener {
+                        override fun onUserItemClicked(childViewModel: ChildViewModel) {
+                            this@DashBoardTabAdapter.onItemClickListener?.childItemClicked(childViewModel.id())
+                        }
+                    })
+            }
             recycledViewPool = viewPool
         }
 
@@ -54,7 +74,7 @@ class DashBoardTabAdapter(
     }
 
     override fun getItemCount(): Int {
-        return models?.sectionViewModel?.size ?: 0
+        return models.sectionViewModel.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

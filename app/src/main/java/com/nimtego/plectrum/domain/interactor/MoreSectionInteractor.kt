@@ -2,6 +2,7 @@ package com.nimtego.plectrum.domain.interactor
 
 import com.nimtego.plectrum.data.entity.DashBoardSongsModel
 import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.data.repository.repository.DashBoardRepository
 import com.nimtego.plectrum.data.repository.repository.MoreSectionRepository
 import com.nimtego.plectrum.data.repository.repository.TabContentRepository
 import io.reactivex.Observable

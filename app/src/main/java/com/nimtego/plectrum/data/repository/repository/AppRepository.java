@@ -156,7 +156,7 @@ public class AppRepository implements Repository {
         Observable<PopularResponse> hotOb = dataStore.hot();
         Observable<PopularResponse> newMusickOb = dataStore.newMusick();
         Observable<PopularResponse> topAlbumOb = dataStore.topAlbum();
-        Observable<PopularResponse> topSongOb = dataStore.topSong();
+        Observable<PopularResponse> topSongOb = dataStore.topSong(0);
         return Observable.zip(topAlbumOb,
                 topSongOb,
                 hotOb,

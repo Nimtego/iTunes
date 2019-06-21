@@ -16,6 +16,9 @@ interface RssItunesApi {
     @GET("top-songs/all/10/explicit.json")
     fun topSong(): Observable<PopularResponse>
 
+    @GET("top-songs/all/50/explicit.json")
+    fun topSongWithSize(): Observable<PopularResponse>
+
     @GET("hot-tracks/all/10/explicit.json")
     fun hotTrack(): Observable<PopularResponse>
 

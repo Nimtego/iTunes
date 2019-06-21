@@ -65,7 +65,7 @@ public class DiskDataStore<E> implements DataStore {
     }
 
     @Override
-    public Observable<PopularResponse> topSong() {
+    public Observable<PopularResponse> topSong(int size) {
         return null;
     }
 
