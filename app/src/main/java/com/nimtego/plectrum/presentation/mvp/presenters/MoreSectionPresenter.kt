@@ -62,4 +62,8 @@ class MoreSectionPresenter(
     fun songClicked(songModel: Song) {
         router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
+
+    fun onBackPressed() {
+        router.exit()
+    }
 }

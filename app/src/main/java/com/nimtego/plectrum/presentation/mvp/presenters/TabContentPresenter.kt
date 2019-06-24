@@ -28,10 +28,13 @@ class TabContentPresenter(
         viewState.message(id)
     }
 
+
+
     override fun sectionClicked(sectionName: String) {
         router.navigateTo(Screens.MoreContentView(sectionName))
-        viewState.message(sectionName)
-
+//        viewState.message(sectionName)
+//        router.newRootScreen(Screens.MoreContentView(sectionName))
+       // router.exit()
     }
 
     private var dataSongsModel: DashBoardSongsModel? = null

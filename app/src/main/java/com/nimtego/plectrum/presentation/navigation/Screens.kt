@@ -61,9 +61,9 @@ class Screens {
         }
     }
 
-    class MusicTabView() : SupportAppScreen() {
+    class TabContentView(private val tabName: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            return TabContentFragment.getInstance()
+            return TabContentFragment.getInstance(tabName)
         }
     }
 

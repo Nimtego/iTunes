@@ -17,9 +17,14 @@ import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.SongAdapter
+import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import javax.inject.Inject
 
-class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView {
+class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonListener {
+    override fun onBackPressed(): Boolean {
+        presenter.onBackPressed();
+        return true
+    }
 
     private var parentContainerRecyclerView: RecyclerView? = null
 

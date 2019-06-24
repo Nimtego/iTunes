@@ -7,7 +7,7 @@ import com.nimtego.plectrum.presentation.mvp.view.BaseView
 import ru.terrakok.cicerone.Router
 
 abstract class BasePresenter<T : BaseView>(
-        protected val router: Router,
+        var router: Router,
         protected val screenNumber: Int
 ) : MvpPresenter<T>() {
 

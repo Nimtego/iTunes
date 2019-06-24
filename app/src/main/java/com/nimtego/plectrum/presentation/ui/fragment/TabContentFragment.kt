@@ -19,6 +19,7 @@ import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import javax.inject.Inject
+import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 
 class TabContentFragment : MvpAppCompatFragment(), TabContentView {
     override fun next(section: String) {
@@ -42,6 +43,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
+        presenter.router = (this.parentFragment as RouterProvider).getRouter()
         super.onCreate(savedInstanceState)
     }
 
@@ -77,6 +79,16 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
     }
 
     companion object {
-        fun getInstance() = TabContentFragment()
+        fun getInstance(tabName: String): TabContentFragment {
+            val fragment = TabContentFragment()
+
+            val arguments = Bundle()
+            arguments.putString(TAB_NAME, tabName)
+            fragment.setArguments(arguments)
+
+            return fragment
+        }
+
+        val TAB_NAME = "TAB_NAME"
     }
 }
