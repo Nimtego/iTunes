@@ -18,9 +18,14 @@ import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.SongAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import javax.inject.Inject
 
 class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonListener {
+    override fun message(message: String) {
+        SimpleToastAlarm(this.context).message(message)
+    }
+
     override fun onBackPressed(): Boolean {
         presenter.onBackPressed();
         return true
@@ -50,7 +55,7 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonL
     }
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
-        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_music_container)
+        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view)
 
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)

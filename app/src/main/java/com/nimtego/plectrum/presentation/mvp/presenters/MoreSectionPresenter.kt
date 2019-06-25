@@ -27,6 +27,7 @@ class MoreSectionPresenter(
     private var dataSongsModel: List<Song>? = null
 
     fun viewReady(section: String) {
+        viewState.message(section)
         dataSongsModel?.let { showModel(it) }.run {
             interactor.execute(object : DisposableObserver<List<Song>>() {
                 override fun onComplete() {
@@ -41,8 +42,8 @@ class MoreSectionPresenter(
 
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
-//                this@DashBoardPresenter.hideViewLoading()
-//                this@DashBoardPresenter.toast("error" + e.localizedMessage)
+//                this@BottomNavigationPresenter.hideViewLoading()
+//                this@BottomNavigationPresenter.toast("error" + e.localizedMessage)
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }

@@ -19,6 +19,6 @@ class MoreSectionRepository(
 //        when (request) {
 //            "HOT" -> songType = dataStore.hot()
 //        }
-        return dataStore.topSong(0).map { mapper.topSong(it.feed) }
+        return dataStore.topSong(2).map { mapper.topSong(it.feed) }
     }
 }

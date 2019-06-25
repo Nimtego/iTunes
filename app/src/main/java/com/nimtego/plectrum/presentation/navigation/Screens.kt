@@ -6,7 +6,7 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import com.nimtego.plectrum.presentation.information_view.album.AlbumInformationFragment
 import com.nimtego.plectrum.presentation.information_view.song.SongInformationFragment
-import com.nimtego.plectrum.presentation.ui.fragment.DashboardFragment
+import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
 import com.nimtego.plectrum.presentation.ui.activity.MainActivity
 import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
@@ -20,7 +20,14 @@ class Screens {
         }
 
         override fun getFragment(): Fragment {
-            return DashboardFragment.getInstance()
+            return BottomNavigationFragment.getInstance()
+        }
+    }
+
+    class TabScreen(private val tabName: String) : SupportAppScreen() {
+
+        override fun getFragment(): Fragment {
+            return TabContentFragment.getInstance(tabName)
         }
     }
 

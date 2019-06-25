@@ -59,8 +59,8 @@ class TabContentPresenter(
 
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
-//                this@DashBoardPresenter.hideViewLoading()
-//                this@DashBoardPresenter.toast("error" + e.localizedMessage)
+//                this@BottomNavigationPresenter.hideViewLoading()
+//                this@BottomNavigationPresenter.toast("error" + e.localizedMessage)
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }

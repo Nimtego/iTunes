@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.nimtego.plectrum.presentation.utils.StatusBarUtils
 
-open class BaseFragment :  MvpAppCompatFragment() {
+abstract class BaseFragment :  MvpAppCompatFragment() {
 
     open fun setupStatusBar() {
         StatusBarUtils.makeIconsDark(this.context, this.activity?.window)

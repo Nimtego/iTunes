@@ -20,17 +20,22 @@ import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import javax.inject.Inject
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
+import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
+import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.Cicerone
 
-class TabContentFragment : MvpAppCompatFragment(), TabContentView {
-    override fun next(section: String) {
 
-    }
 
-    override fun message(message: String) {
-        SimpleToastAlarm(this.context).message(message)
-    }
+
+
+class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvider, BackButtonListener {
 
     private var parentContainerRecyclerView: RecyclerView? = null
+
+    @Inject
+    lateinit var ciceroneHolder: LocalCiceroneHolder
+
 
     @Inject
     @InjectPresenter
@@ -53,6 +58,30 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
         return view
     }
 
+    private fun getContainerName(): String {
+        return arguments.getString(TAB_NAME)
+    }
+
+    private fun getCicerone(): Cicerone<Router> {
+        return ciceroneHolder.getCicerone(getContainerName())
+    }
+
+    override fun getRouter(): Router {
+        return getCicerone().getRouter()
+    }
+
+    override fun onBackPressed(): Boolean {
+        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
+        if (fragment != null
+                && fragment is BackButtonListener
+                && (fragment as BackButtonListener).onBackPressed()) {
+            return true
+        } else {
+            (activity as RouterProvider).getRouter().exit()
+            return true
+        }
+    }
+
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
         this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_music_container)
 
@@ -69,7 +98,16 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
         }
     }
 
-    //Mark: view override
+//Mark: view override
+
+    override fun next(section: String) {
+
+    }
+
+    override fun message(message: String) {
+        SimpleToastAlarm(this.context).message(message)
+    }
+
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
             adapter = DashBoardTabAdapter(data, this.context).apply {
@@ -84,7 +122,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView {
 
             val arguments = Bundle()
             arguments.putString(TAB_NAME, tabName)
-            fragment.setArguments(arguments)
+            fragment.arguments = arguments
 
             return fragment
         }

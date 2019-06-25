@@ -6,6 +6,6 @@ import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentView
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 
 @StateStrategyType(OneExecutionStateStrategy::class)
-interface DashBoardView : ProgressView {
+interface MainBottomNavigationView : ProgressView {
     fun message(message: String?)
 }
