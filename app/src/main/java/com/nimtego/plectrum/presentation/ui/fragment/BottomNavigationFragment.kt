@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -14,24 +13,30 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
+import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import com.nimtego.plectrum.presentation.utils.toast.ToastAlarm
-import ru.terrakok.cicerone.Router
-import javax.inject.Inject
-import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
-
+import javax.inject.Inject
 
 
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, RouterProvider, BackButtonListener {
 
     lateinit var  toast: ToastAlarm
-    private var navigator: Navigator? = null
+
+    private lateinit var currentTab: String
+
     private var bottomNavigationView: BottomNavigationView? = null
+
+    @Inject
+    internal lateinit var router: Router
+
+    private var navigator: Navigator? = null
 
     @Inject
     lateinit var ciceroneHolder: LocalCiceroneHolder
@@ -45,20 +50,43 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
         return presenter
     }
 
+    override fun onResume() {
+        super.onResume()
+        getCicerone().navigatorHolder.setNavigator(getNavigator())
+    }
+
+    override fun onPause() {
+        getCicerone().navigatorHolder.removeNavigator()
+        super.onPause()
+    }
+    private fun getCicerone(): Cicerone<Router> {
+        return ciceroneHolder.getCicerone(getContainerName())
+    }
+
+
+
+    private fun getNavigator(): Navigator {
+        if (navigator == null) {
+            navigator = SupportAppNavigator(activity, childFragmentManager, R.id.bottom_navigation_container)
+        }
+        return navigator as Navigator
+    }
+
     override fun getRouter(): Router {
         return getCicerone().router
     }
 
     override fun onBackPressed(): Boolean {
-        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-        if (fragment != null
-                && fragment is BackButtonListener
-                && (fragment as BackButtonListener).onBackPressed()) {
-            return true
-        } else {
-            (activity as RouterProvider).getRouter().exit()
-            return true
-        }
+//        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
+//        if (fragment != null
+//                && fragment is BackButtonListener
+//                && (fragment as BackButtonListener).onBackPressed()) {
+//            return true
+//        } else {
+//            (activity as RouterProvider).getRouter().exit()
+//            return true
+//        }
+        return true
     }
 
     override fun message(message: String?) {
@@ -69,6 +97,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
+        presenter.router = this.router
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -78,7 +107,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
         initViews()
 
         if (savedInstanceState == null) {
-            bottomNavigationView?.setSelectedItemId(R.id.navigation_music)
+            this.currentTab = MUSIC_TAB
+            bottomNavigationView?.selectedItemId = R.id.navigation_music
         }
 
         return view
@@ -90,14 +120,17 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
             when (item.itemId) {
                 R.id.navigation_music -> {
                     message(item.itemId.toString())
+                    this.currentTab = MUSIC_TAB
                     selectTab(MUSIC_TAB)
                 }
                 R.id.navigation_movie -> {
                     message(item.itemId.toString())
+                    this.currentTab = MOVIE_TAB
                     selectTab(MOVIE_TAB)
                 }
                 R.id.navigation_books -> {
                     message(item.itemId.toString())
+                    this.currentTab = BOOK_TAB
                     selectTab(BOOK_TAB)
                 }
             }
@@ -109,24 +142,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
         super.onActivityCreated(savedInstanceState)
 
         if (childFragmentManager.findFragmentById(R.id.bottom_navigation_container) == null) {
-            getCicerone().router.replaceScreen(Screens.TabContentView(getContainerName()))
+            router.replaceScreen(Screens.TabContentView(getContainerName()))
         }
-    }
-    override fun onResume() {
-        super.onResume()
-        getCicerone().navigatorHolder.setNavigator(getNavigator())
-    }
-
-    override fun onPause() {
-        getCicerone().navigatorHolder.removeNavigator()
-        super.onPause()
-    }
-
-    private fun getNavigator(): Navigator {
-        if (navigator == null) {
-            navigator = SupportAppNavigator(activity, childFragmentManager, R.id.bottom_navigation_container)
-        }
-        return navigator as Navigator
     }
 
     override fun showProgress() {
@@ -140,11 +157,12 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 //Mark: private
 
     private fun selectTab(tab: String) {
+        //ciceroneHolder.getCicerone(tab).router.navigateTo(Screens.TabContentView(tab))
         val fm = childFragmentManager
         var currentFragment: Fragment? = null
-        val fragments = fm.getFragments()
+        val fragments = fm.fragments
         if (fragments != null) {
-            for (f in fragments!!) {
+            for (f in fragments) {
                 if (f.isVisible()) {
                     currentFragment = f
                     break
@@ -171,12 +189,9 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
     }
 
 
-    private fun getCicerone(): Cicerone<Router> {
-        return ciceroneHolder.getCicerone(getContainerName())
-    }
 
     private fun getContainerName(): String {
-        return arguments.getString(MAIN_TAB_FRAGMENT)
+        return currentTab
     }
 
     companion object {

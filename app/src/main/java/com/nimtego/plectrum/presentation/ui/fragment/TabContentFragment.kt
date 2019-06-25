@@ -11,31 +11,24 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
-import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
-import javax.inject.Inject
-import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
-import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
 import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.Cicerone
-
-
-
+import javax.inject.Inject
 
 
 class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvider, BackButtonListener {
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-    @Inject
-    lateinit var ciceroneHolder: LocalCiceroneHolder
-
+    private lateinit var router: Router
 
     @Inject
     @InjectPresenter
@@ -48,7 +41,8 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
-        presenter.router = (this.parentFragment as RouterProvider).getRouter()
+        this.router = (this.parentFragment as RouterProvider).getRouter()
+        presenter.router = this.router
         super.onCreate(savedInstanceState)
     }
 
@@ -62,12 +56,8 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
         return arguments.getString(TAB_NAME)
     }
 
-    private fun getCicerone(): Cicerone<Router> {
-        return ciceroneHolder.getCicerone(getContainerName())
-    }
-
     override fun getRouter(): Router {
-        return getCicerone().getRouter()
+        return router
     }
 
     override fun onBackPressed(): Boolean {

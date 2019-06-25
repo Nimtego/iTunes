@@ -13,6 +13,7 @@ import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
@@ -27,7 +28,7 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonL
     }
 
     override fun onBackPressed(): Boolean {
-        presenter.onBackPressed();
+        presenter.onBackPressed()
         return true
     }
 
@@ -45,6 +46,7 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonL
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
+        presenter.router = (this.parentFragment as RouterProvider).getRouter()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

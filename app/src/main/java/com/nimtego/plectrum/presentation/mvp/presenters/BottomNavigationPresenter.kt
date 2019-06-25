@@ -25,4 +25,8 @@ class BottomNavigationPresenter(router: Router,
         //  router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
 
+    fun tabClicked(tab: String) {
+
+    }
+
 }
