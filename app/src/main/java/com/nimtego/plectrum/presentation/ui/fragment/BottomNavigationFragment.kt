@@ -116,25 +116,12 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 
     private fun initViews() {
         bottomNavigationView?.setOnNavigationItemSelectedListener { item ->
-//            bottomNavigationView?.itemIconTintList. = null
             when (item.itemId) {
-                R.id.navigation_music -> {
-                    message(item.itemId.toString())
-                    this.currentTab = MUSIC_TAB
-                    selectTab(MUSIC_TAB)
-                }
-                R.id.navigation_movie -> {
-                    message(item.itemId.toString())
-                    this.currentTab = MOVIE_TAB
-                    selectTab(MOVIE_TAB)
-                }
-                R.id.navigation_books -> {
-                    message(item.itemId.toString())
-                    this.currentTab = BOOK_TAB
-                    selectTab(BOOK_TAB)
-                }
+                R.id.navigation_music -> selectTab(MUSIC_TAB)
+                R.id.navigation_movie -> selectTab(MOVIE_TAB)
+                R.id.navigation_books -> selectTab(BOOK_TAB)
             }
-            false
+            true
         }
     }
 
@@ -157,6 +144,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 //Mark: private
 
     private fun selectTab(tab: String) {
+        this.currentTab = tab
         //ciceroneHolder.getCicerone(tab).router.navigateTo(Screens.TabContentView(tab))
         val fm = childFragmentManager
         var currentFragment: Fragment? = null
