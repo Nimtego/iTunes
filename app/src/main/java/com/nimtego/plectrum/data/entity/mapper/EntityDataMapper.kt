@@ -158,4 +158,18 @@ class EntityDataMapper {
                               hotTrack =  hotTrackResult)
     }
 
+    fun topSong(topSongs: Feed) : List<Song> {
+       return topSongs.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
+    }
+
 }

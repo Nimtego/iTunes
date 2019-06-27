@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.presentation.di.modules.navigation
 
+import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -18,9 +19,9 @@ class NavigationModule {
         return cicerone.router
     }
 
-//    @Provides
-//    @Singleton
-//    internal fun provideNavigatorHolder(): NavigatorHolder {
-//        return cicerone.navigatorHolder
-//    }
+    @Provides
+    @Singleton
+    fun provideNavigatorHolder(): NavigatorHolder {
+        return cicerone.navigatorHolder
+    }
 }

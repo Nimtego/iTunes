@@ -6,10 +6,11 @@ import com.arellomobile.mvp.MvpAppCompatActivity
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.view.MainView
-import com.nimtego.plectrum.presentation.ui.fragment.DashboardFragment
+import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 
 class MainActivity : MvpAppCompatActivity(), MainView {
+
 
     private lateinit var navigator: SupportAppNavigator
 
@@ -36,7 +37,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 .beginTransaction()
                 .add(
                         R.id.main_container,
-                        DashboardFragment.getInstance()
+                        BottomNavigationFragment.getInstance()
                 )
                 .commit()
     }

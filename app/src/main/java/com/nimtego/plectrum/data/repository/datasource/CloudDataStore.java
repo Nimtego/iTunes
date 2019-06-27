@@ -83,8 +83,12 @@ public class CloudDataStore<E> implements DataStore {
     }
 
     @Override
-    public Observable<PopularResponse> topSong() {
-        return networkConnection.getRssItunesAPi().topSong();
+    public Observable<PopularResponse> topSong(int size) {
+        if (size == 0) {
+            return networkConnection.getRssItunesAPi().topSong();
+        } else {
+            return networkConnection.getRssItunesAPi().topSongWithSize();
+        }
     }
 
     @Override

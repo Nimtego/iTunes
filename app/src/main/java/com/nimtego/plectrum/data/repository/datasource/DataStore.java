@@ -28,7 +28,7 @@ public interface DataStore {
 
     Observable<PopularResponse> recent();
 
-    Observable<PopularResponse> topSong();
+    Observable<PopularResponse> topSong(int size);
 
     Observable<PopularResponse> topAlbum();
 

@@ -36,7 +36,7 @@ class SectionChildAdapter (
                 }
             }
         }
-        return ViewHolder(view)
+        return holder
     }
 
 
@@ -67,12 +67,12 @@ class SectionChildAdapter (
 //        holder.cv.cardElevation = 5f
     }
 
-    fun setOnItemClickListener(onItemClickListener: SectionChildAdapter.OnItemClickListener) {
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         this.onItemClickListener = onItemClickListener
     }
 
     override fun getItemCount(): Int {
-        return models?.size ?: 0
+        return models.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

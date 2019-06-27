@@ -4,14 +4,14 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.Album
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
-import com.nimtego.plectrum.presentation.mvp.view.DashBoardView
+import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import ru.terrakok.cicerone.Router
 
 @InjectViewState
-class DashBoardPresenter(router: Router,
-                         screenNumber: Int,
-                         private val interactor: DashBoardInteractor)
-    : BasePresenter<DashBoardView>(router, screenNumber) {
+class BottomNavigationPresenter(router: Router,
+                                screenNumber: Int,
+                                private val interactor: DashBoardInteractor)
+    : BasePresenter<MainBottomNavigationView>(router, screenNumber) {
 
     fun viewIsReady() {
 
@@ -23,6 +23,10 @@ class DashBoardPresenter(router: Router,
 
     fun songClicked(songModel: Song) {
         //  router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
+    }
+
+    fun tabClicked(tab: String) {
+
     }
 
 }

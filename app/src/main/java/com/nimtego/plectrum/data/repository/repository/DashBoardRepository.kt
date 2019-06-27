@@ -19,7 +19,7 @@ class DashBoardRepository(
         val hotOb = dataStore.hot()
         val newMusicOb = dataStore.newMusick()
         val topAlbumOb = dataStore.topAlbum()
-        val topSongOb = dataStore.topSong()
+        val topSongOb = dataStore.topSong(0)
         return Observable.zip<PopularResponse, PopularResponse, PopularResponse, PopularResponse, DashBoardSongsModel>(topAlbumOb,
                 topSongOb,
                 hotOb,
