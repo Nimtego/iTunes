@@ -6,6 +6,8 @@ import com.nimtego.plectrum.data.network.rss_itunes.RssItunesApi;
 import com.nimtego.plectrum.data.network.wiki.RestCountries;
 import com.nimtego.plectrum.data.network.wiki.WikiApi;
 
+import org.jetbrains.annotations.NotNull;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -27,6 +29,7 @@ public class NetworkConnection implements AppNetwork {
         return appNetwork;
     }
 
+    @NotNull
     @Override
     public ITunesApi getITunesClient() {
         if (iTunesApi == null)
@@ -34,8 +37,9 @@ public class NetworkConnection implements AppNetwork {
         return iTunesApi;
     }
 
+    @NotNull
     @Override
-    public WikiApi getWikiClient(RestCountries restCountries) {
+    public WikiApi getWikiClient(@NotNull RestCountries restCountries) {
         if (wikiApi == null || !this.restCountries.equals(restCountries)) {
             this.restCountries = restCountries;
             wikiApi = getWiki(this.restCountries).create(WikiApi.class);
@@ -43,11 +47,13 @@ public class NetworkConnection implements AppNetwork {
         return wikiApi;
     }
 
+    @NotNull
     @Override
     public WikiApi getWikiClient() {
         return getWikiClient(restCountries);
     }
 
+    @NotNull
     @Override
     public RssItunesApi getRssItunesAPi() {
         if (rssItunesApi == null)

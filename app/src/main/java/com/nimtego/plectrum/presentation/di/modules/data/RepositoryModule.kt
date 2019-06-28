@@ -5,7 +5,6 @@ import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.cache.DashBoardEntityCache
 import com.nimtego.plectrum.data.cache.FileManager
 import com.nimtego.plectrum.data.cache.Serializer
-import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper
 import com.nimtego.plectrum.data.executor.BaseExecutor
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse

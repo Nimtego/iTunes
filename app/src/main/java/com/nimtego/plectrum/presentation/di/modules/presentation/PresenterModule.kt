@@ -5,7 +5,7 @@ import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
-import com.nimtego.plectrum.presentation.main.MainPresenter
+import com.nimtego.plectrum.presentation.old.main.MainPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter

@@ -7,6 +7,7 @@ import com.nimtego.plectrum.presentation.di.components.ApplicationComponent
 import com.nimtego.plectrum.presentation.di.components.DaggerApplicationComponent
 import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 
 class App : Application() {
@@ -40,10 +41,10 @@ class App : Application() {
     fun getAppComponent() = appComponent
 
     private fun initCicerone() {
-        cicerone = Cicerone.create()
+        this.cicerone = Cicerone.create()
     }
 
-    fun getNavigatorHolder() = cicerone.getNavigatorHolder()
+    fun getNavigatorHolder(): NavigatorHolder = cicerone.navigatorHolder
 
-    fun getRouter() = cicerone.getRouter()
+    fun getRouter() = cicerone.router
 }

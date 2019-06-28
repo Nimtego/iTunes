@@ -4,8 +4,8 @@ import android.content.Context
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import android.content.Intent
 import android.support.v4.app.Fragment
-import com.nimtego.plectrum.presentation.information_view.album.AlbumInformationFragment
-import com.nimtego.plectrum.presentation.information_view.song.SongInformationFragment
+import com.nimtego.plectrum.presentation.old.information_view.album.AlbumInformationFragment
+import com.nimtego.plectrum.presentation.old.information_view.song.SongInformationFragment
 import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
 import com.nimtego.plectrum.presentation.ui.activity.MainActivity
 import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment

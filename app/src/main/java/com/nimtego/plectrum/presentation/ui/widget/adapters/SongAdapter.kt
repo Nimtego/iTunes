@@ -12,7 +12,6 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.data.entity.Song
-import com.nimtego.plectrum.presentation.main.model.SongModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -24,7 +23,7 @@ class SongAdapter(private val models: List<Song>?, parent: Context) : RecyclerVi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.song_card_form, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.layout_song_card_form, parent, false)
         return ViewHolder(v)
     }
 

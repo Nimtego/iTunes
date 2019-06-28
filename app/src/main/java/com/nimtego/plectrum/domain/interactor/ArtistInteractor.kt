@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.presentation.main.model.ArtistModel
+import com.nimtego.plectrum.presentation.old.main.model.ArtistModel
 import io.reactivex.Observable
 
 

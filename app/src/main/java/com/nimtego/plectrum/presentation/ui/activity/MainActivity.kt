@@ -16,7 +16,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onResume() {
         super.onResume()
-        App.INSTANCE.getNavigatorHolder()?.setNavigator(navigator)
+        App.INSTANCE.getNavigatorHolder().setNavigator(navigator)
     }
 
 
@@ -24,7 +24,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         //todo add module
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main_k)
+        setContentView(R.layout.activity_main)
         //set transparent status bar
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,

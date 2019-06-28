@@ -16,8 +16,8 @@ import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
-import com.nimtego.plectrum.presentation.utils.toast.ToastAlarm
+import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
+import com.nimtego.plectrum.presentation.ui.widget.toast.ToastAlarm
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router

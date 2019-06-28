@@ -7,7 +7,7 @@ import io.reactivex.Observable
 import java.io.File
 
 
-class DashBoardEntityCache<E : PopularResponse> : Cache<E> {
+class DashBoardEntityCache<E : PopularResponse>(context: Context, private val serializer: Serializer, private val fileManager: FileManager, private val threadPoolExecutor: ThreadExecutor) : Cache<E> {
 
     private val SETTINGS_FILE_NAME = "dash_board_cache_1"
     private val SETTINGS_KEY_LAST_CACHE_UPDATE = "last_cache_update"
@@ -16,20 +16,11 @@ class DashBoardEntityCache<E : PopularResponse> : Cache<E> {
     private val EXPIRATION_TIME = (60 * 10 * 1000).toLong()
 
     private val context: Context
-    private val serializer: Serializer
-    private val fileManager: FileManager
     private val cacheDir: File
-    private val threadPoolExecutor: ThreadExecutor
 
-    constructor(context: Context,
-                serializer: Serializer,
-                fileManager: FileManager,
-                threadPoolExecutor: ThreadExecutor) {
+    init {
         this.context = context.applicationContext
         this.cacheDir = this.context.cacheDir
-        this.serializer = serializer
-        this.fileManager = fileManager
-        this.threadPoolExecutor = threadPoolExecutor
     }
 
     override fun get(id: String): Observable<E> {
@@ -38,23 +29,17 @@ class DashBoardEntityCache<E : PopularResponse> : Cache<E> {
             val fileContent = this@DashBoardEntityCache.fileManager.readFileContent(userEntityFile)
             val userEntity: PopularResponse = this@DashBoardEntityCache.serializer.deserialize(fileContent, PopularResponse::class.java)
 
-            if (userEntity != null) {
-                emitter.onNext(userEntity as E)
-                emitter.onComplete()
-            } else {
-                emitter.onError(EntityNotFoundException())
-            }
+            emitter.onNext(userEntity as E)
+            emitter.onComplete()
         }
     }
 
     override fun put(entity: E) {
-        if (entity != null) {
-            val userEntityFile = this.buildFile(entity.feed.id)
-            if (!isCached(entity.feed.id)) {
-                val jsonString = this.serializer.serialize(entity, PopularResponse::class.java)
-                this.executeAsynchronously(CacheWriter(this.fileManager, userEntityFile, jsonString))
-                setLastCacheUpdateTimeMillis()
-            }
+        val userEntityFile = this.buildFile(entity.feed.id)
+        if (!isCached(entity.feed.id)) {
+            val jsonString = this.serializer.serialize(entity, PopularResponse::class.java)
+            this.executeAsynchronously(CacheWriter(this.fileManager, userEntityFile, jsonString))
+            setLastCacheUpdateTimeMillis()
         }
     }
 

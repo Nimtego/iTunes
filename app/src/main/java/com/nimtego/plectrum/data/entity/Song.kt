@@ -12,6 +12,7 @@ data class Song (
     val trackPrice: Double,
     val trackArtWorkUrl: String,
     val trackTimeMillis: Int) : ChildViewModel {
+
     override fun mainName(): String {
        return artistName
     }

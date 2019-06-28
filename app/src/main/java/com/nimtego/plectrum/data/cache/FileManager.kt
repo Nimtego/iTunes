@@ -23,7 +23,7 @@ class FileManager @Inject constructor() {
     internal fun readFileContent(file: File): String {
         val fileContentBuilder = StringBuilder()
         if (file.exists()) {
-            var stringLine: String
+            val stringLine: String
             try {
                 val fileReader = FileReader(file)
                 val bufferedReader = BufferedReader(fileReader)

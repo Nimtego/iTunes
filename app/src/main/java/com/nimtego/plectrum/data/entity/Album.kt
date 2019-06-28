@@ -11,6 +11,7 @@ data class Album(
     val albumArtWorkUrl: String,
     val albumArtistName: String,
     val albumPrice: Double) : ChildViewModel {
+
     override fun mainName(): String {
         return albumName
     }

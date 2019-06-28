@@ -26,7 +26,7 @@ class SectionChildAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.dashboard_child_item, parent, false)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.layout_tab_content_child_item, parent, false)
         val holder = ViewHolder(view)
         view.setOnClickListener{ _: View ->
             val adapterPosition = holder.adapterPosition

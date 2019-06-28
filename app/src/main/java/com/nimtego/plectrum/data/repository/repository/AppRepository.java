@@ -13,13 +13,14 @@ import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory;
 import com.nimtego.plectrum.data.model.itunes.AlbumResult;
 import com.nimtego.plectrum.data.model.itunes.ArtistsRepository;
 import com.nimtego.plectrum.domain.repository.Repository;
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel;
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK;
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel;
-import com.nimtego.plectrum.presentation.main.model.AlbumModel;
-import com.nimtego.plectrum.presentation.main.model.ArtistModel;
-import com.nimtego.plectrum.presentation.main.model.SongModel;
+import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel;
+import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK;
+import com.nimtego.plectrum.presentation.old.information_view.song.model.SongDetailsModel;
+import com.nimtego.plectrum.presentation.old.main.model.AlbumModel;
+import com.nimtego.plectrum.presentation.old.main.model.ArtistModel;
+import com.nimtego.plectrum.presentation.old.main.model.SongModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
 import org.jsoup.select.Elements;
 
@@ -53,14 +54,16 @@ public class AppRepository implements Repository {
                 new EntityDataMapper());
     }
 
+    @NotNull
     @Override
-    public Observable<List<SongModel>> songs(String request) {
+    public Observable<List<SongModel>> songs(@NotNull String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songs(request).map(this.mapper::transformSongs);
     }
 
+    @NotNull
     @Override
-    public Observable<List<ArtistModel>> artists(String request) {
+    public Observable<List<ArtistModel>> artists(@NotNull String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.artists(request)
                 .map(ArtistsRepository::getResults)
@@ -94,27 +97,31 @@ public class AppRepository implements Repository {
         });
     }
 
+    @NotNull
     @Override
-    public Observable<List<AlbumModel>> albums(String request) {
+    public Observable<List<AlbumModel>> albums(@NotNull String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.albums(request).map(this.mapper::transformAlbums);
     }
 
 
+    @NotNull
     @Override
-    public Observable<SongDetailsModel> songDeteil(String request) {
+    public Observable<SongDetailsModel> songDeteil(@NotNull String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.songById(Integer.valueOf(request)).map(result ->
                 this.mapper.transformSongDetail(result.getResults().get(0)));
     }
 
+    @NotNull
     @Override
-    public Observable<ArtistModel> artist(String request) {
+    public Observable<ArtistModel> artist(@NotNull String request) {
         return null;
     }
 
+    @NotNull
     @Override
-    public Observable<AlbumDetailsModel> albumDeteil(String request) {
+    public Observable<AlbumDetailsModel> albumDetail(@NotNull String request) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return dataStore.album(request)
                 .flatMap(album -> {
@@ -133,8 +140,9 @@ public class AppRepository implements Repository {
                 });
     }
 
+    @NotNull
     @Override
-    public Observable<ArtistDetailsModelK> artistDetail(String id) {
+    public Observable<ArtistDetailsModelK> artistDetail(@NotNull String id) {
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         return Observable.zip(dataStore.artistById(Integer.valueOf(id)),
                 dataStore.album(id), (artist, albums) -> {
@@ -149,12 +157,13 @@ public class AppRepository implements Repository {
                 }));
     }
 
+    @NotNull
     @Override
     public Observable<DashBoardSongsModel> dashBoardModel() {
         //todo
         final DataStore dataStore = this.dataStoreFactory.createCloudDataStore();
         Observable<PopularResponse> hotOb = dataStore.hot();
-        Observable<PopularResponse> newMusickOb = dataStore.newMusick();
+        Observable<PopularResponse> newMusickOb = dataStore.newMusic();
         Observable<PopularResponse> topAlbumOb = dataStore.topAlbum();
         Observable<PopularResponse> topSongOb = dataStore.topSong(0);
         return Observable.zip(topAlbumOb,

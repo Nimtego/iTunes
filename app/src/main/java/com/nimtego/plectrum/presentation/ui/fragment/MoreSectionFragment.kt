@@ -14,12 +14,11 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
-import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.SongAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
+import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
 import javax.inject.Inject
 
 class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonListener {
@@ -57,7 +56,7 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonL
     }
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
-        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view)
+        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_more_section)
 
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)

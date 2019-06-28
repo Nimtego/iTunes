@@ -4,7 +4,6 @@ import dagger.Provides
 import android.app.Activity
 import android.content.Context
 import dagger.Module
-import javax.inject.Named
 
 
 @Module

@@ -19,7 +19,7 @@ import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.utils.toast.SimpleToastAlarm
+import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -47,7 +47,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.dashboard_music_tab_fragment, container, false)
+        val view = inflater.inflate(R.layout.bottom_parent_tab_fragment, container, false)
         initRV(view, container)
         return view
     }
@@ -73,7 +73,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
     }
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
-        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_music_container)
+        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_parent_tab_container)
 
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)

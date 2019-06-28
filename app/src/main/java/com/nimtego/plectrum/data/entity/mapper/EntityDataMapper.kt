@@ -7,12 +7,12 @@ import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.data.model.itunes.*
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
 import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel
-import com.nimtego.plectrum.presentation.main.model.AlbumModel
-import com.nimtego.plectrum.presentation.main.model.ArtistModel
-import com.nimtego.plectrum.presentation.main.model.SongModel
+import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK
+import com.nimtego.plectrum.presentation.old.information_view.song.model.SongDetailsModel
+import com.nimtego.plectrum.presentation.old.main.model.AlbumModel
+import com.nimtego.plectrum.presentation.old.main.model.ArtistModel
+import com.nimtego.plectrum.presentation.old.main.model.SongModel
 
 class EntityDataMapper {
     fun transformArtist(result: ArtistResult): ArtistModel {
