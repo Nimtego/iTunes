@@ -24,12 +24,12 @@ public class AlbumModelDataMapperTest {
     public void setUp() {
     }
 
-    @Test
-    public void transformAlbumTest() {
-        Album album = createFakeAlbum();
-
-
-    }
+//    @Test
+//    public void transformAlbumTest() {
+//        Album album = createFakeAlbum();
+//
+//
+//    }
 
     private void testAssert(AlbumModel albumModel) {
         assertThat(albumModel, is(instanceOf(AlbumModel.class)));
@@ -38,17 +38,6 @@ public class AlbumModelDataMapperTest {
         assertThat(albumModel.getAlbumArtwork(), is(ALBUM_IMAGE));
     }
 
-
-    private Album createFakeAlbum() {
-        return Album.builder()
-                .albumName(ALBUM_NAME)
-                .albumId(ALBUM_ID)
-                .albumArtWorkUrl(ALBUM_IMAGE)
-                .albumArtistId(ALBUM_ARTIST_ID)
-                .albumArtistName(ALBUM_ARTIST_NAME)
-                .albumPrice(ALBUM_PRICE)
-                .build();
-    }
 
     @Test
     public void transformAlbums() {
