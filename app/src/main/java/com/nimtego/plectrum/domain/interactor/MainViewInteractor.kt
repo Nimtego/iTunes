@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.presentation.main.model.MainDataModel
+import com.nimtego.plectrum.presentation.old.main.model.MainDataModel
 import dagger.internal.Preconditions
 import io.reactivex.Observable
 import io.reactivex.functions.Function3

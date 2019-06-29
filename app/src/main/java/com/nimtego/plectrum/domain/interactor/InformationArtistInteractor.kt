@@ -1,7 +1,7 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.main.model.AlbumModel
+import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK
+import com.nimtego.plectrum.presentation.old.main.model.AlbumModel
 import dagger.internal.Preconditions
 import io.reactivex.Observable
 import java.util.*

@@ -29,20 +29,15 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    //lombok
-    compileOnly 'org.projectlombok:lombok:1.18.2'
-    annotationProcessor 'org.projectlombok:lombok:1.18.2'
-    testImplementation 'org.projectlombok:lombok:1.18.2'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
-    androidTestImplementation 'org.projectlombok:lombok:1.18.2'
-    androidTestAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
-
     //rxjava 2
     implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
     //cicerone
     implementation 'ru.terrakok.cicerone:cicerone:4.0.0'
+
+    //json
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     //moxy
     implementation 'com.arello-mobile:moxy-app-compat:1.5.5'

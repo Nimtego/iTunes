@@ -1,7 +1,7 @@
 package com.nimtego.plectrum.domain.interactor
 
 import com.nimtego.plectrum.App
-import com.nimtego.plectrum.domain.Repository
+import com.nimtego.plectrum.domain.repository.Repository
 import com.nimtego.plectrum.presentation.base.Interactor
 import dagger.internal.Preconditions
 import io.reactivex.Observable
@@ -17,7 +17,7 @@ abstract class BaseInteractor<T, P> : Interactor<T, P> {
 
     init {
         disposables = CompositeDisposable()
-        this.repository = App.getRepository()
+        this.repository = App.INSTANCE.getRepository()
     }
 
     protected abstract fun buildUseCaseObservable(params: P): Observable<T>

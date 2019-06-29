@@ -1,13 +1,18 @@
 package com.nimtego.plectrum.data.entity.mapper
 
-import com.nimtego.plectrum.data.rest.pojo.*
-import com.nimtego.plectrum.data.rest.pojo.wiki.WikiSearchResult
-import com.nimtego.plectrum.presentation.information_view.album.model.AlbumDetailsModel
-import com.nimtego.plectrum.presentation.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.information_view.song.model.SongDetailsModel
-import com.nimtego.plectrum.presentation.main.model.AlbumModel
-import com.nimtego.plectrum.presentation.main.model.ArtistModel
-import com.nimtego.plectrum.presentation.main.model.SongModel
+import android.util.Log
+import com.nimtego.plectrum.data.entity.Album
+import com.nimtego.plectrum.data.entity.DashBoardSongsModel
+import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.data.model.itunes.*
+import com.nimtego.plectrum.data.model.rss_itunes.Feed
+import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
+import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK
+import com.nimtego.plectrum.presentation.old.information_view.song.model.SongDetailsModel
+import com.nimtego.plectrum.presentation.old.main.model.AlbumModel
+import com.nimtego.plectrum.presentation.old.main.model.ArtistModel
+import com.nimtego.plectrum.presentation.old.main.model.SongModel
 
 class EntityDataMapper {
     fun transformArtist(result: ArtistResult): ArtistModel {
@@ -91,6 +96,80 @@ class EntityDataMapper {
         return ArtistDetailsModelK(artistArtwork = artistResult.artistLinkUrl,
                                    artistId = artistResult.artistId,
                                    artistName = artistResult.artistName)
+    }
+
+    //todo
+    fun dashBoardModel(topSongs: Feed,
+                       topAlbum: Feed,
+                       newMusic: Feed,
+                       hotTrack: Feed): DashBoardSongsModel {
+
+        Log.i("Presenter", topSongs.title)
+
+        val topSongsResult = topSongs.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
+
+        val newMusicResult = newMusic.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
+
+        val hotTrackResult = hotTrack.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
+
+        val topAlbumsResult = topAlbum.results.map {
+            Album(albumId = it.id.toInt(),
+                    albumArtistId = it.artistId.toInt(),
+                    albumName = it.name,
+                    albumArtistName = it.artistName,
+                    albumArtWorkUrl = it.artworkUrl100,
+                    albumPrice = 0.0,
+                    albumRealiseDate = it.releaseDate,
+                    albumTrackCount = 0)
+        }
+        return DashBoardSongsModel(topSongs =  topSongsResult,
+                              topAlbums = topAlbumsResult,
+                              newMusic = newMusicResult,
+                              hotTrack =  hotTrackResult)
+    }
+
+    fun topSong(topSongs: Feed) : List<Song> {
+       return topSongs.results.map {
+            Song(artistName = it.artistName,
+                    artistId = it.artistId.toInt(),
+                    trackName = it.name,
+                    trackId = it.id.toInt(),
+                    collectionId = 0,
+                    trackPrice = 0.0,
+                    wrapperType = it.copyright,
+                    trackTimeMillis = 0,
+                    trackArtWorkUrl = it.artworkUrl100)
+        }
     }
 
 }

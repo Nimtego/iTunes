@@ -1,5 +1,7 @@
 package com.nimtego.plectrum.data.entity
 
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+
 data class Album(
     val albumId: Int,
     val albumArtistId: Int,
@@ -8,4 +10,22 @@ data class Album(
     val albumTrackCount: Int,
     val albumArtWorkUrl: String,
     val albumArtistName: String,
-    val albumPrice: Double)
+    val albumPrice: Double) : ChildViewModel {
+
+    override fun mainName(): String {
+        return albumName
+    }
+
+    override fun minorName(): String {
+        return albumArtistName
+    }
+
+    override fun imageUrl(): String {
+        return albumArtWorkUrl
+    }
+
+    override fun id(): String {
+        return albumId.toString()
+    }
+
+}

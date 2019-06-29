@@ -2,8 +2,7 @@ package com.nimtego.plectrum.presentation.base
 
 import android.content.Context
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.nimtego.plectrum.presentation.mvp.BaseView
-import com.nimtego.plectrum.presentation.mvp.ProgressView
+import com.nimtego.plectrum.presentation.mvp.view.ProgressView
 
 abstract class BaseFragment : MvpAppCompatFragment(), ProgressView {
 

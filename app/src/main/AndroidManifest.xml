@@ -14,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme.Base"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".presentation.migrate_kotlin.ui.MainActivity"></activity>
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name=".presentation.ui.activity.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <intent-filter>
@@ -25,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.information_view.DetailedInformationActivity"></activity>
+        <activity android:name="com.nimtego.plectrum.presentation.old.information_view.DetailedInformationActivity" />
     </application>
 
 </manifest>
