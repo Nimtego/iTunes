@@ -36,4 +36,10 @@ interface DataStore {
     fun hot(): Observable<PopularResponse>
 
     fun newMusic(): Observable<PopularResponse>
+
+    fun topMovie(): Observable<PopularResponse>
+
+    fun topFreeBooks(): Observable<PopularResponse>
+
+    fun topPaidBooks(): Observable<PopularResponse>
 }

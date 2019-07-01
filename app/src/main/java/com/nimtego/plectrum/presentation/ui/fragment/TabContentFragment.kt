@@ -49,6 +49,7 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.bottom_parent_tab_fragment, container, false)
         initRV(view, container)
+        presenter.viewIsReady(getContainerName())
         return view
     }
 

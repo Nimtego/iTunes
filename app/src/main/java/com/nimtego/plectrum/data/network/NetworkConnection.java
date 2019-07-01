@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkConnection implements AppNetwork {
     private final static String BASE_URL_WIKI = "https://COUNTRY.wikipedia.org/w/";
     private final static String BASE_URL_ITUNES = "https://itunes.apple.com";
-    private final static String BASE_URL_RSS_ITUNES = "https://rss.itunes.apple.com/api/v1/us/itunes-music/";
+    private final static String BASE_URL_RSS_ITUNES = "https://rss.itunes.apple.com/api/v1/us/";
 
     private static AppNetwork appNetwork;
     private ITunesApi iTunesApi = null;

@@ -88,4 +88,17 @@ class CloudDataStore<E>(
     override fun newMusic(): Observable<PopularResponse> {
         return networkConnection.rssItunesAPi.newMusic()
     }
+
+    override fun topMovie(): Observable<PopularResponse> {
+        return networkConnection.rssItunesAPi.topMovie()
+    }
+
+    override fun topFreeBooks(): Observable<PopularResponse> {
+        return networkConnection.rssItunesAPi.topFreeBooks()
+    }
+
+    override fun topPaidBooks(): Observable<PopularResponse> {
+        return networkConnection.rssItunesAPi.topPaidBooks()
+    }
+
 }
