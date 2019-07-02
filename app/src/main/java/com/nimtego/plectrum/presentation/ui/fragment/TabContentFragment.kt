@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -75,7 +76,6 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
         this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_parent_tab_container)
-
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@TabContentFragment.context,

@@ -38,10 +38,10 @@ class TabContentPresenter(
         viewState.message(sectionName)
     }
 
-//    override fun onFirstViewAttach() {
-//        super.onFirstViewAttach()
-//        viewIsReady()
-//    }
+    override fun attachView(view: TabContentView) {
+        super.attachView(view)
+        tabContentModel?.let { showModel(it) }
+    }
 
     fun viewIsReady(tab: String) {
         tabContentModel?.let { showModel(it) }.run {

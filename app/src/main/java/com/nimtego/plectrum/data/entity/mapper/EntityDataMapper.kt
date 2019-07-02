@@ -107,10 +107,11 @@ class EntityDataMapper {
     }
 
     private fun tabContentResult(result: Result) : TabChildViewModel {
-        return TabChildViewModel(mainName = result.name,
-                                 minorName = result.artistName,
+        return TabChildViewModel(mainName = result.artistName,
+                                 minorName = result.name,
                                  imageUrl = result.artworkUrl100,
-                                 id = result.artistId)
+                //todo remove this
+                                 id = if(result.artistId == null) "0" else result.artistId)
     }
 
 
