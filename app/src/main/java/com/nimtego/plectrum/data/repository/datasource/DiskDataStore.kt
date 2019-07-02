@@ -12,6 +12,12 @@ import io.reactivex.Observable
 
 class DiskDataStore<E>(private val cache: Cache<E>) : DataStore {
 
+
+    override fun topMovie(): Observable<PopularResponse> {
+        //todo
+        return Observable.create { PopularResponse() }
+    }
+
     override fun wikiSearch(response: String): Observable<WikiSearchResult> {
         //todo
         return Observable.create { WikiSearchResult() }
@@ -78,4 +84,15 @@ class DiskDataStore<E>(private val cache: Cache<E>) : DataStore {
         //todo
         return Observable.create { PopularResponse() }
     }
+
+    override fun topFreeBooks(): Observable<PopularResponse> {
+        //todo
+        return Observable.create { PopularResponse() }
+    }
+
+    override fun topPaidBooks(): Observable<PopularResponse> {
+        //todo
+        return Observable.create { PopularResponse() }
+    }
+
 }

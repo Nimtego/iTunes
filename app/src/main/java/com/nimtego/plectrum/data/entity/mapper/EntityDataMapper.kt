@@ -1,12 +1,13 @@
 package com.nimtego.plectrum.data.entity.mapper
 
 import android.util.Log
-import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.DashBoardSongsModel
-import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.data.entity.*
 import com.nimtego.plectrum.data.model.itunes.*
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
+import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.SectionViewModel
 import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel
 import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK
 import com.nimtego.plectrum.presentation.old.information_view.song.model.SongDetailsModel
@@ -99,6 +100,21 @@ class EntityDataMapper {
     }
 
     //todo
+    fun tabContentModel(feed: Feed) : SectionViewModel<ChildViewModel> {
+        val list = feed.results.map { tabContentResult(it) }
+        return SectionViewModel(title = feed.title,
+                                parentList = list)
+    }
+
+    private fun tabContentResult(result: Result) : TabChildViewModel {
+        return TabChildViewModel(mainName = result.artistName,
+                                 minorName = result.name,
+                                 imageUrl = result.artworkUrl100,
+                //todo remove this
+                                 id = if(result.artistId == null) "0" else result.artistId)
+    }
+
+
     fun dashBoardModel(topSongs: Feed,
                        topAlbum: Feed,
                        newMusic: Feed,

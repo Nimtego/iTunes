@@ -107,8 +107,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
         initViews()
 
         if (savedInstanceState == null) {
-            this.currentTab = MUSIC_TAB
-            bottomNavigationView?.selectedItemId = R.id.navigation_music
+            this.currentTab = MOVIE_TAB
+            bottomNavigationView?.selectedItemId = R.id.navigation_movie
         }
 
         return view
@@ -163,7 +163,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 
         val transaction = fm.beginTransaction()
         if (newFragment == null) {
-            transaction.add(R.id.bottom_navigation_container, Screens.TabScreen(tab).getFragment(), tab)
+            transaction.add(R.id.bottom_navigation_container, Screens.TabScreen(tab).fragment, tab)
         }
 
         if (currentFragment != null) {
@@ -188,7 +188,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 
             val arguments = Bundle()
             arguments.putString(MAIN_TAB_FRAGMENT, MAIN_TAB_FRAGMENT)
-            fragment.setArguments(arguments)
+            fragment.arguments = arguments
 
             return fragment
         }

@@ -12,9 +12,9 @@ import io.reactivex.annotations.NonNull
 
 @Singleton
 class DataStoreFactory<E>
-@Inject
-constructor(private val context: Context,
-            private val cache: Cache<E>) {
+@Inject constructor(
+        private val context: Context,
+        private val cache: Cache<E>) {
 
     fun create(userId: Int): DataStore {
         val userDataStore: DataStore
