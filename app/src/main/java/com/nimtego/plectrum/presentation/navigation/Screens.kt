@@ -4,8 +4,6 @@ import android.content.Context
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import android.content.Intent
 import android.support.v4.app.Fragment
-import com.nimtego.plectrum.presentation.old.information_view.album.AlbumInformationFragment
-import com.nimtego.plectrum.presentation.old.information_view.song.SongInformationFragment
 import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
 import com.nimtego.plectrum.presentation.ui.activity.MainActivity
 import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
@@ -55,18 +53,6 @@ class Screens {
 //            return TabContainerFragment.getNewInstance(tabName)
 //        }
 //    }
-
-    class AlbumInformationDetail(private val id: String) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return AlbumInformationFragment.newInstance(id)
-        }
-    }
-
-    class SongInformationDetail(private val id: String) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return SongInformationFragment.newInstance(id)
-        }
-    }
 
     class TabContentView(private val tabName: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {

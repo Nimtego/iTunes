@@ -3,18 +3,14 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.DashBoardSongsModel
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.data.entity.TabContentModel
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.DashBoardModelContainer
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
-import com.nimtego.plectrum.presentation.ui.widget.adapters.SectionChildAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 
@@ -84,10 +80,10 @@ class TabContentPresenter(
     }
 
     fun albumClicked(albumModel: Album) {
-        router.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
+        //router.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
     }
 
     fun songClicked(songModel: Song) {
-        router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
+        //router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
 }

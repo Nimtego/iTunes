@@ -2,7 +2,7 @@ package com.nimtego.plectrum.domain.interactor
 
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.domain.repository.Repository
-import com.nimtego.plectrum.presentation.base.Interactor
+import com.nimtego.plectrum.presentation.interactor.Interactor
 import dagger.internal.Preconditions
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

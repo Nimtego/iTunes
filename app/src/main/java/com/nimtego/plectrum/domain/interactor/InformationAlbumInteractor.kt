@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.AlbumDetailsModel
 import io.reactivex.Observable
 
 class InformationAlbumInteractor : BaseInteractor<AlbumDetailsModel, InformationAlbumInteractor.Params>() {

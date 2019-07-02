@@ -24,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.nimtego.plectrum.presentation.old.information_view.DetailedInformationActivity" />
+        <activity android:name="com.nimtego.plectrum.presentation.mvp.view_model.information_view.DetailedInformationActivity" />
     </application>
 
 </manifest>
