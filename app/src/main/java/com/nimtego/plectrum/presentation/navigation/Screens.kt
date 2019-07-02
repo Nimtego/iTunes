@@ -5,7 +5,7 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 import android.content.Intent
 import android.support.v4.app.Fragment
 import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
-import com.nimtego.plectrum.presentation.ui.activity.MainActivity
+import com.nimtego.plectrum.presentation.ui.activity.AppActivity
 import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
 
@@ -31,13 +31,13 @@ class Screens {
 
     class StartScreen : SupportAppScreen() {
         override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
+            return Intent(context, AppActivity::class.java)
         }
     }
 
     class MainScreen : SupportAppScreen() {
         override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
+            return Intent(context, AppActivity::class.java)
         }
     }
 
