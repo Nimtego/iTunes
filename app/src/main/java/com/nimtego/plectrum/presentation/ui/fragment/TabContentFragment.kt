@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -15,8 +14,8 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener

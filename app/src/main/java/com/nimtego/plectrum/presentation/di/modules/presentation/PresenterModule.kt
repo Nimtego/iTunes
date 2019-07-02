@@ -5,7 +5,6 @@ import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
-import com.nimtego.plectrum.presentation.old.main.MainPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
@@ -15,12 +14,6 @@ import ru.terrakok.cicerone.Router
 
 @Module(includes = [InteractorModule::class, NavigationModule::class])
 class PresenterModule {
-
-
-    @Provides
-    fun mainPresenter(): MainPresenter {
-        return MainPresenter()
-    }
 
     @Provides
     fun tabContentPresenter(router: Router,

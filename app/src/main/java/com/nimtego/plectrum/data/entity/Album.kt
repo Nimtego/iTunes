@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.data.entity
 
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
 
 data class Album(
     val albumId: Int,

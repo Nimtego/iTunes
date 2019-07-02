@@ -6,14 +6,14 @@ import com.nimtego.plectrum.data.model.itunes.*
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.SectionViewModel
-import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel
-import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.old.information_view.song.model.SongDetailsModel
-import com.nimtego.plectrum.presentation.old.main.model.AlbumModel
-import com.nimtego.plectrum.presentation.old.main.model.ArtistModel
-import com.nimtego.plectrum.presentation.old.main.model.SongModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.ArtistDetailsModelK
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.view_model.music.AlbumModel
+import com.nimtego.plectrum.presentation.mvp.view_model.music.ArtistModel
+import com.nimtego.plectrum.presentation.mvp.view_model.music.SongModel
 
 class EntityDataMapper {
     fun transformArtist(result: ArtistResult): ArtistModel {
@@ -68,20 +68,20 @@ class EntityDataMapper {
 
     fun transformAlbumDetail(albumResult: AlbumResult): AlbumDetailsModel {
         return AlbumDetailsModel(albumName = albumResult.collectionName,
-                                  albumArtistName = albumResult.artistName,
-                                  albumArtwork = albumResult.artworkUrl100,
-                                  collectionPrice = albumResult.collectionPrice,
-                                  releaseDate = albumResult.releaseDate,
-                                  albumId = albumResult.collectionId)
+                albumArtistName = albumResult.artistName,
+                albumArtwork = albumResult.artworkUrl100,
+                collectionPrice = albumResult.collectionPrice,
+                releaseDate = albumResult.releaseDate,
+                albumId = albumResult.collectionId)
     }
 
     fun transformSongDetail(songResult: SongResult): SongDetailsModel {
         return SongDetailsModel(songName = songResult.trackName,
-                                 songArtwork = songResult.artworkUrl100,
-                                 songPrice = songResult.trackPrice,
-                                 songArtistName = songResult.artistName,
-                                 songAlbumName = songResult.collectionName,
-                                 releaseDate = songResult.releaseDate)
+                songArtwork = songResult.artworkUrl100,
+                songPrice = songResult.trackPrice,
+                songArtistName = songResult.artistName,
+                songAlbumName = songResult.collectionName,
+                releaseDate = songResult.releaseDate)
     }
 
     fun wikiInformationArtist(wiki: WikiSearchResult): String {
@@ -95,8 +95,8 @@ class EntityDataMapper {
 
     fun transformArtistDetail(artistResult: ArtistResult): ArtistDetailsModelK {
         return ArtistDetailsModelK(artistArtwork = artistResult.artistLinkUrl,
-                                   artistId = artistResult.artistId,
-                                   artistName = artistResult.artistName)
+                artistId = artistResult.artistId,
+                artistName = artistResult.artistName)
     }
 
     //todo

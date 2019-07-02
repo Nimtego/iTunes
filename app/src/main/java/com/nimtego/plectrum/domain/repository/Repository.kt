@@ -1,12 +1,12 @@
 package com.nimtego.plectrum.domain.repository
 
 import com.nimtego.plectrum.data.entity.DashBoardSongsModel
-import com.nimtego.plectrum.presentation.old.information_view.album.model.AlbumDetailsModel
-import com.nimtego.plectrum.presentation.old.information_view.artist.model.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.old.information_view.song.model.SongDetailsModel
-import com.nimtego.plectrum.presentation.old.main.model.AlbumModel
-import com.nimtego.plectrum.presentation.old.main.model.ArtistModel
-import com.nimtego.plectrum.presentation.old.main.model.SongModel
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.ArtistDetailsModelK
+import com.nimtego.plectrum.presentation.mvp.view_model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.view_model.music.AlbumModel
+import com.nimtego.plectrum.presentation.mvp.view_model.music.ArtistModel
+import com.nimtego.plectrum.presentation.mvp.view_model.music.SongModel
 
 import io.reactivex.Observable
 

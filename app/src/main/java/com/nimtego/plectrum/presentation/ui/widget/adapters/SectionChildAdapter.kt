@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.view_model.dashboard.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
