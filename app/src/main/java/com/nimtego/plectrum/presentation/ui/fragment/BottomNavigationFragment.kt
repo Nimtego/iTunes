@@ -22,6 +22,7 @@ import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import java.lang.StringBuilder
 import javax.inject.Inject
 
 
@@ -90,7 +91,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
     }
 
     override fun message(message: String?) {
-
+        SimpleToastAlarm(this.context).message(message ?: "NULL")
     }
 
 
@@ -145,11 +146,13 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 
     private fun selectTab(tab: String) {
         this.currentTab = tab
+        val sb = StringBuilder()
         //ciceroneHolder.getCicerone(tab).router.navigateTo(Screens.TabContentView(tab))
         val fm = childFragmentManager
         var currentFragment: Fragment? = null
         val fragments = fm.fragments
         if (fragments != null) {
+            sb.append("fragments != null")
             for (f in fragments) {
                 if (f.isVisible()) {
                     currentFragment = f
@@ -163,16 +166,20 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
 
         val transaction = fm.beginTransaction()
         if (newFragment == null) {
+            sb.append("\nnewFragment == null")
             transaction.add(R.id.bottom_navigation_container, Screens.TabScreen(tab).fragment, tab)
         }
 
         if (currentFragment != null) {
+            sb.append("\ncurrentFragment != null")
             transaction.hide(currentFragment)
         }
 
         if (newFragment != null) {
+            sb.append("\nnewFragment != null")
             transaction.show(newFragment)
         }
+        message(sb.toString())
         transaction.commitNow()
     }
 

@@ -69,7 +69,7 @@ class TabContentPresenter(
         val data =  BaseParentViewModel(listContent.map {
             SectionViewModel(it.title(), it.getModels())
         })
-//        val data = BaseParentViewModel(listOf<DashBoardModelContainer<ChildViewModel>>(
+//        val data = BaseParentViewModel(listOf<ParentTabModelContainer<ChildViewModel>>(
 //                SectionViewModel("Top album", tabContentModel.contentList.),
 //                SectionViewModel("Top song", dataSongsModel.topSongs),
 //                SectionViewModel("Hot song", dataSongsModel.hotTrack),

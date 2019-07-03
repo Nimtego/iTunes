@@ -7,10 +7,11 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 
-class DashBoardInteractor @Inject constructor(
+class BottomNavigationInteractor @Inject constructor(
         disposable: CompositeDisposable,
         repository: DashBoardRepository
-) : BaseInteractorK<DashBoardSongsModel, DashBoardInteractor.Params>(disposable, repository) {
+) : BaseInteractor<DashBoardSongsModel, BottomNavigationInteractor.Params>(disposable, repository) {
+
     override fun buildUseCaseObservable(params: Params): Observable<DashBoardSongsModel> {
         return repository.query(params.request)
     }

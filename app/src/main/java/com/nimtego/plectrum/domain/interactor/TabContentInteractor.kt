@@ -9,7 +9,7 @@ import javax.inject.Inject
 class TabContentInteractor @Inject constructor (
         disposable: CompositeDisposable,
         repository: TabContentRepository
-) : BaseInteractorK<TabContentModel, TabContentInteractor.Params>(disposable, repository) {
+) : BaseInteractor<TabContentModel, TabContentInteractor.Params>(disposable, repository) {
     override fun buildUseCaseObservable(params: Params): Observable<TabContentModel> {
         return repository.query(params.request)
     }

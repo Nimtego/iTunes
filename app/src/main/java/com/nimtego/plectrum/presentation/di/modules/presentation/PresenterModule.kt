@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
-import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
+import com.nimtego.plectrum.domain.interactor.BottomNavigationInteractor
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
@@ -23,7 +23,7 @@ class PresenterModule {
 
     @Provides
     fun dashBoardPresenter(router: Router,
-                           interactor: DashBoardInteractor): BottomNavigationPresenter {
+                           interactor: BottomNavigationInteractor): BottomNavigationPresenter {
         return BottomNavigationPresenter(router, 1, interactor)
     }
 
