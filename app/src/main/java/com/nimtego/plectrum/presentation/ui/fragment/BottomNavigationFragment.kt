@@ -78,16 +78,15 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
     }
 
     override fun onBackPressed(): Boolean {
-//        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-//        if (fragment != null
-//                && fragment is BackButtonListener
-//                && (fragment as BackButtonListener).onBackPressed()) {
-//            return true
-//        } else {
-//            (activity as RouterProvider).getRouter().exit()
-//            return true
-//        }
-        return true
+        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
+        if (fragment != null
+                && fragment is BackButtonListener
+                && (fragment as BackButtonListener).onBackPressed()) {
+            return true
+        } else {
+            (activity as RouterProvider).getRouter().exit()
+            return true
+        }
     }
 
     override fun message(message: String?) {
@@ -175,10 +174,11 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
             transaction.hide(currentFragment)
         }
 
-        if (newFragment != null) {
+        if (newFragment != null ) {
             sb.append("\nnewFragment != null")
             transaction.show(newFragment)
         }
+
         message(sb.toString())
         transaction.commitNow()
     }

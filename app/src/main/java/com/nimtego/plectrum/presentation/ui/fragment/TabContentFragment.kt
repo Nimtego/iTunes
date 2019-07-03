@@ -62,15 +62,15 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
     }
 
     override fun onBackPressed(): Boolean {
-        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-        if (fragment != null
-                && fragment is BackButtonListener
-                && (fragment as BackButtonListener).onBackPressed()) {
-            return true
-        } else {
-            (activity as RouterProvider).getRouter().exit()
-            return true
-        }
+//        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
+//        if (fragment != null
+//                && fragment is BackButtonListener
+//                && (fragment as BackButtonListener).onBackPressed()) {
+//            return true
+//        } else {
+//            (activity as RouterProvider).getRouter().exit()
+        router.exit()
+        return true
     }
 
     protected fun initRV(view: View, viewGroup: ViewGroup?) {
