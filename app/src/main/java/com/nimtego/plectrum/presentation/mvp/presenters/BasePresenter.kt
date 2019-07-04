@@ -36,19 +36,19 @@ abstract class BasePresenter<T : BaseView>(
     }
 
     fun onForwardCommandClick() {
-        router.navigateTo(Screens.SampleScreen(1))
+        //router.navigateTo(Screens.SampleScreen(1))
     }
 
     fun onReplaceCommandClick() {
-        router.replaceScreen(Screens.SampleScreen(1))
+        //router.replaceScreen(Screens.SampleScreen(1))
     }
 
     fun onNewChainCommandClick() {
-        router.newChain(
-                Screens.SampleScreen(screenNumber + 1),
-                Screens.SampleScreen(screenNumber + 2),
-                Screens.SampleScreen(screenNumber + 3)
-        )
+//        router.newChain(
+//                Screens.SampleScreen(screenNumber + 1),
+//                Screens.SampleScreen(screenNumber + 2),
+//                Screens.SampleScreen(screenNumber + 3)
+//        )
     }
 
     fun onFinishChainCommandClick() {
@@ -56,7 +56,7 @@ abstract class BasePresenter<T : BaseView>(
     }
 
     fun onNewRootCommandClick() {
-        router.newRootScreen(Screens.SampleScreen(screenNumber + 1))
+//        router.newRootScreen(Screens.SampleScreen(screenNumber + 1))
     }
 
     fun onForwardWithDelayCommandClick() {
@@ -70,6 +70,6 @@ abstract class BasePresenter<T : BaseView>(
     }
 
     fun onBackToCommandClick() {
-        router.backTo(Screens.SampleScreen(3))
+//        router.backTo(Screens.SampleScreen(3))
     }
 }

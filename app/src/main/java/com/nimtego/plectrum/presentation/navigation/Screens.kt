@@ -10,17 +10,7 @@ import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
 
 
-class Screens {
-    class SampleScreen(private val number: Int) : SupportAppScreen() {
-
-        init {
-            this.screenKey = javaClass.simpleName + "_" + number
-        }
-
-        override fun getFragment(): Fragment {
-            return BottomNavigationFragment.getInstance()
-        }
-    }
+object Screens {
 
     class TabScreen(private val tabName: String) : SupportAppScreen() {
 
@@ -59,6 +49,26 @@ class Screens {
             return TabContentFragment.getInstance(tabName)
         }
     }
+
+    object MusicTabContentView : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return TabContentFragment.getInstance("MUSIC_TAB")
+        }
+    }
+
+    object MovieTabContentView : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return TabContentFragment.getInstance("MOVIE_TAB")
+        }
+    }
+
+    object BookTabContentView : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return TabContentFragment.getInstance("BOOK_TAB")
+        }
+    }
+
+
 
     class MoreContentView(private val sectionName: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {

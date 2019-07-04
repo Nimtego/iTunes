@@ -53,6 +53,9 @@ dependencies {
     //rxrelay
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
 
+    //ahbottom
+    implementation 'com.aurelhubert:ahbottomnavigation:2.2.0'
+
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'

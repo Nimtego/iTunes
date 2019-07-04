@@ -83,9 +83,9 @@ class TabContentRepository(
 //        val BOOK_TAB = "book_tab"
         //todo remove hardcode
         return when (request) {
-            "music_tab" -> musicQuery()
-            "movie_tab" -> movieQuery()
-            "book_tab" -> bookQuery()
+            "MUSIC_TAB" -> musicQuery()
+            "MOVIE_TAB" -> movieQuery()
+            "BOOK_TAB" -> bookQuery()
             else -> Observable.create { PopularResponse() }
         }
     }

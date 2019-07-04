@@ -10,6 +10,7 @@ import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router

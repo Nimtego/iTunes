@@ -49,8 +49,8 @@ class TabContentFragment : BaseFragment(), TabContentView, RouterProvider, BackB
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        this.router = (this.parentFragment as RouterProvider).getRouter()
-        this.presenter.router = this.router
+//        this.router = (this.parentFragment as RouterProvider).getRouter()
+//        this.presenter.router = this.router
         initRV()
         this.presenter.viewIsReady(getContainerName())
     }
