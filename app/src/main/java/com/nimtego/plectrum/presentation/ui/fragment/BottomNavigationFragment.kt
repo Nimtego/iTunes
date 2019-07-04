@@ -1,8 +1,6 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
@@ -15,10 +13,6 @@ import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import javax.inject.Inject
 
