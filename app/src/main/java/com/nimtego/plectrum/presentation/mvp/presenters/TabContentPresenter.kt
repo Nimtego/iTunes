@@ -24,14 +24,14 @@ class TabContentPresenter(
     private var tabContentModel: TabContentModel? = null
 
     override fun childItemClicked(id: String) {
-        viewState.message(id)
+        viewState.systemMessage(id)
     }
 
 
 
     override fun sectionClicked(sectionName: String) {
         router.navigateTo(Screens.MoreContentView(sectionName))
-        viewState.message(sectionName)
+        viewState.systemMessage(sectionName)
     }
 
     override fun attachView(view: TabContentView) {

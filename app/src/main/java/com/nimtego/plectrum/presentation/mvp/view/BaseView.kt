@@ -6,4 +6,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface BaseView : MvpView {
+    fun systemMessage(message: String)
 }

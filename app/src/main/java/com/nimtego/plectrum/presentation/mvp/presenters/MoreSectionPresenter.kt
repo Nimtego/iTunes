@@ -19,7 +19,7 @@ class MoreSectionPresenter(
     private var dataSongsModel: List<Song>? = null
 
     fun viewReady(section: String) {
-        viewState.message(section)
+        viewState.systemMessage(section)
         dataSongsModel?.let { showModel(it) }.run {
             interactor.execute(object : DisposableObserver<List<Song>>() {
                 override fun onComplete() {

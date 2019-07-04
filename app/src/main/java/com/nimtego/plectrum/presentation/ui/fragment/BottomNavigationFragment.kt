@@ -3,9 +3,6 @@ package com.nimtego.plectrum.presentation.ui.fragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
@@ -16,22 +13,18 @@ import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
-import com.nimtego.plectrum.presentation.ui.widget.toast.ToastAlarm
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, RouterProvider, BackButtonListener {
 
-    lateinit var  toast: ToastAlarm
+    override val layoutRes: Int =  R.layout.bottom_navigation_fragment
 
     private lateinit var currentTab: String
-
     private var bottomNavigationView: BottomNavigationView? = null
 
     @Inject
@@ -89,32 +82,21 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
         }
     }
 
-    override fun message(message: String?) {
-        SimpleToastAlarm(this.context).message(message ?: "NULL")
-    }
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         presenter.router = this.router
+        this.bottomNavigationView = view?.findViewById(R.id.bottomNavigationView)
+        initBottomNavigation()
+        bottomNavigationView?.selectedItemId = R.id.navigation_movie
+        router.replaceScreen(Screens.TabContentView(getContainerName()))
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.bottom_navigation_fragment, container, false)
-        toast = SimpleToastAlarm(this.context)
-        this.bottomNavigationView = view.findViewById(R.id.bottomNavigationView)
-        initViews()
-
-        if (savedInstanceState == null) {
-            this.currentTab = MOVIE_TAB
-            bottomNavigationView?.selectedItemId = R.id.navigation_movie
-        }
-
-        return view
-    }
-
-    private fun initViews() {
+    private fun initBottomNavigation() {
         bottomNavigationView?.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_music -> selectTab(MUSIC_TAB)
@@ -122,14 +104,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
                 R.id.navigation_books -> selectTab(BOOK_TAB)
             }
             true
-        }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        if (childFragmentManager.findFragmentById(R.id.bottom_navigation_container) == null) {
-            router.replaceScreen(Screens.TabContentView(getContainerName()))
         }
     }
 
@@ -179,7 +153,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, Route
             transaction.show(newFragment)
         }
 
-        message(sb.toString())
+        systemMessage(sb.toString())
         transaction.commitNow()
     }
 

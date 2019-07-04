@@ -21,10 +21,9 @@ import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
 import javax.inject.Inject
 
-class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonListener {
-    override fun message(message: String) {
-        SimpleToastAlarm(this.context).message(message)
-    }
+class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener {
+
+    override val layoutRes: Int = R.layout.more_section_fragment
 
     override fun onBackPressed(): Boolean {
         presenter.onBackPressed()
@@ -45,18 +44,19 @@ class MoreSectionFragment : MvpAppCompatFragment(), MoreSectionView, BackButtonL
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initRV()
         presenter.router = (this.parentFragment as RouterProvider).getRouter()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.more_section_fragment, container, false)
-        initRV(view, container)
         presenter.viewReady(arguments.getString("SECTION"))
-        return view
     }
 
-    protected fun initRV(view: View, viewGroup: ViewGroup?) {
-        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_more_section)
+    protected fun initRV() {
+        this.parentContainerRecyclerView = this.view
+                ?.findViewById(R.id.recycler_view_more_section)
 
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)

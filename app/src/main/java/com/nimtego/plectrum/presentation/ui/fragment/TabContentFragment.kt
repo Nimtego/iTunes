@@ -24,7 +24,9 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 
-class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvider, BackButtonListener {
+class TabContentFragment : BaseFragment(), TabContentView, RouterProvider, BackButtonListener {
+
+    override val layoutRes: Int = R.layout.bottom_parent_tab_fragment
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
@@ -41,16 +43,16 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
-        this.router = (this.parentFragment as RouterProvider).getRouter()
-        presenter.router = this.router
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.bottom_parent_tab_fragment, container, false)
-        initRV(view, container)
-        presenter.viewIsReady(getContainerName())
-        return view
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        this.router = (this.parentFragment as RouterProvider).getRouter()
+        this.presenter.router = this.router
+        initRV()
+        this.presenter.viewIsReady(getContainerName())
     }
 
     private fun getContainerName(): String {
@@ -73,8 +75,9 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
         return true
     }
 
-    protected fun initRV(view: View, viewGroup: ViewGroup?) {
-        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_parent_tab_container)
+    protected fun initRV() {
+        this.parentContainerRecyclerView = view
+                ?.findViewById(R.id.recycler_view_parent_tab_container)
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@TabContentFragment.context,
@@ -89,14 +92,6 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
     }
 
 //Mark: view override
-
-    override fun next(section: String) {
-
-    }
-
-    override fun message(message: String) {
-        SimpleToastAlarm(this.context).message(message)
-    }
 
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {

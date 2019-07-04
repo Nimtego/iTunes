@@ -9,6 +9,4 @@ import com.nimtego.plectrum.data.entity.Song
 interface MoreSectionView : BaseView {
     @StateStrategyType(SkipStrategy::class)
     fun showViewState(data: List<Song>)
-
-    fun message(message: String)
 }
