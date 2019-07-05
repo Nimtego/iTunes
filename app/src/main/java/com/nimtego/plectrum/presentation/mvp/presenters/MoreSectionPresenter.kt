@@ -8,9 +8,11 @@ import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 @InjectViewState
-class MoreSectionPresenter(
+class MoreSectionPresenter
+@Inject constructor(
         router: Router,
         screenNumber: Int,
         private val interactor: MoreSectionInteractor

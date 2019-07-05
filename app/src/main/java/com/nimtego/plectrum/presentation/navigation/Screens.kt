@@ -12,24 +12,24 @@ import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
 
 object Screens {
 
-    class TabScreen(private val tabName: String) : SupportAppScreen() {
-
-        override fun getFragment(): Fragment {
-            return TabContentFragment.getInstance(tabName)
-        }
-    }
-
-    class StartScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, AppActivity::class.java)
-        }
-    }
-
-    class MainScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, AppActivity::class.java)
-        }
-    }
+//    class TabScreen(private val tabName: String) : SupportAppScreen() {
+//
+//        override fun getFragment(): Fragment {
+//            return TabContentFragment.getInstance(tabName)
+//        }
+//    }
+//
+//    class StartScreen : SupportAppScreen() {
+//        override fun getActivityIntent(context: Context): Intent {
+//            return Intent(context, AppActivity::class.java)
+//        }
+//    }
+//
+//    class MainScreen : SupportAppScreen() {
+//        override fun getActivityIntent(context: Context): Intent {
+//            return Intent(context, AppActivity::class.java)
+//        }
+//    }
 
 //    class BottomNavigationScreen : SupportAppScreen() {
 //        override fun getActivityIntent(context: Context): Intent {
@@ -43,6 +43,12 @@ object Screens {
 //            return TabContainerFragment.getNewInstance(tabName)
 //        }
 //    }
+
+    object BottomNavigationView : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return BottomNavigationFragment.getInstance()
+        }
+    }
 
     class TabContentView(private val tabName: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {

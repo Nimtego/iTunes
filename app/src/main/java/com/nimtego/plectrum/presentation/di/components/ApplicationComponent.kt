@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.presentation.di.components
 
-import com.nimtego.plectrum.presentation.di.modules.navigation.LocalNavigationModule
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.presentation.PresenterModule
 import com.nimtego.plectrum.presentation.di.modules.system.SystemModule
 import com.nimtego.plectrum.presentation.ui.activity.AppActivity
@@ -12,8 +12,8 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [PresenterModule::class,
-                      LocalNavigationModule::class,
-                      SystemModule::class])
+                      SystemModule::class,
+                      NavigationModule::class])
 interface ApplicationComponent {
 
     fun inject(activity: AppActivity)

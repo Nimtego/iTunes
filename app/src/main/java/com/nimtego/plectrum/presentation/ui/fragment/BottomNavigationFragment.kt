@@ -1,84 +1,64 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
-import com.nimtego.plectrum.presentation.navigation.LocalCiceroneHolder
+import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppScreen
+import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
+import javax.inject.Named
 
 
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackButtonListener {
 
-    override val layoutRes: Int =  R.layout.bottom_navigation_fragment
+    override val layoutRes: Int = R.layout.bottom_navigation_fragment
 
-    private lateinit var currentTab: SupportAppScreen
+    @field:[Inject Named(NavigationQualifiers.APP_NAVIGATION)]
+    internal lateinit var appRouter: Router
+
+    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
+    internal lateinit var bottomNavigatorHolder: NavigatorHolder
+
+    private var navigator: Navigator? = null
+
+    @Inject
+    @InjectPresenter
+    internal lateinit var presenter: BottomNavigationPresenter
+
     private var bottomNavigationView: AHBottomNavigation? = null
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
 
-//    @Inject
-//    internal lateinit var router: Router
-
-//    private var navigator: Navigator? = null
-
-    @Inject
-    lateinit var ciceroneHolder: LocalCiceroneHolder
-
-    @Inject
-    @InjectPresenter
-    internal lateinit var presenter: BottomNavigationPresenter
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): BottomNavigationPresenter {
         return presenter
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        getCicerone().navigatorHolder.setNavigator(getNavigator())
-////    }
-//
-//    override fun onPause() {
-//        getCicerone().navigatorHolder.removeNavigator()
-//        super.onPause()
-//    }
-//    private fun getCicerone(): Cicerone<Router> {
-//        return ciceroneHolder.getCicerone(getContainerName())
-//    }
-
-
-
-//    private fun getNavigator(): Navigator {
-//        if (navigator == null) {
-//            navigator = SupportAppNavigator(activity, childFragmentManager, R.id.bottom_navigation_container)
-//        }
-//        return navigator as Navigator
-//    }
-
-//    override fun getRouter(): Router {
-//        return router
-//    }
-
     override fun onBackPressed(): Boolean {
-        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-        if (fragment != null
-                && fragment is BackButtonListener
-                && (fragment as BackButtonListener).onBackPressed()) {
-            return true
+        val fragment = this.childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
+
+        return if (fragment is BackButtonListener) {
+            fragment.onBackPressed()
         } else {
-            (activity as RouterProvider).getRouter().exit()
-            return true
+            this.presenter.onBackPressed()
         }
     }
 
@@ -89,9 +69,26 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        presenter.router = this.router
+        if (this.navigator == null) {
+            context?.let {
+                this.navigator = BottomNavigator(childFragmentManager,
+                        it as AppCompatActivity,
+                        R.id.bottom_navigation_container,
+                        appRouter)
+            }
+        }
         this.bottomNavigationView = this.view?.findViewById(R.id.bottomNavigationView)
         initBottomNavigation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        this.bottomNavigatorHolder.setNavigator(this.navigator)
+    }
+
+    override fun onPause() {
+        this.bottomNavigatorHolder.removeNavigator()
+        super.onPause()
     }
 
     private fun initBottomNavigation() {
@@ -162,13 +159,68 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     private fun createTabFragment(tab: SupportAppScreen) = tab.fragment
 
 
-
 //    private fun getContainerName(): String {
 //        return currentTab?.screenKey
 //    }
 
+    // MARK: - Inner Types
+
+    private inner class BottomNavigator(
+            private val fragmentManager: FragmentManager?,
+            private val activity: AppCompatActivity,
+            container: Int,
+            parentRouter: Router
+    ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
+
+        private val musicNavigationFragment: Fragment = Screens.MusicTabContentView.fragment
+        private val movieNavigationFragment: Fragment = Screens.MovieTabContentView.fragment
+        private val bookNavigationFragment: Fragment = Screens.BookTabContentView.fragment
+
+        init {
+            this.fragmentManager
+                    ?.beginTransaction()
+                    ?.add(container, this.musicNavigationFragment)
+                    ?.detach(this.musicNavigationFragment)
+                    ?.add(container, this.movieNavigationFragment)
+                    ?.detach(this.movieNavigationFragment)
+                    ?.add(container, this.bookNavigationFragment)
+                    ?.detach(this.bookNavigationFragment)
+                    ?.commitNow()
+        }
+
+        override fun fragmentReplace(command: Replace) {
+            when (command.screen) {
+                Screens.MusicTabContentView -> {
+                    this.fragmentManager?.beginTransaction()
+                            ?.attach(this.musicNavigationFragment)
+                            ?.detach(this.movieNavigationFragment)
+                            ?.detach(this.bookNavigationFragment)
+                            ?.commit()
+
+                }
+                Screens.MovieTabContentView -> {
+                    this.fragmentManager?.beginTransaction()
+                            ?.detach(this.musicNavigationFragment)
+                            ?.attach(this.movieNavigationFragment)
+                            ?.detach(this.bookNavigationFragment)
+                            ?.commit()
+
+                }
+                Screens.BookTabContentView -> {
+                    this.fragmentManager?.beginTransaction()
+                            ?.detach(this.musicNavigationFragment)
+                            ?.detach(this.movieNavigationFragment)
+                            ?.attach(this.bookNavigationFragment)
+                            ?.commit()
+
+                }
+            }
+        }
+
+    }
+
     companion object {
-        fun getInstance() : BottomNavigationFragment {
+        fun getInstance(): BottomNavigationFragment {
             val fragment = BottomNavigationFragment()
 
             val arguments = Bundle()
@@ -177,6 +229,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
             return fragment
         }
+
         const val MAIN_TAB_FRAGMENT = "main_tab_fragment"
         val MUSIC_TAB = Screens.MusicTabContentView
         val MOVIE_TAB = Screens.MovieTabContentView
