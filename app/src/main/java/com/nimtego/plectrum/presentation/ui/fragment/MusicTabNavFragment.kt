@@ -10,7 +10,6 @@ import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.MusicNavigationPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -66,7 +65,7 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
             context?.let {
                 this.navigator = MusicTabNavigator(childFragmentManager,
                         it as AppCompatActivity,
-                        R.id.bottom_navigation_container,
+                        R.id.tab_layout_container,
                         bottomBarRouter)
             }
             this.navigator?.applyCommands(arrayOf(Replace(Screens.MusicTabScreen)))
@@ -96,7 +95,7 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
 
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
-                Screens.MusicTabScreen -> MusicTabFragment.getInstance()
+                Screens.MusicTabScreen -> screen.fragment
                 else -> null
             }
             return null
@@ -104,11 +103,11 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
     }
 
     companion object {
-        fun getInstance(tabName: String): TabContentFragment {
-            val fragment = TabContentFragment()
+        fun getInstance(): MusicTabNavFragment {
+            val fragment = MusicTabNavFragment()
 
             val arguments = Bundle()
-            arguments.putString(TAB_NAME, tabName)
+            arguments.putString(TAB_NAME, "Music_nav_fragment")
             fragment.arguments = arguments
 
             return fragment

@@ -13,10 +13,9 @@ import javax.inject.Inject
 @InjectViewState
 class MoreSectionPresenter
 @Inject constructor(
-        router: Router,
-        screenNumber: Int,
+        private val router: Router,
         private val interactor: MoreSectionInteractor
-) : BasePresenter<MoreSectionView>(router, screenNumber) {
+) : BasePresenter<MoreSectionView>() {
 
     private var dataSongsModel: List<Song>? = null
 

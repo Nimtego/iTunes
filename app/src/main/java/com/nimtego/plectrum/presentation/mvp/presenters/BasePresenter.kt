@@ -6,10 +6,7 @@ import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
 import ru.terrakok.cicerone.Router
 
-abstract class BasePresenter<T : BaseView>(
-        var router: Router,
-        protected val screenNumber: Int
-) : MvpPresenter<T>() {
+abstract class BasePresenter<T : BaseView>() : MvpPresenter<T>() {
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 
@@ -31,45 +28,4 @@ abstract class BasePresenter<T : BaseView>(
 
 //Mark: navigation
 
-    fun onBackCommandClick() {
-        router.exit()
-    }
-
-    fun onForwardCommandClick() {
-        //router.navigateTo(Screens.SampleScreen(1))
-    }
-
-    fun onReplaceCommandClick() {
-        //router.replaceScreen(Screens.SampleScreen(1))
-    }
-
-    fun onNewChainCommandClick() {
-//        router.newChain(
-//                Screens.SampleScreen(screenNumber + 1),
-//                Screens.SampleScreen(screenNumber + 2),
-//                Screens.SampleScreen(screenNumber + 3)
-//        )
-    }
-
-    fun onFinishChainCommandClick() {
-        router.finishChain()
-    }
-
-    fun onNewRootCommandClick() {
-//        router.newRootScreen(Screens.SampleScreen(screenNumber + 1))
-    }
-
-    fun onForwardWithDelayCommandClick() {
-//        if (future != null) future.cancel(true)
-//        future = executorService.schedule(Runnable {
-//            //WARNING! Navigation must be only in UI thread.
-//            Handler(Looper.getMainLooper()).post(
-//                    Runnable { router.navigateTo(Screens.SampleScreen(screenNumber + 1)) }
-//            )
-//        }, 5, TimeUnit.SECONDS)
-    }
-
-    fun onBackToCommandClick() {
-//        router.backTo(Screens.SampleScreen(3))
-    }
 }

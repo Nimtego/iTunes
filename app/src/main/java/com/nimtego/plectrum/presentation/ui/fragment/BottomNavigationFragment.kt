@@ -172,9 +172,9 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
 
-        private val musicNavigationFragment: Fragment = Screens.MusicTabContentView.fragment
-        private val movieNavigationFragment: Fragment = Screens.MovieTabContentView.fragment
-        private val bookNavigationFragment: Fragment = Screens.BookTabContentView.fragment
+        private val musicNavigationFragment: Fragment = Screens.MusicTabNavigationScreen.fragment
+        private val movieNavigationFragment: Fragment = Screens.MovieTabNavigationScreen.fragment
+        private val bookNavigationFragment: Fragment = Screens.BookTabNavigationScreen.fragment
 
         init {
             this.fragmentManager
@@ -190,7 +190,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
         override fun fragmentReplace(command: Replace) {
             when (command.screen) {
-                Screens.MusicTabContentView -> {
+                Screens.MusicTabNavigationScreen-> {
                     this.fragmentManager?.beginTransaction()
                             ?.attach(this.musicNavigationFragment)
                             ?.detach(this.movieNavigationFragment)
@@ -198,7 +198,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                             ?.commit()
 
                 }
-                Screens.MovieTabContentView -> {
+                Screens.MovieTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
                             ?.detach(this.musicNavigationFragment)
                             ?.attach(this.movieNavigationFragment)
@@ -206,7 +206,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                             ?.commit()
 
                 }
-                Screens.BookTabContentView -> {
+                Screens.BookTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
                             ?.detach(this.musicNavigationFragment)
                             ?.detach(this.movieNavigationFragment)
@@ -231,8 +231,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         }
 
         const val MAIN_TAB_FRAGMENT = "main_tab_fragment"
-        val MUSIC_TAB = Screens.MusicTabContentView
-        val MOVIE_TAB = Screens.MovieTabContentView
-        val BOOK_TAB = Screens.BookTabContentView
+        val MUSIC_TAB = Screens.MusicTabNavigationScreen
+        val MOVIE_TAB = Screens.MovieTabNavigationScreen
+        val BOOK_TAB = Screens.BookTabNavigationScreen
     }
 }

@@ -13,7 +13,7 @@ import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
-import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -90,7 +90,7 @@ class TabContentFragment : BaseFragment(), TabContentView, RouterProvider, BackB
 
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = DashBoardTabAdapter(data, this.context).apply {
+            adapter = ParentTabAdapter(data, this.context).apply {
                 setOnItemClickListener(presenter)
             }
         }

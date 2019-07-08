@@ -12,13 +12,11 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @InjectViewState
-class BottomNavigationPresenter
-@Inject constructor(
-        @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
-        val bottomNavigationRouter: Router,
-        screenNumber: Int,
-        private val interactor: BottomNavigationInteractor
-) : BasePresenter<MainBottomNavigationView>(bottomNavigationRouter, screenNumber) {
+class BottomNavigationPresenter @Inject constructor()
+    : BasePresenter<MainBottomNavigationView>() {
+
+    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
+    internal lateinit var bottomNavigationRouter: Router
 
     @field:[Inject Named(NavigationQualifiers.APP_NAVIGATION)]
     internal lateinit var appRouter: Router

@@ -13,10 +13,10 @@ import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParen
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 
-class DashBoardTabAdapter(
+class ParentTabAdapter(
         private val models: BaseParentViewModel<ChildViewModel>,
         parent: Context
-) : RecyclerView.Adapter<DashBoardTabAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ParentTabAdapter.ViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
     private var onItemClickListener: OnItemClickListener? = null
@@ -58,7 +58,7 @@ class DashBoardTabAdapter(
             adapter = SectionChildAdapter(sectionModel.getModels(), this.context).apply {
                     setOnItemClickListener(object : SectionChildAdapter.OnItemClickListener {
                         override fun onUserItemClicked(childViewModel: ChildViewModel) {
-                            this@DashBoardTabAdapter.onItemClickListener?.childItemClicked(childViewModel.id())
+                            this@ParentTabAdapter.onItemClickListener?.childItemClicked(childViewModel.id())
                         }
                     })
             }
