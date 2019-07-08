@@ -34,7 +34,7 @@ class TabContentPresenter
 
 
     override fun sectionClicked(sectionName: String) {
-        this.router.navigateTo(Screens.MoreContentView(sectionName))
+        this.router.navigateTo(Screens.MoreContentScreen)
         viewState.systemMessage(sectionName)
     }
 
@@ -73,12 +73,6 @@ class TabContentPresenter
         val data =  BaseParentViewModel(listContent.map {
             SectionViewModel(it.title(), it.getModels())
         })
-//        val data = BaseParentViewModel(listOf<ParentTabModelContainer<ChildViewModel>>(
-//                SectionViewModel("Top album", tabContentModel.contentList.),
-//                SectionViewModel("Top song", dataSongsModel.topSongs),
-//                SectionViewModel("Hot song", dataSongsModel.hotTrack),
-//                SectionViewModel("New music", dataSongsModel.newMusic))
-//        )
         viewState.showViewState(data)
 
     }

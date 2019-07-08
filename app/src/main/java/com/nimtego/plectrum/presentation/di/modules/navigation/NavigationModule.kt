@@ -103,4 +103,18 @@ class NavigationModule {
         return tabContentNavigationBarCicerone.navigatorHolder
     }
 
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+    internal fun provideMoreSongContentRouter(): Router {
+        return musicTabNavigationCicerone.router
+    }
+
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+    internal fun provideMoreSongContentNavigatorHolder(): NavigatorHolder {
+        return musicTabNavigationCicerone.navigatorHolder
+    }
+
 }

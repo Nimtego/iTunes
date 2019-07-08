@@ -14,23 +14,6 @@ class TabContentRepository(
         private val dataStoreFactory: DataStoreFactory<PopularResponse>,
         private val mapper: EntityDataMapper
 ) : RepositoryK<TabContentModel> {
-//    private fun musicQuery() : Observable<TabContentModel> {
-//        val dataStore = dataStore()
-//        val hotOb = dataStore.hot()
-//        val newMusicOb = dataStore.newMusic()
-//        val topAlbumOb = dataStore.topAlbum()
-//        val topSongOb = dataStore.topSong(0)
-//        return Observable.zip<PopularResponse, PopularResponse, PopularResponse, PopularResponse, DashBoardSongsModel>(topAlbumOb,
-//                topSongOb,
-//                hotOb,
-//                newMusicOb,
-//                Function4<PopularResponse, PopularResponse, PopularResponse, PopularResponse, DashBoardSongsModel>
-//                { topAlbum, topSong, hotSong, newMusic ->
-//                    mapper.dashBoardModel(topSong.feed, topAlbum.feed, newMusic.feed, hotSong.feed)
-//                }
-//        )
-//    }
-
 
     private fun musicQuery() : Observable<TabContentModel> {
         val dataStore = dataStore()

@@ -9,7 +9,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.presenters.MusicNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.MovieNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -36,10 +36,10 @@ class MovieTabNavFragment  : BaseFragment(), TabNavigationView, BackButtonListen
 
     @Inject
     @InjectPresenter
-    internal lateinit var presenter: MusicNavigationPresenter
+    internal lateinit var presenter: MovieNavigationPresenter
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): MusicNavigationPresenter {
+    fun provideRepositoryPresenter(): MovieNavigationPresenter {
         return presenter
     }
 
@@ -98,7 +98,6 @@ class MovieTabNavFragment  : BaseFragment(), TabNavigationView, BackButtonListen
                 Screens.MovieTabScreen -> screen.fragment
                 else -> null
             }
-            return null
         }
     }
 

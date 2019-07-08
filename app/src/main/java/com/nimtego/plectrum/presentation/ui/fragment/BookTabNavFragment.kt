@@ -9,7 +9,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.presenters.MusicNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.BookNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -30,16 +30,16 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
     internal lateinit var bottomBarRouter: Router
 
     @field:[Inject Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)]
-    internal lateinit var musicNavigatorHolder: NavigatorHolder
+    internal lateinit var bookNavigatorHolder: NavigatorHolder
 
     private var navigator: Navigator? = null
 
     @Inject
     @InjectPresenter
-    internal lateinit var presenter: MusicNavigationPresenter
+    internal lateinit var presenter: BookNavigationPresenter
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): MusicNavigationPresenter {
+    fun provideRepositoryPresenter(): BookNavigationPresenter {
         return presenter
     }
 
@@ -74,11 +74,11 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
 
     override fun onResume() {
         super.onResume()
-        this.musicNavigatorHolder.setNavigator(this.navigator)
+        this.bookNavigatorHolder.setNavigator(this.navigator)
     }
 
     override fun onPause() {
-        this.musicNavigatorHolder.removeNavigator()
+        this.bookNavigatorHolder.removeNavigator()
         super.onPause()
     }
 
@@ -98,13 +98,12 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
                 Screens.BookTabScreen -> screen.fragment
                 else -> null
             }
-            return null
         }
     }
 
     companion object {
-        fun getInstance(): MovieTabNavFragment {
-            val fragment = MovieTabNavFragment()
+        fun getInstance(): BookTabNavFragment {
+            val fragment = BookTabNavFragment()
 
             val arguments = Bundle()
             arguments.putString(TAB_NAME, "Book_nav_fragment")

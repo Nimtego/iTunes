@@ -13,7 +13,7 @@ import javax.inject.Inject
 @InjectViewState
 class MoreSectionPresenter
 @Inject constructor(
-        private val router: Router,
+        private val musicTabRouter: Router,
         private val interactor: MoreSectionInteractor
 ) : BasePresenter<MoreSectionView>() {
 
@@ -58,6 +58,6 @@ class MoreSectionPresenter
     }
 
     fun onBackPressed() {
-        router.exit()
+        this.musicTabRouter.exit()
     }
 }

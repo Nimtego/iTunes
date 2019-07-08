@@ -30,8 +30,6 @@ interface ApplicationComponent {
 
     fun inject(fragment: BookTabFragment)
 
-    fun inject(fragment: TabContentFragment)
-
     fun inject(fragment: MoreSectionFragment)
 
 }

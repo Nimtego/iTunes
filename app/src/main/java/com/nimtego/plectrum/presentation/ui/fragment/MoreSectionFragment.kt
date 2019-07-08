@@ -3,34 +3,29 @@ package com.nimtego.plectrum.presentation.ui.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.SongAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
+import ru.terrakok.cicerone.Router
 import javax.inject.Inject
+import javax.inject.Named
 
 class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.more_section_fragment
 
-    override fun onBackPressed(): Boolean {
-        presenter.onBackPressed()
-        return true
-    }
-
     private var parentContainerRecyclerView: RecyclerView? = null
+
+    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
+    internal lateinit var tabMusicRouter: Router
 
     @Inject
     @InjectPresenter
@@ -45,6 +40,11 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
 
+    }
+
+    override fun onBackPressed(): Boolean {
+        this.presenter.onBackPressed()
+        return true
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

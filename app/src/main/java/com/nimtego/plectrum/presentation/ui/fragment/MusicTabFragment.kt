@@ -29,8 +29,8 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
     @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
     internal lateinit var tabMusicRouter: Router
 
-    @field:[Inject Named(NavigationQualifiers.APP_NAVIGATION)]
-    internal lateinit var appRouter: Router
+    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
+    internal lateinit var parentRouter: Router
 
     @Inject
     @InjectPresenter
@@ -48,12 +48,8 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-//        this.router = (this.parentFragment as RouterProvider).getRouter()
-//        this.presenter.router = this.router
         initRV()
-        systemMessage("In tab music")
-        this.presenter.viewIsReady()
+        this.presenter.viewIsReady(getContainerName())
     }
 
     private fun getContainerName(): String {
@@ -65,14 +61,7 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
     }
 
     override fun onBackPressed(): Boolean {
-//        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-//        if (fragment != null
-//                && fragment is BackButtonListener
-//                && (fragment as BackButtonListener).onBackPressed()) {
-//            return true
-//        } else {
-//            (activity as RouterProvider).getRouter().exit()
-        tabMusicRouter.exit()
+        this.presenter.onBackPressed()
         return true
     }
 

@@ -11,5 +11,17 @@ abstract class ParentHolderFragmentNavigator(
         container: Int,
         private val parentRouter: Router
 ) : SupportAppNavigator(activity, fragmentManager, container) {
+//    override fun unknownScreen(command: Command) {
+//        when (command) {
+//            is Forward -> this.parentRouter.navigateTo(command.screen)
+//            is Back -> this.parentRouter.exit()
+//            is Replace -> this.parentRouter.replaceScreen(command.screen)
+//            is BackTo -> this.parentRouter.backTo(command.screen)
+//        }
+//    }
+//
+//    override fun exit() {
+//        this.parentRouter.exit()
+//    }
 
 }
