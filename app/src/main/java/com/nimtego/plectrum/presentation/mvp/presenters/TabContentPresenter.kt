@@ -92,4 +92,9 @@ class TabContentPresenter
     fun songClicked(songModel: Song) {
         //router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
     }
+
+    fun onBackPressed(): Boolean {
+        //todo
+        return true
+    }
 }

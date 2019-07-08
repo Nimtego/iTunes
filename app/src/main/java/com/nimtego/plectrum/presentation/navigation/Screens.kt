@@ -62,6 +62,12 @@ object Screens {
         }
     }
 
+    object MusicTabScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return TabContentFragment.getInstance("MUSIC_TAB")
+        }
+    }
+
     object MovieTabContentView : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return TabContentFragment.getInstance("MOVIE_TAB")
@@ -74,30 +80,9 @@ object Screens {
         }
     }
 
-
-
     class MoreContentView(private val sectionName: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return MoreSectionFragment.getInstance(sectionName)
         }
     }
-
-//
-//    class GithubScreen : SupportAppScreen() {
-//        fun getActivityIntent(context: Context): Intent {
-//            return Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/terrakok/Cicerone"))
-//        }
-//    }
-//
-//    class ProfileScreen : SupportAppScreen() {
-//        fun getActivityIntent(context: Context): Intent {
-//            return Intent(context, ProfileActivity::class.java)
-//        }
-//    }
-//
-//
-//    class SelectPhotoScreen : SupportAppScreen() {
-//        override fun getFragment(): Fragment {
-//            return SelectPhotoFragment()
-//        }
 }

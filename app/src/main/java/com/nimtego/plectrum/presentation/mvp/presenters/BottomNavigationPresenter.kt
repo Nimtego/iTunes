@@ -17,8 +17,8 @@ class BottomNavigationPresenter
         @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
         val bottomNavigationRouter: Router,
         screenNumber: Int,
-        private val interactor: BottomNavigationInteractor)
-    : BasePresenter<MainBottomNavigationView>(bottomNavigationRouter, screenNumber) {
+        private val interactor: BottomNavigationInteractor
+) : BasePresenter<MainBottomNavigationView>(bottomNavigationRouter, screenNumber) {
 
     @field:[Inject Named(NavigationQualifiers.APP_NAVIGATION)]
     internal lateinit var appRouter: Router

@@ -3,10 +3,6 @@ package com.nimtego.plectrum.presentation.ui.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
@@ -19,7 +15,6 @@ import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 

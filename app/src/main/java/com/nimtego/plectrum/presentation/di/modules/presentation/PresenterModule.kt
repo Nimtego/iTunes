@@ -8,6 +8,7 @@ import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.MusicNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import dagger.Module
 import dagger.Provides
@@ -33,5 +34,12 @@ class PresenterModule {
     fun sectionMorePresenter(@Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)router: Router,
                            interactor: MoreSectionInteractor): MoreSectionPresenter {
         return MoreSectionPresenter(router, 1, interactor)
+    }
+
+    //todo
+    @Provides
+    fun musicTabNavPresenter(@Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)router: Router,
+                             interactor: BottomNavigationInteractor): MusicNavigationPresenter {
+        return MusicNavigationPresenter(router, 1, interactor)
     }
 }

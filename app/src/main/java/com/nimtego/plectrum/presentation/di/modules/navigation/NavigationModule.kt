@@ -19,8 +19,6 @@ class NavigationModule {
     private val movieTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
     private val bookTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
 
-//    private val cicerone: Cicerone<Router> = Cicerone.create()
-
     @Provides
     @Singleton
     @Named(NavigationQualifiers.APP_NAVIGATION)

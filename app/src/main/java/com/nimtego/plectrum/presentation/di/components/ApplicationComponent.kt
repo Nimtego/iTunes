@@ -6,6 +6,7 @@ import com.nimtego.plectrum.presentation.di.modules.system.SystemModule
 import com.nimtego.plectrum.presentation.ui.activity.AppActivity
 import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
 import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
+import com.nimtego.plectrum.presentation.ui.fragment.MusicTabNavFragment
 import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -19,6 +20,8 @@ interface ApplicationComponent {
     fun inject(activity: AppActivity)
 
     fun inject(fragment: BottomNavigationFragment)
+
+    fun inject(fragment: MusicTabNavFragment)
 
     fun inject(fragment: TabContentFragment)
 
