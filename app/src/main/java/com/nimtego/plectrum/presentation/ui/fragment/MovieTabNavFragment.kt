@@ -22,7 +22,7 @@ import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
 
-class MovieTabNavFragment  : BaseFragment(), TabNavigationView, BackButtonListener {
+class MovieTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.fragment_tab_container
 
@@ -68,8 +68,8 @@ class MovieTabNavFragment  : BaseFragment(), TabNavigationView, BackButtonListen
                         R.id.tab_layout_container,
                         bottomBarRouter)
             }
-            this.navigator?.applyCommands(arrayOf(Replace(Screens.MovieTabScreen)))
         }
+        this.navigator?.applyCommands(arrayOf(Replace(Screens.MovieTabScreen)))
     }
 
     override fun onResume() {

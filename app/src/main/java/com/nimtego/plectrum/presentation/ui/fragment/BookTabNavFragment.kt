@@ -68,8 +68,8 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
                         R.id.tab_layout_container,
                         bottomBarRouter)
             }
-            this.navigator?.applyCommands(arrayOf(Replace(Screens.BookTabScreen)))
         }
+        this.navigator?.applyCommands(arrayOf(Replace(Screens.BookTabScreen)))
     }
 
     override fun onResume() {

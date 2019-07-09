@@ -23,8 +23,11 @@ class PresenterModule {
     }
 
     @Provides
-    fun bottomBarPresenter(): BottomNavigationPresenter {
-        return BottomNavigationPresenter()
+    fun bottomBarPresenter(
+            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router,
+            @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router
+    ): BottomNavigationPresenter {
+        return BottomNavigationPresenter(bottomRouter, appRouter)
     }
 
     @Provides

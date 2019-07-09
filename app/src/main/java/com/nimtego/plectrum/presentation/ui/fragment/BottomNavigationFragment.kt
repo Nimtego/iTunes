@@ -136,27 +136,27 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 //Mark: private
 
     private fun selectTab(tab: SupportAppScreen) {
-
-        val currentFragment = currentTabFragment
-        val newFragment = childFragmentManager.findFragmentByTag(tab.screenKey)
-
-        if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
-
-        childFragmentManager.beginTransaction().apply {
-            if (newFragment == null) add(R.id.bottom_navigation_container, createTabFragment(tab), tab.screenKey)
-
-            currentFragment?.let {
-                hide(it)
-                it.userVisibleHint = false
-            }
-            newFragment?.let {
-                show(it)
-                it.userVisibleHint = true
-            }
-        }.commitNow()
+        this.presenter.replaceFragment(tab)
+//        val currentFragment = currentTabFragment
+//        val newFragment = childFragmentManager.findFragmentByTag(tab.screenKey)
+//
+//        if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
+//
+//        childFragmentManager.beginTransaction().apply {
+//            if (newFragment == null) add(R.id.bottom_navigation_container, createTabFragment(tab), tab.screenKey)
+//
+//            currentFragment?.let {
+//                hide(it)
+//                it.userVisibleHint = false
+//            }
+//            newFragment?.let {
+//                show(it)
+//                it.userVisibleHint = true
+//            }
+//        }.commitNow()
     }
 
-    private fun createTabFragment(tab: SupportAppScreen) = tab.fragment
+//    private fun createTabFragment(tab: SupportAppScreen) = tab.fragment
 
 
 //    private fun getContainerName(): String {
@@ -180,11 +180,11 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             this.fragmentManager
                     ?.beginTransaction()
                     ?.add(container, this.musicNavigationFragment)
-                    ?.detach(this.musicNavigationFragment)
+                    ?.hide(this.musicNavigationFragment)
                     ?.add(container, this.movieNavigationFragment)
-                    ?.detach(this.movieNavigationFragment)
+                    ?.hide(this.movieNavigationFragment)
                     ?.add(container, this.bookNavigationFragment)
-                    ?.detach(this.bookNavigationFragment)
+                    ?.hide(this.bookNavigationFragment)
                     ?.commitNow()
         }
 
@@ -192,25 +192,25 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             when (command.screen) {
                 Screens.MusicTabNavigationScreen-> {
                     this.fragmentManager?.beginTransaction()
-                            ?.attach(this.musicNavigationFragment)
-                            ?.detach(this.movieNavigationFragment)
-                            ?.detach(this.bookNavigationFragment)
+                            ?.show(this.musicNavigationFragment)
+                            ?.hide(this.movieNavigationFragment)
+                            ?.hide(this.bookNavigationFragment)
                             ?.commit()
 
                 }
                 Screens.MovieTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.detach(this.musicNavigationFragment)
-                            ?.attach(this.movieNavigationFragment)
-                            ?.detach(this.bookNavigationFragment)
+                            ?.hide(this.musicNavigationFragment)
+                            ?.show(this.movieNavigationFragment)
+                            ?.hide(this.bookNavigationFragment)
                             ?.commit()
 
                 }
                 Screens.BookTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.detach(this.musicNavigationFragment)
-                            ?.detach(this.movieNavigationFragment)
-                            ?.attach(this.bookNavigationFragment)
+                            ?.hide(this.musicNavigationFragment)
+                            ?.hide(this.movieNavigationFragment)
+                            ?.show(this.bookNavigationFragment)
                             ?.commit()
 
                 }

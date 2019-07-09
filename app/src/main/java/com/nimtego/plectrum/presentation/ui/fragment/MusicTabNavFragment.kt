@@ -18,6 +18,7 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppScreen
+import ru.terrakok.cicerone.commands.Forward
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
@@ -68,8 +69,8 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
                         R.id.tab_layout_container,
                         bottomBarRouter)
             }
-            this.navigator?.applyCommands(arrayOf(Replace(Screens.MusicTabScreen)))
         }
+        this.navigator?.applyCommands(arrayOf(Forward(Screens.MusicTabScreen)))
     }
 
     override fun onResume() {
