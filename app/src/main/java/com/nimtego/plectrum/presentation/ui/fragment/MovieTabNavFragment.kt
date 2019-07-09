@@ -82,13 +82,11 @@ class MovieTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
         super.onPause()
     }
 
-//Mark: view override
-
 // MARK: - Inner Types
 
     private inner class MovieTabNavigator(
-            private val fragmentManager: FragmentManager?,
-            private val activity: AppCompatActivity,
+            fragmentManager: FragmentManager?,
+            activity: AppCompatActivity,
             container: Int,
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
@@ -104,14 +102,14 @@ class MovieTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
     companion object {
         fun getInstance(): MovieTabNavFragment {
             val fragment = MovieTabNavFragment()
-
             val arguments = Bundle()
+
             arguments.putString(TAB_NAME, "Movie_nav_fragment")
             fragment.arguments = arguments
 
             return fragment
         }
 
-        val TAB_NAME = "TAB_NAME"
+        const val TAB_NAME = "TAB_NAME"
     }
 }

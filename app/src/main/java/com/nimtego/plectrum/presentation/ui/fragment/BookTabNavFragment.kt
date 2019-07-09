@@ -82,13 +82,11 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
         super.onPause()
     }
 
-//Mark: view override
-
 // MARK: - Inner Types
 
     private inner class BookTabNavigator(
-            private val fragmentManager: FragmentManager?,
-            private val activity: AppCompatActivity,
+            fragmentManager: FragmentManager?,
+            activity: AppCompatActivity,
             container: Int,
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
@@ -104,14 +102,14 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
     companion object {
         fun getInstance(): BookTabNavFragment {
             val fragment = BookTabNavFragment()
-
             val arguments = Bundle()
+
             arguments.putString(TAB_NAME, "Book_nav_fragment")
             fragment.arguments = arguments
 
             return fragment
         }
 
-        val TAB_NAME = "TAB_NAME"
+        const val TAB_NAME = "TAB_NAME"
     }
 }

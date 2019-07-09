@@ -61,7 +61,8 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
     }
 
     override fun onBackPressed(): Boolean {
-        this.presenter.onBackPressed()
+        tabMusicRouter.exit()
+//        this.presenter.onBackPressed()
         return true
     }
 
@@ -101,7 +102,8 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
             return fragment
         }
-        val TAB_NAME = "TAB_NAME"
-        val TAB = "MUSIC_TAB"
+
+        const val TAB_NAME = "TAB_NAME"
+        const val TAB = "MUSIC_TAB"
     }
 }

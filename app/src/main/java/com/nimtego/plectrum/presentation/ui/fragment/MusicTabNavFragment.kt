@@ -19,7 +19,6 @@ import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Forward
-import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -83,13 +82,11 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
         super.onPause()
     }
 
-//Mark: view override
-
 // MARK: - Inner Types
 
     private inner class MusicTabNavigator(
-            private val fragmentManager: FragmentManager?,
-            private val activity: AppCompatActivity,
+            fragmentManager: FragmentManager?,
+            activity: AppCompatActivity,
             container: Int,
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
@@ -106,14 +103,14 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
     companion object {
         fun getInstance(): MusicTabNavFragment {
             val fragment = MusicTabNavFragment()
-
             val arguments = Bundle()
+
             arguments.putString(TAB_NAME, "Music_nav_fragment")
             fragment.arguments = arguments
 
             return fragment
         }
 
-        val TAB_NAME = "TAB_NAME"
+        const val TAB_NAME = "TAB_NAME"
     }
 }

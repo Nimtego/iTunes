@@ -24,7 +24,6 @@ import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
 
-
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.bottom_navigation_fragment
@@ -53,12 +52,16 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     }
 
     override fun onBackPressed(): Boolean {
-        val fragment = this.childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-
-        return if (fragment is BackButtonListener) {
+        val fm = childFragmentManager
+        var fragment: Fragment? = null
+        val fragments = fm.fragments
+        fragment = fragments?.firstOrNull{ it.isVisible }
+        return if (fragment != null
+                && fragment is BackButtonListener) {
             fragment.onBackPressed()
-        } else {
-            this.presenter.onBackPressed()
+        }
+        else {
+            presenter.onBackPressed()
         }
     }
 
@@ -137,31 +140,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     private fun selectTab(tab: SupportAppScreen) {
         this.presenter.replaceFragment(tab)
-//        val currentFragment = currentTabFragment
-//        val newFragment = childFragmentManager.findFragmentByTag(tab.screenKey)
-//
-//        if (currentFragment != null && newFragment != null && currentFragment == newFragment) return
-//
-//        childFragmentManager.beginTransaction().apply {
-//            if (newFragment == null) add(R.id.bottom_navigation_container, createTabFragment(tab), tab.screenKey)
-//
-//            currentFragment?.let {
-//                hide(it)
-//                it.userVisibleHint = false
-//            }
-//            newFragment?.let {
-//                show(it)
-//                it.userVisibleHint = true
-//            }
-//        }.commitNow()
     }
-
-//    private fun createTabFragment(tab: SupportAppScreen) = tab.fragment
-
-
-//    private fun getContainerName(): String {
-//        return currentTab?.screenKey
-//    }
 
     // MARK: - Inner Types
 
@@ -222,8 +201,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     companion object {
         fun getInstance(): BottomNavigationFragment {
             val fragment = BottomNavigationFragment()
-
             val arguments = Bundle()
+
             arguments.putString(MAIN_TAB_FRAGMENT, MAIN_TAB_FRAGMENT)
             fragment.arguments = arguments
 

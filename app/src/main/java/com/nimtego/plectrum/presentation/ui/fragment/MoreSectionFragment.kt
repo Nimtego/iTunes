@@ -71,7 +71,8 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
         }
     }
 
-    //Mark: view override
+//Mark: view override
+
     override fun showViewState(data: List<Song>) {
         this.parentContainerRecyclerView?.apply {
             adapter = SongAdapter(data, this.context)
@@ -82,9 +83,11 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
         fun getInstance(sectionName: String) : MoreSectionFragment {
             val fragment = MoreSectionFragment()
             val arguments = Bundle()
-            arguments.putString("SECTION", sectionName)
+            arguments.putString(TAB_NAME, sectionName)
             fragment.arguments = arguments
             return fragment
         }
+
+        const val TAB_NAME = "SECTION"
     }
 }

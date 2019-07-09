@@ -94,14 +94,15 @@ class BookTabFragment : BaseFragment(), TabContentView, RouterProvider, BackButt
     companion object {
         fun getInstance(): BookTabFragment {
             val fragment = BookTabFragment()
-
             val arguments = Bundle()
+
             arguments.putString(TAB_NAME, TAB)
             fragment.arguments = arguments
 
             return fragment
         }
-        val TAB_NAME = "TAB_NAME"
-        val TAB = "BOOK_TAB"
+
+        const val TAB_NAME = "TAB_NAME"
+        const val TAB = "BOOK_TAB"
     }
 }

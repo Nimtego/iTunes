@@ -101,7 +101,8 @@ class MovieTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
             return fragment
         }
-        val TAB_NAME = "TAB_NAME"
-        val TAB = "MOVIE_TAB"
+
+        const val TAB_NAME = "TAB_NAME"
+        const val TAB = "MOVIE_TAB"
     }
 }
