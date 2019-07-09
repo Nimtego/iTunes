@@ -1,87 +1,65 @@
 package com.nimtego.plectrum.presentation.navigation
 
-import android.content.Context
-import ru.terrakok.cicerone.android.support.SupportAppScreen
-import android.content.Intent
 import android.support.v4.app.Fragment
-import com.nimtego.plectrum.presentation.ui.fragment.BottomNavigationFragment
-import com.nimtego.plectrum.presentation.ui.activity.MainActivity
-import com.nimtego.plectrum.presentation.ui.fragment.MoreSectionFragment
-import com.nimtego.plectrum.presentation.ui.fragment.TabContentFragment
+import com.nimtego.plectrum.presentation.ui.fragment.*
+import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 
-class Screens {
-    class SampleScreen(private val number: Int) : SupportAppScreen() {
+object Screens {
 
-        init {
-            this.screenKey = javaClass.simpleName + "_" + number
-        }
-
+    object BottomNavigationScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return BottomNavigationFragment.getInstance()
         }
     }
 
-    class TabScreen(private val tabName: String) : SupportAppScreen() {
-
+    object MusicTabNavigationScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            return TabContentFragment.getInstance(tabName)
+            return MusicTabNavFragment.getInstance()
         }
     }
 
-    class StartScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
+    object MusicTabScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MusicTabFragment.getInstance()
         }
     }
 
-    class MainScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
-            return Intent(context, MainActivity::class.java)
+    object MovieTabNavigationScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MovieTabNavFragment.getInstance()
         }
     }
 
-//    class BottomNavigationScreen : SupportAppScreen() {
-//        override fun getActivityIntent(context: Context): Intent {
-//            return Intent(context, BottomNavigationActivity::class.java)
-//        }
-//    }
+    object MovieTabScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MovieTabFragment.getInstance()
+        }
+    }
 
-//    class TabScreen(private val tabName: String) : SupportAppScreen() {
-//
+    object BookTabNavigationScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return BookTabNavFragment.getInstance()
+        }
+    }
+
+    object BookTabScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return BookTabFragment.getInstance()
+        }
+    }
+
+    //todo create User choice manager
+
+    object MoreContentScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MoreSectionFragment.getInstance("New songs")
+        }
+    }
+
+//    class MoreContentScreen(private val sectionName: String) : SupportAppScreen() {
 //        override fun getFragment(): Fragment {
-//            return TabContainerFragment.getNewInstance(tabName)
+//            return MoreSectionFragment.getInstance(sectionName)
 //        }
 //    }
-
-    class TabContentView(private val tabName: String) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return TabContentFragment.getInstance(tabName)
-        }
-    }
-
-    class MoreContentView(private val sectionName: String) : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return MoreSectionFragment.getInstance(sectionName)
-        }
-    }
-
-//
-//    class GithubScreen : SupportAppScreen() {
-//        fun getActivityIntent(context: Context): Intent {
-//            return Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/terrakok/Cicerone"))
-//        }
-//    }
-//
-//    class ProfileScreen : SupportAppScreen() {
-//        fun getActivityIntent(context: Context): Intent {
-//            return Intent(context, ProfileActivity::class.java)
-//        }
-//    }
-//
-//
-//    class SelectPhotoScreen : SupportAppScreen() {
-//        override fun getFragment(): Fragment {
-//            return SelectPhotoFragment()
-//        }
 }

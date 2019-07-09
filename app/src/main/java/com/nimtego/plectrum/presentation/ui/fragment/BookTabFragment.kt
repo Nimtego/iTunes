@@ -3,54 +3,53 @@ package com.nimtego.plectrum.presentation.ui.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.mvp.presenters.BookTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
-import com.nimtego.plectrum.presentation.mvp.presenters.TabContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
-import com.nimtego.plectrum.presentation.ui.widget.adapters.DashBoardTabAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
+import javax.inject.Named
 
+class BookTabFragment : BaseFragment(), TabContentView, RouterProvider, BackButtonListener {
 
-class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvider, BackButtonListener {
+    override val layoutRes: Int = R.layout.bottom_parent_tab_fragment
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-    private lateinit var router: Router
+    @field:[Inject Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)]
+    internal lateinit var tabBookRouter: Router
+
+    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
+    internal lateinit var parentRouter: Router
 
     @Inject
     @InjectPresenter
-    internal lateinit var presenter: TabContentPresenter
+    internal lateinit var presenter: BookTabPresenter
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): TabContentPresenter {
+    fun provideRepositoryPresenter(): BookTabPresenter {
         return presenter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
-        this.router = (this.parentFragment as RouterProvider).getRouter()
-        presenter.router = this.router
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.bottom_parent_tab_fragment, container, false)
-        initRV(view, container)
-        presenter.viewIsReady(getContainerName())
-        return view
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initRV()
+        this.presenter.viewIsReady(getContainerName())
     }
 
     private fun getContainerName(): String {
@@ -58,26 +57,20 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
     }
 
     override fun getRouter(): Router {
-        return router
+        return tabBookRouter
     }
 
     override fun onBackPressed(): Boolean {
-        val fragment = childFragmentManager.findFragmentById(R.id.bottom_navigation_container)
-        if (fragment != null
-                && fragment is BackButtonListener
-                && (fragment as BackButtonListener).onBackPressed()) {
-            return true
-        } else {
-            (activity as RouterProvider).getRouter().exit()
-            return true
-        }
+        tabBookRouter.exit()
+        return true
     }
 
-    protected fun initRV(view: View, viewGroup: ViewGroup?) {
-        this.parentContainerRecyclerView = view.findViewById(R.id.recycler_view_parent_tab_container)
+    protected fun initRV() {
+        this.parentContainerRecyclerView = view
+                ?.findViewById(R.id.recycler_view_parent_tab_container)
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@TabContentFragment.context,
+            layoutManager = LinearLayoutManager(this@BookTabFragment.context,
                     LinearLayoutManager.VERTICAL,
                     false)
             addItemDecoration(SpaceItemDecorator(spacing = 32,
@@ -90,33 +83,26 @@ class TabContentFragment : MvpAppCompatFragment(), TabContentView, RouterProvide
 
 //Mark: view override
 
-    override fun next(section: String) {
-
-    }
-
-    override fun message(message: String) {
-        SimpleToastAlarm(this.context).message(message)
-    }
-
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = DashBoardTabAdapter(data, this.context).apply {
+            adapter = ParentTabAdapter(data, this.context).apply {
                 setOnItemClickListener(presenter)
             }
         }
     }
 
     companion object {
-        fun getInstance(tabName: String): TabContentFragment {
-            val fragment = TabContentFragment()
-
+        fun getInstance(): BookTabFragment {
+            val fragment = BookTabFragment()
             val arguments = Bundle()
-            arguments.putString(TAB_NAME, tabName)
+
+            arguments.putString(TAB_NAME, TAB)
             fragment.arguments = arguments
 
             return fragment
         }
 
-        val TAB_NAME = "TAB_NAME"
+        const val TAB_NAME = "TAB_NAME"
+        const val TAB = "BOOK_TAB"
     }
 }

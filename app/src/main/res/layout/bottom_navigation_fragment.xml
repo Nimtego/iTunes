@@ -3,28 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cordinatorLayoutActivityA"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_bottom_sheet_navigation_bar"
     android:fitsSystemWindows="true"
-    tools:context="com.nimtego.plectrum.presentation.ui.activity.MainActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        app:layout_behavior="com.nimtego.plectrum.presentation.ui.widget.behavior.SearchViewScrollBehavior"
-        android:translationZ="0.1dp"
-        app:elevation="0dp">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:visibility="gone"
-            app:layout_scrollFlags="scroll|enterAlways" />
+    tools:context="com.nimtego.plectrum.presentation.ui.activity.AppActivity">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardS"
@@ -32,6 +14,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
             android:layout_marginEnd="6dp"
+            app:layout_behavior="com.nimtego.plectrum.presentation.ui.widget.behavior.BottomNavigationBehavior"
             android:background="@color/color_search_view"
             app:cardElevation="4dp"
             app:cardUseCompatPadding="true">
@@ -47,8 +30,6 @@
         </android.support.v7.widget.CardView>
 
 
-    </android.support.design.widget.AppBarLayout>
-
     <FrameLayout
         android:id="@+id/bottom_navigation_container"
         android:layout_width="match_parent"
@@ -58,17 +39,14 @@
         android:focusableInTouchMode="true">
     </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
         android:layout_gravity="bottom"
-        android:elevation="4dp"
-        app:itemIconTint="@drawable/navigation_bar_item_state"
-        app:itemTextColor="@drawable/navigation_bar_item_state"
-        android:background="@color/color_bottom_sheet_navigation_bar"
-        android:layout_marginStart="0dp"
-        app:menu="@menu/navigation"/>
+        android:background="@color/color_bottom_sheet_navigation_bar"/>
 </android.support.design.widget.CoordinatorLayout>
+
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
 

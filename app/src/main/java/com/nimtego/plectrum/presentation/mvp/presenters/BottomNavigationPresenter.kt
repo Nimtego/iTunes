@@ -1,32 +1,24 @@
 package com.nimtego.plectrum.presentation.mvp.presenters
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.Song
-import com.nimtego.plectrum.domain.interactor.DashBoardInteractor
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppScreen
+import javax.inject.Inject
 
 @InjectViewState
-class BottomNavigationPresenter(router: Router,
-                                screenNumber: Int,
-                                private val interactor: DashBoardInteractor)
-    : BasePresenter<MainBottomNavigationView>(router, screenNumber) {
+class BottomNavigationPresenter @Inject constructor(
+        private val bottomNavigationRouter: Router,
+        private val appRouter: Router
+) : BasePresenter<MainBottomNavigationView>() {
 
-    fun viewIsReady() {
-
+    fun replaceFragment(screenName: SupportAppScreen) {
+        this.bottomNavigationRouter.replaceScreen(screenName)
     }
 
-    fun albumClicked(albumModel: Album) {
-        //  router.navigateTo(Screens.AlbumInformationDetail(albumModel.albumId.toString()))
-    }
-
-    fun songClicked(songModel: Song) {
-        //  router.navigateTo(Screens.SongInformationDetail(songModel.trackId.toString()))
-    }
-
-    fun tabClicked(tab: String) {
-
+    fun onBackPressed(): Boolean {
+        this.bottomNavigationRouter.exit()
+        return true
     }
 
 }

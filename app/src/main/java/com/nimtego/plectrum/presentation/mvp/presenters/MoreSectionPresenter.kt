@@ -8,18 +8,19 @@ import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
 @InjectViewState
-class MoreSectionPresenter(
-        router: Router,
-        screenNumber: Int,
+class MoreSectionPresenter
+@Inject constructor(
+        private val musicTabRouter: Router,
         private val interactor: MoreSectionInteractor
-) : BasePresenter<MoreSectionView>(router, screenNumber) {
+) : BasePresenter<MoreSectionView>() {
 
     private var dataSongsModel: List<Song>? = null
 
     fun viewReady(section: String) {
-        viewState.message(section)
+        viewState.systemMessage(section)
         dataSongsModel?.let { showModel(it) }.run {
             interactor.execute(object : DisposableObserver<List<Song>>() {
                 override fun onComplete() {
@@ -57,6 +58,6 @@ class MoreSectionPresenter(
     }
 
     fun onBackPressed() {
-        router.exit()
+        this.musicTabRouter.exit()
     }
 }
