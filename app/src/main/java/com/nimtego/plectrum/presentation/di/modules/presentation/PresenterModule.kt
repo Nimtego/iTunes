@@ -1,17 +1,24 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
+import com.nimtego.plectrum.domain.interactor.InformationInteractor
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.manger.ChildItemStorage
+import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
+import com.nimtego.plectrum.presentation.manger.MainItemStorage
+import com.nimtego.plectrum.presentation.manger.SectionItemStorage
 import com.nimtego.plectrum.presentation.mvp.presenters.*
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Router
 import javax.inject.Named
 
-@Module(includes = [InteractorModule::class, NavigationModule::class])
+@Module(includes = [InteractorModule::class,
+                    NavigationModule::class,
+                    StorageModule::class])
 class PresenterModule {
 
     @Provides
@@ -30,13 +37,6 @@ class PresenterModule {
         return BottomNavigationPresenter(bottomRouter, appRouter)
     }
 
-    @Provides
-    fun sectionMorePresenter(
-            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION) router: Router,
-            interactor: MoreSectionInteractor
-    ): MoreSectionPresenter {
-        return MoreSectionPresenter(router, interactor)
-    }
 
     //todo
     @Provides
@@ -65,11 +65,15 @@ class PresenterModule {
 
     @Provides
     fun musicTabPresenter(
-            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
+            router: Router,
+            @Named(NavigationQualifiers.APP_NAVIGATION)
+            appRouter: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
             interactor: TabContentInteractor
     ): MusicTabPresenter {
-        return MusicTabPresenter(router, appRouter, interactor)
+        return MusicTabPresenter(router, appRouter, itemStorage, interactor)
     }
 
     @Provides
@@ -89,4 +93,27 @@ class PresenterModule {
     ): BookTabPresenter {
         return BookTabPresenter(router, appRouter, interactor)
     }
+
+    @Provides
+    fun sectionMorePresenter(
+            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+            router: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
+            interactor: MoreSectionInteractor
+    ): MoreSectionPresenter {
+        return MoreSectionPresenter(router, interactor, itemStorage)
+    }
+
+    @Provides
+    fun informationPresenter(
+            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+            router: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
+            interactor: InformationInteractor
+    ): InformationPresenter {
+        return InformationPresenter(router, interactor, itemStorage)
+    }
+
 }

@@ -32,4 +32,6 @@ interface ApplicationComponent {
 
     fun inject(fragment: MoreSectionFragment)
 
+    fun inject(fragment: InformationFragment)
+
 }

@@ -44,7 +44,7 @@ class DiskDataStore<E>(private val cache: Cache<E>) : DataStore {
         return Observable.create { AlbumsRepository() }
     }
 
-    override fun songById(id: Int): Observable<SongsRepository> {
+    override fun songById(id: String): Observable<SongsRepository> {
         //todo
         return Observable.create { SongsRepository() }
     }

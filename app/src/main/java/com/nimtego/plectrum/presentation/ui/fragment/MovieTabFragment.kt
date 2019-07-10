@@ -85,7 +85,7 @@ class MovieTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = ParentTabAdapter(data, this.context).apply {
+            adapter = ParentTabAdapter(data).apply {
                 setOnItemClickListener(presenter)
             }
         }

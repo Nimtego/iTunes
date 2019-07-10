@@ -128,13 +128,10 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         )
     }
 
-    override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showProgress(show: Boolean) {
+
     }
 
-    override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
 //Mark: private
 

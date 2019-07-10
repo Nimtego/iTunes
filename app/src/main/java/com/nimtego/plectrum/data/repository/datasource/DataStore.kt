@@ -21,7 +21,7 @@ interface DataStore {
 
     fun albums(response: String): Observable<AlbumsRepository>
 
-    fun songById(id: Int): Observable<SongsRepository>
+    fun songById(id: String): Observable<SongsRepository>
 
     fun artistById(id: Int): Observable<ArtistsRepository>
 

@@ -50,7 +50,7 @@ class CloudDataStore<E>(
 
     }
 
-    override fun songById(id: Int): Observable<SongsRepository> {
+    override fun songById(id: String): Observable<SongsRepository> {
         return networkConnection.iTunesClient
                 .getSongs(FabricParam.lookupSongsAlbum(id.toString()))
     }

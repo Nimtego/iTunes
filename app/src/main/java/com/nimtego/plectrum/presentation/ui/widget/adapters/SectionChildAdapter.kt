@@ -16,8 +16,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 class SectionChildAdapter (
-        val models: List<ChildViewModel>,
-        parent: Context
+        private val models: List<ChildViewModel>
 ) : RecyclerView.Adapter<SectionChildAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -28,7 +27,7 @@ class SectionChildAdapter (
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.layout_tab_content_child_item, parent, false)
         val holder = ViewHolder(view)
-        view.setOnClickListener{ _: View ->
+        holder.itemView.setOnClickListener{ _: View ->
             val adapterPosition = holder.adapterPosition
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 this.models.get(adapterPosition).let {
@@ -55,13 +54,11 @@ class SectionChildAdapter (
                 .replace("100x100", "200x200"))
                 .into(holder.albumImage, object : Callback {
                     override fun onSuccess() {
-                        if (holder.pb != null)
-                            holder.pb!!.visibility = View.GONE
+                            holder.pb?.visibility = View.GONE
                     }
 
                     override fun onError(e: Exception) {
-                        if (holder.pb != null)
-                            holder.pb!!.visibility = View.GONE
+                            holder.pb?.visibility = View.GONE
                     }
                 })
 //        holder.cv.cardElevation = 5f

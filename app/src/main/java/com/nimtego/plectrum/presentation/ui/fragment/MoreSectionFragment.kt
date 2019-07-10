@@ -51,7 +51,7 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
         super.onActivityCreated(savedInstanceState)
         initRV()
 //        presenter.router = (this.parentFragment as RouterProvider).getRouter()
-        presenter.viewReady(arguments.getString("SECTION"))
+        presenter.viewReady()
     }
 
     protected fun initRV() {

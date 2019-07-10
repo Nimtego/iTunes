@@ -57,6 +57,12 @@ object Screens {
         }
     }
 
+    object ItemInformationScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return InformationFragment.getInstance()
+        }
+    }
+
 //    class MoreContentScreen(private val sectionName: String) : SupportAppScreen() {
 //        override fun getFragment(): Fragment {
 //            return MoreSectionFragment.getInstance(sectionName)

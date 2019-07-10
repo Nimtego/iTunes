@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.data.repository.repository
 
-import com.nimtego.plectrum.data.entity.DashBoardSongsModel
 import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
