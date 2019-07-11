@@ -2,7 +2,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.manger.SectionItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView

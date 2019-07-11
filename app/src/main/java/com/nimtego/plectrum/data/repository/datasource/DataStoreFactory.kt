@@ -14,7 +14,7 @@ import io.reactivex.annotations.NonNull
 class DataStoreFactory<E>
 @Inject constructor(
         private val context: Context,
-        private val cache: Cache<E>) {
+        private val cache: Cache<String, E>) {
 
     fun create(userId: Int): DataStore {
         val userDataStore: DataStore

@@ -4,14 +4,14 @@ import com.nimtego.plectrum.data.entity.DashBoardSongsModel
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory
-import com.nimtego.plectrum.domain.repository.RepositoryK
+import com.nimtego.plectrum.domain.repository.Repository
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
 
 class DashBoardRepository(
         private val dataStoreFactory: DataStoreFactory<PopularResponse>,
         private val mapper: EntityDataMapper
-) : RepositoryK<DashBoardSongsModel> {
+) : Repository<DashBoardSongsModel> {
 
     override fun query(request: String): Observable<DashBoardSongsModel> {
         //todo

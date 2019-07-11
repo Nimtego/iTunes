@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.presentation.ui.widget.adapters
 
-import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -11,7 +10,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 

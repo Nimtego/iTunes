@@ -5,7 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.InformationInteractor
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
-import com.nimtego.plectrum.presentation.mvp.view_model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject

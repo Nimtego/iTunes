@@ -10,7 +10,7 @@ import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
 
 import io.reactivex.Observable
 
-class DiskDataStore<E>(private val cache: Cache<E>) : DataStore {
+class DiskDataStore<E>(private val cache: Cache<String, E>) : DataStore {
 
 
     override fun topMovie(): Observable<PopularResponse> {

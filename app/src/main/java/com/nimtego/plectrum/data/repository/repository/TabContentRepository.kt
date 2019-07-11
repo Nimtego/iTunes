@@ -5,7 +5,7 @@ import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import com.nimtego.plectrum.data.repository.datasource.DataStore
 import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory
-import com.nimtego.plectrum.domain.repository.RepositoryK
+import com.nimtego.plectrum.domain.repository.Repository
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import io.reactivex.functions.Function4
@@ -13,7 +13,7 @@ import io.reactivex.functions.Function4
 class TabContentRepository(
         private val dataStoreFactory: DataStoreFactory<PopularResponse>,
         private val mapper: EntityDataMapper
-) : RepositoryK<TabContentModel> {
+) : Repository<TabContentModel> {
 
     private fun musicQuery() : Observable<TabContentModel> {
         val dataStore = dataStore()

@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 
 class ParentTabAdapter(

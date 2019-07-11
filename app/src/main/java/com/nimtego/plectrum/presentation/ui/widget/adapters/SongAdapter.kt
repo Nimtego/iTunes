@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 

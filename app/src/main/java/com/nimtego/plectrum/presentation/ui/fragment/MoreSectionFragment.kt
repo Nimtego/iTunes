@@ -7,7 +7,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView

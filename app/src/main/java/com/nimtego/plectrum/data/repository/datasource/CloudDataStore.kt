@@ -16,7 +16,7 @@ import io.reactivex.Observable
 
 class CloudDataStore<E>(
         private val networkConnection: AppNetwork,
-        private val cache: Cache<E>
+        private val cache: Cache<String, E>
 ) : DataStore {
 
 

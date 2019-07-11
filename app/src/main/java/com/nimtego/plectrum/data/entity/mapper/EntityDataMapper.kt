@@ -6,14 +6,15 @@ import com.nimtego.plectrum.data.model.itunes.*
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.SectionViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.information_view.AlbumDetailsModel
-import com.nimtego.plectrum.presentation.mvp.view_model.information_view.ArtistDetailsModelK
-import com.nimtego.plectrum.presentation.mvp.view_model.information_view.SongDetailsModel
-import com.nimtego.plectrum.presentation.mvp.view_model.music.AlbumModel
-import com.nimtego.plectrum.presentation.mvp.view_model.music.ArtistModel
-import com.nimtego.plectrum.presentation.mvp.view_model.music.SongModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.model.information_view.AlbumDetailsModel
+import com.nimtego.plectrum.presentation.mvp.model.information_view.ArtistDetailsModelK
+import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
+import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
+import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 
 class EntityDataMapper {
     fun transformArtist(result: ArtistResult): ArtistModel {
@@ -176,15 +177,28 @@ class EntityDataMapper {
 
     fun topSong(topSongs: Feed) : List<Song> {
        return topSongs.results.map {
-            Song(artistName = it.artistName,
-                    artistId = it.artistId.toInt(),
-                    trackName = it.name,
-                    trackId = it.id.toInt(),
-                    collectionId = 0,
-                    trackPrice = 0.0,
-                    wrapperType = it.copyright,
-                    trackTimeMillis = 0,
-                    trackArtWorkUrl = it.artworkUrl100)
+           Song(artistName = it.artistName,
+                   artistId = it.artistId.toInt(),
+                   trackName = it.name,
+                   trackId = it.id.toInt(),
+                   collectionId = 0,
+                   trackPrice = 0.0,
+                   wrapperType = it.copyright,
+                   trackTimeMillis = 0,
+                   trackArtWorkUrl = it.artworkUrl100)
+        }
+    }
+
+    fun topAlbum(topAlbum: Feed) : List<Album> {
+        return topAlbum.results.map {
+            Album(albumArtistName = it.artistName,
+                    albumArtistId = it.artistId.toInt(),
+                    albumName = it.name,
+                    albumId = it.id.toInt(),
+                    albumRealiseDate = it.releaseDate,
+                    albumTrackCount = 0,
+                    albumPrice = 0.0,
+                    albumArtWorkUrl = it.artworkUrl100)
         }
     }
 

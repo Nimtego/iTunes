@@ -1,20 +1,12 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.presenters.MovieTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
-import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
-import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -24,10 +16,9 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.ImageView
-import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
-import com.nimtego.plectrum.presentation.mvp.view_model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 

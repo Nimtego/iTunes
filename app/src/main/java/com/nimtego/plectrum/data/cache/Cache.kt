@@ -2,13 +2,13 @@ package com.nimtego.plectrum.data.cache
 
 import io.reactivex.Observable
 
-interface Cache<E> {
+interface Cache<K, V> {
 
-    fun get(id: String): Observable<E>
+    fun get(key: K): Observable<V>
 
-    fun put(entity: E)
+    fun put(key: K, value: V)
 
-    fun isCached(id: String): Boolean
+    fun isCached(key: K): Boolean
 
     fun isExpired(): Boolean
 

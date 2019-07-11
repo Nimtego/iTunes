@@ -4,15 +4,13 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.TabContentModel
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
-import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
-import javax.inject.Named
 
 @InjectViewState
 class BookTabPresenter @Inject constructor(

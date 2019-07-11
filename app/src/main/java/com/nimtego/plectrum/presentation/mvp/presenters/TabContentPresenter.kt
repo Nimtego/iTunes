@@ -3,13 +3,13 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.Album
-import com.nimtego.plectrum.data.entity.Song
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.data.entity.TabContentModel
 import com.nimtego.plectrum.domain.interactor.TabContentInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
