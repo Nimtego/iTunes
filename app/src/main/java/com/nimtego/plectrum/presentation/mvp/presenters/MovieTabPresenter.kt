@@ -3,9 +3,9 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.TabContentModel
-import com.nimtego.plectrum.domain.interactor.TabContentInteractor
+import com.nimtego.plectrum.domain.interactor.PopularMovieInteractor
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.List
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class MovieTabPresenter @Inject constructor(
         private val tabContentRouter: Router,
         private val appRouter: Router,
-        private val interactor: TabContentInteractor
+        private val interactor: PopularMovieInteractor
 ) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
@@ -60,7 +60,7 @@ class MovieTabPresenter @Inject constructor(
     private fun showModel(tabContentModel: TabContentModel) {
         //todo create res for title or...
         val listContent = tabContentModel.contentList
-        val data = BaseParentViewModel(listContent.map {
+        val data = List(listContent.map {
             SectionViewModel(it.title(), it.getModels())
         })
         viewState.showViewState(data)

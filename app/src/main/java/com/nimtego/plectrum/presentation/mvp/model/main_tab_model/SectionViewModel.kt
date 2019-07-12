@@ -1,5 +1,7 @@
 package com.nimtego.plectrum.presentation.mvp.model.main_tab_model
 
+import kotlin.collections.List
+
 data class SectionViewModel<M : ChildViewModel>(
         val title: String,
         val parentList: List<M>) : ParentTabModelContainer<M> {

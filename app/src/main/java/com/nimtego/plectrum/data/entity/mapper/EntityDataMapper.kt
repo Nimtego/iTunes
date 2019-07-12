@@ -14,6 +14,7 @@ import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsM
 import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
 import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
 import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
+import com.nimtego.plectrum.presentation.mvp.model.song.Album
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 
 class EntityDataMapper {
@@ -188,6 +189,8 @@ class EntityDataMapper {
                    trackArtWorkUrl = it.artworkUrl100)
         }
     }
+
+
 
     fun topAlbum(topAlbum: Feed) : List<Album> {
         return topAlbum.results.map {

@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.data.repository.repository.AlbumRepository
 import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable

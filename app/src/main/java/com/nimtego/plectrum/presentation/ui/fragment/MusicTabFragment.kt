@@ -11,8 +11,8 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifi
 import com.nimtego.plectrum.presentation.mvp.presenters.MusicTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
@@ -84,7 +84,7 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
 //Mark: view override
 
-    override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
+    override fun showViewState(data: List<ParentTabModelContainer<ChildViewModel>>) {
         this.parentContainerRecyclerView?.apply {
             adapter = ParentTabAdapter(data).apply {
                 setOnItemClickListener(presenter)

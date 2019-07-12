@@ -2,6 +2,7 @@ package com.nimtego.plectrum.domain.interactor
 
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.data.repository.repository.MoreSectionRepository
+import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -9,9 +10,9 @@ import javax.inject.Inject
 class MoreSectionInteractor @Inject constructor (
         disposable: CompositeDisposable,
         repository: MoreSectionRepository
-) : BaseInteractor<List<Song>, MoreSectionInteractor.Params>(disposable, repository) {
+) : BaseInteractor<MusicTabModel, MoreSectionInteractor.Params>(disposable, repository) {
 
-    override fun buildUseCaseObservable(params: Params): Observable<List<Song>> {
+    override fun buildUseCaseObservable(params: Params): Observable<MusicTabModel> {
         return repository.query(params.request)
     }
 

@@ -10,9 +10,7 @@ class PopularMusicFactory @Inject constructor(
         private val cloudDataStore: CloudPopularMusic,
         private val diskPopularMusic: DiskPopularMusic
 ) : PopularMusicDataStore {
-
-
-
+    
     override fun hotTrack(): Observable<PopularResponse> {
         return if (cache.isCached(PopularMusicKey.HOT_TRACK)) {
             diskPopularMusic.hotTrack()

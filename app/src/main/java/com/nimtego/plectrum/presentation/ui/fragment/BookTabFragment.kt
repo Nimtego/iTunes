@@ -11,7 +11,7 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifi
 import com.nimtego.plectrum.presentation.mvp.presenters.BookTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.List
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
@@ -83,7 +83,7 @@ class BookTabFragment : BaseFragment(), TabContentView, RouterProvider, BackButt
 
 //Mark: view override
 
-    override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
+    override fun showViewState(data: List<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
             adapter = ParentTabAdapter(data).apply {
                 setOnItemClickListener(presenter)

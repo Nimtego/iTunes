@@ -12,18 +12,18 @@ import javax.inject.Singleton
 class InteractorModule {
 
     @Provides
-    @Singleton
-    internal fun provideBottomNavigationInteractor(
-            repository: DashBoardRepository,
-            compositeDisposable: CompositeDisposable
-    ) = BottomNavigationInteractor(compositeDisposable, repository)
+    internal fun compositeDisposable(): CompositeDisposable {
+        return CompositeDisposable()
+    }
+
 
     @Provides
     @Singleton
-    internal fun provideTabContentInteractor(
-            repository: TabContentRepository,
+    internal fun providePopularMusicInteractor(
+            repository: PopularMusicRepository,
             compositeDisposable: CompositeDisposable
-    ) = TabContentInteractor(compositeDisposable, repository)
+    ) = PopularMusicInteractor(compositeDisposable, repository)
+
 
     @Provides
     @Singleton
@@ -32,17 +32,4 @@ class InteractorModule {
             compositeDisposable: CompositeDisposable
     ) = MoreSectionInteractor(compositeDisposable, repository)
 
-    @Provides
-    @Singleton
-    internal fun provideInformationInteractor(
-            repository: InformationRepository,
-            compositeDisposable: CompositeDisposable
-    ) = InformationInteractor(compositeDisposable, repository)
-
-    @Provides
-    @Singleton
-    internal fun provideAlbumInteractor(
-            repository: AlbumRepository,
-            compositeDisposable: CompositeDisposable
-    ) = AlbumInteractor(compositeDisposable, repository)
 }

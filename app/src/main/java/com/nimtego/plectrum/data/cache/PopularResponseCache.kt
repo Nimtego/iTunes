@@ -6,9 +6,10 @@ import com.nimtego.plectrum.domain.executor.ThreadExecutor
 import io.reactivex.Observable
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
+import javax.inject.Inject
 
 
-class PopularResponseCache(
+class PopularResponseCache @Inject constructor(
         private val context: Context,
         private val serializer: Serializer,
         private val fileManager: FileManager,

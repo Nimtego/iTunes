@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 
 class ParentTabAdapter(
-        private val models: BaseParentViewModel<ChildViewModel>
+        private val models: List<ParentTabModelContainer<ChildViewModel>>
 ) : RecyclerView.Adapter<ParentTabAdapter.ViewHolder>() {
 
     private val viewPool = RecyclerView.RecycledViewPool()
@@ -36,7 +35,7 @@ class ParentTabAdapter(
         view.findViewById<LinearLayout>(R.id.section_header).setOnClickListener { _: View ->
             val adapterPosition = holder.adapterPosition
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                this.models.sectionViewModel[adapterPosition].let {
+                this.models[adapterPosition].let {
                     this.onItemClickListener?.sectionClicked(it)
                 }
             }
@@ -46,7 +45,7 @@ class ParentTabAdapter(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val sectionModel = this.models.sectionViewModel!![position]
+        val sectionModel = this.models[position]
         holder.sectionTitle.text = sectionModel.title()
         val childLayoutManager = LinearLayoutManager(
                 holder.childRecyclerView?.context, LinearLayout.HORIZONTAL, false)
@@ -72,7 +71,7 @@ class ParentTabAdapter(
     }
 
     override fun getItemCount(): Int {
-        return models.sectionViewModel.size
+        return models.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
