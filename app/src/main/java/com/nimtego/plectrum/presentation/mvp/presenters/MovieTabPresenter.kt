@@ -2,13 +2,12 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.data.entity.TabContentModel
 import com.nimtego.plectrum.domain.interactor.PopularMovieInteractor
+import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.List
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
@@ -18,6 +17,7 @@ import javax.inject.Inject
 class MovieTabPresenter @Inject constructor(
         private val tabContentRouter: Router,
         private val appRouter: Router,
+        private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
 ) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
@@ -29,20 +29,20 @@ class MovieTabPresenter @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    private var tabContentModel: TabContentModel? = null
+    private var movieModel: BaseParentViewModel<ChildViewModel>? = null
 
 
     fun viewIsReady(containerName: String) {
-        tabContentModel?.let { showModel(it) }.run {
-            interactor.execute(object : DisposableObserver<TabContentModel>() {
+        movieModel?.let { showModel() }.run {
+            interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
                 }
 
-                override fun onNext(tabContentModel: TabContentModel) {
+                override fun onNext(tabContentModel: BaseParentViewModel<ChildViewModel>) {
                     Log.i("Presenter", "onnext")
-                    this@MovieTabPresenter.tabContentModel = tabContentModel
-                    this@MovieTabPresenter.showModel(tabContentModel)
+                    this@MovieTabPresenter.movieModel = tabContentModel
+                    this@MovieTabPresenter.showModel()
                 }
 
                 override fun onError(e: Throwable) {
@@ -52,18 +52,15 @@ class MovieTabPresenter @Inject constructor(
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }
-            }, TabContentInteractor.Params.forRequest(containerName))
+            }, PopularMovieInteractor.Params.forRequest(containerName))
 
         }
     }
 
-    private fun showModel(tabContentModel: TabContentModel) {
-        //todo create res for title or...
-        val listContent = tabContentModel.contentList
-        val data = List(listContent.map {
-            SectionViewModel(it.title(), it.getModels())
-        })
-        viewState.showViewState(data)
+    private fun showModel() {
+        movieModel?.let {
+            viewState.showViewState(it)
+        }
 
     }
 }

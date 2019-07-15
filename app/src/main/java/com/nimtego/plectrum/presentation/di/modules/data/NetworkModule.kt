@@ -18,7 +18,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    @Named(NetworkQualifiers.RSS_ITUNES_API)
+    //@Named(NetworkQualifiers.RSS_ITUNES_API)
     internal fun provideRssItunesApi(
             @Named(NetworkQualifiers.RSS_ITUNES_API)retrofit: Retrofit
     ): RssItunesApi {
@@ -27,6 +27,16 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    @Named(NetworkQualifiers.RSS_ITUNES_API)
+    internal fun providesRssITunesApiRetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(BASE_URL_RSS_ITUNES)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(gsonConverterFactory)
+                .build()
+    }
+
+    @Provides
     @Named(NetworkQualifiers.ITUNES_API)
     internal fun provideItunesApi(
             @Named(NetworkQualifiers.ITUNES_API)retrofit: Retrofit
@@ -35,7 +45,6 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
     @Named(NetworkQualifiers.ITUNES_API)
     internal fun provideItunesRetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
@@ -46,22 +55,10 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
     @Named(NetworkQualifiers.WIKI_API)
-    internal fun wikiApi(gsonConverterFactory: GsonConverterFactory): Retrofit {
+    internal fun providesWikiApiRetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BASE_URL_WIKI)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(gsonConverterFactory)
-                .build()
-    }
-
-    @Provides
-    @Singleton
-    @Named(NetworkQualifiers.RSS_ITUNES_API)
-    internal fun rssITunesApi(gsonConverterFactory: GsonConverterFactory): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl(BASE_URL_RSS_ITUNES)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(gsonConverterFactory)
                 .build()

@@ -1,17 +1,20 @@
 package com.nimtego.plectrum.domain.interactor
 
+import com.nimtego.plectrum.data.repository.repository.PopularMovieRepository
 import com.nimtego.plectrum.data.repository.repository.PopularMusicRepository
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class PopularMovieInteractor@Inject constructor (
+class PopularMovieInteractor @Inject constructor (
         disposable: CompositeDisposable,
-        repository: PopularMusicRepository
-) : BaseInteractor<List<MusicTabModel>, PopularMovieInteractor.Params>(disposable, repository) {
+        repository: PopularMovieRepository
+) : BaseInteractor<BaseParentViewModel<ChildViewModel>, PopularMovieInteractor.Params>(disposable, repository) {
 
-    override fun buildUseCaseObservable(params: Params): Observable<List<MusicTabModel>> {
+    override fun buildUseCaseObservable(params: Params): Observable<BaseParentViewModel<ChildViewModel>> {
         return repository.query(params.request)
     }
 

@@ -11,15 +11,16 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.model.song.Song
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class SongAdapter(private val models: List<Song>?, parent: Context) : RecyclerView.Adapter<SongAdapter.ViewHolder>() {
+class MoreSectionAdapter(private val models: ParentTabModelContainer<ChildViewModel>, parent: Context) : RecyclerView.Adapter<MoreSectionAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
-        fun onUserItemClicked(song: Song)
+        fun onUserItemClicked(childViewModel: ChildViewModel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,26 +30,23 @@ class SongAdapter(private val models: List<Song>?, parent: Context) : RecyclerVi
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val song = this.models!![position]
-        holder.songName.text = song.trackName
-        holder.songAlbumName.text = song.artistName
-        holder.songArtistName.text = song.artistName
+        val childViewModel = this.models.getModels().get(position)
+        holder.songName.text = childViewModel.mainName()
+        holder.songAlbumName.text = childViewModel.minorName()
+        //todo new model wrapper
+        holder.songArtistName.text = childViewModel.id()
         holder.pb!!.visibility = View.VISIBLE
         holder.itemView.setOnClickListener {
-            if (this@SongAdapter.onItemClickListener != null) {
-                this@SongAdapter.onItemClickListener!!.onUserItemClicked(song)
-            }
+            this@MoreSectionAdapter.onItemClickListener?.onUserItemClicked(childViewModel)
         }
-        Picasso.get().load(models[position].trackArtWorkUrl.replace("100x100", "200x200"))
+        Picasso.get().load(models.getModels()[position].imageUrl().replace("100x100", "200x200"))
                 .into(holder.songImage, object : Callback {
                     override fun onSuccess() {
-                        if (holder.pb != null)
-                            holder.pb!!.visibility = View.GONE
+                        holder.pb?.visibility = View.GONE
                     }
 
                     override fun onError(e: Exception) {
-                        if (holder.pb != null)
-                            holder.pb!!.visibility = View.GONE
+                        holder.pb?.visibility = View.GONE
                     }
                 })
         holder.cv.cardElevation = 5f
@@ -59,7 +57,7 @@ class SongAdapter(private val models: List<Song>?, parent: Context) : RecyclerVi
     }
 
     override fun getItemCount(): Int {
-        return models?.size ?: 0
+        return models.getModels().size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

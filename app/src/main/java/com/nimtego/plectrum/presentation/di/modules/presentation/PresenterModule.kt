@@ -1,6 +1,8 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
+import com.nimtego.plectrum.domain.interactor.PopularBookInteractor
+import com.nimtego.plectrum.domain.interactor.PopularMovieInteractor
 import com.nimtego.plectrum.domain.interactor.PopularMusicInteractor
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
@@ -65,6 +67,31 @@ class PresenterModule {
         return MusicTabPresenter(router, appRouter, itemStorage, interactor)
     }
 
+    @Provides
+    fun movieTabPresenter(
+            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
+            router: Router,
+            @Named(NavigationQualifiers.APP_NAVIGATION)
+            appRouter: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
+            interactor: PopularMovieInteractor
+    ): MovieTabPresenter {
+        return MovieTabPresenter(router, appRouter, itemStorage, interactor)
+    }
+
+    @Provides
+    fun bookTabPresenter(
+            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)
+            router: Router,
+            @Named(NavigationQualifiers.APP_NAVIGATION)
+            appRouter: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
+            interactor: PopularBookInteractor
+    ): BookTabPresenter {
+        return BookTabPresenter(router, appRouter, itemStorage, interactor)
+    }
 
     @Provides
     fun sectionMorePresenter(
@@ -76,5 +103,18 @@ class PresenterModule {
     ): MoreSectionPresenter {
         return MoreSectionPresenter(router, interactor, itemStorage)
     }
+
+    //todo 
+    @Provides
+    fun informationPresenter(
+//            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+//            router: Router,
+//            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+//            itemStorage: MainChoiceItemStorage,
+//            interactor: MoreSectionInteractor
+    ): InformationPresenter {
+        return InformationPresenter()
+    }
+
 
 }

@@ -1,12 +1,13 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.music
 
 import com.nimtego.plectrum.data.cache.Cache
+import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import io.reactivex.Observable
 import javax.inject.Inject
 
 class PopularMusicFactory @Inject constructor(
-        private val cache: Cache<String, PopularResponse>,
+        private val cache: PopularResponseCache,
         private val cloudDataStore: CloudPopularMusic,
         private val diskPopularMusic: DiskPopularMusic
 ) : PopularMusicDataStore {

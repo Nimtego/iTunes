@@ -24,6 +24,19 @@ class InteractorModule {
             compositeDisposable: CompositeDisposable
     ) = PopularMusicInteractor(compositeDisposable, repository)
 
+    @Provides
+    @Singleton
+    internal fun providePopularMovieInteractor(
+            repository: PopularMovieRepository,
+            compositeDisposable: CompositeDisposable
+    ) = PopularMovieInteractor(compositeDisposable, repository)
+
+    @Provides
+    @Singleton
+    internal fun providePopularBookInteractor(
+            repository: PopularBookRepository,
+            compositeDisposable: CompositeDisposable
+    ) = PopularBookInteractor(compositeDisposable, repository)
 
     @Provides
     @Singleton

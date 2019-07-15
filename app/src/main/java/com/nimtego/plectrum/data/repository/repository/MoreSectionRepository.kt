@@ -4,15 +4,17 @@ import com.nimtego.plectrum.data.entity.mapper.PopularMusicMapper
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicDataStore
 import com.nimtego.plectrum.domain.repository.Repository
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.song.*
 import io.reactivex.Observable
 
 class MoreSectionRepository(
         private val dataStoreFactory: PopularMusicDataStore,
         private val mapper: PopularMusicMapper
-) : Repository<MusicTabModel> {
+) : Repository<ParentTabModelContainer<ChildViewModel>> {
 
-    override fun query(request: String): Observable<MusicTabModel> {
+    override fun query(request: String): Observable<ParentTabModelContainer<ChildViewModel>> {
         return when (request) {
             //todo
             "HOT_TRACK" -> getHotTrack().map { MusicTabModel(request, it) }

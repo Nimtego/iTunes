@@ -7,12 +7,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
-import com.nimtego.plectrum.presentation.ui.widget.adapters.SongAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -73,9 +74,9 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
 //Mark: view override
 
-    override fun showViewState(data: List<Song>) {
+    override fun showViewState(data: ParentTabModelContainer<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = SongAdapter(data, this.context)
+            adapter = MoreSectionAdapter(data, this.context)
         }
     }
 

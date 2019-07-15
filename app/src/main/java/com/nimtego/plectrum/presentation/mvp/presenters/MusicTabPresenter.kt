@@ -4,6 +4,7 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.PopularMusicInteractor
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
@@ -30,7 +31,7 @@ class MusicTabPresenter @Inject constructor(
     //  because resolve crash(FragmentManager is already executing transactions).
     //  We need to redefine the concept of navigation.
 
-    private var songsModel: List<ParentTabModelContainer<ChildViewModel>>? = null
+    private var songsModel: BaseParentViewModel<ChildViewModel>? = null
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
         this.itemStorage.changeCurrentSection(section)
@@ -45,12 +46,12 @@ class MusicTabPresenter @Inject constructor(
 
     fun viewIsReady(containerName: String) {
         songsModel?.let { this@MusicTabPresenter.showModel() }.run {
-            interactor.execute(object : DisposableObserver<List<MusicTabModel>>() {
+            interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
                 }
 
-                override fun onNext(songs: List<MusicTabModel>) {
+                override fun onNext(songs: BaseParentViewModel<ChildViewModel>) {
                     Log.i("Presenter", "onnext")
                     this@MusicTabPresenter.songsModel = songs
                     this@MusicTabPresenter.showModel()

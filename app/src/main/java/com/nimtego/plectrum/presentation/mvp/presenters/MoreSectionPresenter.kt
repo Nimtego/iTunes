@@ -5,6 +5,8 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.manger.SectionItemStorage
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
@@ -18,20 +20,20 @@ class MoreSectionPresenter
         private val itemStorage: SectionItemStorage
 ) : BasePresenter<MoreSectionView>() {
 
-    private var dataSongsModel: List<Song>? = null
+    private var dataModel: ParentTabModelContainer<ChildViewModel>? = null
 
     fun viewReady() {
         this.itemStorage.getCurrentSection()?.let {
             this.viewState.systemMessage(it.title())
-            interactor.execute(object : DisposableObserver<List<Song>>() {
+            interactor.execute(object : DisposableObserver<ParentTabModelContainer<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
                 }
 
-                override fun onNext(songs: List<Song>) {
+                override fun onNext(songs: ParentTabModelContainer<ChildViewModel>) {
                     Log.i("Presenter", "onnext")
-                    this@MoreSectionPresenter.dataSongsModel = songs
-                    this@MoreSectionPresenter.showModel(songs)
+                    this@MoreSectionPresenter.dataModel = songs
+                    this@MoreSectionPresenter.showModel()
                 }
 
                 override fun onError(e: Throwable) {
@@ -41,9 +43,8 @@ class MoreSectionPresenter
         }
     }
 
-    private fun showModel(songs: List<Song>) {
-
-        viewState.showViewState(songs)
+    private fun showModel() {
+        dataModel?.let {  viewState.showViewState(it)}
     }
 
     fun onBackPressed() {
