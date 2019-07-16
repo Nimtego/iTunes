@@ -105,8 +105,8 @@ class InformationFragment : BaseFragment(), InformationView, RouterProvider, Bac
     }
 
     companion object {
-        fun getInstance(): MovieTabFragment {
-            val fragment = MovieTabFragment()
+        fun getInstance(): InformationFragment {
+            val fragment = InformationFragment()
 
             val arguments = Bundle()
             arguments.putString(TAB_NAME, TAB)

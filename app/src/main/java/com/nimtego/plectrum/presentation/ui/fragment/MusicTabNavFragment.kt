@@ -95,6 +95,7 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
             return when (screen) {
                 Screens.MusicTabScreen -> screen.fragment
                 Screens.MoreContentScreen -> screen.fragment
+                Screens.ItemInformationScreen -> screen.fragment
                 else -> null
             }
         }
