@@ -6,12 +6,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
-import android.support.design.widget.CollapsingToolbarLayout
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -23,7 +21,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
-class InformationFragment : BaseFragment(), InformationView, RouterProvider, BackButtonListener {
+class InformationFragment : BaseFragment(), InformationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.information_fragment
 
@@ -44,7 +42,6 @@ class InformationFragment : BaseFragment(), InformationView, RouterProvider, Bac
     private var albumImage: ImageView? = null
     private var information: TextView? = null
     private var pb: ProgressBar? = null
-    private var collapsingToolbarLayout: CollapsingToolbarLayout? = null
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): InformationPresenter {
@@ -62,10 +59,6 @@ class InformationFragment : BaseFragment(), InformationView, RouterProvider, Bac
         this.presenter.viewReady()
     }
 
-    override fun getRouter(): Router {
-        return tabMusicRouter
-    }
-
     override fun onBackPressed(): Boolean {
         tabMusicRouter.exit()
         return true
@@ -78,7 +71,6 @@ class InformationFragment : BaseFragment(), InformationView, RouterProvider, Bac
         songs = view?.findViewById(R.id.songs);
         information = view?.findViewById(R.id.information);
         albumImage = view?.findViewById(R.id.image_album);
-        collapsingToolbarLayout = view?.findViewById(R.id.collapsing_toolbar);
 
         pb = view?.findViewById(R.id.image_progress_bar);
     }
@@ -90,7 +82,6 @@ class InformationFragment : BaseFragment(), InformationView, RouterProvider, Bac
         date?.text = data.releaseDate
         price?.text = data.songPrice.toString()
 
-        collapsingToolbarLayout?.title = data.songName
         Picasso.get().load(data.songArtwork
                 ?.replace("100x100", "400x400"))
                 .into(this.albumImage, object : Callback {

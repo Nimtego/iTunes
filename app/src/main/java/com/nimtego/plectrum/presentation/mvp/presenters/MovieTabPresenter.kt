@@ -8,6 +8,7 @@ import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
@@ -22,11 +23,13 @@ class MovieTabPresenter @Inject constructor(
 ) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.itemStorage.changeCurrentSection(section)
+        this.tabContentRouter.navigateTo(Screens.MoreContentScreen)
     }
 
     override fun childItemClicked(childViewModel: ChildViewModel) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.itemStorage.changeCurrentChildItem(childViewModel)
+        this.tabContentRouter.navigateTo(Screens.ItemInformationScreen)
     }
 
     private var movieModel: BaseParentViewModel<ChildViewModel>? = null

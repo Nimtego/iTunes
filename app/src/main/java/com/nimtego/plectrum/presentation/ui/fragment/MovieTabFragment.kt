@@ -10,9 +10,7 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.MovieTabPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
@@ -21,7 +19,7 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
 
-class MovieTabFragment : BaseFragment(), TabContentView, RouterProvider, BackButtonListener {
+class MovieTabFragment : BaseFragment(), TabContentView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.bottom_parent_tab_fragment
 
@@ -55,10 +53,6 @@ class MovieTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
     private fun getContainerName(): String {
         return arguments.getString(TAB_NAME)
-    }
-
-    override fun getRouter(): Router {
-        return tabMovieRouter
     }
 
     override fun onBackPressed(): Boolean {

@@ -21,6 +21,8 @@ class InformationPresenter
     private var dataSongsModel: SongDetailsModel? = null
 
     fun viewReady() {
+        val item = this.itemStorage.getCurrentChildItem()?.mainName() ?: "Empty"
+        this.viewState.systemMessage(item)
 //        this.itemStorage.getCurrentChildItem()?.let {
 //            this.viewState.systemMessage(it.id())
 //            interactor.execute(object : DisposableObserver<SongDetailsModel>() {
@@ -46,6 +48,6 @@ class InformationPresenter
     }
 
     fun onBackPressed() {
-        //this.musicTabRouter.exit()
+        this.musicTabRouter.exit()
     }
 }
