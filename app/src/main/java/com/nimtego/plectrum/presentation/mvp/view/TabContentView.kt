@@ -9,6 +9,5 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModel
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface TabContentView : BaseView {
-    @StateStrategyType(SkipStrategy::class)
     fun showViewState(data: BaseParentViewModel<ChildViewModel>)
 }

@@ -19,7 +19,7 @@ class MovieTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

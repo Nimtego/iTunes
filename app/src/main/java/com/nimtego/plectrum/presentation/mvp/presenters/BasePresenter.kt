@@ -2,11 +2,18 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 
 import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
+import com.nimtego.plectrum.domain.interactor.BaseInteractor
+import com.nimtego.plectrum.presentation.interactor.DisposableInteractor
+import com.nimtego.plectrum.presentation.interactor.Interactor
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import ru.terrakok.cicerone.Router
 
-abstract class BasePresenter<T : BaseView>() : MvpPresenter<T>() {
+abstract class BasePresenter<T : BaseView>(
+        private val disposableInteractor: DisposableInteractor
+) : MvpPresenter<T>() {
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 
@@ -22,10 +29,8 @@ abstract class BasePresenter<T : BaseView>() : MvpPresenter<T>() {
         super.detachView(view)
     }
 
-    fun search(request: String) {
-
+    override fun onDestroy() {
+        this.disposableInteractor.dispose()
     }
-
-//Mark: navigation
 
 }

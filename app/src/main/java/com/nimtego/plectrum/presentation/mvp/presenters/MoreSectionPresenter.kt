@@ -2,7 +2,6 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.manger.SectionItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
@@ -18,13 +17,21 @@ class MoreSectionPresenter
         private val musicTabRouter: Router,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: SectionItemStorage
-) : BasePresenter<MoreSectionView>() {
+) : BasePresenter<MoreSectionView>(interactor) {
 
     private var dataModel: ParentTabModelContainer<ChildViewModel>? = null
 
+    override fun attachView(view: MoreSectionView) {
+        super.attachView(view)
+        viewReady()
+    }
+
     fun viewReady() {
-        this.itemStorage.getCurrentSection()?.let {
+        this.dataModel?.let { showModel() } ?: this.itemStorage.getCurrentSection()?.let {
             this.viewState.systemMessage(it.title())
+            this.dataModel = it
+            showModel()
+        } ?: run {
             interactor.execute(object : DisposableObserver<ParentTabModelContainer<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
@@ -39,12 +46,13 @@ class MoreSectionPresenter
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
                 }
-            }, MoreSectionInteractor.Params.forRequest(it.title()))
+            }, MoreSectionInteractor.Params.forRequest("HOT_TRACK"))
+
         }
     }
 
     private fun showModel() {
-        dataModel?.let {  viewState.showViewState(it)}
+        dataModel?.let { viewState.showViewState(it) }
     }
 
     fun onBackPressed() {

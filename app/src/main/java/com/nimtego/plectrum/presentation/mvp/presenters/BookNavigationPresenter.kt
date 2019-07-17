@@ -9,7 +9,7 @@ import javax.inject.Inject
 class BookNavigationPresenter @Inject constructor(
         private val bookTabRouter: Router,
         private val bottomBarRouter: Router
-) : BasePresenter<TabNavigationView>() {
+) : BaseNavigationPresenter<TabNavigationView>() {
 
 
     fun onBackPressed(): Boolean {

@@ -1,9 +1,6 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
-import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
-import com.nimtego.plectrum.domain.interactor.PopularBookInteractor
-import com.nimtego.plectrum.domain.interactor.PopularMovieInteractor
-import com.nimtego.plectrum.domain.interactor.PopularMusicInteractor
+import com.nimtego.plectrum.domain.interactor.*
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
@@ -104,16 +101,16 @@ class PresenterModule {
         return MoreSectionPresenter(router, interactor, itemStorage)
     }
 
-    //todo 
+    //todo
     @Provides
     fun informationPresenter(
-//            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
-//            router: Router,
-//            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
-//            itemStorage: MainChoiceItemStorage,
-//            interactor: MoreSectionInteractor
+            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+            router: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
+            interactor: InformationInteractor
     ): InformationPresenter {
-        return InformationPresenter()
+        return InformationPresenter(router, interactor, itemStorage)
     }
 
 

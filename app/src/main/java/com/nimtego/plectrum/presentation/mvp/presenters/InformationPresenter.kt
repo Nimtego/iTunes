@@ -13,10 +13,10 @@ import javax.inject.Inject
 @InjectViewState
 class InformationPresenter
 @Inject constructor(
-        //private val musicTabRouter: Router,
-        //private val interactor: InformationInteractor,
-        //private val itemStorage: ChildItemStorage
-) : BasePresenter<InformationView>() {
+        private val musicTabRouter: Router,
+        private val interactor: InformationInteractor,
+        private val itemStorage: ChildItemStorage
+) : BasePresenter<InformationView>(interactor) {
 
     private var dataSongsModel: SongDetailsModel? = null
 

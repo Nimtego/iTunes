@@ -21,7 +21,7 @@ class BookTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularBookInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
 
     private var tabContentModel: BaseParentViewModel<ChildViewModel>? = null
 

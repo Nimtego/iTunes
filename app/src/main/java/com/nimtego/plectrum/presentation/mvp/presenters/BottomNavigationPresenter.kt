@@ -10,7 +10,7 @@ import javax.inject.Inject
 class BottomNavigationPresenter @Inject constructor(
         private val bottomNavigationRouter: Router,
         private val appRouter: Router
-) : BasePresenter<MainBottomNavigationView>() {
+) : BaseNavigationPresenter<MainBottomNavigationView>() {
 
     fun replaceFragment(screenName: SupportAppScreen) {
         this.bottomNavigationRouter.replaceScreen(screenName)

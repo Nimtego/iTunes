@@ -9,7 +9,7 @@ import javax.inject.Inject
 class MusicNavigationPresenter @Inject constructor(
         private val musicTabRouter: Router,
         private val bottomBarRouter: Router
-) : BasePresenter<TabNavigationView>() {
+) : BaseNavigationPresenter<TabNavigationView>() {
 
     fun onBackPressed(): Boolean {
         this.musicTabRouter.exit()

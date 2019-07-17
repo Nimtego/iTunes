@@ -21,7 +21,7 @@ class MusicTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMusicInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
 
     // FIXME
     //  APP_ROUTER
@@ -33,19 +33,15 @@ class MusicTabPresenter @Inject constructor(
 
     private var songsModel: BaseParentViewModel<ChildViewModel>? = null
 
-    override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
-        this.itemStorage.changeCurrentSection(section)
-        this.tabContentRouter.navigateTo(Screens.MoreContentScreen)
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        this.viewState.systemMessage("First attach")
     }
-
-    override fun childItemClicked(childViewModel: ChildViewModel) {
-        this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.tabContentRouter.navigateTo(Screens.ItemInformationScreen)
-    }
-
 
     fun viewIsReady(containerName: String) {
-        songsModel?.let { this@MusicTabPresenter.showModel() }.run {
+        this.songsModel?.let{
+            showModel()
+        } ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
@@ -65,7 +61,6 @@ class MusicTabPresenter @Inject constructor(
 
                 }
             }, PopularMusicInteractor.Params.forRequest(containerName))
-
         }
     }
 
@@ -73,6 +68,16 @@ class MusicTabPresenter @Inject constructor(
         this.songsModel?.let {
             this.viewState.showViewState(it)
         }
+    }
+
+    override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
+        this.itemStorage.changeCurrentSection(section)
+        this.tabContentRouter.navigateTo(Screens.MoreContentScreen)
+    }
+
+    override fun childItemClicked(childViewModel: ChildViewModel) {
+        this.itemStorage.changeCurrentChildItem(childViewModel)
+        this.tabContentRouter.navigateTo(Screens.ItemInformationScreen)
     }
 
     fun onBackPressed() {
