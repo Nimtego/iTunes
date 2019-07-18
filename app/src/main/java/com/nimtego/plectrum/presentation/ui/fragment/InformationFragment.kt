@@ -25,11 +25,11 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
 
     override val layoutRes: Int = R.layout.information_fragment
 
-    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
-    internal lateinit var tabMusicRouter: Router
-
-    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
-    internal lateinit var parentRouter: Router
+//    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
+//    internal lateinit var tabMusicRouter: Router
+//
+//    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
+//    internal lateinit var parentRouter: Router
 
     @Inject
     @InjectPresenter
@@ -45,6 +45,8 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): InformationPresenter {
+        val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
+        this.presenter.setNavigationQualifier(navigationQualifier)
         return presenter
     }
 
@@ -60,7 +62,7 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     }
 
     override fun onBackPressed(): Boolean {
-        tabMusicRouter.exit()
+        this.presenter.onBackPressed()
         return true
     }
 
@@ -96,17 +98,16 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     }
 
     companion object {
-        fun getInstance(): InformationFragment {
+        fun getInstance(navigationQualifier: String): InformationFragment {
             val fragment = InformationFragment()
 
             val arguments = Bundle()
-            arguments.putString(TAB_NAME, TAB)
+            arguments.putString(TAB_NAME, navigationQualifier)
             fragment.arguments = arguments
 
             return fragment
         }
 
-        const val TAB_NAME = "TAB_NAME"
-        const val TAB = "MOVIE_TAB"
+        const val TAB_NAME = "TabName"
     }
 }

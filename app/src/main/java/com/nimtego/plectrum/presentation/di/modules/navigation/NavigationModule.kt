@@ -19,6 +19,14 @@ class NavigationModule {
     private val movieTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
     private val bookTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
 
+    private val routerHandler: HashMap<String, Cicerone<Router>> =
+            hashMapOf(
+                    NavigationQualifiers.APP_NAVIGATION to appCicerone,
+                    NavigationQualifiers.BOTTOM_BAR_NAVIGATION to  bottomNavigationBarCicerone,
+                    NavigationQualifiers.TAB_MUSIC_NAVIGATION to  musicTabNavigationCicerone,
+                    NavigationQualifiers.TAB_MOVIE_NAVIGATION to  movieTabNavigationCicerone,
+                    NavigationQualifiers.TAB_BOOK_NAVIGATION to  bookTabNavigationCicerone)
+
     @Provides
     @Singleton
     @Named(NavigationQualifiers.APP_NAVIGATION)
@@ -105,16 +113,16 @@ class NavigationModule {
 
     @Provides
     @Singleton
-    @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
-    internal fun provideMoreSongContentRouter(): Router {
-        return musicTabNavigationCicerone.router
+    @Named(NavigationQualifiers.ROUTER_HANDLER)
+    internal fun provideRouterHandler(): HashMap<String, Cicerone<Router>> {
+        return routerHandler
     }
 
-    @Provides
-    @Singleton
-    @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
-    internal fun provideMoreSongContentNavigatorHolder(): NavigatorHolder {
-        return musicTabNavigationCicerone.navigatorHolder
-    }
+//    @Provides
+//    @Singleton
+//    @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
+//    internal fun provideMoreSongContentNavigatorHolder(): NavigatorHolder {
+//        return musicTabNavigationCicerone.navigatorHolder
+//    }
 
 }

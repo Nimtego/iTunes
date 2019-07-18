@@ -7,17 +7,20 @@ import com.nimtego.plectrum.presentation.manger.ChildItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
 import io.reactivex.observers.DisposableObserver
+import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class InformationPresenter
 @Inject constructor(
-        private val musicTabRouter: Router,
+        private val routerHandler: Map<String, Cicerone<Router>>,
         private val interactor: InformationInteractor,
         private val itemStorage: ChildItemStorage
 ) : BasePresenter<InformationView>(interactor) {
 
+    private lateinit var navigationQualifier: String
+    private var router: Router? = null
     private var dataSongsModel: SongDetailsModel? = null
 
     fun viewReady() {
@@ -48,6 +51,12 @@ class InformationPresenter
     }
 
     fun onBackPressed() {
-        this.musicTabRouter.exit()
+        this.router?.exit()
     }
+
+    fun setNavigationQualifier(navigationQualifier: String) {
+        this.navigationQualifier = navigationQualifier
+        this.router = routerHandler[navigationQualifier]?.router
+    }
+
 }

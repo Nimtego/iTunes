@@ -8,6 +8,7 @@ import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
 import com.nimtego.plectrum.presentation.mvp.presenters.*
 import dagger.Module
 import dagger.Provides
+import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Named
 
@@ -92,8 +93,8 @@ class PresenterModule {
 
     @Provides
     fun sectionMorePresenter(
-            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
-            router: Router,
+            @Named(NavigationQualifiers.ROUTER_HANDLER)
+            router: HashMap<String, Cicerone<Router>>,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             itemStorage: MainChoiceItemStorage,
             interactor: MoreSectionInteractor
@@ -104,8 +105,8 @@ class PresenterModule {
     //todo
     @Provides
     fun informationPresenter(
-            @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
-            router: Router,
+            @Named(NavigationQualifiers.ROUTER_HANDLER)
+            router: HashMap<String, Cicerone<Router>>,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             itemStorage: MainChoiceItemStorage,
             interactor: InformationInteractor

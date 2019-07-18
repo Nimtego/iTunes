@@ -94,8 +94,8 @@ class MusicTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
                 Screens.MusicTabScreen -> screen.fragment
-                Screens.MoreContentScreen -> screen.fragment
-                Screens.ItemInformationScreen -> screen.fragment
+                is Screens.MoreContentScreen -> screen.fragment
+                is Screens.ItemInformationScreen -> screen.fragment
                 else -> null
             }
         }

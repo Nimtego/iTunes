@@ -3,11 +3,12 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.PopularMovieInteractor
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
-import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
@@ -21,16 +22,6 @@ class MovieTabPresenter @Inject constructor(
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
 ) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
-
-    override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
-        this.itemStorage.changeCurrentSection(section)
-        this.tabContentRouter.navigateTo(Screens.MoreContentScreen)
-    }
-
-    override fun childItemClicked(childViewModel: ChildViewModel) {
-        this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.tabContentRouter.navigateTo(Screens.ItemInformationScreen)
-    }
 
     private var movieModel: BaseParentViewModel<ChildViewModel>? = null
 
@@ -64,6 +55,23 @@ class MovieTabPresenter @Inject constructor(
         movieModel?.let {
             viewState.showViewState(it)
         }
+    }
 
+    override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
+        this.itemStorage.changeCurrentSection(section)
+        this.tabContentRouter.navigateTo(
+                Screens.MoreContentScreen(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
+        )
+    }
+
+    override fun childItemClicked(childViewModel: ChildViewModel) {
+        this.itemStorage.changeCurrentChildItem(childViewModel)
+        this.tabContentRouter.navigateTo(
+                Screens.ItemInformationScreen(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
+        )
+    }
+
+    fun onBackPressed() {
+        this.tabContentRouter.exit()
     }
 }

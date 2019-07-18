@@ -15,9 +15,11 @@ import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Qualifier
 
 class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener {
 
@@ -25,8 +27,11 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
-    internal lateinit var tabMusicRouter: Router
+//    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
+//    internal lateinit var tabMusicRouter: Router
+//
+//    @field:[Inject Named(NavigationQualifiers.ROUTER_HANDLER)]
+//    internal lateinit var routerHandler: Map<String, Cicerone<Router>>
 
     @Inject
     @InjectPresenter
@@ -34,6 +39,8 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): MoreSectionPresenter {
+        val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
+        this.presenter.setNavigationQualifier(navigationQualifier)
         return presenter
     }
 
@@ -82,14 +89,14 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
     }
 
     companion object {
-        fun getInstance(sectionName: String) : MoreSectionFragment {
+        fun getInstance(qualifier: String) : MoreSectionFragment {
             val fragment = MoreSectionFragment()
             val arguments = Bundle()
-            arguments.putString(TAB_NAME, sectionName)
+            arguments.putString(TAB_NAME, qualifier)
             fragment.arguments = arguments
             return fragment
         }
 
-        const val TAB_NAME = "SECTION"
+        const val TAB_NAME = "TabName"
     }
 }

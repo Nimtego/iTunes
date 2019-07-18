@@ -3,6 +3,7 @@ package com.nimtego.plectrum.presentation.navigation
 import android.support.v4.app.Fragment
 import com.nimtego.plectrum.presentation.ui.fragment.*
 import ru.terrakok.cicerone.android.support.SupportAppScreen
+import javax.inject.Qualifier
 
 
 object Screens {
@@ -51,21 +52,27 @@ object Screens {
 
     //todo create User choice manager
 
-    object MoreContentScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return MoreSectionFragment.getInstance("New songs")
-        }
-    }
-
-    object ItemInformationScreen : SupportAppScreen() {
-        override fun getFragment(): Fragment {
-            return InformationFragment.getInstance()
-        }
-    }
-
-//    class MoreContentScreen(private val sectionName: String) : SupportAppScreen() {
+//    object MoreContentScreen : SupportAppScreen() {
 //        override fun getFragment(): Fragment {
-//            return MoreSectionFragment.getInstance(sectionName)
+//            return MoreSectionFragment.getInstance("New songs")
 //        }
 //    }
+
+//    object ItemInformationScreen : SupportAppScreen() {
+//        override fun getFragment(): Fragment {
+//            return InformationFragment.getInstance()
+//        }
+//    }
+
+    class MoreContentScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return MoreSectionFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class ItemInformationScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return InformationFragment.getInstance(navigationQualifier)
+        }
+    }
 }

@@ -56,7 +56,7 @@ class MovieTabFragment : BaseFragment(), TabContentView, BackButtonListener {
     }
 
     override fun onBackPressed(): Boolean {
-        tabMovieRouter.exit()
+        this.presenter.onBackPressed()
         return true
     }
 

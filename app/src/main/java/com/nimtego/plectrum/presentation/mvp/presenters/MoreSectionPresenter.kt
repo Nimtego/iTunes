@@ -12,23 +12,26 @@ import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
+import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class MoreSectionPresenter
 @Inject constructor(
-        private val musicTabRouter: Router,
+        private val routerHandler: Map<String, Cicerone<Router>>,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: MainItemStorage
 ) : BasePresenter<MoreSectionView>(interactor), MoreSectionAdapter.OnItemClickListener {
 
+    private lateinit var navigationQualifier: String
+    private var router: Router? = null
+    private var dataModel: ParentTabModelContainer<ChildViewModel>? = null
+
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.musicTabRouter.navigateTo(Screens.ItemInformationScreen)
+        this.router?.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
     }
-
-    private var dataModel: ParentTabModelContainer<ChildViewModel>? = null
 
     override fun attachView(view: MoreSectionView) {
         super.attachView(view)
@@ -65,6 +68,11 @@ class MoreSectionPresenter
     }
 
     fun onBackPressed() {
-        this.musicTabRouter.exit()
+        this.router?.exit()
+    }
+
+    fun setNavigationQualifier(navigationQualifier: String) {
+        this.navigationQualifier = navigationQualifier
+        this.router = routerHandler[navigationQualifier]?.router
     }
 }

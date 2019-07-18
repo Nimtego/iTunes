@@ -94,6 +94,8 @@ class BookTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
                 Screens.BookTabScreen -> screen.fragment
+                is Screens.MoreContentScreen -> screen.fragment
+                is Screens.ItemInformationScreen -> screen.fragment
                 else -> null
             }
         }

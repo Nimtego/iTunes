@@ -56,8 +56,7 @@ class MusicTabFragment : BaseFragment(), TabContentView, BackButtonListener {
     }
 
     override fun onBackPressed(): Boolean {
-        tabMusicRouter.exit()
-//        this.presenter.onBackPressed()
+        this.presenter.onBackPressed()
         return true
     }
 

@@ -4,12 +4,14 @@ import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.data.entity.TabContentModel
 import com.nimtego.plectrum.domain.interactor.PopularBookInteractor
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
+import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
@@ -58,10 +60,16 @@ class BookTabPresenter @Inject constructor(
     }
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
-
+        this.itemStorage.changeCurrentSection(section)
+        this.tabContentRouter.navigateTo(
+                Screens.MoreContentScreen(NavigationQualifiers.TAB_BOOK_NAVIGATION)
+        )
     }
 
     override fun childItemClicked(childViewModel: ChildViewModel) {
-
+        this.itemStorage.changeCurrentChildItem(childViewModel)
+        this.tabContentRouter.navigateTo(
+                Screens.ItemInformationScreen(NavigationQualifiers.TAB_BOOK_NAVIGATION)
+        )
     }
 }

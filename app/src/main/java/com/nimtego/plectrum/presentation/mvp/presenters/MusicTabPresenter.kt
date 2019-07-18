@@ -3,6 +3,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.PopularMusicInteractor
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
@@ -72,12 +73,16 @@ class MusicTabPresenter @Inject constructor(
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
         this.itemStorage.changeCurrentSection(section)
-        this.tabContentRouter.navigateTo(Screens.MoreContentScreen)
+        this.tabContentRouter.navigateTo(
+                Screens.MoreContentScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
+        )
     }
 
     override fun childItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.tabContentRouter.navigateTo(Screens.ItemInformationScreen)
+        this.tabContentRouter.navigateTo(
+                Screens.ItemInformationScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
+        )
     }
 
     fun onBackPressed() {

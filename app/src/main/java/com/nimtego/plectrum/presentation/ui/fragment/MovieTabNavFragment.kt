@@ -94,6 +94,8 @@ class MovieTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
                 Screens.MovieTabScreen -> screen.fragment
+                is Screens.MoreContentScreen -> screen.fragment
+                is Screens.ItemInformationScreen -> screen.fragment
                 else -> null
             }
         }
