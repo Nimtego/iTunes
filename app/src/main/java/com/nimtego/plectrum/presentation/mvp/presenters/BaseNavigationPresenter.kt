@@ -4,7 +4,7 @@ import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
 
-abstract class BaseNavigationPresenter<T : BaseView>() : MvpPresenter<T>() {
+abstract class BaseNavigationPresenter<T : BaseView> : MvpPresenter<T>() {
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 

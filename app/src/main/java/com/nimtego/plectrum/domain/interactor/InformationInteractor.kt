@@ -7,9 +7,7 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-
-//todo repo
-class InformationInteractor @Inject constructor (
+class InformationInteractor @Inject constructor(
         disposable: CompositeDisposable,
         repository: PopularBookRepository
 ) : BaseInteractor<BaseParentViewModel<ChildViewModel>, InformationInteractor.Params>(disposable, repository) {

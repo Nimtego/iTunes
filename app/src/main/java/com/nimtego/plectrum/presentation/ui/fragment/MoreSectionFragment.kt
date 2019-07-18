@@ -27,12 +27,6 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-//    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
-//    internal lateinit var tabMusicRouter: Router
-//
-//    @field:[Inject Named(NavigationQualifiers.ROUTER_HANDLER)]
-//    internal lateinit var routerHandler: Map<String, Cicerone<Router>>
-
     @Inject
     @InjectPresenter
     internal lateinit var presenter: MoreSectionPresenter

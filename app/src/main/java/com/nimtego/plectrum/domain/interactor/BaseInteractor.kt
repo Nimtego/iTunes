@@ -10,7 +10,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseInteractor<R, P> (
+abstract class BaseInteractor<R, P>(
         protected val disposables: CompositeDisposable,
         protected var repository: Repository<R>
 ) : Interactor<R, P> {
