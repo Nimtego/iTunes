@@ -82,11 +82,9 @@ dependencies {
     implementation 'pl.droidsonroids.retrofit2:converter-jspoon:1.0.0'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
 
-    //noinspection GradleCompatible
+    //look *1
+    //noinspection GradleDependency
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    //libraries use 27.1.0 version exifinterface
-    //to remove upon transition to 27+
-    implementation 'com.android.support:exifinterface:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:26.1.0'
     testImplementation 'junit:junit:4.12'
@@ -106,4 +104,16 @@ dependencies {
 }
 repositories {
     mavenCentral()
+}
+//*1
+//libraries use 27+ version support change to 26.1
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.1.0'
+            }
+        }
+    }
 }
