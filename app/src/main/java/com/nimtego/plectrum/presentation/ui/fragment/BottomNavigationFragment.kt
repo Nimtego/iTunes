@@ -53,7 +53,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     override fun onBackPressed(): Boolean {
         val fm = childFragmentManager
-        var fragment: Fragment? = null
+        val fragment: Fragment?
         val fragments = fm.fragments
         fragment = fragments?.firstOrNull{ it.isVisible }
         return if (fragment != null
@@ -143,7 +143,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     private inner class BottomNavigator(
             private val fragmentManager: FragmentManager?,
-            private val activity: AppCompatActivity,
+            activity: AppCompatActivity,
             container: Int,
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {

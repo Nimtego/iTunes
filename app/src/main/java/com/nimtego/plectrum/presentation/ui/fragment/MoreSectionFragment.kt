@@ -82,7 +82,7 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
     override fun showViewState(data: ParentTabModelContainer<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = MoreSectionAdapter(data, this.context).apply {
+            adapter = MoreSectionAdapter(data).apply {
                 setOnItemClickListener(presenter)
             }
         }

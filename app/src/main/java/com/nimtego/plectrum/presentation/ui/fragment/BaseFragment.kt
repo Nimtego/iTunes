@@ -2,6 +2,7 @@ package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
@@ -17,7 +18,7 @@ abstract class BaseFragment :  MvpAppCompatFragment(), BaseView {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
-                              savedInstanceState: Bundle?) =
+                              savedInstanceState: Bundle?): View =
             inflater.inflate(layoutRes, container, false)
 
     open fun setupStatusBar() {
