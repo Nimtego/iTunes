@@ -17,31 +17,24 @@ import android.widget.ImageView
 import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.BlurTransformation
 
 
 class InformationFragment : BaseFragment(), InformationView, BackButtonListener {
 
-    override val layoutRes: Int = R.layout.information_fragment
-
-//    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
-//    internal lateinit var tabMusicRouter: Router
-//
-//    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
-//    internal lateinit var parentRouter: Router
+    override val layoutRes: Int = R.layout.information_song_fragment
 
     @Inject
     @InjectPresenter
     internal lateinit var presenter: InformationPresenter
 
-    private var price: TextView? = null
-    private var date: TextView? = null
-    private var artistName: TextView? = null
-    private var songs: TextView? = null
-    private var albumImage: ImageView? = null
-    private var information: TextView? = null
-    private var pb: ProgressBar? = null
+    private var headTextView: TextView? = null
+    private var minorHeadTextView: TextView? = null
+    private var backgroundImageVIew: ImageView? = null
+    private var contentImageVIew: ImageView? = null
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): InformationPresenter {
@@ -67,32 +60,37 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     }
 
     private fun init() {
-        artistName = view?.findViewById(R.id.author);
-        date = view?.findViewById(R.id.release_date);
-        price = view?.findViewById(R.id.price);
-        songs = view?.findViewById(R.id.songs);
-        information = view?.findViewById(R.id.information);
-        albumImage = view?.findViewById(R.id.image_album);
-
-        pb = view?.findViewById(R.id.image_progress_bar);
+        this.headTextView = view?.findViewById(R.id.head_main_text_view)
+        this.minorHeadTextView = view?.findViewById(R.id.minor_head_text_view)
+        this.backgroundImageVIew = view?.findViewById(R.id.information_background_image_view)
+        this.contentImageVIew = view?.findViewById(R.id.content_image_view)
     }
 
 //Mark: view override
 
-    override fun showViewState(data: SongDetailsModel) {
-        artistName?.text = data.songArtistName
-        date?.text = data.releaseDate
-        price?.text = data.songPrice.toString()
+    override fun showViewState(data: ChildViewModel) {
+        this.headTextView?.text = data.mainName()
+        this.minorHeadTextView?.text = data.minorName()
 
-        Picasso.get().load(data.songArtwork
-                ?.replace("100x100", "400x400"))
-                .into(this.albumImage, object : Callback {
+        Picasso.get().load(data.imageUrl().replace("100x100", "400x400"))
+                .transform(BlurTransformation(this.context))
+                .into(this.backgroundImageVIew, object : Callback {
                     override fun onSuccess() {
-                        pb?.visibility = View.GONE;
+
                     }
 
                     override fun onError(e: Exception) {
-                        pb?.visibility = View.GONE;
+
+                    }
+                })
+        Picasso.get().load(data.imageUrl().replace("100x100", "400x400"))
+                .into(this.contentImageVIew, object : Callback {
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: Exception) {
+
                     }
                 })
     }

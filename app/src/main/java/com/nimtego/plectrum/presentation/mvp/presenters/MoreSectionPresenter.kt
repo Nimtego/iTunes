@@ -3,6 +3,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.manger.SectionItemStorage
@@ -58,7 +59,7 @@ class MoreSectionPresenter
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
                 }
-            }, MoreSectionInteractor.Params.forRequest("HOT_TRACK"))
+            }, MoreSectionInteractor.Params.forRequest(navigationQualifier))
 
         }
     }

@@ -7,7 +7,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
@@ -15,23 +14,13 @@ import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Qualifier
 
 class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.more_section_fragment
 
     private var parentContainerRecyclerView: RecyclerView? = null
-
-//    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
-//    internal lateinit var tabMusicRouter: Router
-//
-//    @field:[Inject Named(NavigationQualifiers.ROUTER_HANDLER)]
-//    internal lateinit var routerHandler: Map<String, Cicerone<Router>>
 
     @Inject
     @InjectPresenter
@@ -89,7 +78,7 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
     }
 
     companion object {
-        fun getInstance(qualifier: String) : MoreSectionFragment {
+        fun getInstance(qualifier: String): MoreSectionFragment {
             val fragment = MoreSectionFragment()
             val arguments = Bundle()
             arguments.putString(TAB_NAME, qualifier)

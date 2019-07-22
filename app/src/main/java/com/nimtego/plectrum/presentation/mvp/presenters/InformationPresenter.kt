@@ -1,12 +1,10 @@
 package com.nimtego.plectrum.presentation.mvp.presenters
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.InformationInteractor
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
-import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
-import io.reactivex.observers.DisposableObserver
+import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -24,8 +22,9 @@ class InformationPresenter
     private var dataSongsModel: SongDetailsModel? = null
 
     fun viewReady() {
-        val item = this.itemStorage.getCurrentChildItem()?.mainName() ?: "Empty"
-        this.viewState.systemMessage(item)
+//        this.itemStorage.getCurrentChildItem()?.let {
+//            viewState.showViewState(it)
+//        } ?: run{ viewState.systemMessage("NULL")}
 //        this.itemStorage.getCurrentChildItem()?.let {
 //            this.viewState.systemMessage(it.id())
 //            interactor.execute(object : DisposableObserver<SongDetailsModel>() {
@@ -46,8 +45,11 @@ class InformationPresenter
 //        }
     }
 
-    private fun showModel(songs: SongDetailsModel) {
-        viewState.showViewState(songs)
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        this.itemStorage.getCurrentChildItem()?.let {
+            viewState.showViewState(it)
+        } ?: run{ viewState.systemMessage("NULL")}
     }
 
     fun onBackPressed() {

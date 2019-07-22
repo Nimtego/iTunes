@@ -37,6 +37,9 @@
     <color name="text_view_header_color">#ff32404f</color>
     <color name="click_text_view_header_color">#066e8a</color>
 
+    <!--Card view-->
+    <color name="semiTransparentColor">#20ffffff</color>
+
     <color name="signupColor">#066e8a</color>
     <color name="color_vendor_gradient_0_start">#ff397d6a</color>
     <color name="color_vendor_gradient_0_end">#ff10ad84</color>
