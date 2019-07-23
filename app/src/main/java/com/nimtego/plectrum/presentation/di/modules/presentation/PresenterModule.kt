@@ -17,6 +17,13 @@ import javax.inject.Named
                     StorageModule::class])
 class PresenterModule {
 
+    @Provides
+    fun splashPresenter(
+            @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
+            interactor: AppLaunchInteractor
+    ): SplashPresenter {
+        return SplashPresenter(appRouter, interactor)
+    }
 
     @Provides
     fun bottomBarPresenter(

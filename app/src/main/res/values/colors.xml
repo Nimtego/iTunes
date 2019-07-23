@@ -27,6 +27,9 @@
     <!--Search view-->
     <color name="color_search_view">@android:color/white</color>
 
+    <!--Splash view-->
+    <color name="splash_view_background">#580D0D</color>
+
     <!--Edit text-->
     <color name="edit_text_hint_color">#60646D</color>
     <color name="edit_text_color">#FFFFFF</color>

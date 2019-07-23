@@ -16,6 +16,8 @@ interface ApplicationComponent {
 
     fun inject(activity: AppActivity)
 
+    fun inject(fragment: SplashFragment)
+
     fun inject(fragment: BottomNavigationFragment)
 
     fun inject(fragment: MusicTabNavFragment)

@@ -58,17 +58,17 @@ class AppActivity : MvpAppCompatActivity() {
         onLockOrientation()
         setTransparentStatusBar()
 
-        this.navigator.applyCommands(arrayOf(Forward(Screens.BottomNavigationScreen)))
+        this.navigator.applyCommands(arrayOf(Forward(Screens.SplashScreen)))
     }
 
     override fun onResumeFragments() {
         super.onResumeFragments()
         subscribeOnSystemMessages()
-        //navigatorHolder.setNavigator(navigator)
+        this.appNavigationHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
-        //navigatorHolder.removeNavigator()
+        this.appNavigationHolder.removeNavigator()
         unsubscribeOnSystemMessages()
         super.onPause()
     }
@@ -132,6 +132,7 @@ class AppActivity : MvpAppCompatActivity() {
 
         override fun createFragment(screen: SupportAppScreen?): Fragment {
             return when (screen) {
+                Screens.SplashScreen -> screen.fragment
                 Screens.BottomNavigationScreen -> screen.fragment
                 else -> throw RuntimeException("Unknown screen key!")
             }
