@@ -98,6 +98,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
         AHBottomNavigationAdapter(activity, R.menu.navigation).apply {
             setupWithBottomNavigation(bottomNavigationView)
+
         }
         with(bottomNavigationView) {
             this?.accentColor = context.getColor(R.color.color_navigation_item_active)
@@ -126,6 +127,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                     else -> MUSIC_TAB
                 }
         )
+
+        this.bottomNavigationView?.isBehaviorTranslationEnabled = false
     }
 
     override fun showProgress(show: Boolean) {

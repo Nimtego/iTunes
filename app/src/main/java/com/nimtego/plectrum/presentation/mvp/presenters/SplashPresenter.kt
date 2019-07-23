@@ -20,7 +20,7 @@ class SplashPresenter @Inject constructor(
         this.interactor.coldStart(object : DisposableCompletableObserver() {
 
             override fun onComplete() { this@SplashPresenter.navigateToStartScreen() }
-            
+
             override fun onError(e: Throwable) {
                 this@SplashPresenter.viewState.systemMessage("$e")
                 Log.i(TAG, "on error $e")

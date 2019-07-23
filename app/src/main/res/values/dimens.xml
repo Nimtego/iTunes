@@ -19,7 +19,7 @@
     <dimen name="padding_micro">2dp</dimen>
 
     <!-- rounded -->
-    <dimen name="rounded_edit_text">12sp</dimen>
+    <dimen name="rounded_edit_text">16sp</dimen>
     <dimen name="value_text_view">8sp</dimen>
 
     <!-- Text size -->
