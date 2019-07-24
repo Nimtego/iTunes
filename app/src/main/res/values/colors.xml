@@ -27,6 +27,9 @@
     <!--Search view-->
     <color name="color_search_view">@android:color/white</color>
 
+    <!--Splash view-->
+    <color name="splash_view_background">#580D0D</color>
+
     <!--Edit text-->
     <color name="edit_text_hint_color">#60646D</color>
     <color name="edit_text_color">#FFFFFF</color>
@@ -36,6 +39,9 @@
     <!--Text view-->
     <color name="text_view_header_color">#ff32404f</color>
     <color name="click_text_view_header_color">#066e8a</color>
+
+    <!--Card view-->
+    <color name="semiTransparentColor">#20ffffff</color>
 
     <color name="signupColor">#066e8a</color>
     <color name="color_vendor_gradient_0_start">#ff397d6a</color>

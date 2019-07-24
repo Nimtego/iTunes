@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.music
 
-import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import io.reactivex.Observable
@@ -11,7 +10,7 @@ class PopularMusicFactory @Inject constructor(
         private val cloudDataStore: CloudPopularMusic,
         private val diskPopularMusic: DiskPopularMusic
 ) : PopularMusicDataStore {
-    
+
     override fun hotTrack(): Observable<PopularResponse> {
         return if (cache.isCached(PopularMusicKey.HOT_TRACK)) {
             diskPopularMusic.hotTrack()

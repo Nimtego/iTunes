@@ -16,6 +16,17 @@ class InteractorModule {
         return CompositeDisposable()
     }
 
+    @Provides
+    @Singleton
+    internal fun provideAppLaunchnInteractor(
+            popularMusicrepository: PopularMusicRepository,
+            popularMovierepository: PopularMovieRepository,
+            popularBookrepository: PopularBookRepository,
+            compositeDisposable: CompositeDisposable
+    ) = AppLaunchInteractor(disposable = compositeDisposable,
+                            popularMusicRepository = popularMusicrepository,
+                            popularMovieRepository = popularMovierepository,
+                            popularBookRepository = popularBookrepository)
 
     @Provides
     @Singleton

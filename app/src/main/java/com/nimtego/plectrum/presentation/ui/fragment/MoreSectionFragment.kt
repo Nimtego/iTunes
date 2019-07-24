@@ -7,7 +7,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
@@ -15,11 +14,7 @@ import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Qualifier
 
 class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener {
 
@@ -83,7 +78,7 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
     }
 
     companion object {
-        fun getInstance(qualifier: String) : MoreSectionFragment {
+        fun getInstance(qualifier: String): MoreSectionFragment {
             val fragment = MoreSectionFragment()
             val arguments = Bundle()
             arguments.putString(TAB_NAME, qualifier)

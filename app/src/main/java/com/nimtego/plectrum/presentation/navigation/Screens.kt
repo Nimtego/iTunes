@@ -8,6 +8,12 @@ import javax.inject.Qualifier
 
 object Screens {
 
+    object SplashScreen : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SplashFragment.getInstance()
+        }
+    }
+
     object BottomNavigationScreen : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return BottomNavigationFragment.getInstance()
