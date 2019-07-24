@@ -59,7 +59,7 @@
         <item name="android:textSize">@dimen/rounded_edit_text</item>
         <item name="android:textColor">@color/edit_text_color</item>
         <item name="android:textColorHint">@color/color_vendor_dark_grey_blue</item>
-        <item name="android:textColorHighlight">@color/edit_text_color</item>
+        <item name="android:textColorHighlight">@color/click_text_view_header_color</item>
         <item name="android:lineSpacingExtra">6sp</item>
         <!--<item name="android:drawablePadding">2dp</item>-->
     </style>

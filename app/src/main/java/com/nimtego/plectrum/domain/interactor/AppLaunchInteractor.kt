@@ -20,7 +20,7 @@ class AppLaunchInteractor @Inject constructor (
         private val popularBookRepository: PopularBookRepository
 ) : BaseDisposableInteractor(disposable) {
 
-    fun coldStart(completable: DisposableCompletableObserver, params: Params) {
+    fun coldStart(completable: DisposableCompletableObserver) {
         val observable = popularMusic()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

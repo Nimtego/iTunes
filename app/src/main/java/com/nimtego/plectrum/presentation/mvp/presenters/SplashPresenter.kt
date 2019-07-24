@@ -25,7 +25,7 @@ class SplashPresenter @Inject constructor(
                 this@SplashPresenter.viewState.systemMessage("$e")
                 Log.i(TAG, "on error $e")
             }
-        }, params = AppLaunchInteractor.Params.forRequest("First start"))
+        })
     }
 
     private fun navigateToStartScreen() {

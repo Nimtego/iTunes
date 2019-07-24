@@ -12,8 +12,7 @@
         android:layout_gravity="center"
         app:cardElevation="8dp"
         app:cardCornerRadius="80dp"
-        android:layout_margin="5dp"
-        android:elevation="10dp">
+        android:layout_margin="5dp">
 
     <ImageView
         android:layout_width="match_parent"
