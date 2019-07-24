@@ -1,17 +1,18 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.data.repository.repository.MoreSectionRepository
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class MoreSectionInteractor @Inject constructor (
+class MoreSectionInteractor @Inject constructor(
         disposable: CompositeDisposable,
         repository: MoreSectionRepository
-) : BaseInteractor<List<Song>, MoreSectionInteractor.Params>(disposable, repository) {
+) : BaseInteractor<ParentTabModelContainer<ChildViewModel>, MoreSectionInteractor.Params>(disposable, repository) {
 
-    override fun buildUseCaseObservable(params: Params): Observable<List<Song>> {
+    override fun buildUseCaseObservable(params: Params): Observable<ParentTabModelContainer<ChildViewModel>> {
         return repository.query(params.request)
     }
 

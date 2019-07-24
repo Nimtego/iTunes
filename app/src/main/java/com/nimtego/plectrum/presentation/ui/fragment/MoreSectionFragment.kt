@@ -7,16 +7,19 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.data.entity.Song
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
-import com.nimtego.plectrum.presentation.ui.widget.adapters.SongAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
+import javax.inject.Qualifier
 
 class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener {
 
@@ -24,15 +27,14 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-    @field:[Inject Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)]
-    internal lateinit var tabMusicRouter: Router
-
     @Inject
     @InjectPresenter
     internal lateinit var presenter: MoreSectionPresenter
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): MoreSectionPresenter {
+        val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
+        this.presenter.setNavigationQualifier(navigationQualifier)
         return presenter
     }
 
@@ -50,8 +52,7 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRV()
-//        presenter.router = (this.parentFragment as RouterProvider).getRouter()
-        presenter.viewReady(arguments.getString("SECTION"))
+        presenter.viewReady()
     }
 
     protected fun initRV() {
@@ -73,21 +74,23 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
 //Mark: view override
 
-    override fun showViewState(data: List<Song>) {
+    override fun showViewState(data: ParentTabModelContainer<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = SongAdapter(data, this.context)
+            adapter = MoreSectionAdapter(data, this.context).apply {
+                setOnItemClickListener(presenter)
+            }
         }
     }
 
     companion object {
-        fun getInstance(sectionName: String) : MoreSectionFragment {
+        fun getInstance(qualifier: String) : MoreSectionFragment {
             val fragment = MoreSectionFragment()
             val arguments = Bundle()
-            arguments.putString(TAB_NAME, sectionName)
+            arguments.putString(TAB_NAME, qualifier)
             fragment.arguments = arguments
             return fragment
         }
 
-        const val TAB_NAME = "SECTION"
+        const val TAB_NAME = "TabName"
     }
 }

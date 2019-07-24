@@ -8,11 +8,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.presenters.MusicTabPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.RouterProvider
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view_model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
@@ -20,7 +19,7 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
 
-class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackButtonListener {
+class MusicTabFragment : BaseFragment(), TabContentView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.bottom_parent_tab_fragment
 
@@ -56,13 +55,8 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
         return arguments.getString(TAB_NAME)
     }
 
-    override fun getRouter(): Router {
-        return tabMusicRouter
-    }
-
     override fun onBackPressed(): Boolean {
-        tabMusicRouter.exit()
-//        this.presenter.onBackPressed()
+        this.presenter.onBackPressed()
         return true
     }
 
@@ -86,7 +80,7 @@ class MusicTabFragment : BaseFragment(), TabContentView, RouterProvider, BackBut
 
     override fun showViewState(data: BaseParentViewModel<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = ParentTabAdapter(data, this.context).apply {
+            adapter = ParentTabAdapter(data.sectionViewModel).apply {
                 setOnItemClickListener(presenter)
             }
         }

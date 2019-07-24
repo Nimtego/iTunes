@@ -16,7 +16,7 @@ import io.reactivex.Observable
 
 class CloudDataStore<E>(
         private val networkConnection: AppNetwork,
-        private val cache: Cache<E>
+        private val cache: Cache<String, E>
 ) : DataStore {
 
 
@@ -50,7 +50,7 @@ class CloudDataStore<E>(
 
     }
 
-    override fun songById(id: Int): Observable<SongsRepository> {
+    override fun songById(id: String): Observable<SongsRepository> {
         return networkConnection.iTunesClient
                 .getSongs(FabricParam.lookupSongsAlbum(id.toString()))
     }

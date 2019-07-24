@@ -1,13 +1,7 @@
 package com.nimtego.plectrum.presentation.di.modules.domain
 
-import com.nimtego.plectrum.data.repository.repository.AlbumRepository
-import com.nimtego.plectrum.data.repository.repository.DashBoardRepository
-import com.nimtego.plectrum.data.repository.repository.MoreSectionRepository
-import com.nimtego.plectrum.data.repository.repository.TabContentRepository
-import com.nimtego.plectrum.domain.interactor.AlbumInteractor
-import com.nimtego.plectrum.domain.interactor.BottomNavigationInteractor
-import com.nimtego.plectrum.domain.interactor.MoreSectionInteractor
-import com.nimtego.plectrum.domain.interactor.TabContentInteractor
+import com.nimtego.plectrum.data.repository.repository.*
+import com.nimtego.plectrum.domain.interactor.*
 import com.nimtego.plectrum.presentation.di.modules.data.RepositoryModule
 import dagger.Module
 import dagger.Provides
@@ -18,18 +12,31 @@ import javax.inject.Singleton
 class InteractorModule {
 
     @Provides
-    @Singleton
-    internal fun provideBottomNavigationInteractor(
-            repository: DashBoardRepository,
-            compositeDisposable: CompositeDisposable
-    ) = BottomNavigationInteractor(compositeDisposable, repository)
+    internal fun compositeDisposable(): CompositeDisposable {
+        return CompositeDisposable()
+    }
+
 
     @Provides
     @Singleton
-    internal fun provideTabContentInteractor(
-            repository: TabContentRepository,
+    internal fun providePopularMusicInteractor(
+            repository: PopularMusicRepository,
             compositeDisposable: CompositeDisposable
-    ) = TabContentInteractor(compositeDisposable, repository)
+    ) = PopularMusicInteractor(compositeDisposable, repository)
+
+    @Provides
+    @Singleton
+    internal fun providePopularMovieInteractor(
+            repository: PopularMovieRepository,
+            compositeDisposable: CompositeDisposable
+    ) = PopularMovieInteractor(compositeDisposable, repository)
+
+    @Provides
+    @Singleton
+    internal fun providePopularBookInteractor(
+            repository: PopularBookRepository,
+            compositeDisposable: CompositeDisposable
+    ) = PopularBookInteractor(compositeDisposable, repository)
 
     @Provides
     @Singleton
@@ -38,10 +45,4 @@ class InteractorModule {
             compositeDisposable: CompositeDisposable
     ) = MoreSectionInteractor(compositeDisposable, repository)
 
-    @Provides
-    @Singleton
-    internal fun provideAlbumInteractor(
-            repository: AlbumRepository,
-            compositeDisposable: CompositeDisposable
-    ) = AlbumInteractor(compositeDisposable, repository)
 }

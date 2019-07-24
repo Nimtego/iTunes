@@ -10,7 +10,7 @@ import com.nimtego.plectrum.data.model.wiki.WikiSearchResult
 
 import io.reactivex.Observable
 
-class DiskDataStore<E>(private val cache: Cache<E>) : DataStore {
+class DiskDataStore<E>(private val cache: Cache<String, E>) : DataStore {
 
 
     override fun topMovie(): Observable<PopularResponse> {
@@ -44,7 +44,7 @@ class DiskDataStore<E>(private val cache: Cache<E>) : DataStore {
         return Observable.create { AlbumsRepository() }
     }
 
-    override fun songById(id: Int): Observable<SongsRepository> {
+    override fun songById(id: String): Observable<SongsRepository> {
         //todo
         return Observable.create { SongsRepository() }
     }

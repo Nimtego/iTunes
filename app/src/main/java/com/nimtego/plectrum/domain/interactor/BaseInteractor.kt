@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.domain.interactor
 
-import com.nimtego.plectrum.domain.repository.RepositoryK
+import com.nimtego.plectrum.domain.repository.Repository
 import com.nimtego.plectrum.presentation.interactor.Interactor
 import dagger.internal.Preconditions
 import io.reactivex.Observable
@@ -10,9 +10,9 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseInteractor<R, P> (
+abstract class BaseInteractor<R, P>(
         protected val disposables: CompositeDisposable,
-        protected var repository: RepositoryK<R>
+        protected var repository: Repository<R>
 ) : Interactor<R, P> {
 
     protected abstract fun buildUseCaseObservable(params: P): Observable<R>

@@ -5,6 +5,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface ProgressView : BaseView {
-    fun showProgress()
-    fun hideProgress()
+    fun showProgress(show: Boolean)
 }

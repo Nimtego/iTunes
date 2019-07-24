@@ -1,49 +1,69 @@
 package com.nimtego.plectrum.presentation.di.modules.data
 
-import android.content.Context
-import com.nimtego.plectrum.data.cache.Cache
-import com.nimtego.plectrum.data.cache.DashBoardEntityCache
-import com.nimtego.plectrum.data.cache.FileManager
-import com.nimtego.plectrum.data.cache.Serializer
 import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper
-import com.nimtego.plectrum.data.executor.BaseExecutor
+import com.nimtego.plectrum.data.entity.mapper.PopularBookMapper
+import com.nimtego.plectrum.data.entity.mapper.PopularMovieMapper
+import com.nimtego.plectrum.data.entity.mapper.PopularMusicMapper
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
-import com.nimtego.plectrum.data.repository.datasource.DataStoreFactory
-import com.nimtego.plectrum.data.repository.repository.DashBoardRepository
-import com.nimtego.plectrum.data.repository.repository.MoreSectionRepository
-import com.nimtego.plectrum.data.repository.repository.TabContentRepository
-import com.nimtego.plectrum.domain.executor.ThreadExecutor
+import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookFactory
+import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovieFactory
+import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
+import com.nimtego.plectrum.data.repository.repository.*
+import com.nimtego.plectrum.domain.repository.Repository
 import com.nimtego.plectrum.presentation.di.modules.ContextModule
+import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import dagger.Module
 import dagger.Provides
-import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Named
 import javax.inject.Singleton
 
-@Module(includes = [ContextModule::class])
+@Module(includes = [ContextModule::class, DataStoreModule::class])
 class RepositoryModule {
 
-    @Provides
-    @Singleton
-    internal fun provideDashBoardRepository(mapper: EntityDataMapper,
-                                            dataStoreFactory: DataStoreFactory<PopularResponse>) =
-            DashBoardRepository(dataStoreFactory, mapper)
 
     @Provides
     @Singleton
-    internal fun provideTabContentRepository(mapper: EntityDataMapper,
-                                             dataStoreFactory: DataStoreFactory<PopularResponse>) =
-            TabContentRepository(dataStoreFactory, mapper)
+    @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
+    internal fun providePopularMusicRepository(
+            mapper: PopularMusicMapper,
+            @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
+            dataStoreFactory: PopularMusicFactory
+    ) : Repository<BaseParentViewModel<ChildViewModel>> {
+        return PopularMusicRepository(dataStoreFactory, mapper)
+    }
 
     @Provides
     @Singleton
-    internal fun provideMoreSectionRepository(mapper: EntityDataMapper,
-                                            dataStoreFactory: DataStoreFactory<PopularResponse>) =
+    @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
+    internal fun providePopularMovieRepository(
+            mapper: PopularMovieMapper,
+            @Named(RepositoryQualifiers.MOVIE_REPOSITORY)
+            dataStoreFactory: PopularMovieFactory
+    ) : Repository<BaseParentViewModel<ChildViewModel>> {
+        return PopularMovieRepository(dataStoreFactory, mapper)
+    }
+
+    @Provides
+    @Singleton
+    @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
+    internal fun providePopularBookRepository(
+            mapper: PopularBookMapper,
+            @Named(RepositoryQualifiers.MOVIE_REPOSITORY)
+            dataStoreFactory: PopularBookFactory
+    ) : Repository<BaseParentViewModel<ChildViewModel>> {
+        return PopularBookRepository(dataStoreFactory, mapper)
+    }
+
+
+    @Provides
+    @Singleton
+    internal fun provideMoreSectionRepository(mapper: PopularMusicMapper,
+                                              dataStoreFactory: PopularMusicFactory) =
             MoreSectionRepository(dataStoreFactory, mapper)
 
-    @Provides
-    internal fun compositeDisposable(): CompositeDisposable {
-        return CompositeDisposable()
-    }
 
     @Provides
     internal fun entityDataMapper(): EntityDataMapper {
@@ -51,32 +71,18 @@ class RepositoryModule {
     }
 
     @Provides
-    internal fun serializer(): Serializer {
-        return Serializer()
+    internal fun providePopularMusicMapper(): PopularMusicMapper {
+        return PopularMusicMapper()
     }
 
     @Provides
-    @Singleton
-    internal fun fileManager(): FileManager {
-        return FileManager()
+    internal fun providePopularMovieMapper(): PopularMovieMapper {
+        return PopularMovieMapper()
     }
 
     @Provides
-    internal fun cache(appContext: Context,
-                       serializer: Serializer,
-                       fileManager: FileManager,
-                       threadExecutor: ThreadExecutor): Cache<PopularResponse> {
-        return DashBoardEntityCache(appContext, serializer, fileManager, threadExecutor)
-    }
-
-    @Provides
-    internal fun storeFactory(appContext: Context, cache: Cache<PopularResponse>): DataStoreFactory<PopularResponse> {
-        return DataStoreFactory(appContext, cache)
-    }
-
-    @Provides
-    internal fun executor(): ThreadExecutor {
-        return BaseExecutor()
+    internal fun providePopularBookMapper(): PopularBookMapper {
+        return PopularBookMapper()
     }
 
 }

@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.presentation.mapper;
 
-import com.nimtego.plectrum.presentation.mvp.view_model.music.AlbumModel;
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel;
 
 import org.junit.Before;
 import org.junit.Test;
