@@ -90,7 +90,7 @@ class EntityDataMapper {
         return wiki.query
                 .search[0]
                 .snippet
-                .replace("\\<.*?\\>".toRegex(), " ")
+                .replace("<.*?>".toRegex(), " ")
                 .replace("&quot;", "")
                 .trim { it <= ' ' }
     }

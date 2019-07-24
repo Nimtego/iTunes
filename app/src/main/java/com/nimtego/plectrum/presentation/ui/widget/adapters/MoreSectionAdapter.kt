@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.presentation.ui.widget.adapters
 
-import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -16,7 +15,7 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class MoreSectionAdapter(private val models: ParentTabModelContainer<ChildViewModel>, parent: Context) : RecyclerView.Adapter<MoreSectionAdapter.ViewHolder>() {
+class MoreSectionAdapter(private val models: ParentTabModelContainer<ChildViewModel>) : RecyclerView.Adapter<MoreSectionAdapter.ViewHolder>() {
     private var onItemClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {

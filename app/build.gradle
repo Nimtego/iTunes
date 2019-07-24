@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.nimtego.itunes"
+        applicationId "com.nimtego.plectrum"
         minSdkVersion 24
         //noinspection OldTargetApi
         targetSdkVersion 26
@@ -30,10 +30,15 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     //rxjava 2
+    //version+ need migrate on AndroidX
+    //noinspection GradleDependency
     implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    //noinspection GradleDependency
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
     //cicerone
+    //version+ need migrate on AndroidX
+    //noinspection GradleDependency
     implementation 'ru.terrakok.cicerone:cicerone:4.0.0'
 
     //json
@@ -48,17 +53,24 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:2.18"
 
     //mockito
+    //version+ need migrate on AndroidX
+    //noinspection GradleDependency
     testImplementation 'org.mockito:mockito-core:2.21.0'
 
     //rxrelay
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
 
     //ahbottom
+    //version+ need migrate on AndroidX
+    //noinspection GradleDependency
     implementation 'com.aurelhubert:ahbottomnavigation:2.2.0'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.4.0'
+
+    //version+ need migrate on AndroidX
+    //noinspection GradleDependency
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
 
@@ -70,7 +82,8 @@ dependencies {
     implementation 'pl.droidsonroids.retrofit2:converter-jspoon:1.0.0'
     implementation group: 'org.jsoup', name: 'jsoup', version: '1.10.3'
 
-    //noinspection GradleCompatible
+    //look *1
+    //noinspection GradleDependency
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:26.1.0'
@@ -79,9 +92,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 
-    //butterknife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
@@ -89,9 +99,21 @@ dependencies {
 
     //room
     implementation "android.arch.persistence.room:runtime:1.1.1"
-    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
 }
 repositories {
     mavenCentral()
+}
+//*1
+//libraries use 27+ version support change to 26.1
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.1.0'
+            }
+        }
+    }
 }
