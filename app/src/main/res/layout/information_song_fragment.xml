@@ -27,7 +27,7 @@
                 android:scaleType="fitXY"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
-            
+
         <android.support.v7.widget.CardView
                 android:id="@+id/head_card_view"
                 android:layout_width="152dp"

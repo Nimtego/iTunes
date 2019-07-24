@@ -29,7 +29,9 @@ class BookTabPresenter @Inject constructor(
 
 
     fun viewIsReady(containerName: String) {
-        tabContentModel?.let { showModel() }.run {
+        tabContentModel?.let {
+            showModel()
+        } ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")

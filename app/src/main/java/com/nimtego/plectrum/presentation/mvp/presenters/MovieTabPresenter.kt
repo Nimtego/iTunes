@@ -27,7 +27,9 @@ class MovieTabPresenter @Inject constructor(
 
 
     fun viewIsReady(containerName: String) {
-        movieModel?.let { showModel() }.run {
+        movieModel?.let {
+            showModel()
+        } ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
