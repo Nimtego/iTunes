@@ -68,8 +68,24 @@ public class AlbumResult {
     @Expose
     private String primaryGenreName;
 
+    public String getWrapperType() {
+        return wrapperType;
+    }
+
+    public String getCollectionType() {
+        return collectionType;
+    }
+
+    public Integer getArtistId() {
+        return artistId;
+    }
+
     public Integer getCollectionId() {
         return collectionId;
+    }
+
+    public Integer getAmgArtistId() {
+        return amgArtistId;
     }
 
     public String getArtistName() {
@@ -80,15 +96,55 @@ public class AlbumResult {
         return collectionName;
     }
 
+    public String getCollectionCensoredName() {
+        return collectionCensoredName;
+    }
+
+    public String getArtistViewUrl() {
+        return artistViewUrl;
+    }
+
+    public String getCollectionViewUrl() {
+        return collectionViewUrl;
+    }
+
+    public String getArtworkUrl60() {
+        return artworkUrl60;
+    }
+
     public String getArtworkUrl100() {
         return artworkUrl100;
     }
 
-    public Double getCollectionPrice() {return collectionPrice;}
+    public Double getCollectionPrice() {
+        return collectionPrice;
+    }
 
-    public String getReleaseDate() {return releaseDate;}
+    public String getCollectionExplicitness() {
+        return collectionExplicitness;
+    }
 
-    public String getWrapperType() {
-        return wrapperType;
+    public Integer getTrackCount() {
+        return trackCount;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getPrimaryGenreName() {
+        return primaryGenreName;
     }
 }

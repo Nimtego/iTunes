@@ -107,11 +107,24 @@ public class SongResult {
     @Expose
     private Boolean isStreamable;
 
-    public Integer getTrackId() {
-        return trackId;
-    }
     public String getWrapperType() {
         return wrapperType;
+    }
+
+    public String getCollectionType() {
+        return collectionType;
+    }
+
+    public Integer getArtistId() {
+        return artistId;
+    }
+
+    public Integer getCollectionId() {
+        return collectionId;
+    }
+
+    public Integer getAmgArtistId() {
+        return amgArtistId;
     }
 
     public String getArtistName() {
@@ -122,35 +135,113 @@ public class SongResult {
         return collectionName;
     }
 
+    public String getCollectionCensoredName() {
+        return collectionCensoredName;
+    }
+
+    public String getArtistViewUrl() {
+        return artistViewUrl;
+    }
+
+    public String getCollectionViewUrl() {
+        return collectionViewUrl;
+    }
+
+    public String getArtworkUrl60() {
+        return artworkUrl60;
+    }
+
     public String getArtworkUrl100() {
         return artworkUrl100;
     }
 
-    public String getCountry() {
-        return country;
+    public Double getCollectionPrice() {
+        return collectionPrice;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public String getTrackName() {
-        return trackName;
-    }
-
-    public Integer getTrackTimeMillis() {
-        return trackTimeMillis;
+    public String getCollectionExplicitness() {
+        return collectionExplicitness;
     }
 
     public Integer getTrackCount() {
         return trackCount;
     }
 
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getPrimaryGenreName() {
+        return primaryGenreName;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public Integer getTrackId() {
+        return trackId;
+    }
+
+    public String getTrackName() {
+        return trackName;
+    }
+
+    public String getTrackCensoredName() {
+        return trackCensoredName;
+    }
+
+    public String getTrackViewUrl() {
+        return trackViewUrl;
+    }
+
+    public String getPreviewUrl() {
+        return previewUrl;
+    }
+
+    public String getArtworkUrl30() {
+        return artworkUrl30;
+    }
+
     public Double getTrackPrice() {
         return trackPrice;
     }
 
+    public String getTrackExplicitness() {
+        return trackExplicitness;
+    }
 
+    public Integer getDiscCount() {
+        return discCount;
+    }
+
+    public Integer getDiscNumber() {
+        return discNumber;
+    }
+
+    public Integer getTrackNumber() {
+        return trackNumber;
+    }
+
+    public Integer getTrackTimeMillis() {
+        return trackTimeMillis;
+    }
+
+    public Boolean getStreamable() {
+        return isStreamable;
+    }
 }
 
 

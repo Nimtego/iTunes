@@ -17,15 +17,7 @@ public class ArtistsRepository {
         return resultCount;
     }
 
-    public void setResultCount(Integer resultCount) {
-        this.resultCount = resultCount;
-    }
-
     public List<ArtistResult> getResults() {
         return results;
-    }
-
-    public void setResults(List<ArtistResult> results) {
-        this.results = results;
     }
 }
