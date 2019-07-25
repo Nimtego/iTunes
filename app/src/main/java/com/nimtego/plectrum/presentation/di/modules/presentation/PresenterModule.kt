@@ -33,30 +33,28 @@ class PresenterModule {
         return BottomNavigationPresenter(bottomRouter, appRouter)
     }
 
-
-    //todo
     @Provides
+    @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
     fun musicTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
-    ): MusicNavigationPresenter {
-        return MusicNavigationPresenter(router, bottomRouter)
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router)
     }
 
     @Provides
+    @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
     fun movieTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
-    ): MovieNavigationPresenter {
-        return MovieNavigationPresenter(router, bottomRouter)
+            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router)
     }
 
     @Provides
+    @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)
     fun bookTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
-    ): BookNavigationPresenter {
-        return BookNavigationPresenter(router, bottomRouter)
+            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router)
     }
 
     @Provides

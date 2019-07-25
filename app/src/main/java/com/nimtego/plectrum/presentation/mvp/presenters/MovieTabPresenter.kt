@@ -27,7 +27,9 @@ class MovieTabPresenter @Inject constructor(
 
 
     fun viewIsReady(containerName: String) {
-        movieModel?.let { showModel() }.run {
+        movieModel?.let {
+            showModel()
+        } ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
@@ -41,10 +43,6 @@ class MovieTabPresenter @Inject constructor(
 
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
-//                this@BottomNavigationPresenter.hideViewLoading()
-//                this@BottomNavigationPresenter.toast("error" + e.localizedMessage)
-//                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
-
                 }
             }, PopularMovieInteractor.Params.forRequest(containerName))
 
