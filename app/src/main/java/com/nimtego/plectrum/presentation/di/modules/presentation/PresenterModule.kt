@@ -53,7 +53,7 @@ class PresenterModule {
 
     @Provides
     fun bookTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router,
+            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router,
             @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
     ): BookNavigationPresenter {
         return BookNavigationPresenter(router, bottomRouter)

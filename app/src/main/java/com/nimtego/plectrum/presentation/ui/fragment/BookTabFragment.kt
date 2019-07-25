@@ -56,7 +56,7 @@ class BookTabFragment : BaseFragment(), TabContentView, BackButtonListener {
     }
 
     override fun onBackPressed(): Boolean {
-        tabBookRouter.exit()
+        this.presenter.onBackPressed()
         return true
     }
 
