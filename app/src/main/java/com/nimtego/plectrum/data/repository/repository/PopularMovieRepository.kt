@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.data.repository.repository
 
-import com.nimtego.plectrum.data.entity.mapper.PopularMovieMapper
+import com.nimtego.plectrum.data.model.mappers.PopularMovieMapper
 import com.nimtego.plectrum.data.model.rss_itunes.Feed
 import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovieDataStore
 import com.nimtego.plectrum.domain.repository.Repository
