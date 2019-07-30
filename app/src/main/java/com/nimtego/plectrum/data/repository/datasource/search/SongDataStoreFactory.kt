@@ -1,11 +1,19 @@
 package com.nimtego.plectrum.data.repository.datasource.search
 
+import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.model.itunes.SongResult
+import com.nimtego.plectrum.data.repository.datasource.popular.music.CloudPopularMusic
+import com.nimtego.plectrum.data.repository.datasource.popular.music.DiskPopularMusic
 import com.nimtego.plectrum.domain.repository.SongSource
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import io.reactivex.Observable
+import javax.inject.Inject
 
-class SongDataStore : SongSource<SongResult> {
+class SongDataStoreFactory @Inject constructor(
+        private val cache: PopularResponseCache,
+        private val cloudDataStore: CloudPopularMusic,
+        private val diskDataStore: DiskPopularMusic
+) : SongSource<SongResult> {
 
     override fun getSongsByRequest(request: String): Observable<List<SongResult>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

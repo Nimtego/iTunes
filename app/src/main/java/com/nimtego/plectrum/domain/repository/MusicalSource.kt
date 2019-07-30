@@ -1,3 +1,5 @@
 package com.nimtego.plectrum.domain.repository
 
-interface MusicalSource : SongSource, AlbumSource, AuthorSource
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
+
+interface MusicalSource
