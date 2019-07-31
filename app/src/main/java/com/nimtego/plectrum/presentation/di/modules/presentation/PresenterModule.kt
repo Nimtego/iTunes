@@ -121,5 +121,16 @@ class PresenterModule {
         return InformationPresenter(router, interactor, itemStorage)
     }
 
+    @Provides
+    fun trackInformationPresenter(
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
+            router: Router,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            itemStorage: MainChoiceItemStorage,
+            interactor: InformationInteractor
+    ): TrackInformationPresenter {
+        return TrackInformationPresenter(router, itemStorage, interactor)
+    }
+
 
 }

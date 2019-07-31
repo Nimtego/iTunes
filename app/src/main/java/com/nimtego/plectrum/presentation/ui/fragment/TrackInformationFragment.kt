@@ -1,29 +1,29 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import javax.inject.Inject
-import android.widget.TextView
-import android.widget.ImageView
-import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
-import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.TrackInformationPresenter
+import com.nimtego.plectrum.presentation.mvp.view.InformationView
+import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
+import javax.inject.Inject
 
-
-class InformationFragment : BaseFragment(), InformationView, BackButtonListener {
+class TrackInformationFragment : BaseFragment(), InformationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.track_information_fragment
 
     @Inject
     @InjectPresenter
-    internal lateinit var presenter: InformationPresenter
+    internal lateinit var presenter: TrackInformationPresenter
 
     private var headTextView: TextView? = null
     private var minorHeadTextView: TextView? = null
@@ -31,7 +31,7 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     private var contentImageVIew: ImageView? = null
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): InformationPresenter {
+    fun provideRepositoryPresenter(): TrackInformationPresenter {
         val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
         this.presenter.setNavigationQualifier(navigationQualifier)
         return presenter
@@ -90,8 +90,8 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     }
 
     companion object {
-        fun getInstance(navigationQualifier: String): InformationFragment {
-            val fragment = InformationFragment()
+        fun getInstance(navigationQualifier: String): TrackInformationFragment {
+            val fragment = TrackInformationFragment()
 
             val arguments = Bundle()
             arguments.putString(TAB_NAME, navigationQualifier)

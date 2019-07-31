@@ -19,38 +19,38 @@ class CloudMusicDataStore @Inject constructor (
     }
 
     override fun getAuthorByAlbumId(id: Int): Observable<ArtistResult> {
-        return api.getArtist(FabricParam.lookupArtist(id)).map { it.results[0] }
+        return api.getArtist(FabricParam.lookupArtist(id)).map { it.results.first() }
     }
 
     override fun getAuthorBySongId(id: Int): Observable<ArtistResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.getArtist(FabricParam.lookupArtist(id)).map { it.results.first() }
     }
 
     override fun getSongsByRequest(request: String): Observable<List<SongResult>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.searchSongs(FabricParam.searchSongParam(request)).map { it.results }
     }
 
     override fun getSongsByAlbumId(id: Int): Observable<List<SongResult>> {
-        return api.getSongs(FabricParam.lookupSongsByIdAlbum(id)).map { it.results }
+        return api.getSongs(FabricParam.lookupSongsById(id)).map { it.results }
     }
 
     override fun getSongById(id: Int): Observable<SongResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.getSongs(FabricParam.lookupSongsById(id)).map { it.results.first() }
     }
 
     override fun getAlbumsByRequest(request: String): Observable<List<AlbumResult>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.searchAlbum(FabricParam.searchAlbumParam(request)).map { it.results }
     }
 
     override fun getAlbumsByAuthorId(id: Int): Observable<List<AlbumResult>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.getAlbum(FabricParam.lookupAlbumById(id)).map { it.results }
     }
 
     override fun getAlbumBySongId(id: Int): Observable<AlbumResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.getAlbum(FabricParam.lookupAlbumById(id)).map { it.results.first() }
     }
 
     override fun getAlbumById(id: Int): Observable<AlbumResult> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return api.getAlbum(FabricParam.lookupAlbumById(id)).map { it.results.first() }
     }
 }
