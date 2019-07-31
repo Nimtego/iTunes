@@ -11,9 +11,10 @@ import com.nimtego.plectrum.presentation.ui.widget.toast.SimpleToastAlarm
 import com.nimtego.plectrum.presentation.ui.widget.toast.ToastAlarm
 import com.nimtego.plectrum.presentation.utils.StatusBarUtils
 
-abstract class BaseFragment :  MvpAppCompatFragment(), BaseView {
+abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
 
     abstract val layoutRes: Int
+
     lateinit var systemMessage: ToastAlarm
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -32,7 +33,7 @@ abstract class BaseFragment :  MvpAppCompatFragment(), BaseView {
     }
 
     override fun systemMessage(message: String) {
-       this.systemMessage.message(message)
+        this.systemMessage.message(message)
     }
 
     open fun showStatusBar(): Boolean = true
