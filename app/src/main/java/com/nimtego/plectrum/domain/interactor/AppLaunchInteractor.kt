@@ -3,6 +3,7 @@ package com.nimtego.plectrum.domain.interactor
 import com.nimtego.plectrum.data.repository.repository.PopularBookRepository
 import com.nimtego.plectrum.data.repository.repository.PopularMovieRepository
 import com.nimtego.plectrum.data.repository.repository.PopularMusicRepository
+import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
@@ -15,24 +16,14 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AppLaunchInteractor @Inject constructor (
-        disposable: CompositeDisposable,
         private val schedulersProvider: SchedulersProvider,
         private val popularMusicRepository: PopularMusicRepository,
         private val popularMovieRepository: PopularMovieRepository,
         private val popularBookRepository: PopularBookRepository
-) : BaseDisposableInteractor(disposable) {
+) : LaunchUseCase  {
 
-//    fun coldStart(completable: DisposableCompletableObserver) {
-//        val observable = popularMusic()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//        addDisposable(observable.subscribeWith(completable))
-//    }
-
-    fun coldStart(): Completable {
-        return popularMusic().subscribeOn(Schedulers.io())
-        //        .observeOn(AndroidSchedulers.mainThread())
-        //addDisposable(observable.subscribeWith(completable))
+    override fun coldStart(): Completable {
+        return popularMusic().subscribeOn(schedulersProvider.io())
     }
 
     private fun popularMusic(): Completable {

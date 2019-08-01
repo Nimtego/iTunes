@@ -4,6 +4,7 @@ import com.nimtego.plectrum.domain.interactor.*
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
 import com.nimtego.plectrum.presentation.manger.MusicalItemStorage
@@ -23,9 +24,10 @@ class PresenterModule {
     @Provides
     fun splashPresenter(
             @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
-            interactor: AppLaunchInteractor
+            interactor: LaunchUseCase,
+            schedulersProvider: SchedulersProvider
     ): SplashPresenter {
-        return SplashPresenter(appRouter, interactor, SchedulersProvider())
+        return SplashPresenter(appRouter, interactor, schedulersProvider)
     }
 
     @Provides
