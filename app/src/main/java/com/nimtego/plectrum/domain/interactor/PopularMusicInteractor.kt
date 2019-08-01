@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class PopularMusicInteractor @Inject constructor(
         disposable: CompositeDisposable,
-        repository: PopularMusicRepository
-) : BaseInteractor<BaseParentViewModel<ChildViewModel>, PopularMusicInteractor.Params>(disposable, repository) {
+        private val repository: PopularMusicRepository
+) : BaseInteractor<BaseParentViewModel<ChildViewModel>, PopularMusicInteractor.Params>(disposable) {
 
     override fun buildUseCaseObservable(params: Params): Observable<BaseParentViewModel<ChildViewModel>> {
         return repository.query(params.request)

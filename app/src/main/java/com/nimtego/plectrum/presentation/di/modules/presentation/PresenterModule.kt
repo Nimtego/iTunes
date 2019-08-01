@@ -4,7 +4,10 @@ import com.nimtego.plectrum.domain.interactor.*
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
+import com.nimtego.plectrum.presentation.manger.MusicalItemStorage
+import com.nimtego.plectrum.presentation.manger.MusicalItemStorageImp
 import com.nimtego.plectrum.presentation.mvp.presenters.*
 import dagger.Module
 import dagger.Provides
@@ -22,7 +25,7 @@ class PresenterModule {
             @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
             interactor: AppLaunchInteractor
     ): SplashPresenter {
-        return SplashPresenter(appRouter, interactor)
+        return SplashPresenter(appRouter, interactor, SchedulersProvider())
     }
 
     @Provides
@@ -123,9 +126,8 @@ class PresenterModule {
     fun trackInformationPresenter(
             @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
             router: Router,
-            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
-            itemStorage: MainChoiceItemStorage,
-            interactor: InformationInteractor
+            itemStorage: MusicalItemStorageImp,
+            interactor: TrackInformationInteractor
     ): TrackInformationPresenter {
         return TrackInformationPresenter(router, itemStorage, interactor)
     }

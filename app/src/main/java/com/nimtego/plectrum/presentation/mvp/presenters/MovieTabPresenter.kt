@@ -21,7 +21,7 @@ class MovieTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
-) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var movieModel: BaseParentViewModel<ChildViewModel>? = null
 

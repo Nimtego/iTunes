@@ -3,6 +3,7 @@ package com.nimtego.plectrum.presentation.di.modules.domain
 import com.nimtego.plectrum.data.repository.repository.*
 import com.nimtego.plectrum.domain.interactor.*
 import com.nimtego.plectrum.presentation.di.modules.data.RepositoryModule
+import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -26,7 +27,8 @@ class InteractorModule {
     ) = AppLaunchInteractor(disposable = compositeDisposable,
                             popularMusicRepository = popularMusicrepository,
                             popularMovieRepository = popularMovierepository,
-                            popularBookRepository = popularBookrepository)
+                            popularBookRepository = popularBookrepository,
+                            schedulersProvider = SchedulersProvider())
 
     @Provides
     @Singleton

@@ -11,8 +11,7 @@ import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
 abstract class BaseInteractor<R, P>(
-        protected val disposables: CompositeDisposable,
-        protected var repository: Repository<R>
+        protected val disposables: CompositeDisposable
 ) : Interactor<R, P> {
 
     protected abstract fun buildUseCaseObservable(params: P): Observable<R>

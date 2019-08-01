@@ -10,9 +10,9 @@ import io.reactivex.Observable
 import javax.inject.Inject
 
 class SongDataStoreFactory @Inject constructor(
-        private val cache: PopularResponseCache,
-        private val cloudDataStore: CloudMusicDataStore,
-        private val diskDataStore: DiskMusicDataStore
+        //private val cache: PopularResponseCache,
+        //private val cloudDataStore: CloudMusicDataStore,
+        //private val diskDataStore: DiskMusicDataStore
 ) : SongSource<SongResult> {
 
     override fun getSongsByRequest(request: String): Observable<List<SongResult>> {

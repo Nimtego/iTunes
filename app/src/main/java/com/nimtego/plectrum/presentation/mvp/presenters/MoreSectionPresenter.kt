@@ -23,7 +23,7 @@ class MoreSectionPresenter
         private val routerHandler: Map<String, Cicerone<Router>>,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: MainItemStorage
-) : BasePresenter<MoreSectionView>(interactor), MoreSectionAdapter.OnItemClickListener {
+) : BasePresenter<MoreSectionView>(), MoreSectionAdapter.OnItemClickListener {
 
     private lateinit var navigationQualifier: String
     private var router: Router? = null

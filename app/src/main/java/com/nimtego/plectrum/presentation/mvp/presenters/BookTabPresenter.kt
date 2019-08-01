@@ -21,7 +21,7 @@ class BookTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularBookInteractor
-) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var tabContentModel: BaseParentViewModel<ChildViewModel>? = null
 
@@ -68,4 +68,9 @@ class BookTabPresenter @Inject constructor(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_BOOK_NAVIGATION)
         )
     }
+    
+    fun onBackPressed() {
+        this.tabContentRouter.exit()
+    }
+
 }

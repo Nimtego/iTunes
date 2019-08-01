@@ -6,8 +6,9 @@ import com.nimtego.plectrum.data.model.itunes.SongResult
 import com.nimtego.plectrum.presentation.mvp.model.song.Album
 import com.nimtego.plectrum.presentation.mvp.model.song.Author
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
+import javax.inject.Inject
 
-class MusicalContentMapper {
+class MusicalContentMapper @Inject constructor() {
     fun songResultToSong(songResult: SongResult): Song {
         return Song(artistId = songResult.artistId,
                 collectionId = songResult.collectionId,
