@@ -7,13 +7,10 @@ import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
-import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.presenters.MovieNavigationPresenter
-import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
+import com.nimtego.plectrum.presentation.mvp.presenters.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -22,36 +19,18 @@ import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
 
-class MovieTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
-
-    override val layoutRes: Int = R.layout.fragment_tab_container
-
-    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
-    internal lateinit var bottomBarRouter: Router
+class MovieTabNavFragment : BaseNavFragment() {
 
     @field:[Inject Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)]
-    internal lateinit var musicNavigatorHolder: NavigatorHolder
+    override lateinit var navigatorHolder: NavigatorHolder
 
-    private var navigator: Navigator? = null
-
-    @Inject
+    @field:[Inject Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)]
     @InjectPresenter
-    internal lateinit var presenter: MovieNavigationPresenter
+    override lateinit var presenter: TabNavigationPresenter
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): MovieNavigationPresenter {
+    fun provideRepositoryPresenter(): TabNavigationPresenter {
         return presenter
-    }
-
-    override fun onBackPressed(): Boolean {
-        val fragment =
-                this.childFragmentManager.findFragmentById(R.id.tab_layout_container)
-
-        return if (fragment is BackButtonListener) {
-            fragment.onBackPressed()
-        } else {
-            this.presenter.onBackPressed()
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,28 +40,17 @@ class MovieTabNavFragment : BaseFragment(), TabNavigationView, BackButtonListene
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (this.navigator == null) {
-            context?.let {
-                this.navigator = MovieTabNavigator(childFragmentManager,
-                        it as AppCompatActivity,
-                        R.id.tab_layout_container,
-                        bottomBarRouter)
-            }
-        }
         this.navigator?.applyCommands(arrayOf(Replace(Screens.MovieTabScreen)))
     }
 
-    override fun onResume() {
-        super.onResume()
-        this.musicNavigatorHolder.setNavigator(this.navigator)
+    override fun provideNavigator(): Navigator? {
+        return context?.let {
+            MovieTabNavigator(childFragmentManager,
+                    it as AppCompatActivity,
+                    this.layoutContainer,
+                    this.bottomBarRouter)
+        }
     }
-
-    override fun onPause() {
-        this.musicNavigatorHolder.removeNavigator()
-        super.onPause()
-    }
-
-// MARK: - Inner Types
 
     private inner class MovieTabNavigator(
             fragmentManager: FragmentManager?,

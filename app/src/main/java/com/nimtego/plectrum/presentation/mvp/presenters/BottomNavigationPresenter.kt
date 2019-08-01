@@ -16,7 +16,7 @@ class BottomNavigationPresenter @Inject constructor(
         this.bottomNavigationRouter.replaceScreen(screenName)
     }
 
-    fun onBackPressed(): Boolean {
+    override fun onBackPressed(): Boolean {
         this.bottomNavigationRouter.exit()
         return true
     }
