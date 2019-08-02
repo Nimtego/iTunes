@@ -5,18 +5,12 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
-import javax.inject.Named
-import android.view.View
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.ImageView
 import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
-import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -25,7 +19,7 @@ import jp.wasabeef.picasso.transformations.BlurTransformation
 
 class InformationFragment : BaseFragment(), InformationView, BackButtonListener {
 
-    override val layoutRes: Int = R.layout.information_song_fragment
+    override val layoutRes: Int = R.layout.track_information_fragment
 
     @Inject
     @InjectPresenter

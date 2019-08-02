@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/status_bar_light_color">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/launch_animation_lottie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:lottie_colorFilter="@color/splash_view_background"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_fileName="launch_animation.json"/>
+
     <android.support.v7.widget.CardView
         android:layout_width="80dp"
         android:layout_height="80dp"

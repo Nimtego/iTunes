@@ -5,10 +5,10 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.PopularBookInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
+import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
-import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
@@ -21,7 +21,7 @@ class BookTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularBookInteractor
-) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var tabContentModel: BaseParentViewModel<ChildViewModel>? = null
 
@@ -72,4 +72,5 @@ class BookTabPresenter @Inject constructor(
     fun onBackPressed() {
         this.tabContentRouter.exit()
     }
+
 }

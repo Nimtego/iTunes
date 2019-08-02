@@ -15,7 +15,7 @@ class InformationPresenter
         private val routerHandler: Map<String, Cicerone<Router>>,
         private val interactor: InformationInteractor,
         private val itemStorage: ChildItemStorage
-) : BasePresenter<InformationView>(interactor) {
+) : BasePresenter<InformationView>() {
 
     private lateinit var navigationQualifier: String
     private var router: Router? = null

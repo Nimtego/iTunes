@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class PopularMovieInteractor @Inject constructor(
         disposable: CompositeDisposable,
-        repository: PopularMovieRepository
-) : BaseInteractor<BaseParentViewModel<ChildViewModel>, PopularMovieInteractor.Params>(disposable, repository) {
+        private val repository: PopularMovieRepository
+) : BaseInteractor<BaseParentViewModel<ChildViewModel>, PopularMovieInteractor.Params>(disposable) {
 
     override fun buildUseCaseObservable(params: Params): Observable<BaseParentViewModel<ChildViewModel>> {
         return repository.query(params.request)

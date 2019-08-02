@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.data.repository.repository
 
-import com.nimtego.plectrum.data.entity.mapper.PopularMusicMapper
+import com.nimtego.plectrum.data.model.mappers.PopularMusicMapper
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicDataStore
 import com.nimtego.plectrum.domain.repository.Repository

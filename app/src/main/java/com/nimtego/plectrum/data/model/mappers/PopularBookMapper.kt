@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.data.entity.mapper
+package com.nimtego.plectrum.data.model.mappers
 
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.presentation.mvp.model.book.Book

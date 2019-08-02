@@ -57,6 +57,11 @@ dependencies {
     //noinspection GradleDependency
     testImplementation 'org.mockito:mockito-core:2.21.0'
 
+    //lottie
+    //version+ need migrate on AndroidX
+    //noinspection GradleDependency
+    implementation 'com.airbnb.android:lottie:2.7.0'
+
     //rxrelay
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.0'
 

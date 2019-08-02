@@ -1,10 +1,8 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.book
 
-import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import com.nimtego.plectrum.data.network.rss_itunes.RssItunesApi
-import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovieKey
 import io.reactivex.Observable
 import javax.inject.Inject
 

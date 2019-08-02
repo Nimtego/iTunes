@@ -1,20 +1,20 @@
 package com.nimtego.plectrum.presentation.di.modules.data
 
-import com.nimtego.plectrum.data.entity.mapper.EntityDataMapper
-import com.nimtego.plectrum.data.entity.mapper.PopularBookMapper
-import com.nimtego.plectrum.data.entity.mapper.PopularMovieMapper
-import com.nimtego.plectrum.data.entity.mapper.PopularMusicMapper
-import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
+import com.nimtego.plectrum.data.model.mappers.MusicalContentMapper
+import com.nimtego.plectrum.data.model.mappers.PopularBookMapper
+import com.nimtego.plectrum.data.model.mappers.PopularMovieMapper
+import com.nimtego.plectrum.data.model.mappers.PopularMusicMapper
 import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookFactory
 import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovieFactory
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
+import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.data.repository.repository.*
 import com.nimtego.plectrum.domain.repository.Repository
+import com.nimtego.plectrum.domain.repository.SongSource
 import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -57,18 +57,23 @@ class RepositoryModule {
         return PopularBookRepository(dataStoreFactory, mapper)
     }
 
+    @Provides
+    @Singleton
+    @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
+    internal fun provideSongRepository(
+            mapper: MusicalContentMapper,
+            @Named(RepositoryQualifiers.MOVIE_REPOSITORY)
+            dataStoreFactory: SongDataStoreFactory
+    ) : SongRepository {
+        return SongRepository(dataStoreFactory, mapper)
+    }
+
 
     @Provides
     @Singleton
     internal fun provideMoreSectionRepository(mapper: PopularMusicMapper,
                                               dataStoreFactory: PopularMusicFactory) =
             MoreSectionRepository(dataStoreFactory, mapper)
-
-
-    @Provides
-    internal fun entityDataMapper(): EntityDataMapper {
-        return EntityDataMapper()
-    }
 
     @Provides
     internal fun providePopularMusicMapper(): PopularMusicMapper {
