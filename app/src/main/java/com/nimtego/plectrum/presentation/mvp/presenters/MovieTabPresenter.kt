@@ -21,7 +21,7 @@ class MovieTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
-) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var movieModel: BaseParentViewModel<ChildViewModel>? = null
 
@@ -43,10 +43,6 @@ class MovieTabPresenter @Inject constructor(
 
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
-//                this@BottomNavigationPresenter.hideViewLoading()
-//                this@BottomNavigationPresenter.toast("error" + e.localizedMessage)
-//                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
-
                 }
             }, PopularMovieInteractor.Params.forRequest(containerName))
 

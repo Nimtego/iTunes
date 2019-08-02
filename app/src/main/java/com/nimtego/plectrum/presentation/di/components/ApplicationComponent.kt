@@ -36,4 +36,6 @@ interface ApplicationComponent {
 
     fun inject(fragment: InformationFragment)
 
+    fun inject(fragment: TrackInformationFragment)
+
 }

@@ -22,7 +22,7 @@ class MusicTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMusicInteractor
-) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     // FIXME
     //  APP_ROUTER
@@ -34,10 +34,9 @@ class MusicTabPresenter @Inject constructor(
 
     private var songsModel: BaseParentViewModel<ChildViewModel>? = null
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        this.viewState.systemMessage("First attach")
-    }
+//    override fun onFirstViewAttach() {
+//        super.onFirstViewAttach()
+//    }
 
     fun viewIsReady(containerName: String) {
         this.songsModel?.let{

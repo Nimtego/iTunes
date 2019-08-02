@@ -6,13 +6,12 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
-class MovieNavigationPresenter @Inject constructor(
-        private val movieTabRouter: Router,
-        private val bottomBarRouter: Router
+class TabNavigationPresenter @Inject constructor(
+        private val router: Router
 ) : BaseNavigationPresenter<TabNavigationView>() {
 
-    fun onBackPressed(): Boolean {
-        this.movieTabRouter.exit()
+    override fun onBackPressed(): Boolean {
+        this.router.exit()
         return true
     }
 }

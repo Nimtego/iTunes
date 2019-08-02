@@ -19,7 +19,7 @@ object FabricParam {
     }
 
     //https://itunes.apple.com/lookup?id=579372950&entity=song
-    fun lookupSongsByIdAlbum(id: Int, limit: Int = limitOfItems): Map<String, String> {
+    fun lookupSongsById(id: Int, limit: Int = limitOfItems): Map<String, String> {
         val param = HashMap<String, String>()
         param["id"] = id.toString()
         param["entity"] = "song"
@@ -28,9 +28,9 @@ object FabricParam {
     }
 
     //https://itunes.apple.com/lookup?id=579372950&entity=album
-    fun lookupAlbum(album: String, limit: Int = limitOfItems): Map<String, String> {
+    fun lookupAlbumById(id: Int, limit: Int = limitOfItems): Map<String, String> {
         val param = HashMap<String, String>()
-        param["id"] = album
+        param["id"] = id.toString()
         param["entity"] = "song"
         param["limit"] = limit.toString()
         return param

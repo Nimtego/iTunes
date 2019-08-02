@@ -18,6 +18,7 @@ import com.nimtego.plectrum.data.repository.datasource.popular.music.CloudPopula
 import com.nimtego.plectrum.data.repository.datasource.popular.music.DiskPopularMusic
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicDataStore
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
+import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.domain.executor.ThreadExecutor
 import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
@@ -165,4 +166,5 @@ class DataStoreModule {
             @Named(RepositoryQualifiers.BOOK_REPOSITORY)
             cache: PopularResponseCache
     ) = DiskPopularBook(cache)
+
 }

@@ -21,7 +21,7 @@ class BookTabPresenter @Inject constructor(
         private val appRouter: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularBookInteractor
-) : BasePresenter<TabContentView>(interactor), ParentTabAdapter.OnItemClickListener {
+) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var tabContentModel: BaseParentViewModel<ChildViewModel>? = null
 
@@ -43,10 +43,6 @@ class BookTabPresenter @Inject constructor(
 
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
-//                this@BottomNavigationPresenter.hideViewLoading()
-//                this@BottomNavigationPresenter.toast("error" + e.localizedMessage)
-//                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
-
                 }
             }, PopularBookInteractor.Params.forRequest(containerName))
 
@@ -72,4 +68,9 @@ class BookTabPresenter @Inject constructor(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_BOOK_NAVIGATION)
         )
     }
+
+    fun onBackPressed() {
+        this.tabContentRouter.exit()
+    }
+
 }

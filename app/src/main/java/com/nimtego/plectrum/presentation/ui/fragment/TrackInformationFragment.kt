@@ -1,29 +1,31 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import javax.inject.Inject
-import android.widget.TextView
-import android.widget.ImageView
-import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
-import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
+import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.TrackInformationPresenter
+import com.nimtego.plectrum.presentation.mvp.view.InformationView
+import com.nimtego.plectrum.presentation.mvp.view.TrackInformationView
+import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
+import javax.inject.Inject
 
-
-class InformationFragment : BaseFragment(), InformationView, BackButtonListener {
+class TrackInformationFragment : BaseFragment(), TrackInformationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.track_information_fragment
 
     @Inject
     @InjectPresenter
-    internal lateinit var presenter: InformationPresenter
+    internal lateinit var presenter: TrackInformationPresenter
 
     private var headTextView: TextView? = null
     private var minorHeadTextView: TextView? = null
@@ -31,9 +33,7 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     private var contentImageVIew: ImageView? = null
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): InformationPresenter {
-        val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
-        this.presenter.setNavigationQualifier(navigationQualifier)
+    fun provideRepositoryPresenter(): TrackInformationPresenter {
         return presenter
     }
 
@@ -45,7 +45,6 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         init()
-        this.presenter.viewReady()
     }
 
     override fun onBackPressed(): Boolean {
@@ -62,11 +61,11 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
 
 //Mark: view override
 
-    override fun showViewState(data: ChildViewModel) {
-        this.headTextView?.text = data.mainName()
-        this.minorHeadTextView?.text = data.minorName()
+    override fun showViewState(data: Song) {
+        this.headTextView?.text = data.trackName
+        this.minorHeadTextView?.text = data.artistName
 
-        Picasso.get().load(data.imageUrl().replace("100x100", "400x400"))
+        Picasso.get().load(data.trackArtWorkUrl.replace("100x100", "400x400"))
                 .transform(BlurTransformation(this.context))
                 .into(this.backgroundImageVIew, object : Callback {
                     override fun onSuccess() {
@@ -77,7 +76,7 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
 
                     }
                 })
-        Picasso.get().load(data.imageUrl().replace("100x100", "400x400"))
+        Picasso.get().load(data.trackArtWorkUrl.replace("100x100", "400x400"))
                 .into(this.contentImageVIew, object : Callback {
                     override fun onSuccess() {
 
@@ -90,8 +89,8 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     }
 
     companion object {
-        fun getInstance(navigationQualifier: String): InformationFragment {
-            val fragment = InformationFragment()
+        fun getInstance(navigationQualifier: String): TrackInformationFragment {
+            val fragment = TrackInformationFragment()
 
             val arguments = Bundle()
             arguments.putString(TAB_NAME, navigationQualifier)

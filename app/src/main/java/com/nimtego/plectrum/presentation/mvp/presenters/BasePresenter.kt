@@ -12,8 +12,10 @@ import io.reactivex.disposables.Disposable
 import ru.terrakok.cicerone.Router
 
 abstract class BasePresenter<T : BaseView>(
-        private val disposableInteractor: DisposableInteractor
+        //private val disposableInteractor: DisposableInteractor
 ) : MvpPresenter<T>() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 
@@ -30,7 +32,11 @@ abstract class BasePresenter<T : BaseView>(
     }
 
     override fun onDestroy() {
-        this.disposableInteractor.dispose()
+        compositeDisposable.dispose()
+    }
+
+    protected fun Disposable.connect() {
+        compositeDisposable.add(this)
     }
 
 }

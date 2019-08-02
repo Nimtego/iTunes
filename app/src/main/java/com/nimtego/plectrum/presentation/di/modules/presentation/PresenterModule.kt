@@ -4,7 +4,11 @@ import com.nimtego.plectrum.domain.interactor.*
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
+import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
+import com.nimtego.plectrum.presentation.manger.MusicalItemStorage
+import com.nimtego.plectrum.presentation.manger.MusicalItemStorageImp
 import com.nimtego.plectrum.presentation.mvp.presenters.*
 import dagger.Module
 import dagger.Provides
@@ -20,9 +24,10 @@ class PresenterModule {
     @Provides
     fun splashPresenter(
             @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
-            interactor: AppLaunchInteractor
+            interactor: LaunchUseCase,
+            schedulersProvider: SchedulersProvider
     ): SplashPresenter {
-        return SplashPresenter(appRouter, interactor)
+        return SplashPresenter(appRouter, interactor, schedulersProvider)
     }
 
     @Provides
@@ -33,30 +38,28 @@ class PresenterModule {
         return BottomNavigationPresenter(bottomRouter, appRouter)
     }
 
-
-    //todo
     @Provides
+    @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
     fun musicTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
-    ): MusicNavigationPresenter {
-        return MusicNavigationPresenter(router, bottomRouter)
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router)
     }
 
     @Provides
+    @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
     fun movieTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
-    ): MovieNavigationPresenter {
-        return MovieNavigationPresenter(router, bottomRouter)
+            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router)
     }
 
     @Provides
+    @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)
     fun bookTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router,
-            @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router
-    ): BookNavigationPresenter {
-        return BookNavigationPresenter(router, bottomRouter)
+            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router)
     }
 
     @Provides
@@ -119,6 +122,16 @@ class PresenterModule {
             interactor: InformationInteractor
     ): InformationPresenter {
         return InformationPresenter(router, interactor, itemStorage)
+    }
+
+    @Provides
+    fun trackInformationPresenter(
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
+            router: Router,
+            itemStorage: MusicalItemStorageImp,
+            interactor: TrackInformationInteractor
+    ): TrackInformationPresenter {
+        return TrackInformationPresenter(router, itemStorage, interactor)
     }
 
 

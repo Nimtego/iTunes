@@ -3,8 +3,9 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
+import com.nimtego.plectrum.presentation.utils.BackButtonListener
 
-abstract class BaseNavigationPresenter<T : BaseView> : MvpPresenter<T>() {
+abstract class BaseNavigationPresenter<T : BaseView> : MvpPresenter<T>(), BackButtonListener {
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 

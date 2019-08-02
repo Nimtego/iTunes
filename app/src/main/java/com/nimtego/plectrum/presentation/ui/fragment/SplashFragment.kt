@@ -1,18 +1,20 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
+import android.widget.ProgressBar
+import com.airbnb.lottie.LottieAnimationView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.SplashPresenter
-import com.nimtego.plectrum.presentation.mvp.view.BaseView
+import com.nimtego.plectrum.presentation.mvp.view.ProgressView
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
 
-class SplashFragment : BaseFragment(), BaseView {
+class SplashFragment : BaseFragment(), ProgressView {
 
     override val layoutRes: Int = R.layout.splash_screen_fragment
 
@@ -22,6 +24,8 @@ class SplashFragment : BaseFragment(), BaseView {
     @Inject
     @InjectPresenter
     internal lateinit var presenter: SplashPresenter
+
+    private var progressBar: LottieAnimationView? = null
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): SplashPresenter {
@@ -33,12 +37,25 @@ class SplashFragment : BaseFragment(), BaseView {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        this.progressBar = view?.findViewById(R.id.launch_animation_lottie)
+    }
+
     override fun showStatusBar() = false
+
+    override fun showProgress(show: Boolean) {
+        if (show) {
+            this.progressBar?.playAnimation()
+        }
+        else {
+            this.progressBar?.pauseAnimation()
+        }
+    }
 
     companion object {
         fun getInstance(): SplashFragment {
-            val fragment = SplashFragment()
-            return fragment
+            return SplashFragment()
         }
     }
 

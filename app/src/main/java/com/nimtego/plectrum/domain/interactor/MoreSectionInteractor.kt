@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 class MoreSectionInteractor @Inject constructor(
         disposable: CompositeDisposable,
-        repository: MoreSectionRepository
-) : BaseInteractor<ParentTabModelContainer<ChildViewModel>, MoreSectionInteractor.Params>(disposable, repository) {
+        private val repository: MoreSectionRepository
+) : BaseInteractor<ParentTabModelContainer<ChildViewModel>, MoreSectionInteractor.Params>(disposable) {
 
     override fun buildUseCaseObservable(params: Params): Observable<ParentTabModelContainer<ChildViewModel>> {
         return repository.query(params.request)
