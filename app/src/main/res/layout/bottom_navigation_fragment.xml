@@ -30,9 +30,7 @@
                 android:hint="@string/search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:theme="@style/MySearchViewStyle" />
-
         </android.support.v7.widget.CardView>
-
 
     <FrameLayout
         android:id="@+id/bottom_navigation_container"
@@ -44,7 +42,7 @@
     </FrameLayout>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-        android:id="@+id/bottomNavigationView"
+        android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
