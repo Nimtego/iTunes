@@ -22,7 +22,7 @@ class AppLaunchInteractor @Inject constructor (
         private val popularBookRepository: PopularBookRepository
 ) : LaunchUseCase  {
 
-    override fun coldStart(): Completable {
+    override fun appLaunch(): Completable {
         return popularMusic().subscribeOn(schedulersProvider.io())
     }
 

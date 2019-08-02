@@ -2,6 +2,7 @@ package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
 import android.widget.ProgressBar
+import com.airbnb.lottie.LottieAnimationView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
@@ -24,7 +25,7 @@ class SplashFragment : BaseFragment(), ProgressView {
     @InjectPresenter
     internal lateinit var presenter: SplashPresenter
 
-    private var progressBar: ProgressBar? = null
+    private var progressBar: LottieAnimationView? = null
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): SplashPresenter {
@@ -38,13 +39,18 @@ class SplashFragment : BaseFragment(), ProgressView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.progressBar = view?.findViewById(R.id.image_progress_bar)
+        this.progressBar = view?.findViewById(R.id.launch_animation_lottie)
     }
 
     override fun showStatusBar() = false
 
     override fun showProgress(show: Boolean) {
-        this.progressBar?.visibility = if (show) ProgressBar.VISIBLE else ProgressBar.INVISIBLE
+        if (show) {
+            this.progressBar?.playAnimation()
+        }
+        else {
+            this.progressBar?.pauseAnimation()
+        }
     }
 
     companion object {

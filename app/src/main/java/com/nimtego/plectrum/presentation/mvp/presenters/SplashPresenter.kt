@@ -18,8 +18,8 @@ class SplashPresenter @Inject constructor(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        this.interactor.coldStart()
-                .timeout(2, TimeUnit.SECONDS)
+        this.interactor.appLaunch()
+                .timeout(5, TimeUnit.SECONDS)
                 .observeOn(schedulersProvider.ui())
                 .doOnSubscribe { this@SplashPresenter.viewState.showProgress(true) }
                 .doAfterTerminate { this@SplashPresenter.viewState.showProgress(false) }
