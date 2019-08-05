@@ -66,6 +66,7 @@ class MusicTabNavFragment : BaseNavFragment() {
                 Screens.MusicTabScreen -> screen.fragment
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
+                is Screens.SearchScreen -> screen.fragment
                 else -> null
             }
         }

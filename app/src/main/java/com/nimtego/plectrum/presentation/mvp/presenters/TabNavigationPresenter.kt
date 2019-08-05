@@ -51,14 +51,13 @@ class TabNavigationPresenter @Inject constructor(
     }
 
     private fun navigateToSearch() {
-        //todo search screen to navigate 
-        //this.router.navigateTo(Screens.MoreContentScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION))
+        //todo search screen to navigate
+        this.router.navigateTo(Screens.SearchScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION))
     }
 
     private inner class CurrentSearchSubscriber : Subscriber<String>() {
         override fun onCompleted() {}
         override fun onNext(result: String) {
-            this@TabNavigationPresenter.viewState.systemMessage("Current search is - $result")
             this@TabNavigationPresenter.navigateToSearch()
         }
         override fun onError(e: Throwable) {}

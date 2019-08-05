@@ -15,6 +15,7 @@ import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -76,8 +77,22 @@ class RepositoryModule {
             MoreSectionRepository(dataStoreFactory, mapper)
 
     @Provides
+    @Singleton
+    internal fun provideSearchRepository(mapper: MusicalContentMapper,
+                                              dataStoreFactory: SongDataStoreFactory
+    ): MusicalRepository {
+        return MusicalRepository(dataStoreFactory, mapper)
+    }
+
+
+    @Provides
     internal fun providePopularMusicMapper(): PopularMusicMapper {
         return PopularMusicMapper()
+    }
+
+    @Provides
+    internal fun provideSearchMusicMapper(): MusicalContentMapper {
+        return MusicalContentMapper()
     }
 
     @Provides

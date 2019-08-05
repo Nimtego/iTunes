@@ -38,4 +38,6 @@ interface ApplicationComponent {
 
     fun inject(fragment: TrackInformationFragment)
 
+    fun inject(fragment: SearchContentFragment)
+
 }
