@@ -40,25 +40,28 @@ class PresenterModule {
     @Provides
     @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
     fun musicTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): TabNavigationPresenter {
-        return TabNavigationPresenter(router)
+        return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
     @Provides
     @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
     fun movieTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router
+            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): TabNavigationPresenter {
-        return TabNavigationPresenter(router)
+        return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
     @Provides
     @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)
     fun bookTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router
+            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): TabNavigationPresenter {
-        return TabNavigationPresenter(router)
+        return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
     @Provides
