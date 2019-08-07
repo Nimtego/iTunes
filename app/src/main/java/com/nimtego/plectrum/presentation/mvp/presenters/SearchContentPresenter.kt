@@ -12,7 +12,6 @@ import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
-import rx.Subscriber
 import javax.inject.Inject
 
 @InjectViewState
@@ -44,22 +43,17 @@ class SearchContentPresenter @Inject constructor(
     }
 
     private fun requestSearchData() {
-        if (this.currentSearchText != itemStorage.getCurrentSearchText()) {
-            this.currentSearchText = itemStorage.getCurrentSearchText()
-            val currentSearchObserver = CurrentSearchObserver()
-            currentSearchObserver.connect()
-            this.currentSearchText?.let {
-                this.interactor.searchSong(it)
-                        .observeOn(schedulersProvider.ui())
-                        .doOnSubscribe {
-                            this@SearchContentPresenter.viewState.showProgress(true)
-                        }
-                        .doAfterTerminate {
-                            this@SearchContentPresenter.viewState.showProgress(false)
-                        }
-                        .subscribe(currentSearchObserver)
-            }
-        }
+        val currentSearchObserver = CurrentSearchObserver()
+        currentSearchObserver.connect()
+        this.interactor.searchSong(this.itemStorage.getCurrentSearchText())
+                .observeOn(schedulersProvider.ui())
+                .doOnSubscribe {
+                    this@SearchContentPresenter.viewState.showProgress(true)
+                }
+                .doAfterTerminate {
+                    this@SearchContentPresenter.viewState.showProgress(false)
+                }
+                .subscribe(currentSearchObserver)
     }
 
     private fun showModel() {

@@ -13,8 +13,10 @@ class UserSearchStorage @Inject constructor() : UserSearchItemStorage {
     }
 
     override fun overrideCurrentSearchText(text: String) {
-        this.currentSearchText = text
-        this.currentSearchTextObservable.onNext(this.currentSearchText)
+        if (this.currentSearchText != text) {
+            this.currentSearchText = text
+            this.currentSearchTextObservable.onNext(this.currentSearchText)
+        }
     }
 
     override fun getCurrentSearchTextObservable(): BehaviorSubject<String> {
