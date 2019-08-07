@@ -6,9 +6,8 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
-import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
-import com.nimtego.plectrum.presentation.manger.MusicalItemStorage
-import com.nimtego.plectrum.presentation.manger.MusicalItemStorageImp
+import com.nimtego.plectrum.presentation.interactor.SongSearchUseCase
+import com.nimtego.plectrum.presentation.manger.*
 import com.nimtego.plectrum.presentation.mvp.presenters.*
 import dagger.Module
 import dagger.Provides
@@ -33,33 +32,37 @@ class PresenterModule {
     @Provides
     fun bottomBarPresenter(
             @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router,
-            @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router
+            @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): BottomNavigationPresenter {
-        return BottomNavigationPresenter(bottomRouter, appRouter)
+        return BottomNavigationPresenter(bottomRouter, appRouter, userSearchItemStorage)
     }
 
     @Provides
     @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
     fun musicTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): TabNavigationPresenter {
-        return TabNavigationPresenter(router)
+        return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
     @Provides
     @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
     fun movieTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router
+            @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): TabNavigationPresenter {
-        return TabNavigationPresenter(router)
+        return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
     @Provides
     @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)
     fun bookTabNavPresenter(
-            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router
+            @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
     ): TabNavigationPresenter {
-        return TabNavigationPresenter(router)
+        return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
     @Provides
@@ -134,5 +137,14 @@ class PresenterModule {
         return TrackInformationPresenter(router, itemStorage, interactor)
     }
 
-
+    @Provides
+    fun searchPresenter(
+            @Named(NavigationQualifiers.ROUTER_HANDLER)
+            router: HashMap<String, Cicerone<Router>>,
+            interactor: SongSearchUseCase,
+            itemStorage: UserSearchItemStorage,
+            schedulersProvider: SchedulersProvider
+    ): SearchContentPresenter {
+        return SearchContentPresenter(router, interactor, itemStorage, schedulersProvider)
+    }
 }

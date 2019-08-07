@@ -81,4 +81,10 @@ object Screens {
             return InformationFragment.getInstance(navigationQualifier)
         }
     }
+
+    class SearchScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchContentFragment.getInstance(navigationQualifier)
+        }
+    }
 }

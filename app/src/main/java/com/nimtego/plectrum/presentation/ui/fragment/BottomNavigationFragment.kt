@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.SearchView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
@@ -16,6 +17,7 @@ import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import kotlinx.android.synthetic.main.bottom_navigation_fragment.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -23,6 +25,8 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
+
+
 
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackButtonListener {
 
@@ -40,7 +44,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     @InjectPresenter
     internal lateinit var presenter: BottomNavigationPresenter
 
-    private var bottomNavigationView: AHBottomNavigation? = null
+    private lateinit var bottomNavigationView: AHBottomNavigation
+    private lateinit var searchText: SearchView
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
@@ -80,8 +85,21 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                         appRouter)
             }
         }
-        this.bottomNavigationView = this.view?.findViewById(R.id.bottomNavigationView)
+        this.bottomNavigationView = bottom_navigation_view
+        this.searchText = search_edit_text
+        initSearchView()
         initBottomNavigation()
+    }
+
+    private fun initSearchView() {
+        searchText.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(text: String): Boolean {
+                searchText.onActionViewCollapsed()
+                presenter.searchTextSubmit(text)
+                return false
+            }
+            override fun onQueryTextChange(s: String): Boolean { return false }
+        })
     }
 
     override fun onResume() {
@@ -101,10 +119,10 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
         }
         with(bottomNavigationView) {
-            this?.accentColor = context.getColor(R.color.color_navigation_item_active)
-            this?.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
+            this.accentColor = context.getColor(R.color.color_navigation_item_active)
+            this.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
 
-            this?.setOnTabSelectedListener { position, wasSelected ->
+            this.setOnTabSelectedListener { position, wasSelected ->
                 if (!wasSelected) selectTab(
                         when (position) {
                             0 -> MUSIC_TAB
@@ -115,7 +133,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                 true
             }
             val leftMargin = resources.getDimension(R.dimen.padding_medium).toInt()
-            this?.setNotificationMarginLeft(leftMargin, leftMargin)
+            this.setNotificationMarginLeft(leftMargin, leftMargin)
         }
 
         selectTab(
@@ -128,7 +146,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                 }
         )
 
-        this.bottomNavigationView?.isBehaviorTranslationEnabled = false
+        this.bottomNavigationView.isBehaviorTranslationEnabled = false
     }
 
     override fun showProgress(show: Boolean) {

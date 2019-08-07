@@ -5,6 +5,7 @@ import com.nimtego.plectrum.data.cache.FileManager
 import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.cache.Serializer
 import com.nimtego.plectrum.data.executor.BaseExecutor
+import com.nimtego.plectrum.data.network.itunes.ITunesApi
 import com.nimtego.plectrum.data.network.rss_itunes.RssItunesApi
 import com.nimtego.plectrum.data.repository.datasource.popular.book.CloudPopularBook
 import com.nimtego.plectrum.data.repository.datasource.popular.book.DiskPopularBook
@@ -18,6 +19,7 @@ import com.nimtego.plectrum.data.repository.datasource.popular.music.CloudPopula
 import com.nimtego.plectrum.data.repository.datasource.popular.music.DiskPopularMusic
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicDataStore
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
+import com.nimtego.plectrum.data.repository.datasource.search.CloudMusicDataStore
 import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.domain.executor.ThreadExecutor
 import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
@@ -166,5 +168,27 @@ class DataStoreModule {
             @Named(RepositoryQualifiers.BOOK_REPOSITORY)
             cache: PopularResponseCache
     ) = DiskPopularBook(cache)
+
+    @Provides
+    @Singleton
+    internal fun provideSearchSongDataStoreFactory(
+//            @Named(RepositoryQualifiers.BOOK_REPOSITORY)
+//            cache: PopularResponseCache,
+            cloudPopular: CloudMusicDataStore
+//            discPopular: DiskPopularBook
+    ) : SongDataStoreFactory {
+        return SongDataStoreFactory(cloudPopular)
+    }
+
+    @Provides
+    @Singleton
+//    @Named(RepositoryQualifiers.BOOK_REPOSITORY)
+    internal fun provideCloudSongSearchDataStore(
+//            @Named(RepositoryQualifiers.BOOK_REPOSITORY)
+//            cache: PopularResponseCache,
+            @Named(NetworkQualifiers.ITUNES_API)
+            api: ITunesApi
+    ) =  CloudMusicDataStore(api)
+
 
 }

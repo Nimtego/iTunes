@@ -11,12 +11,12 @@ import javax.inject.Inject
 
 class SongDataStoreFactory @Inject constructor(
         //private val cache: PopularResponseCache,
-        //private val cloudDataStore: CloudMusicDataStore,
+        private val cloudDataStore: CloudMusicDataStore
         //private val diskDataStore: DiskMusicDataStore
 ) : SongSource<SongResult> {
 
     override fun getSongsByRequest(request: String): Observable<List<SongResult>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return cloudDataStore.getSongsByRequest(request)
     }
 
     override fun getSongsByAlbumId(id: Int): Observable<List<SongResult>> {

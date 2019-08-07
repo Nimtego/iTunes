@@ -1,6 +1,8 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
 import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
+import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
+import com.nimtego.plectrum.presentation.manger.UserSearchStorage
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -17,5 +19,11 @@ class StorageModule {
     @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
     internal fun provideStorageManager(): MainChoiceItemStorage {
         return itemStorage
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideUserSearchItemStorage(): UserSearchItemStorage {
+        return UserSearchStorage()
     }
 }

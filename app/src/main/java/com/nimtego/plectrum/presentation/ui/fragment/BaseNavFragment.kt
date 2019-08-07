@@ -50,10 +50,16 @@ abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonLi
     override fun onResume() {
         super.onResume()
         this.navigatorHolder.setNavigator(this.navigator)
+        this.presenter.viewIsVisible(true)
     }
 
     override fun onPause() {
         this.navigatorHolder.removeNavigator()
+        this.presenter.viewIsVisible(false)
         super.onPause()
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        this.presenter.viewIsVisible(!hidden)
     }
 }

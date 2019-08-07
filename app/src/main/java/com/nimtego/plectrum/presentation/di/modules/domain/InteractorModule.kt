@@ -2,9 +2,12 @@ package com.nimtego.plectrum.presentation.di.modules.domain
 
 import com.nimtego.plectrum.data.repository.repository.*
 import com.nimtego.plectrum.domain.interactor.*
+import com.nimtego.plectrum.domain.repository.SongSource
 import com.nimtego.plectrum.presentation.di.modules.data.RepositoryModule
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
+import com.nimtego.plectrum.presentation.interactor.SongSearchUseCase
+import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -60,4 +63,11 @@ class InteractorModule {
             compositeDisposable: CompositeDisposable
     ) = MoreSectionInteractor(compositeDisposable, repository)
 
+    @Provides
+    @Singleton
+    internal fun provideSearchInteractor(
+            schedulersProvider: SchedulersProvider,
+            repository: MusicalRepository
+    ): SongSearchUseCase {
+        return SearchMusicContentInteractor(schedulersProvider, repository) }
 }

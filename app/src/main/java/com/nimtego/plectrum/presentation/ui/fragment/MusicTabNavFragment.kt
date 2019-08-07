@@ -15,6 +15,7 @@ import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppScreen
+import ru.terrakok.cicerone.commands.Forward
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,6 +31,7 @@ class MusicTabNavFragment : BaseNavFragment() {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): TabNavigationPresenter {
+        this.presenter.setNavigationQualifiers(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
         return presenter
     }
 
@@ -66,7 +68,25 @@ class MusicTabNavFragment : BaseNavFragment() {
                 Screens.MusicTabScreen -> screen.fragment
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
+                is Screens.SearchScreen -> screen.fragment
                 else -> null
+            }
+        }
+
+        override fun fragmentForward(command: Forward?) {
+            if (command?.screen is Screens.SearchScreen) {
+                val fm = childFragmentManager
+                val fragment: Fragment?
+                val fragments = fm.fragments
+                fragment = fragments?.firstOrNull { it.isVisible }
+                if (fragment != null
+                        && fragment is SearchContentFragment) {
+                    fragmentReplace(Replace(command.screen))
+                } else {
+                    super.fragmentForward(command)
+                }
+            } else {
+                super.fragmentForward(command)
             }
         }
     }

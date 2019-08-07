@@ -11,13 +11,13 @@ import javax.inject.Inject
 class MusicalContentMapper @Inject constructor() {
     fun songResultToSong(songResult: SongResult): Song {
         return Song(artistId = songResult.artistId,
-                collectionId = songResult.collectionId,
+                collectionId = 0,
                 trackId = songResult.trackId,
                 artistName = songResult.artistName,
                 wrapperType = songResult.wrapperType,
                 trackName = songResult.trackName,
-                trackPrice = songResult.trackPrice,
-                trackArtWorkUrl = songResult.trackViewUrl,
+                trackPrice = 0.0,
+                trackArtWorkUrl = songResult.artworkUrl100,
                 trackTimeMillis = songResult.trackTimeMillis)
     }
 
