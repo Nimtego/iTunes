@@ -14,13 +14,6 @@ class BottomNavigationPresenter @Inject constructor(
         private val userSearchItemStorage: UserSearchItemStorage
 ) : BaseNavigationPresenter<MainBottomNavigationView>() {
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        this.userSearchItemStorage.getCurrentSearchTextObservable().subscribe {
-            this@BottomNavigationPresenter.viewState.systemMessage(it)
-        }
-    }
-
     fun replaceFragment(screenName: SupportAppScreen) {
         this.bottomNavigationRouter.replaceScreen(screenName)
     }

@@ -26,6 +26,7 @@ class SearchContentPresenter @Inject constructor(
     private lateinit var navigationQualifier: String
     private var router: Router? = null
     private var dataModel: List<ChildViewModel>? = null
+    private var currentSearchText: String? = null
 
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
 //        this.itemStorage.changeCurrentChildItem(childViewModel)
@@ -39,19 +40,26 @@ class SearchContentPresenter @Inject constructor(
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewReady()
+        requestSearchData()
     }
 
-    fun viewReady() {
-        this.interactor.searchSong(itemStorage.getCurrentSearchText())
-                .observeOn(schedulersProvider.ui())
-                .doOnSubscribe {
-                    this@SearchContentPresenter.viewState.showProgress(true)
-                }
-                .doAfterTerminate {
-                    this@SearchContentPresenter.viewState.showProgress(false)
-                }
-                .subscribe(CurrentSearchObserver())
+    private fun requestSearchData() {
+        if (this.currentSearchText != itemStorage.getCurrentSearchText()) {
+            this.currentSearchText = itemStorage.getCurrentSearchText()
+            val currentSearchObserver = CurrentSearchObserver()
+            currentSearchObserver.connect()
+            this.currentSearchText?.let {
+                this.interactor.searchSong(it)
+                        .observeOn(schedulersProvider.ui())
+                        .doOnSubscribe {
+                            this@SearchContentPresenter.viewState.showProgress(true)
+                        }
+                        .doAfterTerminate {
+                            this@SearchContentPresenter.viewState.showProgress(false)
+                        }
+                        .subscribe(currentSearchObserver)
+            }
+        }
     }
 
     private fun showModel() {

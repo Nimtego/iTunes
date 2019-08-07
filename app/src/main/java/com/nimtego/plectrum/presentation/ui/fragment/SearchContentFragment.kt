@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -32,6 +33,7 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     internal lateinit var presenter: SearchContentPresenter
 
     private var searchContentRv: RecyclerView? = null
+    private var pb: ProgressBar? = null
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): SearchContentPresenter {
@@ -52,7 +54,7 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     }
 
     override fun showProgress(show: Boolean) {
-
+        pb?.visibility = if (show) ProgressBar.VISIBLE else ProgressBar.GONE
     }
 
     override fun onBackPressed(): Boolean {
@@ -61,7 +63,8 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     }
 
     private fun init() {
-        this.searchContentRv = view?.findViewById<RecyclerView>(R.id.recycler_view_search_content)
+        this.pb = view?.findViewById(R.id.pb_loading)
+        this.searchContentRv = view?.findViewById(R.id.recycler_view_search_content)
         this.searchContentRv?.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@SearchContentFragment.context,

@@ -3,6 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:progressDrawable="@color/black_effective" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_search_content"
         android:layout_width="match_parent"
