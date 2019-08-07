@@ -31,6 +31,7 @@ class BookTabNavFragment : BaseNavFragment() {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): TabNavigationPresenter {
+        this.presenter.setNavigationQualifiers(NavigationQualifiers.TAB_BOOK_NAVIGATION)
         return presenter
     }
 

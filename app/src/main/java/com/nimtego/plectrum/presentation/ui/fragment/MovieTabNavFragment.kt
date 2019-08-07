@@ -31,6 +31,7 @@ class MovieTabNavFragment : BaseNavFragment() {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): TabNavigationPresenter {
+        this.presenter.setNavigationQualifiers(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
         return presenter
     }
 

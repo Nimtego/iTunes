@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.manger
 
 import rx.subjects.BehaviorSubject
+import rx.subjects.PublishSubject
 import javax.inject.Inject
 
 class UserSearchStorage @Inject constructor() : UserSearchItemStorage {

@@ -9,6 +9,7 @@ import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
 import javax.inject.Inject
+import javax.inject.Qualifier
 
 @InjectViewState
 class TabNavigationPresenter @Inject constructor(
@@ -17,6 +18,7 @@ class TabNavigationPresenter @Inject constructor(
 ) : BaseNavigationPresenter<TabNavigationView>() {
 
     private var currentSearchSubscriber: CurrentSearchSubscriber
+    private lateinit var navigationQualifier: String
 
     init {
         this.currentSearchSubscriber = CurrentSearchSubscriber()
@@ -30,7 +32,7 @@ class TabNavigationPresenter @Inject constructor(
     override fun attachView(view: TabNavigationView) {
         super.attachView(view)
         this.userSearchItemStorage.getCurrentSearchTextObservable()
-                .subscribe(this.currentSearchSubscriber)
+                .subscribe(CurrentSearchSubscriber())
     }
 
     override fun detachView(view: TabNavigationView) {
@@ -39,20 +41,24 @@ class TabNavigationPresenter @Inject constructor(
     }
 
     fun viewIsVisible(visible: Boolean) {
-        if (visible) {
-            if (this.currentSearchSubscriber.isUnsubscribed) {
-                this.currentSearchSubscriber = CurrentSearchSubscriber()
-            }
-            this.userSearchItemStorage.getCurrentSearchTextObservable()
-                    .subscribe(this.currentSearchSubscriber)
-        } else {
-            this.currentSearchSubscriber.unsubscribe()
-        }
+//        if (visible) {
+//            if (this.currentSearchSubscriber.isUnsubscribed) {
+//                this.currentSearchSubscriber = CurrentSearchSubscriber()
+//            }
+//            this.userSearchItemStorage.getCurrentSearchTextObservable()
+//                    .subscribe(this.currentSearchSubscriber)
+//        }
+//        else {
+//            this.currentSearchSubscriber.unsubscribe()
+//        }
     }
 
     private fun navigateToSearch() {
-        //todo search screen to navigate
-        this.router.navigateTo(Screens.SearchScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION))
+        this.router.navigateTo(Screens.SearchScreen(this.navigationQualifier))
+    }
+
+    fun setNavigationQualifiers(tabNavigationQualifier:  String) {
+        this.navigationQualifier = tabNavigationQualifier
     }
 
     private inner class CurrentSearchSubscriber : Subscriber<String>() {

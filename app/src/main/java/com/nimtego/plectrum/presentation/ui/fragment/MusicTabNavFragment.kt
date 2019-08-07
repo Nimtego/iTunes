@@ -31,6 +31,7 @@ class MusicTabNavFragment : BaseNavFragment() {
 
     @ProvidePresenter
     fun provideRepositoryPresenter(): TabNavigationPresenter {
+        this.presenter.setNavigationQualifiers(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
         return presenter
     }
 
