@@ -4,7 +4,7 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 
 data class MovieWrapperModel (
-        private val movie: Movie
+        private val movie: PopularMovieModel
 ) : ChildViewModel {
 
     override fun mainName(): String {

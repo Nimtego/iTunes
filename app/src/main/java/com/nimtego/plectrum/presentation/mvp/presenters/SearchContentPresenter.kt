@@ -2,7 +2,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters
 
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
-import com.nimtego.plectrum.presentation.interactor.SongSearchUseCase
+import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @InjectViewState
 class SearchContentPresenter @Inject constructor(
         private val routerHandler: Map<String, Cicerone<Router>>,
-        private val interactor: SongSearchUseCase,
+        private val interactor: MusicalSearchUseCase,
         private val itemStorage: UserSearchItemStorage,
         private val schedulersProvider: SchedulersProvider
 ) : BasePresenter<SearchContentView>(), MoreSectionAdapter.OnItemClickListener {

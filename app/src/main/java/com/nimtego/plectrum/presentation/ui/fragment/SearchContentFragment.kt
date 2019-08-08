@@ -3,25 +3,21 @@ package com.nimtego.plectrum.presentation.ui.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
-import com.nimtego.plectrum.presentation.mvp.presenters.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.SearchContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
-import jp.wasabeef.picasso.transformations.BlurTransformation
+import kotlinx.android.synthetic.main.search_content_fragment.*
 import javax.inject.Inject
 
 class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListener {
@@ -33,6 +29,7 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     internal lateinit var presenter: SearchContentPresenter
 
     private var searchContentRv: RecyclerView? = null
+    private lateinit var bottomNavigationView: AHBottomNavigation
     private var pb: ProgressBar? = null
 
     @ProvidePresenter
@@ -50,7 +47,50 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         init()
+        initBottomNavigation()
 //        this.presenter.viewReady()
+    }
+
+    private fun initBottomNavigation() {
+        this.bottomNavigationView = inner_bottom_navigation_view
+        AHBottomNavigationAdapter(activity, R.menu.inner_music_navigation).apply {
+            setupWithBottomNavigation(bottomNavigationView)
+
+        }
+        with(bottomNavigationView) {
+            this.accentColor = context.getColor(R.color.color_navigation_item_active)
+            this.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
+
+            this.setOnTabSelectedListener { position, wasSelected ->
+                if (!wasSelected) selectTab(
+                        when (position) {
+                            0 -> 1
+                            1 -> 2
+                            else -> 3
+                        }
+                )
+                true
+            }
+            val leftMargin = resources.getDimension(com.nimtego.plectrum.R.dimen.padding_medium).toInt()
+            this.setNotificationMarginLeft(leftMargin, leftMargin)
+        }
+
+//        selectTab(
+//                when (currentTabFragment?.tag) {
+//                    BottomNavigationFragment.MUSIC_TAB.screenKey -> BottomNavigationFragment.MUSIC_TAB
+//                    BottomNavigationFragment.MOVIE_TAB.screenKey -> BottomNavigationFragment.MOVIE_TAB
+//                    BottomNavigationFragment.BOOK_TAB.screenKey -> BottomNavigationFragment.BOOK_TAB
+//                    //todo remove
+//                    else -> BottomNavigationFragment.MUSIC_TAB
+//                }
+//        )
+
+        this.bottomNavigationView.isBehaviorTranslationEnabled = false
+    }
+
+    private fun selectTab(tab: Int) {
+//        this.presenter.replaceFragment(tab)
+        systemMessage(tab.toString())
     }
 
     override fun showProgress(show: Boolean) {

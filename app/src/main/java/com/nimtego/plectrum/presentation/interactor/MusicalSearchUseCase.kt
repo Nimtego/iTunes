@@ -1,8 +1,10 @@
 package com.nimtego.plectrum.presentation.interactor
 
+import com.nimtego.plectrum.presentation.mvp.model.song.Album
+import com.nimtego.plectrum.presentation.mvp.model.song.Author
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import io.reactivex.Observable
 
-interface SongSearchUseCase {
+interface MusicalSearchUseCase {
     fun searchSong(request: String): Observable<List<Song>>
 }
