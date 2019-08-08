@@ -10,7 +10,6 @@
         android:id="@+id/status_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/android_status_bar_height"
-        android:elevation="4dp"
         android:background="@color/color_background_dark" />
 
     <FrameLayout

@@ -29,7 +29,7 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     internal lateinit var presenter: SearchContentPresenter
 
     private var searchContentRv: RecyclerView? = null
-    private lateinit var bottomNavigationView: AHBottomNavigation
+    //private lateinit var bottomNavigationView: AHBottomNavigation
     private var pb: ProgressBar? = null
 
     @ProvidePresenter
@@ -47,33 +47,33 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         init()
-        initBottomNavigation()
+//        initBottomNavigation()
 //        this.presenter.viewReady()
     }
 
-    private fun initBottomNavigation() {
-        this.bottomNavigationView = inner_bottom_navigation_view
-        AHBottomNavigationAdapter(activity, R.menu.inner_music_navigation).apply {
-            setupWithBottomNavigation(bottomNavigationView)
-
-        }
-        with(bottomNavigationView) {
-            this.accentColor = context.getColor(R.color.color_navigation_item_active)
-            this.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
-
-            this.setOnTabSelectedListener { position, wasSelected ->
-                if (!wasSelected) selectTab(
-                        when (position) {
-                            0 -> 1
-                            1 -> 2
-                            else -> 3
-                        }
-                )
-                true
-            }
-            val leftMargin = resources.getDimension(com.nimtego.plectrum.R.dimen.padding_medium).toInt()
-            this.setNotificationMarginLeft(leftMargin, leftMargin)
-        }
+//    private fun initBottomNavigation() {
+//        this.bottomNavigationView = inner_bottom_navigation_view
+//        AHBottomNavigationAdapter(activity, R.menu.inner_music_navigation).apply {
+//            setupWithBottomNavigation(bottomNavigationView)
+//
+//        }
+//        with(bottomNavigationView) {
+//            this.accentColor = context.getColor(R.color.color_navigation_item_active)
+//            this.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
+//
+//            this.setOnTabSelectedListener { position, wasSelected ->
+//                if (!wasSelected) selectTab(
+//                        when (position) {
+//                            0 -> 1
+//                            1 -> 2
+//                            else -> 3
+//                        }
+//                )
+//                true
+//            }
+//            val leftMargin = resources.getDimension(com.nimtego.plectrum.R.dimen.padding_medium).toInt()
+//            this.setNotificationMarginLeft(leftMargin, leftMargin)
+//        }
 
 //        selectTab(
 //                when (currentTabFragment?.tag) {
@@ -85,8 +85,8 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
 //                }
 //        )
 
-        this.bottomNavigationView.isBehaviorTranslationEnabled = false
-    }
+//        this.bottomNavigationView.isBehaviorTranslationEnabled = false
+//    }
 
     private fun selectTab(tab: Int) {
 //        this.presenter.replaceFragment(tab)
