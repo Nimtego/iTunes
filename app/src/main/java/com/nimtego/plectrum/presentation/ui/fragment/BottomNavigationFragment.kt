@@ -15,6 +15,7 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
+import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
@@ -26,7 +27,6 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
-
 
 
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackButtonListener {
@@ -62,12 +62,12 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         val fm = childFragmentManager
         val fragment: Fragment?
         val fragments = fm.fragments
-        fragment = fragments?.firstOrNull{ it.isVisible }
+        fragment = fragments?.firstOrNull { it.isVisible }
         return if (fragment != null
                 && fragment is BackButtonListener) {
+            closeInnerTopNavigation()
             fragment.onBackPressed()
-        }
-        else {
+        } else {
             presenter.onBackPressed()
         }
     }
@@ -102,7 +102,10 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                 presenter.searchTextSubmit(text)
                 return false
             }
-            override fun onQueryTextChange(s: String): Boolean { return false }
+
+            override fun onQueryTextChange(s: String): Boolean {
+                return false
+            }
         })
     }
 
@@ -194,6 +197,18 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     }
 
+    override fun withInnerTopNavigation(tabs: List<String>) {
+        this.topNavigationView.removeAllTabs()
+        tabs.forEach {
+            this.topNavigationView.addTab(this.topNavigationView.newTab().setText(it))
+        }
+        this.topNavigationView.visibility = TabLayout.VISIBLE
+    }
+
+    override fun closeInnerTopNavigation() {
+        this.topNavigationView.visibility = TabLayout.GONE
+    }
+
 
 //Mark: private
 
@@ -228,13 +243,12 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
         override fun fragmentReplace(command: Replace) {
             when (command.screen) {
-                Screens.MusicTabNavigationScreen-> {
+                Screens.MusicTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
                             ?.show(this.musicNavigationFragment)
                             ?.hide(this.movieNavigationFragment)
                             ?.hide(this.bookNavigationFragment)
                             ?.commit()
-
                 }
                 Screens.MovieTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
@@ -242,7 +256,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                             ?.show(this.movieNavigationFragment)
                             ?.hide(this.bookNavigationFragment)
                             ?.commit()
-
                 }
                 Screens.BookTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()

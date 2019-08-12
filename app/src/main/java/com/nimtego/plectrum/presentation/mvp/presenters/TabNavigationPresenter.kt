@@ -19,12 +19,15 @@ class TabNavigationPresenter @Inject constructor(
 
     private var currentSearchSubscriber: CurrentSearchSubscriber
     private lateinit var navigationQualifier: String
+    private var isSearchState: Boolean = false
 
     init {
         this.currentSearchSubscriber = CurrentSearchSubscriber()
     }
 
     override fun onBackPressed(): Boolean {
+        this.viewState.search(false)
+        this.isSearchState = false
         this.router.exit()
         return true
     }
@@ -33,27 +36,24 @@ class TabNavigationPresenter @Inject constructor(
         super.attachView(view)
         this.userSearchItemStorage.getCurrentSearchTextObservable()
                 .subscribe(CurrentSearchSubscriber())
+        viewIsVisible(true)
     }
 
     override fun detachView(view: TabNavigationView) {
         super.detachView(view)
         this.currentSearchSubscriber.unsubscribe()
+        viewIsVisible(false)
     }
 
     fun viewIsVisible(visible: Boolean) {
-//        if (visible) {
-//            if (this.currentSearchSubscriber.isUnsubscribed) {
-//                this.currentSearchSubscriber = CurrentSearchSubscriber()
-//            }
-//            this.userSearchItemStorage.getCurrentSearchTextObservable()
-//                    .subscribe(this.currentSearchSubscriber)
-//        }
-//        else {
-//            this.currentSearchSubscriber.unsubscribe()
-//        }
+        if (this.isSearchState) {
+            this.viewState.search(visible)
+        }
     }
 
     private fun navigateToSearch() {
+        this.isSearchState = true
+        this.viewState.search(this.isSearchState)
         this.router.navigateTo(Screens.SearchScreen(this.navigationQualifier))
     }
 
