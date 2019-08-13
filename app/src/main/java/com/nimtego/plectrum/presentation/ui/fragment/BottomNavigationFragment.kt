@@ -206,6 +206,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     }
 
     override fun closeInnerTopNavigation() {
+        this.topNavigationView.removeAllTabs()
         this.topNavigationView.visibility = TabLayout.GONE
     }
 

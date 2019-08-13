@@ -51,10 +51,10 @@ class SearchContentPresenter @Inject constructor(
                 this.interactor.searchSong(it)
                         .observeOn(schedulersProvider.ui())
                         .doOnSubscribe {
-                            //this@SearchContentPresenter.viewState.showProgress(true)
+                            this@SearchContentPresenter.viewState.showProgress(true)
                         }
                         .doAfterTerminate {
-                            //this@SearchContentPresenter.viewState.showProgress(false)
+                            this@SearchContentPresenter.viewState.showProgress(false)
                         }
                         .subscribe(currentSearchObserver)
             }
