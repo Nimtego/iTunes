@@ -43,17 +43,22 @@ class SearchContentPresenter @Inject constructor(
     }
 
     private fun requestSearchData() {
-        val currentSearchObserver = CurrentSearchObserver()
-        currentSearchObserver.connect()
-        this.interactor.searchSong(this.itemStorage.getCurrentSearchText())
-                .observeOn(schedulersProvider.ui())
-                .doOnSubscribe {
-                    this@SearchContentPresenter.viewState.showProgress(true)
-                }
-                .doAfterTerminate {
-                    this@SearchContentPresenter.viewState.showProgress(false)
-                }
-                .subscribe(currentSearchObserver)
+        if (this.itemStorage.getCurrentSearchText() != this.currentSearchText) {
+            this.currentSearchText = this.itemStorage.getCurrentSearchText()
+            val currentSearchObserver = CurrentSearchObserver()
+            currentSearchObserver.connect()
+            this.currentSearchText?.let {
+                this.interactor.searchSong(it)
+                        .observeOn(schedulersProvider.ui())
+                        .doOnSubscribe {
+                            //this@SearchContentPresenter.viewState.showProgress(true)
+                        }
+                        .doAfterTerminate {
+                            //this@SearchContentPresenter.viewState.showProgress(false)
+                        }
+                        .subscribe(currentSearchObserver)
+            }
+        }
     }
 
     private fun showModel() {

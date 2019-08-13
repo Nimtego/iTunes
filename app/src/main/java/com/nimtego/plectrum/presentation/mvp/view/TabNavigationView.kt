@@ -7,6 +7,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface TabNavigationView : BaseView {
-    @StateStrategyType(AddToEndSingleStrategy::class)
-    fun search(showTabs: Boolean)
+    @StateStrategyType(SkipStrategy::class)
+    fun showSearchTabs(showTabs: Boolean)
 }

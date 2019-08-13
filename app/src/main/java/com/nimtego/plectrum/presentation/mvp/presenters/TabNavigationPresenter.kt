@@ -1,15 +1,13 @@
 package com.nimtego.plectrum.presentation.mvp.presenters
 
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.navigation.Screens
-import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
 import javax.inject.Inject
-import javax.inject.Qualifier
 
 @InjectViewState
 class TabNavigationPresenter @Inject constructor(
@@ -26,7 +24,7 @@ class TabNavigationPresenter @Inject constructor(
     }
 
     override fun onBackPressed(): Boolean {
-        this.viewState.search(false)
+        this.viewState.showSearchTabs(false)
         this.isSearchState = false
         this.router.exit()
         return true
@@ -46,14 +44,21 @@ class TabNavigationPresenter @Inject constructor(
     }
 
     fun viewIsVisible(visible: Boolean) {
-        if (this.isSearchState) {
-            this.viewState.search(visible)
+        if (visible) {
+            this.userSearchItemStorage.getCurrentSearchTextObservable()
+                    .subscribe(CurrentSearchSubscriber())
+            if (this.isSearchState) {
+                this.viewState.showSearchTabs(visible)
+            }
+        }
+        else  {
+            this.currentSearchSubscriber.unsubscribe()
         }
     }
 
     private fun navigateToSearch() {
         this.isSearchState = true
-        this.viewState.search(this.isSearchState)
+        this.viewState.showSearchTabs(this.isSearchState)
         this.router.navigateTo(Screens.SearchScreen(this.navigationQualifier))
     }
 
