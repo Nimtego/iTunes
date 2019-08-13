@@ -17,4 +17,7 @@
     <string name="text_header_more">More</string>
     <string name="album_name">Album name</string>
     <string name="track_price">Track price</string>
+    <string name="track">Track</string>
+    <string name="navigation_albums">Albums</string>
+    <string name="navigation_author">Author</string>
 </resources>

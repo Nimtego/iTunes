@@ -6,7 +6,7 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
-import com.nimtego.plectrum.presentation.interactor.SongSearchUseCase
+import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
 import com.nimtego.plectrum.presentation.manger.*
 import com.nimtego.plectrum.presentation.mvp.presenters.*
 import dagger.Module
@@ -141,7 +141,7 @@ class PresenterModule {
     fun searchPresenter(
             @Named(NavigationQualifiers.ROUTER_HANDLER)
             router: HashMap<String, Cicerone<Router>>,
-            interactor: SongSearchUseCase,
+            interactor: MusicalSearchUseCase,
             itemStorage: UserSearchItemStorage,
             schedulersProvider: SchedulersProvider
     ): SearchContentPresenter {

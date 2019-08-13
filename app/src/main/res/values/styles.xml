@@ -40,6 +40,11 @@
         <item name="android:drawablePadding">2dp</item>
     </style>
 
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_view_header_color</item>
+    </style>
+
     <style name="MoreTextStyle" parent="HeaderTextStyle">
         <item name="android:textColor">@color/click_text_view_header_color</item>
     </style>

@@ -9,6 +9,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.TabNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import ru.terrakok.cicerone.Navigator
@@ -43,6 +44,17 @@ class MusicTabNavFragment : BaseNavFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         this.navigator?.applyCommands(arrayOf(Replace(Screens.MusicTabScreen)))
+    }
+
+    override fun showSearchTabs(showTabs: Boolean) {
+        if (showTabs) {
+            (parentFragment as MainBottomNavigationView).withInnerTopNavigation(
+                    listOf("Track", "Album", "Author", "Test 1", "Test 2", "Test 3")
+            )
+        }
+        else {
+            (parentFragment as MainBottomNavigationView).closeInnerTopNavigation()
+        }
     }
 
     override fun provideNavigator(): Navigator? {

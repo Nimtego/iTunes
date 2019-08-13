@@ -7,5 +7,6 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface SearchContentView : ProgressView {
+    @StateStrategyType(SkipStrategy::class)
     fun showViewState(data: List<ChildViewModel>)
 }

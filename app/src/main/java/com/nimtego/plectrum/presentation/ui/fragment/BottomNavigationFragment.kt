@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.fragment
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
+import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
@@ -25,7 +27,6 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
-
 
 
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackButtonListener {
@@ -45,6 +46,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     internal lateinit var presenter: BottomNavigationPresenter
 
     private lateinit var bottomNavigationView: AHBottomNavigation
+    private lateinit var topNavigationView: TabLayout
     private lateinit var searchText: SearchView
 
     private val currentTabFragment: BaseFragment?
@@ -60,12 +62,12 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         val fm = childFragmentManager
         val fragment: Fragment?
         val fragments = fm.fragments
-        fragment = fragments?.firstOrNull{ it.isVisible }
+        fragment = fragments?.firstOrNull { it.isVisible }
         return if (fragment != null
                 && fragment is BackButtonListener) {
+            closeInnerTopNavigation()
             fragment.onBackPressed()
-        }
-        else {
+        } else {
             presenter.onBackPressed()
         }
     }
@@ -86,9 +88,11 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             }
         }
         this.bottomNavigationView = bottom_navigation_view
+        this.topNavigationView = top_navigation_view
         this.searchText = search_edit_text
         initSearchView()
         initBottomNavigation()
+        initTopNavigation()
     }
 
     private fun initSearchView() {
@@ -98,7 +102,10 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                 presenter.searchTextSubmit(text)
                 return false
             }
-            override fun onQueryTextChange(s: String): Boolean { return false }
+
+            override fun onQueryTextChange(s: String): Boolean {
+                return false
+            }
         })
     }
 
@@ -149,8 +156,58 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         this.bottomNavigationView.isBehaviorTranslationEnabled = false
     }
 
+    private fun initTopNavigation() {
+//        AHBottomNavigationAdapter(activity, R.menu.inner_music_navigation).apply {
+//            setupWithBottomNavigation(topNavigationView)
+//
+//        }
+//        with(topNavigationView) {
+//            this.accentColor = context.getColor(R.color.color_navigation_item_active)
+//            this.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
+//
+//            this.setOnTabSelectedListener { position, wasSelected ->
+//                if (!wasSelected) selectTab(
+//                        when (position) {
+//                            0 -> MUSIC_TAB
+//                            1 -> MOVIE_TAB
+//                            else -> BOOK_TAB
+//                        }
+//                )
+//                true
+//            }
+//            val leftMargin = resources.getDimension(R.dimen.padding_medium).toInt()
+//            this.setNotificationMarginLeft(leftMargin, leftMargin)
+//        }
+//
+//        selectTab(
+//                when (currentTabFragment?.tag) {
+//                    MUSIC_TAB.screenKey -> MUSIC_TAB
+//                    MOVIE_TAB.screenKey -> MOVIE_TAB
+//                    BOOK_TAB.screenKey -> BOOK_TAB
+//                    //todo remove
+//                    else -> MUSIC_TAB
+//                }
+//        )
+//
+//        this.topNavigationView.isBehaviorTranslationEnabled = false
+//        this.topNavigationView.defaultBackgroundColor = context.getColor(R.color.color_background_dark)
+    }
+
     override fun showProgress(show: Boolean) {
 
+    }
+
+    override fun withInnerTopNavigation(tabs: List<String>) {
+        this.topNavigationView.removeAllTabs()
+        tabs.forEach {
+            this.topNavigationView.addTab(this.topNavigationView.newTab().setText(it))
+        }
+        this.topNavigationView.visibility = TabLayout.VISIBLE
+    }
+
+    override fun closeInnerTopNavigation() {
+        this.topNavigationView.removeAllTabs()
+        this.topNavigationView.visibility = TabLayout.GONE
     }
 
 
@@ -187,13 +244,12 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
         override fun fragmentReplace(command: Replace) {
             when (command.screen) {
-                Screens.MusicTabNavigationScreen-> {
+                Screens.MusicTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
                             ?.show(this.musicNavigationFragment)
                             ?.hide(this.movieNavigationFragment)
                             ?.hide(this.bookNavigationFragment)
                             ?.commit()
-
                 }
                 Screens.MovieTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
@@ -201,7 +257,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                             ?.show(this.movieNavigationFragment)
                             ?.hide(this.bookNavigationFragment)
                             ?.commit()
-
                 }
                 Screens.BookTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()

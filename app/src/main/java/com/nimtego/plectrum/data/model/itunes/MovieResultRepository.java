@@ -5,19 +5,19 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class ArtistsRepository {
+public class MovieResultRepository {
     @SerializedName("resultCount")
     @Expose
     private Integer resultCount;
     @SerializedName("results")
     @Expose
-    private List<ArtistResult> results = null;
+    private List<MovieResult> results = null;
 
     public Integer getResultCount() {
         return resultCount;
     }
 
-    public List<ArtistResult> getResults() {
+    public List<MovieResult> getResults() {
         return results;
     }
 }
