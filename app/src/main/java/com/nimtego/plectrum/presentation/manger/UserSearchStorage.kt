@@ -7,7 +7,8 @@ import javax.inject.Inject
 class UserSearchStorage @Inject constructor() : UserSearchItemStorage {
 
     private var currentSearchText: String = ""
-    private val currentSearchTextObservable: BehaviorSubject<String> = BehaviorSubject.create()
+    private val currentSearchTextBehavior: BehaviorSubject<String> = BehaviorSubject.create()
+    private val currentSearchTextPublish: PublishSubject<String> = PublishSubject.create()
 
     override fun getCurrentSearchText(): String {
         return this.currentSearchText
@@ -16,11 +17,16 @@ class UserSearchStorage @Inject constructor() : UserSearchItemStorage {
     override fun overrideCurrentSearchText(text: String) {
         if (this.currentSearchText != text) {
             this.currentSearchText = text
-            this.currentSearchTextObservable.onNext(this.currentSearchText)
+            this.currentSearchTextBehavior.onNext(this.currentSearchText)
+            this.currentSearchTextPublish.onNext(this.currentSearchText)
         }
     }
 
-    override fun getCurrentSearchTextObservable(): BehaviorSubject<String> {
-        return this.currentSearchTextObservable
+    override fun getCurrentSearchTextBehavior(): BehaviorSubject<String> {
+        return this.currentSearchTextBehavior
+    }
+
+    override fun getCurrentSearchTextPublish(): PublishSubject<String> {
+        return this.currentSearchTextPublish
     }
 }

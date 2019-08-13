@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.presentation.mvp.presenters
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
@@ -15,13 +14,9 @@ class TabNavigationPresenter @Inject constructor(
         private val userSearchItemStorage: UserSearchItemStorage
 ) : BaseNavigationPresenter<TabNavigationView>() {
 
-    private var currentSearchSubscriber: CurrentSearchSubscriber
+    private var currentSearchSubscriber: CurrentSearchSubscriber? = null
     private lateinit var navigationQualifier: String
     private var isSearchState: Boolean = false
-
-    init {
-        this.currentSearchSubscriber = CurrentSearchSubscriber()
-    }
 
     override fun onBackPressed(): Boolean {
         this.viewState.showSearchTabs(false)
@@ -32,27 +27,27 @@ class TabNavigationPresenter @Inject constructor(
 
     override fun attachView(view: TabNavigationView) {
         super.attachView(view)
-        this.userSearchItemStorage.getCurrentSearchTextObservable()
-                .subscribe(CurrentSearchSubscriber())
-        viewIsVisible(true)
+        this.currentSearchSubscriber = CurrentSearchSubscriber()
+        this.userSearchItemStorage.getCurrentSearchTextBehavior()
+                .subscribe(this.currentSearchSubscriber)
     }
 
     override fun detachView(view: TabNavigationView) {
         super.detachView(view)
-        this.currentSearchSubscriber.unsubscribe()
-        viewIsVisible(false)
+        this.currentSearchSubscriber?.unsubscribe()
     }
 
     fun viewIsVisible(visible: Boolean) {
         if (visible) {
-            this.userSearchItemStorage.getCurrentSearchTextObservable()
-                    .subscribe(CurrentSearchSubscriber())
+            this.userSearchItemStorage.getCurrentSearchTextBehavior()
+                    .subscribe(this.currentSearchSubscriber)
             if (this.isSearchState) {
                 this.viewState.showSearchTabs(visible)
             }
         }
         else  {
-            this.currentSearchSubscriber.unsubscribe()
+            this.currentSearchSubscriber?.unsubscribe()
+            this.currentSearchSubscriber = CurrentSearchSubscriber()
         }
     }
 
@@ -64,6 +59,10 @@ class TabNavigationPresenter @Inject constructor(
 
     fun setNavigationQualifiers(tabNavigationQualifier:  String) {
         this.navigationQualifier = tabNavigationQualifier
+    }
+
+    override fun onDestroy() {
+        this.currentSearchSubscriber?.unsubscribe()
     }
 
     private inner class CurrentSearchSubscriber : Subscriber<String>() {
