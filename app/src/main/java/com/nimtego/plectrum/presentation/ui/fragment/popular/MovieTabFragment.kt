@@ -26,11 +26,6 @@ class MovieTabFragment : BaseFragment(), TabContentView, BackButtonListener {
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-    @field:[Inject Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)]
-    internal lateinit var tabMovieRouter: Router
-
-    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
-    internal lateinit var parentRouter: Router
 
     @Inject
     @InjectPresenter

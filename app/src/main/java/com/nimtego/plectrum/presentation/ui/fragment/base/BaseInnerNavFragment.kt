@@ -2,21 +2,17 @@ package com.nimtego.plectrum.presentation.ui.fragment.base
 
 import android.os.Bundle
 import com.nimtego.plectrum.R
-import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
-import javax.inject.Inject
-import javax.inject.Named
 
-abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
+abstract class BaseInnerNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
 
-    final override val layoutRes: Int = R.layout.navigation_container_fragment
+    final override val layoutRes: Int = R.layout.navigation_search_fragment
 
-    val layoutContainer: Int = R.id.navigation_layout_container
+    val layoutContainer: Int = R.id.search_navigation_layout_container
 
     abstract var navigatorHolder: NavigatorHolder
 
@@ -31,7 +27,7 @@ abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonLi
         return if (fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
-            this.presenter.onBackPressed()
+            return this.presenter.onBackPressed()
         }
     }
 

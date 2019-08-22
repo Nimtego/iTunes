@@ -8,5 +8,7 @@ object NavigationQualifiers {
     const val TAB_MOVIE_NAVIGATION = "TabMovieNavigation"
     const val TAB_BOOK_NAVIGATION = "TabBookNavigation"
 
+    const val SEARCH_MUSIC_NAVIGATION = "SearchMusicNavigation"
+
     const val ROUTER_HANDLER = "RouterHandler"
 }

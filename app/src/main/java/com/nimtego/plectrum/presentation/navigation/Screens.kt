@@ -4,10 +4,7 @@ import android.support.v4.app.Fragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.InformationFragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.BookTabNavFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.BottomNavigationFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.MovieTabNavFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.MusicTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.*
 import com.nimtego.plectrum.presentation.ui.fragment.popular.BookTabFragment
 import com.nimtego.plectrum.presentation.ui.fragment.popular.MovieTabFragment
 import com.nimtego.plectrum.presentation.ui.fragment.popular.MusicTabFragment
@@ -91,9 +88,21 @@ object Screens {
         }
     }
 
-    class SearchScreen(private val navigationQualifier: String) : SupportAppScreen() {
+    class SearchContentScreen(private val navigationQualifier: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return SearchContentFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class SearchNavTabScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchContentFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class SearchNavigationScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchNavigationFragment.getInstance(navigationQualifier)
         }
     }
 }

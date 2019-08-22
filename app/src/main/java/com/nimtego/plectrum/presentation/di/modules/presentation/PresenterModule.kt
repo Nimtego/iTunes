@@ -60,6 +60,17 @@ class PresenterModule {
         return TabNavigationPresenter(router, userSearchItemStorage)
     }
 
+
+    @Provides
+    @Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
+    fun musicSearchNavPresenter(
+            @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION) router: Router,
+            userSearchItemStorage: UserSearchItemStorage
+    ): TabNavigationPresenter {
+        return TabNavigationPresenter(router, userSearchItemStorage)
+    }
+
+
     @Provides
     @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
     fun movieTabNavPresenter(
@@ -152,7 +163,7 @@ class PresenterModule {
 
     @Provides
     fun searchPresenter(
-            @Named(NavigationQualifiers.ROUTER_HANDLER)
+            @Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
             router: HashMap<String, Cicerone<Router>>,
             interactor: MusicalSearchUseCase,
             itemStorage: UserSearchItemStorage,

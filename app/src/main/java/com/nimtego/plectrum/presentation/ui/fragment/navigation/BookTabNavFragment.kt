@@ -82,27 +82,27 @@ class BookTabNavFragment : BaseNavFragment() {
                 Screens.BookTabScreen -> screen.fragment
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
-                is Screens.SearchScreen -> screen.fragment
+                is Screens.SearchNavigationScreen -> screen.fragment
                 else -> null
             }
         }
 
-        override fun fragmentForward(command: Forward?) {
-            if (command?.screen is Screens.SearchScreen) {
-                val fm = childFragmentManager
-                val fragment: Fragment?
-                val fragments = fm.fragments
-                fragment = fragments?.firstOrNull { it.isVisible }
-                if (fragment != null
-                        && fragment is SearchContentFragment) {
-                    fragmentReplace(Replace(command.screen))
-                } else {
-                    super.fragmentForward(command)
-                }
-            } else {
-                super.fragmentForward(command)
-            }
-        }
+//        override fun fragmentForward(command: Forward?) {
+//            if (command?.screen is Screens.SearchScreen) {
+//                val fm = childFragmentManager
+//                val fragment: Fragment?
+//                val fragments = fm.fragments
+//                fragment = fragments?.firstOrNull { it.isVisible }
+//                if (fragment != null
+//                        && fragment is SearchContentFragment) {
+//                    fragmentReplace(Replace(command.screen))
+//                } else {
+//                    super.fragmentForward(command)
+//                }
+//            } else {
+//                super.fragmentForward(command)
+//            }
+//        }
     }
 
     companion object {
