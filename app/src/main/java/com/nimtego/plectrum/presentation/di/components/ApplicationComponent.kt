@@ -4,7 +4,18 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.presentation.PresenterModule
 import com.nimtego.plectrum.presentation.di.modules.system.SystemModule
 import com.nimtego.plectrum.presentation.ui.activity.AppActivity
-import com.nimtego.plectrum.presentation.ui.fragment.*
+import com.nimtego.plectrum.presentation.ui.fragment.general.InformationFragment
+import com.nimtego.plectrum.presentation.ui.fragment.general.MoreSectionFragment
+import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
+import com.nimtego.plectrum.presentation.ui.fragment.general.TrackInformationFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.BookTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.BottomNavigationFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.MovieTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.MusicTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.BookTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.MovieTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.MusicTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import dagger.Component
 import javax.inject.Singleton
 

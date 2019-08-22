@@ -1,6 +1,11 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
-import com.nimtego.plectrum.domain.interactor.*
+import com.nimtego.plectrum.domain.interactor.general.InformationInteractor
+import com.nimtego.plectrum.domain.interactor.general.MoreSectionInteractor
+import com.nimtego.plectrum.domain.interactor.general.TrackInformationInteractor
+import com.nimtego.plectrum.domain.interactor.popular.PopularBookInteractor
+import com.nimtego.plectrum.domain.interactor.popular.PopularMovieInteractor
+import com.nimtego.plectrum.domain.interactor.popular.PopularMusicInteractor
 import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
@@ -8,7 +13,16 @@ import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
 import com.nimtego.plectrum.presentation.manger.*
-import com.nimtego.plectrum.presentation.mvp.presenters.*
+import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.general.MoreSectionPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.general.SplashPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.general.TrackInformationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.navigation.BottomNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.popular.BookTabPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.popular.MovieTabPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.popular.MusicTabPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
