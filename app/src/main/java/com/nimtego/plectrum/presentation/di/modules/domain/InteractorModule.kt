@@ -2,6 +2,11 @@ package com.nimtego.plectrum.presentation.di.modules.domain
 
 import com.nimtego.plectrum.data.repository.repository.*
 import com.nimtego.plectrum.domain.interactor.*
+import com.nimtego.plectrum.domain.interactor.general.MoreSectionInteractor
+import com.nimtego.plectrum.domain.interactor.popular.PopularBookInteractor
+import com.nimtego.plectrum.domain.interactor.popular.PopularMovieInteractor
+import com.nimtego.plectrum.domain.interactor.popular.PopularMusicInteractor
+import com.nimtego.plectrum.domain.interactor.search.SearchMusicContentInteractor
 import com.nimtego.plectrum.presentation.di.modules.data.RepositoryModule
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
@@ -67,5 +72,6 @@ class InteractorModule {
             schedulersProvider: SchedulersProvider,
             repository: MusicalRepository
     ): MusicalSearchUseCase {
-        return SearchMusicContentInteractor(schedulersProvider, repository) }
+        return SearchMusicContentInteractor(schedulersProvider, repository)
+    }
 }

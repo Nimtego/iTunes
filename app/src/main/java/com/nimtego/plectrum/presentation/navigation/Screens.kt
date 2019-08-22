@@ -1,9 +1,18 @@
 package com.nimtego.plectrum.presentation.navigation
 
 import android.support.v4.app.Fragment
-import com.nimtego.plectrum.presentation.ui.fragment.*
+import com.nimtego.plectrum.presentation.ui.fragment.general.InformationFragment
+import com.nimtego.plectrum.presentation.ui.fragment.general.MoreSectionFragment
+import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.BookTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.BottomNavigationFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.MovieTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.MusicTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.BookTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.MovieTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.MusicTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import javax.inject.Qualifier
 
 
 object Screens {
