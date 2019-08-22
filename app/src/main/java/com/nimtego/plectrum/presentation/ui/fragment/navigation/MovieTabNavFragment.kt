@@ -17,6 +17,7 @@ import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragmen
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Forward
 import ru.terrakok.cicerone.commands.Replace
@@ -63,17 +64,15 @@ class MovieTabNavFragment : BaseNavFragment() {
         return context?.let {
             MovieTabNavigator(childFragmentManager,
                     it as AppCompatActivity,
-                    this.layoutContainer,
-                    this.bottomBarRouter)
+                    this.layoutContainer)
         }
     }
 
     private inner class MovieTabNavigator(
             fragmentManager: FragmentManager?,
             activity: AppCompatActivity,
-            container: Int,
-            parentRouter: Router
-    ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
+            container: Int
+    ) : SupportAppNavigator(activity, fragmentManager, container) {
 
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {

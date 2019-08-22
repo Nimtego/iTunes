@@ -23,6 +23,7 @@ import kotlinx.android.synthetic.main.bottom_navigation_fragment.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
@@ -32,9 +33,6 @@ import javax.inject.Named
 class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.bottom_navigation_fragment
-
-    @field:[Inject Named(NavigationQualifiers.APP_NAVIGATION)]
-    internal lateinit var appRouter: Router
 
     @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
     internal lateinit var bottomNavigatorHolder: NavigatorHolder
@@ -83,8 +81,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             context?.let {
                 this.navigator = BottomNavigator(childFragmentManager,
                         it as AppCompatActivity,
-                        R.id.bottom_navigation_container,
-                        appRouter)
+                        R.id.bottom_navigation_container)
             }
         }
         this.bottomNavigationView = bottom_navigation_view
@@ -222,9 +219,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     private inner class BottomNavigator(
             private val fragmentManager: FragmentManager?,
             activity: AppCompatActivity,
-            container: Int,
-            parentRouter: Router
-    ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
+            container: Int
+    ) : SupportAppNavigator(activity, fragmentManager, container) {
 
         private val musicNavigationFragment: Fragment = Screens.MusicTabNavigationScreen.fragment
         private val movieNavigationFragment: Fragment = Screens.MovieTabNavigationScreen.fragment

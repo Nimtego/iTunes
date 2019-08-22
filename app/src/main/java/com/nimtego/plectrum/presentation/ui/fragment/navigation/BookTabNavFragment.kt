@@ -17,6 +17,7 @@ import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragmen
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Forward
 import ru.terrakok.cicerone.commands.Replace
@@ -64,8 +65,7 @@ class BookTabNavFragment : BaseNavFragment() {
         return context?.let {
             BookTabNavigator(childFragmentManager,
                     it as AppCompatActivity,
-                    this.layoutContainer,
-                    this.bottomBarRouter)
+                    this.layoutContainer)
         }
     }
 
@@ -74,9 +74,8 @@ class BookTabNavFragment : BaseNavFragment() {
     private inner class BookTabNavigator(
             fragmentManager: FragmentManager?,
             activity: AppCompatActivity,
-            container: Int,
-            parentRouter: Router
-    ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
+            container: Int
+    ) : SupportAppNavigator(activity, fragmentManager, container) {
 
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {

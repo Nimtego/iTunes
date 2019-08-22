@@ -46,10 +46,9 @@ class PresenterModule {
     @Provides
     fun bottomBarPresenter(
             @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router,
-            @Named(NavigationQualifiers.APP_NAVIGATION) appRouter: Router,
             userSearchItemStorage: UserSearchItemStorage
     ): BottomNavigationPresenter {
-        return BottomNavigationPresenter(bottomRouter, appRouter, userSearchItemStorage)
+        return BottomNavigationPresenter(bottomRouter, userSearchItemStorage)
     }
 
     @Provides

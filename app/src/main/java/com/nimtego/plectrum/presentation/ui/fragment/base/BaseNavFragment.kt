@@ -14,12 +14,9 @@ import javax.inject.Named
 
 abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
 
-    final override val layoutRes: Int = R.layout.fragment_tab_container
+    final override val layoutRes: Int = R.layout.navigation_container_fragment
 
-    val layoutContainer: Int = R.id.tab_layout_container
-
-    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
-    internal lateinit var bottomBarRouter: Router
+    val layoutContainer: Int = R.id.navigation_layout_container
 
     abstract var navigatorHolder: NavigatorHolder
 

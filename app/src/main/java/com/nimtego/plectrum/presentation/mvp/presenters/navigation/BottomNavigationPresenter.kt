@@ -11,7 +11,6 @@ import javax.inject.Inject
 @InjectViewState
 class BottomNavigationPresenter @Inject constructor(
         private val bottomNavigationRouter: Router,
-        private val appRouter: Router,
         private val userSearchItemStorage: UserSearchItemStorage
 ) : BaseNavigationPresenter<MainBottomNavigationView>() {
 
