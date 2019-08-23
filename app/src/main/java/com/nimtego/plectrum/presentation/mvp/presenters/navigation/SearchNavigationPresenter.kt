@@ -36,7 +36,7 @@ class SearchNavigationPresenter @Inject constructor(
     override fun onBackPressed(): Boolean {
 //        this.isSearchState = false
 //        this.viewState.showSearchTabs(this.isSearchState)
-        this.searchRouter?.exit()
+        this.parentRouter?.exit()
         return true
     }
 

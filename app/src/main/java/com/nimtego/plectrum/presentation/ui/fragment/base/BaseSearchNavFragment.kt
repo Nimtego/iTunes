@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Navigator
@@ -23,7 +24,6 @@ abstract class BaseSearchNavFragment : BaseFragment(), TabNavigationView, BackBu
     override fun onBackPressed(): Boolean {
         val fragment =
                 this.childFragmentManager.findFragmentById(layoutContainer)
-
         return if (fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
