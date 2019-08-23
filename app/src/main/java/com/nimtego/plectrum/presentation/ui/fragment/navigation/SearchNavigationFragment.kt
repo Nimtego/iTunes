@@ -8,10 +8,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.ui.fragment.base.BaseInnerNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
+import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -22,18 +23,25 @@ import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
 
-class SearchNavigationFragment : BaseInnerNavFragment() {
+class SearchNavigationFragment : BaseSearchNavFragment() {
 
-    @field:[Inject Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)]
-    override lateinit var navigatorHolder: NavigatorHolder
+    @field:[Inject Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)]
+    internal lateinit var searchRouterHandler: HashMap<String, Cicerone<Router>>
 
-    @field:[Inject Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)]
+    @field:[Inject Named(NavigationQualifiers.SEARCH_NAVIGATION)]
     @InjectPresenter
-    override lateinit var presenter: TabNavigationPresenter
+    override lateinit var presenter: SearchNavigationPresenter
+
+    override val navigatorHolder: NavigatorHolder by lazy {
+        this.searchRouterHandler[navigationQualifier]?.navigatorHolder as NavigatorHolder
+    }
+
+    private val navigationQualifier: String
+        get() = requireNotNull(this.arguments?.getString(NAVIGATION_QUALIFIERS))
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): TabNavigationPresenter {
-        this.presenter.setNavigationQualifiers(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
+    fun provideRepositoryPresenter(): SearchNavigationPresenter {
+        this.presenter.setNavigationQualifiers(navigationQualifier)
         return presenter
     }
 
@@ -47,7 +55,7 @@ class SearchNavigationFragment : BaseInnerNavFragment() {
         this.navigator?.applyCommands(
                 arrayOf(
                         Replace(Screens.SearchContentScreen(
-                                NavigationQualifiers.SEARCH_MUSIC_NAVIGATION))))
+                                this.navigationQualifier))))
     }
 
     override fun showSearchTabs(showTabs: Boolean) {
@@ -64,7 +72,7 @@ class SearchNavigationFragment : BaseInnerNavFragment() {
 
     override fun provideNavigator(): Navigator? {
         return context?.let {
-            MusicTabNavigator(childFragmentManager,
+            SearchNavigator(childFragmentManager,
                     it as AppCompatActivity,
                     this.layoutContainer)
         }
@@ -72,7 +80,7 @@ class SearchNavigationFragment : BaseInnerNavFragment() {
 
 // MARK: - Inner Types
 
-    private inner class MusicTabNavigator(
+    private inner class SearchNavigator(
             fragmentManager: FragmentManager?,
             activity: AppCompatActivity,
             container: Int
@@ -82,7 +90,7 @@ class SearchNavigationFragment : BaseInnerNavFragment() {
             return when (screen) {
 //                Screens.MusicTabScreen -> screen.fragment
 //                is Screens.MoreContentScreen -> screen.fragment
-//                is Screens.ItemInformationScreen -> screen.fragment
+                is Screens.ItemInformationScreen -> screen.fragment
                 is Screens.SearchContentScreen -> screen.fragment
                 else -> null
             }
@@ -111,12 +119,12 @@ class SearchNavigationFragment : BaseInnerNavFragment() {
             val fragment = SearchNavigationFragment()
 
             val arguments = Bundle()
-            arguments.putString(TAB_NAME, navigationQualifier)
+            arguments.putString(NAVIGATION_QUALIFIERS, navigationQualifier)
             fragment.arguments = arguments
 
             return fragment
         }
 
-        const val TAB_NAME = "TabName"
+        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
     }
 }

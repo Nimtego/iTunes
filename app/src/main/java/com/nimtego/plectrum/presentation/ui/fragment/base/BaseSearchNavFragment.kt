@@ -2,23 +2,23 @@ package com.nimtego.plectrum.presentation.ui.fragment.base
 
 import android.os.Bundle
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 
-abstract class BaseInnerNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
+abstract class BaseSearchNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
 
     final override val layoutRes: Int = R.layout.navigation_search_fragment
-
     val layoutContainer: Int = R.id.search_navigation_layout_container
 
-    abstract var navigatorHolder: NavigatorHolder
+    abstract val navigatorHolder: NavigatorHolder
+
+    abstract var presenter: SearchNavigationPresenter
 
     protected var navigator: Navigator? = null
-
-    abstract var presenter: TabNavigationPresenter
 
     override fun onBackPressed(): Boolean {
         val fragment =
@@ -27,7 +27,7 @@ abstract class BaseInnerNavFragment : BaseFragment(), TabNavigationView, BackBut
         return if (fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
-            return this.presenter.onBackPressed()
+            this.presenter.onBackPressed()
         }
     }
 
@@ -57,8 +57,8 @@ abstract class BaseInnerNavFragment : BaseFragment(), TabNavigationView, BackBut
         this.presenter.viewIsVisible(!hidden)
     }
 
-//    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-//        super.setUserVisibleHint(isVisibleToUser)
-//        this.presenter.viewIsVisible(isVisibleToUser)
-//    }
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        this.presenter.viewIsVisible(isVisibleToUser)
+    }
 }

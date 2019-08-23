@@ -22,30 +22,6 @@ class InformationPresenter
     private var router: Router? = null
     private var dataSongsModel: SongDetailsModel? = null
 
-    fun viewReady() {
-//        this.itemStorage.getCurrentChildItem()?.let {
-//            viewState.showViewState(it)
-//        } ?: run{ viewState.systemMessage("NULL")}
-//        this.itemStorage.getCurrentChildItem()?.let {
-//            this.viewState.systemMessage(it.id())
-//            interactor.execute(object : DisposableObserver<SongDetailsModel>() {
-//                override fun onComplete() {
-//                    Log.i("Presenter", "onComplete()")
-//                }
-//
-//                override fun onNext(songs: SongDetailsModel) {
-//                    Log.i("Presenter", "onnext")
-//                    this@InformationPresenter.dataSongsModel = songs
-//                    this@InformationPresenter.showModel(songs)
-//                }
-//
-//                override fun onError(e: Throwable) {
-//                    Log.i("Presenter", "onerror $e")
-//                }
-//            }, InformationInteractor.Params.forRequest(it.id()))
-//        }
-    }
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         this.itemStorage.getCurrentChildItem()?.let {

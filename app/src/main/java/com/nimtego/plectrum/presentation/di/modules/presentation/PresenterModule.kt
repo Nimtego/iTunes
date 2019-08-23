@@ -18,6 +18,7 @@ import com.nimtego.plectrum.presentation.mvp.presenters.general.MoreSectionPrese
 import com.nimtego.plectrum.presentation.mvp.presenters.general.SplashPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.TrackInformationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.BottomNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.BookTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.MovieTabPresenter
@@ -93,62 +94,56 @@ class PresenterModule {
     fun musicTabPresenter(
             @Named(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
             router: Router,
-            @Named(NavigationQualifiers.APP_NAVIGATION)
-            appRouter: Router,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             itemStorage: MainChoiceItemStorage,
             interactor: PopularMusicInteractor
     ): MusicTabPresenter {
-        return MusicTabPresenter(router, appRouter, itemStorage, interactor)
+        return MusicTabPresenter(router, itemStorage, interactor)
     }
 
     @Provides
     fun movieTabPresenter(
             @Named(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
             router: Router,
-            @Named(NavigationQualifiers.APP_NAVIGATION)
-            appRouter: Router,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             itemStorage: MainChoiceItemStorage,
             interactor: PopularMovieInteractor
     ): MovieTabPresenter {
-        return MovieTabPresenter(router, appRouter, itemStorage, interactor)
+        return MovieTabPresenter(router, itemStorage, interactor)
     }
 
     @Provides
     fun bookTabPresenter(
             @Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)
             router: Router,
-            @Named(NavigationQualifiers.APP_NAVIGATION)
-            appRouter: Router,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
-            itemStorage: MainChoiceItemStorage,
+            userChoiceItemStorage: MainChoiceItemStorage,
             interactor: PopularBookInteractor
     ): BookTabPresenter {
-        return BookTabPresenter(router, appRouter, itemStorage, interactor)
+        return BookTabPresenter(router, userChoiceItemStorage, interactor)
     }
 
     @Provides
     fun sectionMorePresenter(
-            @Named(NavigationQualifiers.ROUTER_HANDLER)
+            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
             router: HashMap<String, Cicerone<Router>>,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
-            itemStorage: MainChoiceItemStorage,
+            userChoiceItemStorage: MainChoiceItemStorage,
             interactor: MoreSectionInteractor
     ): MoreSectionPresenter {
-        return MoreSectionPresenter(router, interactor, itemStorage)
+        return MoreSectionPresenter(router, interactor, userChoiceItemStorage)
     }
 
     //todo
     @Provides
     fun informationPresenter(
-            @Named(NavigationQualifiers.ROUTER_HANDLER)
+            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
             router: HashMap<String, Cicerone<Router>>,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
-            itemStorage: MainChoiceItemStorage,
+            userChoiceItemStorage: MainChoiceItemStorage,
             interactor: InformationInteractor
     ): InformationPresenter {
-        return InformationPresenter(router, interactor, itemStorage)
+        return InformationPresenter(router, interactor, userChoiceItemStorage)
     }
 
     @Provides
@@ -162,13 +157,33 @@ class PresenterModule {
     }
 
     @Provides
+    @Named(NavigationQualifiers.SEARCH_NAVIGATION)
+    fun searchNavigationPresenter(
+            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+            parentRouterHandler: HashMap<String, Cicerone<Router>>,
+            @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
+            searchRouterHandler: HashMap<String, Cicerone<Router>>,
+            itemStorage: UserSearchItemStorage
+    ): SearchNavigationPresenter {
+        return SearchNavigationPresenter(parentRouterHandler,
+                                         searchRouterHandler,
+                                         itemStorage)
+    }
+
+    @Provides
     fun searchPresenter(
-            @Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
-            router: HashMap<String, Cicerone<Router>>,
+            @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
+            routerHandler: HashMap<String, Cicerone<Router>>,
             interactor: MusicalSearchUseCase,
-            itemStorage: UserSearchItemStorage,
+            searchItemStorage: UserSearchItemStorage,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            userChoiceItemStorage: MainChoiceItemStorage,
             schedulersProvider: SchedulersProvider
     ): SearchContentPresenter {
-        return SearchContentPresenter(router, interactor, itemStorage, schedulersProvider)
+        return SearchContentPresenter(routerHandler = routerHandler,
+                                      interactor = interactor,
+                                      searchItemStorage = searchItemStorage,
+                                      userChoiceItemStorage = userChoiceItemStorage,
+                                      schedulersProvider = schedulersProvider)
     }
 }

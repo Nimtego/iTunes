@@ -25,10 +25,10 @@ abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonLi
     abstract var presenter: TabNavigationPresenter
 
     override fun onBackPressed(): Boolean {
-        val fragment =
-                this.childFragmentManager.findFragmentById(layoutContainer)
-
-        return if (fragment is BackButtonListener) {
+//        val fragment =
+//                this.childFragmentManager.findFragmentById(layoutContainer)
+        val fragment = this.childFragmentManager?.fragments?.firstOrNull { it.isVisible }
+        return if (fragment != null && fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
             this.presenter.onBackPressed()

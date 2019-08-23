@@ -11,19 +11,20 @@ import javax.inject.Singleton
 @Module
 class StorageModule {
 
-    private val itemStorage: MainChoiceItemStorage = MainChoiceItemStorage()
+    private val userChoiceItemStorage: MainChoiceItemStorage = MainChoiceItemStorage()
+    private val userSearchItemStorage: UserSearchStorage = UserSearchStorage()
 
 
     @Provides
     @Singleton
     @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
     internal fun provideStorageManager(): MainChoiceItemStorage {
-        return itemStorage
+        return userChoiceItemStorage
     }
 
     @Provides
     @Singleton
     internal fun provideUserSearchItemStorage(): UserSearchItemStorage {
-        return UserSearchStorage()
+        return userSearchItemStorage
     }
 }
