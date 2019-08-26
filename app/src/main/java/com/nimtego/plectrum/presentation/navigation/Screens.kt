@@ -96,7 +96,7 @@ object Screens {
 
     class SearchNavTabScreen(private val navigationQualifier: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
-            return SearchContentFragment.getInstance(navigationQualifier)
+            return SearchTabNavFragment.getInstance(navigationQualifier)
         }
     }
 

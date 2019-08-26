@@ -1,13 +1,14 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
 import android.content.Context
+import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import com.nimtego.plectrum.presentation.manger.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [ContextModule::class])
 class StorageModule {
 
     private val userChoiceItemStorage: MainChoiceItemStorage = MainChoiceItemStorage()
@@ -29,7 +30,7 @@ class StorageModule {
 
     @Provides
     @Singleton
-    internal fun provideUserSearchItemStorage(context: Context): ResourceManager {
+    internal fun provideResourceManager(context: Context): ResourceManager {
         return AppResourceManager(context)
     }
 }

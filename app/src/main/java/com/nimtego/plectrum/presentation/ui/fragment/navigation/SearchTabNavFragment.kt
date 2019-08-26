@@ -102,11 +102,11 @@ class SearchTabNavFragment : BaseNavFragment() {
     }
 
     companion object {
-        fun getInstance(): MusicTabNavFragment {
+        fun getInstance(navigationQualifier: String): MusicTabNavFragment {
             val fragment = MusicTabNavFragment()
             val arguments = Bundle()
 
-            arguments.putString(TAB_NAME, "Music_nav_fragment")
+            arguments.putString(TAB_NAME, navigationQualifier)
             fragment.arguments = arguments
 
             return fragment
