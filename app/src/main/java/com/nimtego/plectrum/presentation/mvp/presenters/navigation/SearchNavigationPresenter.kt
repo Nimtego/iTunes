@@ -67,7 +67,7 @@ class SearchNavigationPresenter @Inject constructor(
     private fun navigateToSearch() {
         this.isSearchState = true
         this.viewState.showSearchTabs(this.isSearchState)
-        this.searchRouter?.navigateTo(Screens.SearchContentScreen(this.navigationQualifier))
+        //this.searchRouter?.navigateTo(Screens.SearchContentScreen(this.navigationQualifier))
     }
 
     fun setNavigationQualifiers(tabNavigationQualifier:  String) {

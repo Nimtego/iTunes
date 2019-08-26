@@ -84,22 +84,22 @@ class MovieTabNavFragment : BaseNavFragment() {
             }
         }
 
-//        override fun fragmentForward(command: Forward?) {
-//            if (command?.screen is Screens.SearchScreen) {
-//                val fm = childFragmentManager
-//                val fragment: Fragment?
-//                val fragments = fm.fragments
-//                fragment = fragments?.firstOrNull { it.isVisible }
-//                if (fragment != null
-//                        && fragment is SearchContentFragment) {
-//                    fragmentReplace(Replace(command.screen))
-//                } else {
-//                    super.fragmentForward(command)
-//                }
-//            } else {
-//                super.fragmentForward(command)
-//            }
-//        }
+        override fun fragmentForward(command: Forward?) {
+            if (command?.screen is Screens.SearchNavigationScreen) {
+                val fm = childFragmentManager
+                val fragment: Fragment?
+                val fragments = fm.fragments
+                fragment = fragments?.firstOrNull { it.isVisible }
+                if (fragment != null
+                        && fragment is SearchNavigationFragment) {
+                    fragmentReplace(Replace(command.screen))
+                } else {
+                    super.fragmentForward(command)
+                }
+            } else {
+                super.fragmentForward(command)
+            }
+        }
     }
 
     companion object {
