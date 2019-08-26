@@ -1,8 +1,7 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
-import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
-import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
-import com.nimtego.plectrum.presentation.manger.UserSearchStorage
+import android.content.Context
+import com.nimtego.plectrum.presentation.manger.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -26,5 +25,11 @@ class StorageModule {
     @Singleton
     internal fun provideUserSearchItemStorage(): UserSearchItemStorage {
         return userSearchItemStorage
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideUserSearchItemStorage(context: Context): ResourceManager {
+        return AppResourceManager(context)
     }
 }
