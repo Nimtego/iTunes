@@ -9,7 +9,9 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
+import com.nimtego.plectrum.presentation.navigation.ScreenTabContainer
 import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import ru.terrakok.cicerone.Cicerone
@@ -27,6 +29,9 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
 
     @field:[Inject Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)]
     internal lateinit var searchRouterHandler: HashMap<String, Cicerone<Router>>
+
+    @Inject
+    internal lateinit var searchTabScreenFabric: SearchTabScreenFabric
 
     @field:[Inject Named(NavigationQualifiers.SEARCH_NAVIGATION)]
     @InjectPresenter
@@ -74,7 +79,8 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
         return context?.let {
             SearchNavigator(childFragmentManager,
                     it as AppCompatActivity,
-                    this.layoutContainer)
+                    this.layoutContainer,
+                    this.searchTabScreenFabric.getScreensContainer(this.navigationQualifier))
         }
     }
 
@@ -83,16 +89,18 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
     private inner class SearchNavigator(
             fragmentManager: FragmentManager?,
             activity: AppCompatActivity,
-            container: Int
+            container: Int,
+            private val screenTabContainer: ScreenTabContainer<SupportAppScreen>
     ) : SupportAppNavigator(activity, fragmentManager, container) {
 
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
 //                Screens.MusicTabScreen -> screen.fragment
 //                is Screens.MoreContentScreen -> screen.fragment
-                is Screens.ItemInformationScreen -> screen.fragment
-                is Screens.SearchContentScreen -> screen.fragment
-                else -> null
+//                is Screens.ItemInformationScreen -> screen.fragment
+//                is Screens.SearchContentScreen -> screen.fragment
+                is Screens.SearchNavTabScreen -> screen.fragment
+                else -> throw Exception("${screen.screenKey} not permissible")
             }
         }
 
