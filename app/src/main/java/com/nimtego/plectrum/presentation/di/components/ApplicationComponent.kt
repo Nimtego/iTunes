@@ -46,8 +46,9 @@ interface ApplicationComponent {
 
     fun inject(fragment: TrackInformationFragment)
 
-    fun inject(fragment: SearchContentFragment)
-
     fun inject(fragment: SearchNavigationFragment)
 
+    fun inject(fragment: SearchTabNavFragment)
+
+    fun inject(fragment: SearchContentFragment)
 }
