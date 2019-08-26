@@ -78,49 +78,75 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
     override fun provideNavigator(): Navigator? {
         return context?.let {
             SearchNavigator(childFragmentManager,
+                    this.searchTabScreenFabric.getScreensContainer(this.navigationQualifier),
                     it as AppCompatActivity,
-                    this.layoutContainer,
-                    this.searchTabScreenFabric.getScreensContainer(this.navigationQualifier))
+                    this.layoutContainer)
         }
     }
 
 // MARK: - Inner Types
 
     private inner class SearchNavigator(
-            fragmentManager: FragmentManager?,
+            private val fragmentManager: FragmentManager?,
+            private val screenTabContainer: ScreenTabContainer<SupportAppScreen>,
             activity: AppCompatActivity,
-            container: Int,
-            private val screenTabContainer: ScreenTabContainer<SupportAppScreen>
+            container: Int
     ) : SupportAppNavigator(activity, fragmentManager, container) {
 
-        override fun createFragment(screen: SupportAppScreen): Fragment? {
-            return when (screen) {
-//                Screens.MusicTabScreen -> screen.fragment
-//                is Screens.MoreContentScreen -> screen.fragment
-//                is Screens.ItemInformationScreen -> screen.fragment
-//                is Screens.SearchContentScreen -> screen.fragment
-                is Screens.SearchNavTabScreen -> screen.fragment
-                else -> throw Exception("${screen.screenKey} not permissible")
+        init {
+            this.fragmentManager?.beginTransaction()?.apply {
+                screenTabContainer.getScreens().forEach {
+                    add(container, it.fragment)
+                    hide(it.fragment)
+                }
+                commitNow()
             }
         }
 
-        override fun fragmentForward(command: Forward?) {
-            if (command?.screen is Screens.SearchContentScreen) {
-                val fm = childFragmentManager
-                val fragment: Fragment?
-                val fragments = fm.fragments
-                fragment = fragments?.firstOrNull { it.isVisible }
-                if (fragment != null
-                        && fragment is SearchContentFragment) {
-                    fragmentReplace(Replace(command.screen))
-                } else {
-                    super.fragmentForward(command)
+        override fun fragmentReplace(command: Replace) {
+            this.fragmentManager?.beginTransaction()?.apply {
+                screenTabContainer.getScreens().forEach {
+                    if (it == command.screen) {
+                        show(it.fragment)
+                    }
+                    else {
+                        hide(it.fragment)
+                    }
                 }
-            } else {
-                super.fragmentForward(command)
+                commitNow()
             }
         }
+
     }
+//
+//        override fun createFragment(screen: SupportAppScreen): Fragment? {
+//            return when (screen) {
+////                Screens.MusicTabScreen -> screen.fragment
+////                is Screens.MoreContentScreen -> screen.fragment
+////                is Screens.ItemInformationScreen -> screen.fragment
+////                is Screens.SearchContentScreen -> screen.fragment
+//                is Screens.SearchNavTabScreen -> screen.fragment
+//                else -> throw Exception("${screen.screenKey} not permissible")
+//            }
+//        }
+//
+//        override fun fragmentForward(command: Forward?) {
+//            if (command?.screen is Screens.SearchContentScreen) {
+//                val fm = childFragmentManager
+//                val fragment: Fragment?
+//                val fragments = fm.fragments
+//                fragment = fragments?.firstOrNull { it.isVisible }
+//                if (fragment != null
+//                        && fragment is SearchContentFragment) {
+//                    fragmentReplace(Replace(command.screen))
+//                } else {
+//                    super.fragmentForward(command)
+//                }
+//            } else {
+//                super.fragmentForward(command)
+//            }
+//        }
+//    }
 
     companion object {
         fun getInstance(navigationQualifier: String): SearchNavigationFragment {
