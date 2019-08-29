@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -56,6 +57,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     private lateinit var searchText: SearchView
     private lateinit var searchTabListener: (Tab) -> Unit
     private var tabContainer: TabContainer? = null
+    private lateinit var appBar: AppBarLayout
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
@@ -98,6 +100,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         this.bottomNavigationView = bottom_navigation_view
         this.topNavigationView = top_navigation_view
         this.searchText = search_edit_text
+        this.appBar = app_bar
         initSearchView()
         initBottomNavigation()
     }
@@ -124,6 +127,10 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     override fun onPause() {
         this.bottomNavigatorHolder.removeNavigator()
         super.onPause()
+    }
+
+    private fun expandSearchLayer() {
+        this.appBar.setExpanded(true)
     }
 
     private fun initBottomNavigation() {
@@ -197,6 +204,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                 }
             })
             visibility = TabLayout.VISIBLE
+            expandSearchLayer()
             this@BottomNavigationFragment.tabContainer?.getCurrentTab()?.let {
                 getTabAt(it.getTabNumber())?.select()
 
@@ -207,6 +215,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     private fun closeInnerTopNavigation() {
         this.topNavigationView.removeAllTabs()
         this.topNavigationView.visibility = TabLayout.GONE
+        expandSearchLayer()
     }
 
 
@@ -214,6 +223,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     private fun selectTab(tab: SupportAppScreen) {
         this.presenter.replaceFragment(tab)
+        expandSearchLayer()
     }
 
 // MARK: - Inner Types
