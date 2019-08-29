@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -46,6 +47,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     private lateinit var bottomNavigationView: AHBottomNavigation
     private lateinit var topNavigationView: TabLayout
     private lateinit var searchText: SearchView
+    private lateinit var appBar: AppBarLayout
 
     private val currentTabFragment: BaseFragment?
         get() = childFragmentManager.fragments.firstOrNull { !it.isHidden } as? BaseFragment
@@ -87,9 +89,9 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         this.bottomNavigationView = bottom_navigation_view
         this.topNavigationView = top_navigation_view
         this.searchText = search_edit_text
+        this.appBar = app_bar
         initSearchView()
         initBottomNavigation()
-        initTopNavigation()
     }
 
     private fun initSearchView() {
@@ -114,6 +116,10 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     override fun onPause() {
         this.bottomNavigatorHolder.removeNavigator()
         super.onPause()
+    }
+
+    private fun expandSearchLayer() {
+        this.appBar.setExpanded(true)
     }
 
     private fun initBottomNavigation() {
@@ -153,43 +159,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         this.bottomNavigationView.isBehaviorTranslationEnabled = false
     }
 
-    private fun initTopNavigation() {
-//        AHBottomNavigationAdapter(activity, R.menu.inner_music_navigation).apply {
-//            setupWithBottomNavigation(topNavigationView)
-//
-//        }
-//        with(topNavigationView) {
-//            this.accentColor = context.getColor(R.color.color_navigation_item_active)
-//            this.inactiveColor = context.getColor(R.color.color_navigation_item_inactive)
-//
-//            this.setOnTabSelectedListener { position, wasSelected ->
-//                if (!wasSelected) selectTab(
-//                        when (position) {
-//                            0 -> MUSIC_TAB
-//                            1 -> MOVIE_TAB
-//                            else -> BOOK_TAB
-//                        }
-//                )
-//                true
-//            }
-//            val leftMargin = resources.getDimension(R.dimen.padding_medium).toInt()
-//            this.setNotificationMarginLeft(leftMargin, leftMargin)
-//        }
-//
-//        selectTab(
-//                when (currentTabFragment?.tag) {
-//                    MUSIC_TAB.screenKey -> MUSIC_TAB
-//                    MOVIE_TAB.screenKey -> MOVIE_TAB
-//                    BOOK_TAB.screenKey -> BOOK_TAB
-//                    //todo remove
-//                    else -> MUSIC_TAB
-//                }
-//        )
-//
-//        this.topNavigationView.isBehaviorTranslationEnabled = false
-//        this.topNavigationView.defaultBackgroundColor = context.getColor(R.color.color_background_dark)
-    }
-
     override fun showProgress(show: Boolean) {
 
     }
@@ -200,11 +169,13 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             this.topNavigationView.addTab(this.topNavigationView.newTab().setText(it))
         }
         this.topNavigationView.visibility = TabLayout.VISIBLE
+        expandSearchLayer()
     }
 
     override fun closeInnerTopNavigation() {
         this.topNavigationView.removeAllTabs()
         this.topNavigationView.visibility = TabLayout.GONE
+        expandSearchLayer()
     }
 
 
@@ -212,6 +183,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     private fun selectTab(tab: SupportAppScreen) {
         this.presenter.replaceFragment(tab)
+        expandSearchLayer()
     }
 
     // MARK: - Inner Types
