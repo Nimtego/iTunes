@@ -8,10 +8,12 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
+import com.nimtego.plectrum.presentation.manger.TabsProvider
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.navigation.ScreenTabContainer
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
+import com.nimtego.plectrum.presentation.ui.auxiliary.SearchTabContainer
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import ru.terrakok.cicerone.Cicerone
@@ -59,20 +61,8 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
         super.onActivityCreated(savedInstanceState)
         this.navigator?.applyCommands(
                 arrayOf(
-                        Replace(Screens.SearchContentScreen(
+                        Replace(Screens.SearchNavTabScreen(
                                 this.navigationQualifier))))
-    }
-
-    override fun showSearchTabs(showTabs: Boolean) {
-        //todo !!!!!!
-//        if (showTabs) {
-//            (parentFragment as MainBottomNavigationView).withInnerTopNavigation(
-//                    listOf("Track", "Album", "Author", "Test 1", "Test 2", "Test 3")
-//            )
-//        }
-//        else {
-//            (parentFragment as MainBottomNavigationView).closeInnerTopNavigation()
-//        }
     }
 
     override fun provideNavigator(): Navigator? {
@@ -118,35 +108,6 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
         }
 
     }
-//
-//        override fun createFragment(screen: SupportAppScreen): Fragment? {
-//            return when (screen) {
-////                Screens.MusicTabScreen -> screen.fragment
-////                is Screens.MoreContentScreen -> screen.fragment
-////                is Screens.ItemInformationScreen -> screen.fragment
-////                is Screens.SearchContentScreen -> screen.fragment
-//                is Screens.SearchNavTabScreen -> screen.fragment
-//                else -> throw Exception("${screen.screenKey} not permissible")
-//            }
-//        }
-//
-//        override fun fragmentForward(command: Forward?) {
-//            if (command?.screen is Screens.SearchContentScreen) {
-//                val fm = childFragmentManager
-//                val fragment: Fragment?
-//                val fragments = fm.fragments
-//                fragment = fragments?.firstOrNull { it.isVisible }
-//                if (fragment != null
-//                        && fragment is SearchContentFragment) {
-//                    fragmentReplace(Replace(command.screen))
-//                } else {
-//                    super.fragmentForward(command)
-//                }
-//            } else {
-//                super.fragmentForward(command)
-//            }
-//        }
-//    }
 
     companion object {
         fun getInstance(navigationQualifier: String): SearchNavigationFragment {

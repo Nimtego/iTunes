@@ -33,4 +33,10 @@ class StorageModule {
     internal fun provideResourceManager(context: Context): ResourceManager {
         return AppResourceManager(context)
     }
+
+    @Provides
+    @Singleton
+    internal fun provideTabProvider(): TabsProvider {
+        return SearchTabsProvider()
+    }
 }

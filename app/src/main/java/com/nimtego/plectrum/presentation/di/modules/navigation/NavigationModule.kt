@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.presentation.di.modules.navigation
 
+import com.nimtego.plectrum.presentation.navigation.LocalHolder
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -36,6 +37,13 @@ class NavigationModule {
                     NavigationQualifiers.TAB_MUSIC_NAVIGATION to searchMusicNavigationCicerone,
                     NavigationQualifiers.TAB_MOVIE_NAVIGATION to searchMovieNavigationCicerone,
                     NavigationQualifiers.TAB_BOOK_NAVIGATION to searchBookNavigationCicerone)
+
+    @Provides
+    @Singleton
+    internal fun provideLocalHolder(): LocalHolder {
+        return LocalHolder()
+    }
+
 
     @Provides
     @Singleton

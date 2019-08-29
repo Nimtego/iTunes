@@ -39,17 +39,6 @@ class MovieTabNavFragment : BaseNavFragment() {
         return presenter
     }
 
-    override fun showSearchTabs(showTabs: Boolean) {
-        if (showTabs) {
-            (parentFragment as MainBottomNavigationView).withInnerTopNavigation(
-                    listOf("Movie", "Actor", "Serials", "Director", "Test 1", "Test 2", "Test 3")
-            )
-        }
-        else {
-            (parentFragment as MainBottomNavigationView).closeInnerTopNavigation()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)

@@ -5,12 +5,17 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
+import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.utils.HideChangeListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 
-abstract class BaseSearchNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
+abstract class BaseSearchNavFragment : BaseFragment(),
+                                       SearchNavigationView,
+                                       BackButtonListener,
+                                       HideChangeListener {
 
     final override val layoutRes: Int = R.layout.navigation_search_fragment
     val layoutContainer: Int = R.id.search_navigation_layout_container
@@ -43,22 +48,15 @@ abstract class BaseSearchNavFragment : BaseFragment(), TabNavigationView, BackBu
     override fun onResume() {
         super.onResume()
         this.navigatorHolder.setNavigator(this.navigator)
-        this.presenter.viewIsVisible(true)
     }
 
     override fun onPause() {
         this.navigatorHolder.removeNavigator()
-        this.presenter.viewIsVisible(false)
         super.onPause()
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        this.presenter.viewIsVisible(!hidden)
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        this.presenter.viewIsVisible(isVisibleToUser)
+    override fun isShow(show: Boolean) {
+        if (show) {systemMessage("Show - $show")}
+        this.presenter.viewIsVisible(show)
     }
 }

@@ -19,11 +19,14 @@ import com.nimtego.plectrum.presentation.mvp.presenters.general.SplashPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.TrackInformationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchTabNavPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.BookTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.MovieTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.MusicTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
+import com.nimtego.plectrum.presentation.navigation.LocalHolder
+import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -47,9 +50,10 @@ class PresenterModule {
     @Provides
     fun bottomBarPresenter(
             @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router,
-            userSearchItemStorage: UserSearchItemStorage
+            userSearchItemStorage: UserSearchItemStorage,
+            tabsProvider: TabsProvider
     ): BottomNavigationPresenter {
-        return BottomNavigationPresenter(bottomRouter, userSearchItemStorage)
+        return BottomNavigationPresenter(bottomRouter, userSearchItemStorage, tabsProvider)
     }
 
     @Provides
@@ -163,27 +167,39 @@ class PresenterModule {
             parentRouterHandler: HashMap<String, Cicerone<Router>>,
             @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
             searchRouterHandler: HashMap<String, Cicerone<Router>>,
-            itemStorage: UserSearchItemStorage
+            itemStorage: UserSearchItemStorage,
+            searchTabScreenFabric: SearchTabScreenFabric,
+            tabsProvider: TabsProvider
     ): SearchNavigationPresenter {
         return SearchNavigationPresenter(parentRouterHandler,
                                          searchRouterHandler,
-                                         itemStorage)
+                                         itemStorage,
+                                         searchTabScreenFabric,
+                                         tabsProvider)
     }
 
     @Provides
     fun searchPresenter(
-            @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
-            routerHandler: HashMap<String, Cicerone<Router>>,
+            localHolder: LocalHolder,
             interactor: MusicalSearchUseCase,
             searchItemStorage: UserSearchItemStorage,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             userChoiceItemStorage: MainChoiceItemStorage,
             schedulersProvider: SchedulersProvider
     ): SearchContentPresenter {
-        return SearchContentPresenter(routerHandler = routerHandler,
+        return SearchContentPresenter(localHolder = localHolder,
                                       interactor = interactor,
                                       searchItemStorage = searchItemStorage,
                                       userChoiceItemStorage = userChoiceItemStorage,
                                       schedulersProvider = schedulersProvider)
+    }
+
+    @Provides
+    fun searchTabNavPresenter(
+            localHolder: LocalHolder,
+            searchItemStorage: UserSearchItemStorage
+    ): SearchTabNavPresenter {
+        return SearchTabNavPresenter(localHolder = localHolder,
+                                     userSearchItemStorage = searchItemStorage)
     }
 }

@@ -49,17 +49,6 @@ class MusicTabNavFragment : BaseNavFragment() {
         this.navigator?.applyCommands(arrayOf(Replace(Screens.MusicTabScreen)))
     }
 
-    override fun showSearchTabs(showTabs: Boolean) {
-        if (showTabs) {
-            (parentFragment as MainBottomNavigationView).withInnerTopNavigation(
-                    listOf("Track", "Album", "Author", "Test 1", "Test 2", "Test 3")
-            )
-        }
-        else {
-            (parentFragment as MainBottomNavigationView).closeInnerTopNavigation()
-        }
-    }
-
     override fun provideNavigator(): Navigator? {
         return context?.let {
             MusicTabNavigator(childFragmentManager,
