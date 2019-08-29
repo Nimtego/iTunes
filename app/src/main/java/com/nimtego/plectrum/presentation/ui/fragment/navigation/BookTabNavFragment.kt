@@ -9,14 +9,10 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
-import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
-import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseNavFragment
-import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Forward
@@ -71,7 +67,7 @@ class BookTabNavFragment : BaseNavFragment() {
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
                 is Screens.SearchNavigationScreen -> screen.fragment
-                else -> null
+                else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }
 
@@ -98,12 +94,10 @@ class BookTabNavFragment : BaseNavFragment() {
             val fragment = BookTabNavFragment()
             val arguments = Bundle()
 
-            arguments.putString(TAB_NAME, "Book_nav_fragment")
+            arguments.putString(NAVIGATION_QUALIFIERS, NavigationQualifiers.TAB_BOOK_NAVIGATION)
             fragment.arguments = arguments
 
             return fragment
         }
-
-        const val TAB_NAME = "TAB_NAME"
     }
 }

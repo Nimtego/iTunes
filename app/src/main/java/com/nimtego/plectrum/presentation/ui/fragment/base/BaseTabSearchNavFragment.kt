@@ -8,7 +8,7 @@ import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 
-abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView {
+abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView, BackButtonListener {
 
     final override val layoutRes: Int = R.layout.navigation_search_fragment
     val layoutContainer: Int = R.id.search_navigation_layout_container
@@ -19,15 +19,15 @@ abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView {
 
     protected var navigator: Navigator? = null
 
-//    override fun onBackPressed(): Boolean {
-//        val fragment =
-//                this.childFragmentManager.findFragmentById(layoutContainer)
-//        return if (fragment is BackButtonListener) {
-//            fragment.onBackPressed()
-//        } else {
-//            this.presenter.onBackPressed()
-//        }
-//    }
+    override fun onBackPressed(): Boolean {
+        val fragment =
+                this.childFragmentManager.findFragmentById(layoutContainer)
+        return if (fragment is BackButtonListener) {
+            fragment.onBackPressed()
+        } else {
+            this.presenter.onBackPressed()
+        }
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -50,13 +50,7 @@ abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView {
         super.onPause()
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        this.presenter.viewIsVisible(!hidden)
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        this.presenter.viewIsVisible(isVisibleToUser)
+    companion object {
+        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
     }
 }

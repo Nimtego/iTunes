@@ -59,4 +59,8 @@ abstract class BaseSearchNavFragment : BaseFragment(),
         if (show) {systemMessage("Show - $show")}
         this.presenter.viewIsVisible(show)
     }
+
+    companion object {
+        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
+    }
 }

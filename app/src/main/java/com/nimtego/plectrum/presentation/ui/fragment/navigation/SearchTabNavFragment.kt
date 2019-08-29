@@ -71,7 +71,7 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
             return when (screen) {
                 is Screens.SearchContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
-                else -> throw Exception("${screen.screenKey} not permissible")
+                else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }
 
@@ -103,7 +103,5 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
 
             return fragment
         }
-
-        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
     }
 }

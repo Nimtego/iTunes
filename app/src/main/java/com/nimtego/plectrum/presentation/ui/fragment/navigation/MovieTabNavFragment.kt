@@ -69,7 +69,7 @@ class MovieTabNavFragment : BaseNavFragment() {
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
                 is Screens.SearchNavigationScreen -> screen.fragment
-                else -> null
+                else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }
 
@@ -96,12 +96,10 @@ class MovieTabNavFragment : BaseNavFragment() {
             val fragment = MovieTabNavFragment()
             val arguments = Bundle()
 
-            arguments.putString(TAB_NAME, "Movie_nav_fragment")
+            arguments.putString(NAVIGATION_QUALIFIERS, NavigationQualifiers.TAB_MOVIE_NAVIGATION)
             fragment.arguments = arguments
 
             return fragment
         }
-
-        const val TAB_NAME = "TAB_NAME"
     }
 }

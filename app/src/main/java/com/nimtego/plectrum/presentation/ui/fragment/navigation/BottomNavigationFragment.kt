@@ -180,7 +180,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     private fun updateTopNavigation() {
         this.topNavigationView.removeAllTabs()
-        //systemMessage("In tabs ${this.tabContainer?.listTabs()}")
         this.tabContainer?.listTabs()?.forEach {
             this.topNavigationView.addTab(
                     this.topNavigationView.newTab().setText(it.getTabName()),
@@ -289,8 +288,9 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 }
 
 private fun FragmentTransaction.showWithCall(fragment: Fragment): FragmentTransaction {
+    val fragmentTransaction = this.show(fragment)
     (fragment as HideChangeListener).isShow(true)
-    return this.show(fragment)
+    return fragmentTransaction
 }
 
 private fun FragmentTransaction.hideWithCall(fragment: Fragment): FragmentTransaction {

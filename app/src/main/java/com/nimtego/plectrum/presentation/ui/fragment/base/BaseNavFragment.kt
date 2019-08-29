@@ -65,6 +65,10 @@ abstract class BaseNavFragment : BaseFragment(), TabNavigationView, HideChangeLi
         this.presenter.viewIsVisible(show)
     }
 
+    companion object {
+        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
+    }
+
 }
 
 //    override fun onHiddenChanged(hidden: Boolean) {

@@ -14,7 +14,6 @@ class SearchTabScreenFabric @Inject constructor(
     private val booksScreensContainer: ScreenTabContainer<SupportAppScreen>
 
     init {
-//todo specific screen
         this.musicScreensContainer = SearchTabScreensContainer(
                 mapOf(
                         Tab(0 to resourceManager.getString(R.string.music_text_search_tab_track))
@@ -50,12 +49,11 @@ class SearchTabScreenFabric @Inject constructor(
     }
 
     fun getScreensContainer(navigationQualifier: String): ScreenTabContainer<SupportAppScreen> {
-        //todo exception
-        return when(navigationQualifier) {
+        return when (navigationQualifier) {
             NavigationQualifiers.TAB_MUSIC_NAVIGATION -> this.musicScreensContainer
             NavigationQualifiers.TAB_MOVIE_NAVIGATION -> this.movieScreensContainer
             NavigationQualifiers.TAB_BOOK_NAVIGATION  -> this.booksScreensContainer
-            else -> throw Exception(navigationQualifier)
+            else -> throw Exception("$navigationQualifier is not supported")
         }
     }
 }

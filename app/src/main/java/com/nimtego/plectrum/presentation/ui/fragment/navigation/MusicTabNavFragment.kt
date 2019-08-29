@@ -13,6 +13,7 @@ import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -71,7 +72,7 @@ class MusicTabNavFragment : BaseNavFragment() {
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
                 is Screens.SearchNavigationScreen -> screen.fragment
-                else -> null
+                else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }
 
@@ -98,12 +99,10 @@ class MusicTabNavFragment : BaseNavFragment() {
             val fragment = MusicTabNavFragment()
             val arguments = Bundle()
 
-            arguments.putString(TAB_NAME, "Music_nav_fragment")
+            arguments.putString(NAVIGATION_QUALIFIERS, NavigationQualifiers.TAB_MUSIC_NAVIGATION)
             fragment.arguments = arguments
 
             return fragment
         }
-
-        const val TAB_NAME = "TAB_NAME"
     }
 }

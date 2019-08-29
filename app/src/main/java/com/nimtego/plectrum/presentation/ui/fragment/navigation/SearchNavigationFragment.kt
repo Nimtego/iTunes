@@ -57,14 +57,6 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        this.navigator?.applyCommands(
-                arrayOf(
-                        Replace(Screens.SearchNavTabScreen(
-                                this.navigationQualifier))))
-    }
-
     override fun provideNavigator(): Navigator? {
         return context?.let {
             SearchNavigator(childFragmentManager,
@@ -119,7 +111,5 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
 
             return fragment
         }
-
-        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
     }
 }
