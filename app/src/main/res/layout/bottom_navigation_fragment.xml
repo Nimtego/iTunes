@@ -113,7 +113,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="fill_vertical"
         android:background="@color/color_background_dark"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
     </FrameLayout>
 
     <com.aurelhubert.ahbottomnavigation.AHBottomNavigation

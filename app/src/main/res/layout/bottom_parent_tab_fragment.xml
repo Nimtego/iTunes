@@ -12,8 +12,7 @@
         android:layout_gravity="fill_vertical"
         android:clipToPadding="false"
         android:focusableInTouchMode="true"
-        android:paddingBottom="?attr/actionBarSize"
-        android:paddingTop="?attr/actionBarSize">
+        android:paddingBottom="?attr/actionBarSize">
     </android.support.v7.widget.RecyclerView>
 
 </FrameLayout>
