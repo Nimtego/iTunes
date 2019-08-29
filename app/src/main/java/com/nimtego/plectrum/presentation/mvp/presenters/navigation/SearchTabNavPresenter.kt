@@ -6,7 +6,6 @@ import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseNavigationPrese
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
 import com.nimtego.plectrum.presentation.navigation.LocalHolder
 import com.nimtego.plectrum.presentation.navigation.Screens
-import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
 import javax.inject.Inject
@@ -14,7 +13,7 @@ import javax.inject.Inject
 @InjectViewState
 class SearchTabNavPresenter @Inject constructor(
         private val localHolder: LocalHolder,
-        private val searchRouterY: Map<String, Cicerone<Router>>
+        private val userSearchItemStorage: UserSearchItemStorage
 ) : BaseNavigationPresenter<SearchNavigationView>() {
 
     private var router: Router? = null
