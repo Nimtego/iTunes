@@ -177,16 +177,13 @@ class PresenterModule {
     @Provides
     @Named(NavigationQualifiers.SEARCH_NAVIGATION)
     fun searchNavigationPresenter(
-            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
-            parentRouterHandler: NavigationHandler,
             @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
             searchRouterHandler: NavigationHandler,
             itemStorage: UserSearchItemStorage,
             searchTabScreenFabric: SearchTabScreenFabric,
             tabsProvider: TabsProvider
     ): SearchNavigationPresenter {
-        return SearchNavigationPresenter(parentRouterHandler,
-                                         searchRouterHandler,
+        return SearchNavigationPresenter(searchRouterHandler,
                                          itemStorage,
                                          searchTabScreenFabric,
                                          tabsProvider)

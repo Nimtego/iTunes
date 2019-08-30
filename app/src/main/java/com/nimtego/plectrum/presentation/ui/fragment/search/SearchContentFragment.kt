@@ -18,7 +18,7 @@ import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import javax.inject.Inject
 
-class SearchContentFragment : BaseFragment(), SearchContentView {
+class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.search_content_fragment
 
@@ -50,10 +50,10 @@ class SearchContentFragment : BaseFragment(), SearchContentView {
         pb?.visibility = if (show) ProgressBar.VISIBLE else ProgressBar.GONE
     }
 
-//    override fun onBackPressed(): Boolean {
-//        this.presenter.onBackPressed()
-//        return true
-//    }
+    override fun onBackPressed(): Boolean {
+        this.presenter.onBackPressed()
+        return true
+    }
 
     private fun init() {
         this.pb = view?.findViewById(R.id.pb_loading)

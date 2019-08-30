@@ -9,8 +9,10 @@ import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.ScreenTabContainer
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
+import com.nimtego.plectrum.presentation.ui.auxiliary.ParentRouterProvider
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
@@ -22,7 +24,10 @@ import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
 
-class SearchNavigationFragment : BaseSearchNavFragment() {
+class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
+
+    @field:[Inject Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)]
+    internal lateinit var parentNavigationHandler: NavigationHandler
 
     @field:[Inject Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)]
     internal lateinit var searchNavigationHandler: NavigationHandler
@@ -57,8 +62,13 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
             SearchNavigator(childFragmentManager,
                     this.searchTabScreenFabric.getScreensContainer(this.navigationQualifier),
                     it as AppCompatActivity,
-                    this.layoutContainer)
+                    this.layoutContainer,
+                    this.parentNavigationHandler.getRouter(this.navigationQualifier))
         }
+    }
+
+    override fun getParentRouter(): Router {
+        return this.searchNavigationHandler.getRouter(navigationQualifier)
     }
 
 // MARK: - Inner Types
@@ -67,8 +77,9 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
             private val fragmentManager: FragmentManager?,
             private val screenTabContainer: ScreenTabContainer<SupportAppScreen>,
             activity: AppCompatActivity,
-            container: Int
-    ) : SupportAppNavigator(activity, fragmentManager, container) {
+            container: Int,
+            parentRouter: Router
+    ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
 
         init {
             this.fragmentManager?.beginTransaction()?.apply {

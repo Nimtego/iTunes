@@ -12,7 +12,6 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
-import com.nimtego.plectrum.presentation.ui.fragment.popular.InformationFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso

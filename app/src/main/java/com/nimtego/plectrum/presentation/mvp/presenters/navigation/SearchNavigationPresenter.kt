@@ -16,7 +16,6 @@ import javax.inject.Inject
 
 @InjectViewState
 class SearchNavigationPresenter @Inject constructor(
-        private val parentNavigationHandler: NavigationHandler,
         private val searchNavigationHandler: NavigationHandler,
         private val userSearchItemStorage: UserSearchItemStorage,
         private val searchTabScreenFabric: SearchTabScreenFabric,
@@ -34,7 +33,6 @@ class SearchNavigationPresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         this.navigationQualifier.let {
-            this.parentRouter = parentNavigationHandler.getRouter(it)
             this.searchRouter = searchNavigationHandler.getRouter(it)
         }
         viewIsVisible(true)

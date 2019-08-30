@@ -10,10 +10,13 @@ import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchTabNavPresenter
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.ui.auxiliary.ParentRouterProvider
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseTabSearchNavFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
+import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
@@ -56,7 +59,8 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
         return context?.let {
             SearchTabNavigator(childFragmentManager,
                     it as AppCompatActivity,
-                    this.layoutContainer)
+                    this.layoutContainer,
+                    (parentFragment as ParentRouterProvider).getParentRouter())
         }
     }
 
@@ -65,8 +69,9 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
     private inner class SearchTabNavigator(
             fragmentManager: FragmentManager?,
             activity: AppCompatActivity,
-            container: Int
-    ) : SupportAppNavigator(activity, fragmentManager, container) {
+            container: Int,
+            parentRouter: Router
+    ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
 
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
