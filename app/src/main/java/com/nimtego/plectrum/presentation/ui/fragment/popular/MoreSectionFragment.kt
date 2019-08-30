@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.ui.fragment.general
+package com.nimtego.plectrum.presentation.ui.fragment.popular
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager

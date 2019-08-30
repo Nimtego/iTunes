@@ -71,7 +71,7 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
                 is Screens.SearchContentScreen -> screen.fragment
-                is Screens.ItemInformationScreen -> screen.fragment
+                is Screens.SearchItemInformationScreen -> screen.fragment
                 else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }

@@ -34,7 +34,7 @@ class SearchContentPresenter @Inject constructor(
 
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
         this.userChoiceItemStorage.changeCurrentChildItem(childViewModel)
-        this.router?.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
+        this.router?.navigateTo(Screens.SearchItemInformationScreen(navigationQualifier))
     }
 
 //    override fun attachView(view: MoreSectionView) {
