@@ -25,7 +25,8 @@ import com.nimtego.plectrum.presentation.mvp.presenters.popular.BookTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.MovieTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.MusicTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
-import com.nimtego.plectrum.presentation.navigation.LocalHolder
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
 import dagger.Module
 import dagger.Provides
@@ -130,24 +131,37 @@ class PresenterModule {
     @Provides
     fun sectionMorePresenter(
             @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
-            router: HashMap<String, Cicerone<Router>>,
+            navigationHandler: NavigationHandler,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             userChoiceItemStorage: MainChoiceItemStorage,
             interactor: MoreSectionInteractor
     ): MoreSectionPresenter {
-        return MoreSectionPresenter(router, interactor, userChoiceItemStorage)
+        return MoreSectionPresenter(navigationHandler, interactor, userChoiceItemStorage)
     }
 
     //todo
     @Provides
+    @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
     fun informationPresenter(
             @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
-            router: HashMap<String, Cicerone<Router>>,
+            navigationHandler: NavigationHandler,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             userChoiceItemStorage: MainChoiceItemStorage,
             interactor: InformationInteractor
     ): InformationPresenter {
-        return InformationPresenter(router, interactor, userChoiceItemStorage)
+        return InformationPresenter(navigationHandler, interactor, userChoiceItemStorage)
+    }
+
+    @Provides
+    @Named(NavigationQualifiers.SEARCH_NAVIGATION)
+    fun informationPresenterForSearchState(
+            @Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)
+            navigationHandler: NavigationHandler,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            userChoiceItemStorage: MainChoiceItemStorage,
+            interactor: InformationInteractor
+    ): InformationPresenter {
+        return InformationPresenter(navigationHandler, interactor, userChoiceItemStorage)
     }
 
     @Provides
@@ -164,9 +178,9 @@ class PresenterModule {
     @Named(NavigationQualifiers.SEARCH_NAVIGATION)
     fun searchNavigationPresenter(
             @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
-            parentRouterHandler: HashMap<String, Cicerone<Router>>,
+            parentRouterHandler: NavigationHandler,
             @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
-            searchRouterHandler: HashMap<String, Cicerone<Router>>,
+            searchRouterHandler: NavigationHandler,
             itemStorage: UserSearchItemStorage,
             searchTabScreenFabric: SearchTabScreenFabric,
             tabsProvider: TabsProvider
@@ -180,14 +194,15 @@ class PresenterModule {
 
     @Provides
     fun searchPresenter(
-            localHolder: LocalHolder,
+            @Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)
+            navigationHandler: NavigationHandler,
             interactor: MusicalSearchUseCase,
             searchItemStorage: UserSearchItemStorage,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             userChoiceItemStorage: MainChoiceItemStorage,
             schedulersProvider: SchedulersProvider
     ): SearchContentPresenter {
-        return SearchContentPresenter(localHolder = localHolder,
+        return SearchContentPresenter(navigationHandler = navigationHandler,
                                       interactor = interactor,
                                       searchItemStorage = searchItemStorage,
                                       userChoiceItemStorage = userChoiceItemStorage,
@@ -196,10 +211,11 @@ class PresenterModule {
 
     @Provides
     fun searchTabNavPresenter(
-            localHolder: LocalHolder,
+            @Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)
+            navigationHandler: NavigationHandler,
             searchItemStorage: UserSearchItemStorage
     ): SearchTabNavPresenter {
-        return SearchTabNavPresenter(localHolder = localHolder,
+        return SearchTabNavPresenter(navigationHandler = navigationHandler,
                                      userSearchItemStorage = searchItemStorage)
     }
 }

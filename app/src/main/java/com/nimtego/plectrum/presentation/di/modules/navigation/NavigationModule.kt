@@ -1,6 +1,8 @@
 package com.nimtego.plectrum.presentation.di.modules.navigation
 
-import com.nimtego.plectrum.presentation.navigation.LocalHolder
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerFixed
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -24,7 +26,7 @@ class NavigationModule {
     private val searchMovieNavigationCicerone: Cicerone<Router> = Cicerone.create()
     private val searchBookNavigationCicerone: Cicerone<Router> = Cicerone.create()
 
-    private val routerHandler: HashMap<String, Cicerone<Router>> =
+    private val bottomRouterHandler: HashMap<String, Cicerone<Router>> =
             hashMapOf(
                     NavigationQualifiers.APP_NAVIGATION to appCicerone,
                     NavigationQualifiers.BOTTOM_BAR_NAVIGATION to bottomNavigationBarCicerone,
@@ -40,8 +42,23 @@ class NavigationModule {
 
     @Provides
     @Singleton
-    internal fun provideLocalHolder(): LocalHolder {
-        return LocalHolder()
+    @Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)
+    internal fun provideLocalHolder(): NavigationHandler {
+        return NavigationHandlerVariable()
+    }
+
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+    internal fun provideRouterHandler(): NavigationHandler {
+        return NavigationHandlerFixed(bottomRouterHandler)
+    }
+
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
+    internal fun provideSearchRouterHandler(): NavigationHandler {
+        return NavigationHandlerFixed(searchRouterHandler)
     }
 
 
@@ -115,19 +132,19 @@ class NavigationModule {
         return bookTabNavigationCicerone.navigatorHolder
     }
 
-    @Provides
-    @Singleton
-    @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
-    internal fun provideRouterHandler(): HashMap<String, Cicerone<Router>> {
-        return routerHandler
-    }
-
-    @Provides
-    @Singleton
-    @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
-    internal fun provideSearchRouterHandler(): HashMap<String, Cicerone<Router>> {
-        return searchRouterHandler
-    }
+//    @Provides
+//    @Singleton
+//    @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+//    internal fun provideRouterHandler(): HashMap<String, Cicerone<Router>> {
+//        return bottomRouterHandler
+//    }
+//
+//    @Provides
+//    @Singleton
+//    @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
+//    internal fun provideSearchRouterHandler(): HashMap<String, Cicerone<Router>> {
+//        return searchNavigationHandler
+//    }
 
 
     @Provides

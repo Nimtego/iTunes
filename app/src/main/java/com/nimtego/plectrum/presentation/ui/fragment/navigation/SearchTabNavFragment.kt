@@ -7,22 +7,23 @@ import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchTabNavPresenter
-import com.nimtego.plectrum.presentation.navigation.LocalHolder
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseTabSearchNavFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import ru.terrakok.cicerone.commands.Forward
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
+import javax.inject.Named
 
 class SearchTabNavFragment : BaseTabSearchNavFragment() {
 
-    @Inject
-    lateinit var localHolder: LocalHolder
+    @field:[Inject Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)]
+    lateinit var navigationHolderVariable: NavigationHandler
 
     @Inject
     @InjectPresenter
@@ -32,7 +33,7 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
         get() = requireNotNull(this.arguments?.getString(NAVIGATION_QUALIFIERS))
 
     override val navigatorHolder: NavigatorHolder by lazy {
-        this.localHolder.getCicerone(this.navigationQualifier).navigatorHolder as NavigatorHolder
+        this.navigationHolderVariable.getNavigatorHolder(this.navigationQualifier)
     }
 
     @ProvidePresenter

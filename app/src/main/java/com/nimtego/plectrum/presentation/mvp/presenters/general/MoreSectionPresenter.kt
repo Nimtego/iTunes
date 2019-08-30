@@ -8,6 +8,7 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @InjectViewState
 class MoreSectionPresenter
 @Inject constructor(
-        private val routerHandler: Map<String, Cicerone<Router>>,
+        private val navigationHandler: NavigationHandler,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: MainItemStorage
 ) : BasePresenter<MoreSectionView>(), MoreSectionAdapter.OnItemClickListener {
@@ -72,6 +73,6 @@ class MoreSectionPresenter
 
     fun setNavigationQualifier(navigationQualifier: String) {
         this.navigationQualifier = navigationQualifier
-        this.router = routerHandler[navigationQualifier]?.router
+        this.router = navigationHandler.getRouter(navigationQualifier)
     }
 }

@@ -10,17 +10,17 @@ import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
-import com.nimtego.plectrum.presentation.navigation.LocalHolder
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
-import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class SearchContentPresenter @Inject constructor(
-        private val localHolder: LocalHolder,
+        private val navigationHandler: NavigationHandler,
         private val interactor: MusicalSearchUseCase,
         private val searchItemStorage: UserSearchItemStorage,
         private val userChoiceItemStorage: MainItemStorage,
@@ -78,7 +78,7 @@ class SearchContentPresenter @Inject constructor(
 
     fun setNavigationQualifier(navigationQualifier: String) {
         this.navigationQualifier = navigationQualifier
-        this.router = localHolder.getCicerone(navigationQualifier).router
+        this.router = navigationHandler.getRouter(navigationQualifier)
     }
 
     private inner class CurrentSearchObserver : DisposableObserver<List<Song>>() {

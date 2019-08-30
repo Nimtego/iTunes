@@ -4,15 +4,15 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
-import com.nimtego.plectrum.presentation.navigation.LocalHolder
-import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
 import javax.inject.Inject
 
 @InjectViewState
 class SearchTabNavPresenter @Inject constructor(
-        private val localHolder: LocalHolder,
+        private val navigationHandler: NavigationHandler,
         private val userSearchItemStorage: UserSearchItemStorage
 ) : BaseNavigationPresenter<SearchNavigationView>() {
 
@@ -25,7 +25,7 @@ class SearchTabNavPresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         this.navigationQualifier.let {
-            this.router = localHolder.getCicerone(navigationQualifier).router
+            this.router = navigationHandler.getRouter(navigationQualifier)
         }
 //        viewIsVisible(true)
     }

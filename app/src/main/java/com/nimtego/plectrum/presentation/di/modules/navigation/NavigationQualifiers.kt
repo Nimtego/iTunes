@@ -15,4 +15,5 @@ object NavigationQualifiers {
 
     const val BOTTOM_NAVIGATION_ROUTER_HANDLER = "BottomNavigationRouterHandler"
     const val SEARCH_NAVIGATION_ROUTER_HANDLER = "SearchNavigationRouterHandler"
+    const val LOCAL_NAVIGATION_ROUTER_HANDLER = "LocalNavigationRouterHandler"
 }

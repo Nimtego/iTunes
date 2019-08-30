@@ -6,14 +6,16 @@ import com.nimtego.plectrum.presentation.manger.ChildItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import ru.terrakok.cicerone.Cicerone
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class InformationPresenter
 @Inject constructor(
-        private val routerHandler: Map<String, Cicerone<Router>>,
+        private val navigationHandler: NavigationHandler,
         private val interactor: InformationInteractor,
         private val itemStorage: ChildItemStorage
 ) : BasePresenter<InformationView>() {
@@ -35,7 +37,7 @@ class InformationPresenter
 
     fun setNavigationQualifier(navigationQualifier: String) {
         this.navigationQualifier = navigationQualifier
-        this.router = routerHandler[navigationQualifier]?.router
+        this.router = navigationHandler.getRouter(navigationQualifier)
     }
 
 }

@@ -1,28 +1,23 @@
 package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.manger.TabsProvider
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.ScreenTabContainer
-import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
-import com.nimtego.plectrum.presentation.ui.auxiliary.SearchTabContainer
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
-import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
-import ru.terrakok.cicerone.commands.Forward
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
 import javax.inject.Named
@@ -30,7 +25,7 @@ import javax.inject.Named
 class SearchNavigationFragment : BaseSearchNavFragment() {
 
     @field:[Inject Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)]
-    internal lateinit var searchRouterHandler: HashMap<String, Cicerone<Router>>
+    internal lateinit var searchNavigationHandler: NavigationHandler
 
     @Inject
     internal lateinit var searchTabScreenFabric: SearchTabScreenFabric
@@ -40,7 +35,7 @@ class SearchNavigationFragment : BaseSearchNavFragment() {
     override lateinit var presenter: SearchNavigationPresenter
 
     override val navigatorHolder: NavigatorHolder by lazy {
-        this.searchRouterHandler[navigationQualifier]?.navigatorHolder as NavigatorHolder
+        this.searchNavigationHandler.getNavigatorHolder(navigationQualifier)
     }
 
     private val navigationQualifier: String

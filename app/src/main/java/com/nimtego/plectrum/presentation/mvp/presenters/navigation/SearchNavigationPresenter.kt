@@ -5,12 +5,10 @@ import com.nimtego.plectrum.presentation.manger.TabsProvider
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
-import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
-import com.nimtego.plectrum.presentation.navigation.Screens
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
 import com.nimtego.plectrum.presentation.navigation.Tab
 import com.nimtego.plectrum.presentation.ui.auxiliary.SearchTabContainer
-import com.nimtego.plectrum.presentation.ui.auxiliary.TabContainer
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
@@ -18,8 +16,8 @@ import javax.inject.Inject
 
 @InjectViewState
 class SearchNavigationPresenter @Inject constructor(
-        private val parentRouterHandler: Map<String, Cicerone<Router>>,
-        private val searchRouterHandler: Map<String, Cicerone<Router>>,
+        private val parentNavigationHandler: NavigationHandler,
+        private val searchNavigationHandler: NavigationHandler,
         private val userSearchItemStorage: UserSearchItemStorage,
         private val searchTabScreenFabric: SearchTabScreenFabric,
         private val tabsProvider: TabsProvider
@@ -36,8 +34,8 @@ class SearchNavigationPresenter @Inject constructor(
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         this.navigationQualifier.let {
-            this.parentRouter = parentRouterHandler[it]?.router
-            this.searchRouter = searchRouterHandler[it]?.router
+            this.parentRouter = parentNavigationHandler.getRouter(it)
+            this.searchRouter = searchNavigationHandler.getRouter(it)
         }
         viewIsVisible(true)
     }

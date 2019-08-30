@@ -9,6 +9,7 @@ import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import javax.inject.Inject
 import android.widget.TextView
 import android.widget.ImageView
+import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
@@ -16,13 +17,14 @@ import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
+import javax.inject.Named
 
 
 class InformationFragment : BaseFragment(), InformationView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.track_information_fragment
 
-    @Inject
+    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
     @InjectPresenter
     internal lateinit var presenter: InformationPresenter
 
