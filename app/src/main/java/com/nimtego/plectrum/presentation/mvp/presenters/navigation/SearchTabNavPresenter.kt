@@ -6,6 +6,7 @@ import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseNavigationPrese
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
+import com.nimtego.plectrum.presentation.navigation.Screens
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
 import javax.inject.Inject
@@ -19,35 +20,17 @@ class SearchTabNavPresenter @Inject constructor(
     private var router: Router? = null
     private lateinit var navigationQualifier: String
 
-    private var currentSearchSubscriber: CurrentSearchSubscriber? = null
-    private var isSearchState: Boolean = false
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         this.navigationQualifier.let {
             this.router = navigationHandler.getRouter(navigationQualifier)
         }
-//        viewIsVisible(true)
     }
 
     override fun onBackPressed(): Boolean {
-//        this.isSearchState = false
-//        this.viewState.showSearchTabs(this.isSearchState)
         this.router?.exit()
         return true
     }
-
-//    override fun attachView(view: TabNavigationView) {
-//        super.attachView(view)
-//        this.currentSearchSubscriber = CurrentSearchSubscriber()
-//        this.userSearchItemStorage.getCurrentSearchTextPublish()
-//                .subscribe(this.currentSearchSubscriber)
-//    }
-//
-//    override fun detachView(view: TabNavigationView) {
-//        super.detachView(view)
-//        this.currentSearchSubscriber?.unsubscribe()
-//    }
 
     fun viewIsVisible(visible: Boolean) {
         if (visible) {
@@ -60,27 +43,12 @@ class SearchTabNavPresenter @Inject constructor(
         }
     }
 
-    private fun navigateToSearch() {
-        this.isSearchState = true
-//        this.viewState.showSearchTabs(this.isSearchState)
-        //this.router?.navigateTo(Screens.SearchContentScreen(this.navigationQualifier))
-    }
-
     fun setNavigationQualifiers(tabNavigationQualifier: String) {
         this.navigationQualifier = tabNavigationQualifier
     }
 
     override fun onDestroy() {
-        this.currentSearchSubscriber?.unsubscribe()
-    }
 
-    private inner class CurrentSearchSubscriber : Subscriber<String>() {
-        override fun onCompleted() {}
-        override fun onNext(result: String) {
-            this@SearchTabNavPresenter.navigateToSearch()
-        }
-
-        override fun onError(e: Throwable) {}
     }
 
 }
