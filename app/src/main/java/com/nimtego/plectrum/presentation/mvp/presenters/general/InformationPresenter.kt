@@ -28,7 +28,7 @@ class InformationPresenter
         super.onFirstViewAttach()
         this.itemStorage.getCurrentChildItem()?.let {
             viewState.showViewState(it)
-        } ?: run{ viewState.systemMessage("NULL")}
+        }
     }
 
     fun onBackPressed() {

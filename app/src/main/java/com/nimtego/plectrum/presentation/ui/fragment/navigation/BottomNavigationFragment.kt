@@ -75,8 +75,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         fragment = fragments?.firstOrNull { it.isVisible }
         return if (fragment != null
                 && fragment is BackButtonListener) {
-            //todo remove from hear
-            //closeInnerTopNavigation()
             fragment.onBackPressed()
         } else {
             presenter.onBackPressed()
