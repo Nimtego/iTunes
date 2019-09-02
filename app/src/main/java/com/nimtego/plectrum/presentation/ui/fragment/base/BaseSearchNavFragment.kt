@@ -57,7 +57,7 @@ abstract class BaseSearchNavFragment : BaseFragment(),
 
     override fun isShow(show: Boolean) {
         if (show) {systemMessage("Show - $show")}
-        this.presenter.viewIsVisible(show)
+        //this.presenter.viewIsVisible(show)
     }
 
     companion object {

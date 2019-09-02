@@ -32,6 +32,7 @@
     <dimen name="text_button">14sp</dimen>
 
     <dimen name="android_status_bar_height">24dp</dimen>
+    <dimen name="android_status_bar_medium">16dp</dimen>
     <dimen name="dialog_min_weight">280dp</dimen>
     <dimen name="card_view_height">170dp</dimen>
     <dimen name="card_view_width">280dp</dimen>

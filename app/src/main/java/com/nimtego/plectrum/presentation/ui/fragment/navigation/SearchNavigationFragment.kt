@@ -1,6 +1,8 @@
 package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
+import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -8,17 +10,14 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
-import com.nimtego.plectrum.presentation.navigation.NavigationHandler
-import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
-import com.nimtego.plectrum.presentation.navigation.ScreenTabContainer
-import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
+import com.nimtego.plectrum.presentation.navigation.*
 import com.nimtego.plectrum.presentation.ui.auxiliary.ParentRouterProvider
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
-import ru.terrakok.cicerone.Cicerone
+import com.nimtego.plectrum.presentation.utils.TabSelectedListener
+import kotlinx.android.synthetic.main.navigation_search_fragment.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
@@ -39,6 +38,9 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
     @InjectPresenter
     override lateinit var presenter: SearchNavigationPresenter
 
+    private lateinit var screensContainer: ScreenTabContainer<SupportAppScreen>
+    private lateinit var searchTabLayout: TabLayout
+
     override val navigatorHolder: NavigatorHolder by lazy {
         this.searchNavigationHandler.getNavigatorHolder(navigationQualifier)
     }
@@ -55,6 +57,32 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        this.searchTabLayout = search_navigation_tab_layout
+        this.screensContainer = this.searchTabScreenFabric.getScreensContainer(this.navigationQualifier)
+        prepareSearchTabLayout()
+    }
+
+    private fun prepareSearchTabLayout() {
+        val tabs = this.screensContainer.getTabs()
+        tabs.forEach {
+            this.searchTabLayout.addTab(
+                    this.searchTabLayout.newTab().setText(it.getTabName()),
+                    it.getTabNumber()
+            )
+        }
+        this.searchTabLayout.apply {
+            addOnTabSelectedListener(object : TabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    tab.let {
+                        this@SearchNavigationFragment.presenter.tabSelected(tab.text.toString())
+                    }
+                }
+            })
+        }
     }
 
     override fun provideNavigator(): Navigator? {
@@ -81,11 +109,14 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
 
+        private val fragmentMap = screenTabContainer.getScreens().map{
+            (it as Screens.SearchNavTabScreen).navigationQualifier to it.fragment
+        }.toMap()
         init {
             this.fragmentManager?.beginTransaction()?.apply {
-                screenTabContainer.getScreens().forEach {
-                    add(container, it.fragment)
-                    hide(it.fragment)
+                fragmentMap.mapValues {
+                    add(container, it.value)
+                    hide(it.value)
                 }
                 commitNow()
             }
@@ -93,13 +124,14 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
 
         override fun fragmentReplace(command: Replace) {
             this.fragmentManager?.beginTransaction()?.apply {
-                screenTabContainer.getScreens().forEach {
-                    if (it == command.screen) {
-                        show(it.fragment)
-                    }
-                    else {
-                        hide(it.fragment)
-                    }
+                fragmentMap.forEach { key, fragment ->
+                        if (key == (command.screen as Screens.SearchNavTabScreen).navigationQualifier) {
+                            println("$key        ${command.screen}")
+                            show(fragment)
+                        } else {
+                            println("$key else")
+                            hide(fragment)
+                        }
                 }
                 commitNow()
             }

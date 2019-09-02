@@ -10,8 +10,9 @@ import ru.terrakok.cicerone.NavigatorHolder
 
 abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView, BackButtonListener {
 
-    final override val layoutRes: Int = R.layout.navigation_search_fragment
-    val layoutContainer: Int = R.id.search_navigation_layout_container
+    final override val layoutRes: Int = R.layout.navigation_container_fragment
+
+    val layoutContainer: Int = R.id.navigation_layout_container
 
     abstract val navigatorHolder: NavigatorHolder
 

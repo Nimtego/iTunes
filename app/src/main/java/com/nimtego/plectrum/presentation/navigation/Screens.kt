@@ -95,13 +95,13 @@ object Screens {
         }
     }
 
-    class SearchNavTabScreen(private val navigationQualifier: String) : SupportAppScreen() {
+    class SearchNavTabScreen(val navigationQualifier: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return SearchTabNavFragment.getInstance(navigationQualifier)
         }
     }
 
-    class SearchNavigationScreen(private val navigationQualifier: String) : SupportAppScreen() {
+    class SearchNavigationScreen(val navigationQualifier: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return SearchNavigationFragment.getInstance(navigationQualifier)
         }

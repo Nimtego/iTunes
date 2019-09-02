@@ -201,7 +201,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
                     }
                 }
             })
-            visibility = TabLayout.VISIBLE
+            //visibility = TabLayout.VISIBLE
             expandSearchLayer()
             this@BottomNavigationFragment.tabContainer?.getCurrentTab()?.let {
                 getTabAt(it.getTabNumber())?.select()

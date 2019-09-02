@@ -8,7 +8,6 @@ import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
-import com.nimtego.plectrum.presentation.navigation.Tab
 import com.nimtego.plectrum.presentation.ui.auxiliary.SearchTabContainer
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
@@ -34,12 +33,12 @@ class SearchNavigationPresenter @Inject constructor(
         this.navigationQualifier.let {
             this.searchRouter = searchNavigationHandler.getRouter(it)
         }
-        viewIsVisible(true)
+        //viewIsVisible(true)
     }
 
     override fun onBackPressed(): Boolean {
         this.tabsProvider.overrideTabContainer(null)
-        this.parentRouter?.exit()
+        this.searchRouter?.exit()
         return true
     }
 
@@ -50,44 +49,45 @@ class SearchNavigationPresenter @Inject constructor(
                 .subscribe(this.currentSearchSubscriber)
     }
 
-    private fun tabSelected(tab: Tab) {
-        this.searchTabContainer = this.searchTabContainer?.copy(currentTabNumber = tab)
-        this.searchRouter?.replaceScreen(
-                this.searchTabScreenFabric.getScreensContainer(this.navigationQualifier).getScreen(tab)
-        )
+    fun tabSelected(tab: String) {
+        //this.searchTabContainer = this.searchTabContainer?.copy(currentTabNumber = tab)
+        val screen = this.searchTabScreenFabric
+                .getScreensContainer(this.navigationQualifier).getScreen(tab)
+        this.viewState.systemMessage("screen is ${screen?.screenKey}")
+        this.searchRouter?.replaceScreen(screen)
     }
 
     override fun detachView(view: SearchNavigationView) {
         super.detachView(view)
         this.currentSearchSubscriber?.unsubscribe()
-        this.viewIsVisible(false)
+        //this.viewIsVisible(false)
     }
 
     fun viewIsVisible(visible: Boolean) {
-        if (this.searchTabContainer == null) {
-            this.searchTabContainer =  SearchTabContainer(
-                    listTab = this.searchTabScreenFabric.getScreensContainer(
-                            this.navigationQualifier
-                    ).getTabs()
-            ) {tab -> this@SearchNavigationPresenter.tabSelected(tab)}
-        }
-        if (visible) {
-            this.currentSearchSubscriber = CurrentSearchSubscriber()
-            this.userSearchItemStorage.getCurrentSearchTextPublish()
-                    .subscribe(this.currentSearchSubscriber)
-            this.tabsProvider.overrideTabContainer(this.searchTabContainer)
-        }
-        else  {
-            this.currentSearchSubscriber?.unsubscribe()
-            this.tabsProvider.overrideTabContainer(null)
-        }
+//        if (this.searchTabContainer == null) {
+//            this.searchTabContainer =  SearchTabContainer(
+//                    listTab = this.searchTabScreenFabric.getScreensContainer(
+//                            this.navigationQualifier
+//                    ).getTabs()
+//            ) {tab -> this@SearchNavigationPresenter.tabSelected(tab.getTabName())}
+//        }
+//        if (visible) {
+//            this.currentSearchSubscriber = CurrentSearchSubscriber()
+//            this.userSearchItemStorage.getCurrentSearchTextPublish()
+//                    .subscribe(this.currentSearchSubscriber)
+//            this.tabsProvider.overrideTabContainer(this.searchTabContainer)
+//        }
+//        else  {
+//            this.currentSearchSubscriber?.unsubscribe()
+//            this.tabsProvider.overrideTabContainer(null)
+//        }
     }
 
     private fun navigateToSearch() {
         this.searchRouter?.navigateTo(Screens.SearchContentScreen(this.navigationQualifier))
     }
 
-    fun setNavigationQualifiers(tabNavigationQualifier:  String) {
+    fun setNavigationQualifiers(tabNavigationQualifier: String) {
         this.navigationQualifier = tabNavigationQualifier
     }
 
@@ -100,6 +100,7 @@ class SearchNavigationPresenter @Inject constructor(
         override fun onNext(result: String) {
             this@SearchNavigationPresenter.navigateToSearch()
         }
+
         override fun onError(e: Throwable) {}
     }
 

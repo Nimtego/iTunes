@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/search_navigation_layout_container"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/android_status_bar_medium">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/search_navigation_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_gravity="top"
+            android:layout_marginBottom="8dp"
+            android:elevation="6dp"
+            android:background="@drawable/tab_layout_background"
+            android:theme="@style/PrimaryButton"
+            app:tabBackground="@drawable/tab_layout_selector"
+            app:tabContentStart="16dp"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/click_accent"
+            app:tabTextAppearance="@style/TabTextAppearance"/>
+
+        <FrameLayout
+            android:id="@+id/search_navigation_layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+    </LinearLayout>
 </FrameLayout>
