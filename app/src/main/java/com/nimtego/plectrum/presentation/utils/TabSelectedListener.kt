@@ -6,6 +6,4 @@ import android.support.design.widget.TabLayout
 interface TabSelectedListener : TabLayout.OnTabSelectedListener {
 
     override fun onTabUnselected(tab: TabLayout.Tab) {} //stub
-
-    override fun onTabReselected(tab: TabLayout.Tab) {} //stub
 }

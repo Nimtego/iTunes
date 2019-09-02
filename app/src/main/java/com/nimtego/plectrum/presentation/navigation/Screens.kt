@@ -1,17 +1,15 @@
 package com.nimtego.plectrum.presentation.navigation
 
 import android.support.v4.app.Fragment
-import com.nimtego.plectrum.presentation.ui.fragment.general.InformationFragment
-import com.nimtego.plectrum.presentation.ui.fragment.general.MoreSectionFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.InformationFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.BookTabNavFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.BottomNavigationFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.MovieTabNavFragment
-import com.nimtego.plectrum.presentation.ui.fragment.navigation.MusicTabNavFragment
+import com.nimtego.plectrum.presentation.ui.fragment.navigation.*
 import com.nimtego.plectrum.presentation.ui.fragment.popular.BookTabFragment
 import com.nimtego.plectrum.presentation.ui.fragment.popular.MovieTabFragment
 import com.nimtego.plectrum.presentation.ui.fragment.popular.MusicTabFragment
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
+import com.nimtego.plectrum.presentation.ui.fragment.search.SearchInformationFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 
@@ -91,9 +89,27 @@ object Screens {
         }
     }
 
-    class SearchScreen(private val navigationQualifier: String) : SupportAppScreen() {
+    class SearchContentScreen(private val navigationQualifier: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return SearchContentFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class SearchNavTabScreen(val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchTabNavFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class SearchNavigationScreen(val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchNavigationFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class SearchItemInformationScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SearchInformationFragment.getInstance(navigationQualifier)
         }
     }
 }

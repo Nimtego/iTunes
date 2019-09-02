@@ -3,23 +3,27 @@ package com.nimtego.plectrum.presentation.mvp.presenters.search
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
+import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
+import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
-import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
 class SearchContentPresenter @Inject constructor(
-        private val routerHandler: Map<String, Cicerone<Router>>,
+        private val navigationHandler: NavigationHandler,
         private val interactor: MusicalSearchUseCase,
-        private val itemStorage: UserSearchItemStorage,
+        private val searchItemStorage: UserSearchItemStorage,
+        private val userChoiceItemStorage: MainItemStorage,
         private val schedulersProvider: SchedulersProvider
 ) : BasePresenter<SearchContentView>(), MoreSectionAdapter.OnItemClickListener {
 
@@ -29,8 +33,8 @@ class SearchContentPresenter @Inject constructor(
     private var currentSearchText: String? = null
 
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
-//        this.itemStorage.changeCurrentChildItem(childViewModel)
-//        this.router?.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
+        this.userChoiceItemStorage.changeCurrentChildItem(childViewModel)
+        this.router?.navigateTo(Screens.SearchItemInformationScreen(navigationQualifier))
     }
 
 //    override fun attachView(view: MoreSectionView) {
@@ -44,8 +48,8 @@ class SearchContentPresenter @Inject constructor(
     }
 
     private fun requestSearchData() {
-        if (this.itemStorage.getCurrentSearchText() != this.currentSearchText) {
-            this.currentSearchText = this.itemStorage.getCurrentSearchText()
+        if (this.searchItemStorage.getCurrentSearchText() != this.currentSearchText) {
+            this.currentSearchText = this.searchItemStorage.getCurrentSearchText()
             val currentSearchObserver = CurrentSearchObserver()
             currentSearchObserver.connect()
             this.currentSearchText?.let {
@@ -74,7 +78,7 @@ class SearchContentPresenter @Inject constructor(
 
     fun setNavigationQualifier(navigationQualifier: String) {
         this.navigationQualifier = navigationQualifier
-        this.router = routerHandler[navigationQualifier]?.router
+        this.router = navigationHandler.getRouter(navigationQualifier)
     }
 
     private inner class CurrentSearchObserver : DisposableObserver<List<Song>>() {

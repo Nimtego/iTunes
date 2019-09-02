@@ -26,12 +26,6 @@ class BookTabFragment : BaseFragment(), TabContentView, BackButtonListener {
 
     private var parentContainerRecyclerView: RecyclerView? = null
 
-    @field:[Inject Named(NavigationQualifiers.TAB_BOOK_NAVIGATION)]
-    internal lateinit var tabBookRouter: Router
-
-    @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
-    internal lateinit var parentRouter: Router
-
     @Inject
     @InjectPresenter
     internal lateinit var presenter: BookTabPresenter

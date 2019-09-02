@@ -1,5 +1,8 @@
 package com.nimtego.plectrum.presentation.di.modules.navigation
 
+import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerFixed
+import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import dagger.Module
 import dagger.Provides
 import ru.terrakok.cicerone.Cicerone
@@ -14,18 +17,50 @@ class NavigationModule {
 
     private val appCicerone: Cicerone<Router> = Cicerone.create()
     private val bottomNavigationBarCicerone: Cicerone<Router> = Cicerone.create()
-    private val tabContentNavigationBarCicerone: Cicerone<Router> = Cicerone.create()
+
     private val musicTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
     private val movieTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
     private val bookTabNavigationCicerone: Cicerone<Router> = Cicerone.create()
 
-    private val routerHandler: HashMap<String, Cicerone<Router>> =
+    private val searchMusicNavigationCicerone: Cicerone<Router> = Cicerone.create()
+    private val searchMovieNavigationCicerone: Cicerone<Router> = Cicerone.create()
+    private val searchBookNavigationCicerone: Cicerone<Router> = Cicerone.create()
+
+    private val bottomRouterHandler: HashMap<String, Cicerone<Router>> =
             hashMapOf(
                     NavigationQualifiers.APP_NAVIGATION to appCicerone,
-                    NavigationQualifiers.BOTTOM_BAR_NAVIGATION to  bottomNavigationBarCicerone,
-                    NavigationQualifiers.TAB_MUSIC_NAVIGATION to  musicTabNavigationCicerone,
-                    NavigationQualifiers.TAB_MOVIE_NAVIGATION to  movieTabNavigationCicerone,
-                    NavigationQualifiers.TAB_BOOK_NAVIGATION to  bookTabNavigationCicerone)
+                    NavigationQualifiers.BOTTOM_BAR_NAVIGATION to bottomNavigationBarCicerone,
+                    NavigationQualifiers.TAB_MUSIC_NAVIGATION to musicTabNavigationCicerone,
+                    NavigationQualifiers.TAB_MOVIE_NAVIGATION to movieTabNavigationCicerone,
+                    NavigationQualifiers.TAB_BOOK_NAVIGATION to bookTabNavigationCicerone)
+
+    private val searchRouterHandler: HashMap<String, Cicerone<Router>> =
+            hashMapOf(
+                    NavigationQualifiers.TAB_MUSIC_NAVIGATION to searchMusicNavigationCicerone,
+                    NavigationQualifiers.TAB_MOVIE_NAVIGATION to searchMovieNavigationCicerone,
+                    NavigationQualifiers.TAB_BOOK_NAVIGATION to searchBookNavigationCicerone)
+
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)
+    internal fun provideLocalHolder(): NavigationHandler {
+        return NavigationHandlerVariable()
+    }
+
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+    internal fun provideRouterHandler(): NavigationHandler {
+        return NavigationHandlerFixed(bottomRouterHandler)
+    }
+
+    @Provides
+    @Singleton
+    @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
+    internal fun provideSearchRouterHandler(): NavigationHandler {
+        return NavigationHandlerFixed(searchRouterHandler)
+    }
+
 
     @Provides
     @Singleton
@@ -97,25 +132,33 @@ class NavigationModule {
         return bookTabNavigationCicerone.navigatorHolder
     }
 
+//    @Provides
+//    @Singleton
+//    @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+//    internal fun provideRouterHandler(): HashMap<String, Cicerone<Router>> {
+//        return bottomRouterHandler
+//    }
+//
+//    @Provides
+//    @Singleton
+//    @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
+//    internal fun provideSearchRouterHandler(): HashMap<String, Cicerone<Router>> {
+//        return searchNavigationHandler
+//    }
+
+
     @Provides
     @Singleton
-    @Named(NavigationQualifiers.TAB_CONTENT_NAVIGATION)
-    internal fun provideTabContentRouter(): Router {
-        return tabContentNavigationBarCicerone.router
+    @Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
+    internal fun provideSearchMusicRouter(): Router {
+        return searchMusicNavigationCicerone.router
     }
 
     @Provides
     @Singleton
-    @Named(NavigationQualifiers.TAB_CONTENT_NAVIGATION)
-    internal fun provideTabContentNavigatorHolder(): NavigatorHolder {
-        return tabContentNavigationBarCicerone.navigatorHolder
-    }
-
-    @Provides
-    @Singleton
-    @Named(NavigationQualifiers.ROUTER_HANDLER)
-    internal fun provideRouterHandler(): HashMap<String, Cicerone<Router>> {
-        return routerHandler
+    @Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
+    internal fun provideSearchMusicNavigatorHolder(): NavigatorHolder {
+        return searchMusicNavigationCicerone.navigatorHolder
     }
 
 //    @Provides

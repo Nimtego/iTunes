@@ -2,9 +2,9 @@ package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.SearchView
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -16,14 +16,13 @@ import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
-import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.utils.HideChangeListener
 import kotlinx.android.synthetic.main.bottom_navigation_fragment.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
@@ -45,7 +44,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     internal lateinit var presenter: BottomNavigationPresenter
 
     private lateinit var bottomNavigationView: AHBottomNavigation
-    private lateinit var topNavigationView: TabLayout
     private lateinit var searchText: SearchView
     private lateinit var appBar: AppBarLayout
 
@@ -65,7 +63,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         fragment = fragments?.firstOrNull { it.isVisible }
         return if (fragment != null
                 && fragment is BackButtonListener) {
-            closeInnerTopNavigation()
             fragment.onBackPressed()
         } else {
             presenter.onBackPressed()
@@ -87,7 +84,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             }
         }
         this.bottomNavigationView = bottom_navigation_view
-        this.topNavigationView = top_navigation_view
         this.searchText = search_edit_text
         this.appBar = app_bar
         initSearchView()
@@ -163,21 +159,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     }
 
-    override fun withInnerTopNavigation(tabs: List<String>) {
-        this.topNavigationView.removeAllTabs()
-        tabs.forEach {
-            this.topNavigationView.addTab(this.topNavigationView.newTab().setText(it))
-        }
-        this.topNavigationView.visibility = TabLayout.VISIBLE
-        expandSearchLayer()
-    }
-
-    override fun closeInnerTopNavigation() {
-        this.topNavigationView.removeAllTabs()
-        this.topNavigationView.visibility = TabLayout.GONE
-        expandSearchLayer()
-    }
-
 
 //Mark: private
 
@@ -186,7 +167,7 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         expandSearchLayer()
     }
 
-    // MARK: - Inner Types
+// MARK: - Inner Types
 
     private inner class BottomNavigator(
             private val fragmentManager: FragmentManager?,
@@ -214,23 +195,23 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             when (command.screen) {
                 Screens.MusicTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.show(this.musicNavigationFragment)
-                            ?.hide(this.movieNavigationFragment)
-                            ?.hide(this.bookNavigationFragment)
+                            ?.hideWithCall(this.movieNavigationFragment)
+                            ?.hideWithCall(this.bookNavigationFragment)
+                            ?.showWithCall(this.musicNavigationFragment)
                             ?.commit()
                 }
                 Screens.MovieTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.hide(this.musicNavigationFragment)
-                            ?.show(this.movieNavigationFragment)
-                            ?.hide(this.bookNavigationFragment)
+                            ?.hideWithCall(this.musicNavigationFragment)
+                            ?.hideWithCall(this.bookNavigationFragment)
+                            ?.showWithCall(this.movieNavigationFragment)
                             ?.commit()
                 }
                 Screens.BookTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.hide(this.musicNavigationFragment)
-                            ?.hide(this.movieNavigationFragment)
-                            ?.show(this.bookNavigationFragment)
+                            ?.hideWithCall(this.musicNavigationFragment)
+                            ?.hideWithCall(this.movieNavigationFragment)
+                            ?.showWithCall(this.bookNavigationFragment)
                             ?.commit()
 
                 }
@@ -255,4 +236,15 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
         val MOVIE_TAB = Screens.MovieTabNavigationScreen
         val BOOK_TAB = Screens.BookTabNavigationScreen
     }
+}
+
+private fun FragmentTransaction.showWithCall(fragment: Fragment): FragmentTransaction {
+    val fragmentTransaction = this.show(fragment)
+    (fragment as HideChangeListener).isShow(true)
+    return fragmentTransaction
+}
+
+private fun FragmentTransaction.hideWithCall(fragment: Fragment): FragmentTransaction {
+    (fragment as HideChangeListener).isShow(false)
+    return this.hide(fragment)
 }

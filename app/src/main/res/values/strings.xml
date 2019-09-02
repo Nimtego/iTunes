@@ -20,4 +20,20 @@
     <string name="track">Track</string>
     <string name="navigation_albums">Albums</string>
     <string name="navigation_author">Author</string>
+
+    <!-- Music search tab item. -->
+    <string name="music_text_search_tab_track">Track</string>
+    <string name="music_text_search_tab_author">Author</string>
+    <string name="music_text_search_tab_album">Album</string>
+
+    <!-- Movie search tab item. -->
+    <string name="movie_text_search_tab_movie">Movie</string>
+    <string name="movie_text_search_tab_director">Director</string>
+    <string name="movie_text_search_tab_artist">Artist</string>
+
+    <!-- Book search tab item. -->
+    <string name="book_text_search_tab_book">Book</string>
+    <string name="book_text_search_tab_audio_book">Audio book</string>
+    <string name="book_text_search_tab_author">Author</string>
+
 </resources>

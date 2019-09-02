@@ -18,8 +18,7 @@ import javax.inject.Inject
 
 @InjectViewState
 class MovieTabPresenter @Inject constructor(
-        private val tabContentRouter: Router,
-        private val appRouter: Router,
+        private val router: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
 ) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
@@ -58,19 +57,19 @@ class MovieTabPresenter @Inject constructor(
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
         this.itemStorage.changeCurrentSection(section)
-        this.tabContentRouter.navigateTo(
+        this.router.navigateTo(
                 Screens.MoreContentScreen(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
         )
     }
 
     override fun childItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.tabContentRouter.navigateTo(
+        this.router.navigateTo(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
         )
     }
 
     fun onBackPressed() {
-        this.tabContentRouter.exit()
+        this.router.exit()
     }
 }

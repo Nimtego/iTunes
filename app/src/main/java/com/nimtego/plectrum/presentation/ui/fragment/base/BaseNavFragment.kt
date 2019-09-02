@@ -6,13 +6,14 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifi
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.utils.HideChangeListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 import javax.inject.Named
 
-abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
+abstract class BaseNavFragment : BaseFragment(), TabNavigationView, HideChangeListener, BackButtonListener {
 
     final override val layoutRes: Int = R.layout.navigation_container_fragment
 
@@ -27,8 +28,7 @@ abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonLi
     override fun onBackPressed(): Boolean {
         val fragment =
                 this.childFragmentManager.findFragmentById(layoutContainer)
-
-        return if (fragment is BackButtonListener) {
+        return if (fragment != null && fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
             this.presenter.onBackPressed()
@@ -47,22 +47,46 @@ abstract class BaseNavFragment : BaseFragment(), TabNavigationView, BackButtonLi
     override fun onResume() {
         super.onResume()
         this.navigatorHolder.setNavigator(this.navigator)
-        //this.presenter.viewIsVisible(true)
+        this.presenter.viewIsVisible(true)
     }
 
     override fun onPause() {
         this.navigatorHolder.removeNavigator()
-        //this.presenter.viewIsVisible(false)
+        this.presenter.viewIsVisible(false)
         super.onPause()
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
-        this.presenter.viewIsVisible(!hidden)
+    override fun isShow(show: Boolean) {
+        val fragment =
+                this.childFragmentManager.findFragmentById(layoutContainer)
+        if (fragment != null && fragment is HideChangeListener) {
+            fragment.isShow(show)
+        }
+        this.presenter.viewIsVisible(show)
     }
+
+    companion object {
+        const val NAVIGATION_QUALIFIERS = "NavigationQualifiers"
+    }
+
+}
+
+//    override fun onHiddenChanged(hidden: Boolean) {
+//        super.onHiddenChanged(hidden)
+//        val fragment =
+//                this.childFragmentManager.findFragmentById(layoutContainer)
+//        if (fragment != null && fragment is HideChangeListener) {
+//            fragment.isShow(!hidden)
+//        }
+//        this.presenter.viewIsVisible(!hidden)
+//    }
 
 //    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
 //        super.setUserVisibleHint(isVisibleToUser)
+//        val fragment =
+//                this.childFragmentManager.findFragmentById(layoutContainer)
+//        if (fragment != null && fragment is HideChangeListener) {
+//            fragment.isShow(isVisibleToUser)
+//        }
 //        this.presenter.viewIsVisible(isVisibleToUser)
 //    }
-}

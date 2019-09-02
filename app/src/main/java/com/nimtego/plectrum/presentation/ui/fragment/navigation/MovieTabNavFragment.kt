@@ -39,17 +39,6 @@ class MovieTabNavFragment : BaseNavFragment() {
         return presenter
     }
 
-    override fun showSearchTabs(showTabs: Boolean) {
-        if (showTabs) {
-            (parentFragment as MainBottomNavigationView).withInnerTopNavigation(
-                    listOf("Movie", "Actor", "Serials", "Director", "Test 1", "Test 2", "Test 3")
-            )
-        }
-        else {
-            (parentFragment as MainBottomNavigationView).closeInnerTopNavigation()
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
         super.onCreate(savedInstanceState)
@@ -79,19 +68,19 @@ class MovieTabNavFragment : BaseNavFragment() {
                 Screens.MovieTabScreen -> screen.fragment
                 is Screens.MoreContentScreen -> screen.fragment
                 is Screens.ItemInformationScreen -> screen.fragment
-                is Screens.SearchScreen -> screen.fragment
-                else -> null
+                is Screens.SearchNavigationScreen -> screen.fragment
+                else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }
 
         override fun fragmentForward(command: Forward?) {
-            if (command?.screen is Screens.SearchScreen) {
+            if (command?.screen is Screens.SearchNavigationScreen) {
                 val fm = childFragmentManager
                 val fragment: Fragment?
                 val fragments = fm.fragments
                 fragment = fragments?.firstOrNull { it.isVisible }
                 if (fragment != null
-                        && fragment is SearchContentFragment) {
+                        && fragment is SearchNavigationFragment) {
                     fragmentReplace(Replace(command.screen))
                 } else {
                     super.fragmentForward(command)
@@ -107,12 +96,10 @@ class MovieTabNavFragment : BaseNavFragment() {
             val fragment = MovieTabNavFragment()
             val arguments = Bundle()
 
-            arguments.putString(TAB_NAME, "Movie_nav_fragment")
+            arguments.putString(NAVIGATION_QUALIFIERS, NavigationQualifiers.TAB_MOVIE_NAVIGATION)
             fragment.arguments = arguments
 
             return fragment
         }
-
-        const val TAB_NAME = "TAB_NAME"
     }
 }

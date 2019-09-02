@@ -1,29 +1,42 @@
 package com.nimtego.plectrum.presentation.di.modules.presentation
 
-import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
-import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
-import com.nimtego.plectrum.presentation.manger.UserSearchStorage
+import android.content.Context
+import com.nimtego.plectrum.presentation.di.modules.ContextModule
+import com.nimtego.plectrum.presentation.manger.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [ContextModule::class])
 class StorageModule {
 
-    private val itemStorage: MainChoiceItemStorage = MainChoiceItemStorage()
+    private val userChoiceItemStorage: MainChoiceItemStorage = MainChoiceItemStorage()
+    private val userSearchItemStorage: UserSearchStorage = UserSearchStorage()
 
 
     @Provides
     @Singleton
     @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
     internal fun provideStorageManager(): MainChoiceItemStorage {
-        return itemStorage
+        return userChoiceItemStorage
     }
 
     @Provides
     @Singleton
     internal fun provideUserSearchItemStorage(): UserSearchItemStorage {
-        return UserSearchStorage()
+        return userSearchItemStorage
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideResourceManager(context: Context): ResourceManager {
+        return AppResourceManager(context)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideTabProvider(): TabsProvider {
+        return SearchTabsProvider()
     }
 }

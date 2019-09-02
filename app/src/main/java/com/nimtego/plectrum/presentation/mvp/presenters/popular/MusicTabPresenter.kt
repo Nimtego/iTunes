@@ -18,25 +18,12 @@ import javax.inject.Inject
 
 @InjectViewState
 class MusicTabPresenter @Inject constructor(
-        private val tabContentRouter: Router,
-        private val appRouter: Router,
+        private val router: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMusicInteractor
 ) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
-    // FIXME
-    //  APP_ROUTER
-    //  @Named(NavigationQualifiers.APP_NAVIGATION)
-    //  private val appRouter: Route,
-    //  Temporary ugly hack,
-    //  because resolve crash(FragmentManager is already executing transactions).
-    //  We need to redefine the concept of navigation.
-
     private var songsModel: BaseParentViewModel<ChildViewModel>? = null
-
-//    override fun onFirstViewAttach() {
-//        super.onFirstViewAttach()
-//    }
 
     fun viewIsReady(containerName: String) {
         this.songsModel?.let{
@@ -72,19 +59,19 @@ class MusicTabPresenter @Inject constructor(
 
     override fun sectionClicked(section: ParentTabModelContainer<ChildViewModel>) {
         this.itemStorage.changeCurrentSection(section)
-        this.tabContentRouter.navigateTo(
+        this.router.navigateTo(
                 Screens.MoreContentScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
         )
     }
 
     override fun childItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.tabContentRouter.navigateTo(
+        this.router.navigateTo(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
         )
     }
 
     fun onBackPressed() {
-        this.tabContentRouter.exit()
+        this.router.exit()
     }
 }
