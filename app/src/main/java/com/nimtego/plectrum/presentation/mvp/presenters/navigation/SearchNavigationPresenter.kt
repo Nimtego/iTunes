@@ -1,14 +1,12 @@
 package com.nimtego.plectrum.presentation.mvp.presenters.navigation
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.presentation.manger.TabsProvider
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
-import com.nimtego.plectrum.presentation.ui.auxiliary.SearchTabContainer
 import ru.terrakok.cicerone.Router
 import rx.Subscriber
 import javax.inject.Inject
@@ -17,27 +15,24 @@ import javax.inject.Inject
 class SearchNavigationPresenter @Inject constructor(
         private val searchNavigationHandler: NavigationHandler,
         private val userSearchItemStorage: UserSearchItemStorage,
-        private val searchTabScreenFabric: SearchTabScreenFabric,
-        private val tabsProvider: TabsProvider
+        private val searchTabScreenFabric: SearchTabScreenFabric
 ) : BaseNavigationPresenter<SearchNavigationView>() {
 
-    private var parentRouter: Router? = null
     private var searchRouter: Router? = null
     private lateinit var navigationQualifier: String
+    private var currentTab: String? = null
 
     private var currentSearchSubscriber: CurrentSearchSubscriber? = null
-    private var searchTabContainer: SearchTabContainer? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         this.navigationQualifier.let {
             this.searchRouter = searchNavigationHandler.getRouter(it)
         }
-        //viewIsVisible(true)
+        this.viewState.selectTab(0)
     }
 
     override fun onBackPressed(): Boolean {
-        this.tabsProvider.overrideTabContainer(null)
         this.searchRouter?.exit()
         return true
     }
@@ -50,37 +45,19 @@ class SearchNavigationPresenter @Inject constructor(
     }
 
     fun tabSelected(tab: String) {
-        //this.searchTabContainer = this.searchTabContainer?.copy(currentTabNumber = tab)
-        val screen = this.searchTabScreenFabric
-                .getScreensContainer(this.navigationQualifier).getScreen(tab)
-        this.viewState.systemMessage("screen is ${screen?.screenKey}")
-        this.searchRouter?.replaceScreen(screen)
+        if (this.currentTab == null || this.currentTab != tab) {
+            val screen = this.searchTabScreenFabric
+                    .getScreensContainer(this.navigationQualifier).getScreen(tab)
+            this.searchRouter?.replaceScreen(screen)
+            this.currentTab = tab
+        } else {
+           //todo to realize reselected
+        }
     }
 
     override fun detachView(view: SearchNavigationView) {
         super.detachView(view)
         this.currentSearchSubscriber?.unsubscribe()
-        //this.viewIsVisible(false)
-    }
-
-    fun viewIsVisible(visible: Boolean) {
-//        if (this.searchTabContainer == null) {
-//            this.searchTabContainer =  SearchTabContainer(
-//                    listTab = this.searchTabScreenFabric.getScreensContainer(
-//                            this.navigationQualifier
-//                    ).getTabs()
-//            ) {tab -> this@SearchNavigationPresenter.tabSelected(tab.getTabName())}
-//        }
-//        if (visible) {
-//            this.currentSearchSubscriber = CurrentSearchSubscriber()
-//            this.userSearchItemStorage.getCurrentSearchTextPublish()
-//                    .subscribe(this.currentSearchSubscriber)
-//            this.tabsProvider.overrideTabContainer(this.searchTabContainer)
-//        }
-//        else  {
-//            this.currentSearchSubscriber?.unsubscribe()
-//            this.tabsProvider.overrideTabContainer(null)
-//        }
     }
 
     private fun navigateToSearch() {

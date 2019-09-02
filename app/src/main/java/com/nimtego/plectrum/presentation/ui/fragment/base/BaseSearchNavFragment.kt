@@ -3,10 +3,7 @@ package com.nimtego.plectrum.presentation.ui.fragment.base
 import android.os.Bundle
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.navigation.TabNavigationPresenter
-import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
-import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.nimtego.plectrum.presentation.utils.HideChangeListener
 import ru.terrakok.cicerone.Navigator
@@ -56,7 +53,7 @@ abstract class BaseSearchNavFragment : BaseFragment(),
     }
 
     override fun isShow(show: Boolean) {
-        if (show) {systemMessage("Show - $show")}
+//        if (show) {systemMessage("Show - $show")}
         //this.presenter.viewIsVisible(show)
     }
 

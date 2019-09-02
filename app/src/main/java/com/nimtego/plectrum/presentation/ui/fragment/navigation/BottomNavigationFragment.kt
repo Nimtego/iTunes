@@ -2,7 +2,6 @@ package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -15,23 +14,18 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.manger.TabsProvider
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.BottomNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MainBottomNavigationView
 import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.navigation.Tab
-import com.nimtego.plectrum.presentation.ui.auxiliary.TabContainer
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.nimtego.plectrum.presentation.utils.HideChangeListener
-import com.nimtego.plectrum.presentation.utils.TabSelectedListener
 import kotlinx.android.synthetic.main.bottom_navigation_fragment.*
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
-import rx.Subscriber
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -49,14 +43,8 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     @InjectPresenter
     internal lateinit var presenter: BottomNavigationPresenter
 
-    @Inject
-    internal lateinit var tabsProvider: TabsProvider
-
     private lateinit var bottomNavigationView: AHBottomNavigation
-    private lateinit var topNavigationView: TabLayout
     private lateinit var searchText: SearchView
-    private lateinit var searchTabListener: (Tab) -> Unit
-    private var tabContainer: TabContainer? = null
     private lateinit var appBar: AppBarLayout
 
     private val currentTabFragment: BaseFragment?
@@ -96,7 +84,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             }
         }
         this.bottomNavigationView = bottom_navigation_view
-        this.topNavigationView = top_navigation_view
         this.searchText = search_edit_text
         this.appBar = app_bar
         initSearchView()
@@ -170,50 +157,6 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
 
     override fun showProgress(show: Boolean) {
 
-    }
-
-    override fun initSearchTabNavigation(tabContainer: TabContainer?) {
-        tabContainer?.let {
-            this.tabContainer = it
-            this.searchTabListener = it.listener()
-            updateTopNavigation()
-        } ?: run {
-            this.tabContainer = null
-            closeInnerTopNavigation()
-        }
-    }
-
-    private fun updateTopNavigation() {
-        this.topNavigationView.removeAllTabs()
-        this.tabContainer?.listTabs()?.forEach {
-            this.topNavigationView.addTab(
-                    this.topNavigationView.newTab().setText(it.getTabName()),
-                    it.getTabNumber()
-            )
-        }
-        this.topNavigationView.apply {
-            addOnTabSelectedListener(object : TabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab) {
-                    tab.let {
-                        this@BottomNavigationFragment.tabContainer?.get(topNavigationView.selectedTabPosition)?.let {
-                            this@BottomNavigationFragment.searchTabListener(it)
-                        }
-                    }
-                }
-            })
-            //visibility = TabLayout.VISIBLE
-            expandSearchLayer()
-            this@BottomNavigationFragment.tabContainer?.getCurrentTab()?.let {
-                getTabAt(it.getTabNumber())?.select()
-
-            }
-        }
-    }
-
-    private fun closeInnerTopNavigation() {
-        this.topNavigationView.removeAllTabs()
-        this.topNavigationView.visibility = TabLayout.GONE
-        expandSearchLayer()
     }
 
 

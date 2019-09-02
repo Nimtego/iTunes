@@ -60,24 +60,6 @@
             </android.support.v7.widget.CardView>
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/top_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/tab_layout_background"
-            android:theme="@style/PrimaryButton"
-            android:visibility="gone"
-            app:tabBackground="@drawable/tab_layout_selector"
-            app:tabContentStart="16dp"
-            app:tabIndicatorHeight="0dp"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/click_accent"
-            app:tabTextAppearance="@style/TabTextAppearance">
-
-        </android.support.design.widget.TabLayout>
-
     </android.support.design.widget.AppBarLayout>
 
     <FrameLayout

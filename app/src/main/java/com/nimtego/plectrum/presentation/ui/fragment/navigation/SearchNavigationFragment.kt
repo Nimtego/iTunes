@@ -2,7 +2,6 @@ package com.nimtego.plectrum.presentation.ui.fragment.navigation
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -81,8 +80,16 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
                         this@SearchNavigationFragment.presenter.tabSelected(tab.text.toString())
                     }
                 }
+
+                override fun onTabReselected(tab: TabLayout.Tab) {
+                    this@SearchNavigationFragment.presenter.tabSelected(tab.text.toString())
+                }
             })
         }
+    }
+
+    override fun selectTab(number: Int) {
+        this.searchTabLayout.getTabAt(number)?.select()
     }
 
     override fun provideNavigator(): Navigator? {
@@ -103,15 +110,16 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
 
     private inner class SearchNavigator(
             private val fragmentManager: FragmentManager?,
-            private val screenTabContainer: ScreenTabContainer<SupportAppScreen>,
+            screenTabContainer: ScreenTabContainer<SupportAppScreen>,
             activity: AppCompatActivity,
             container: Int,
             parentRouter: Router
     ) : ParentHolderFragmentNavigator(activity, fragmentManager, container, parentRouter) {
 
-        private val fragmentMap = screenTabContainer.getScreens().map{
+        private val fragmentMap = screenTabContainer.getScreens().map {
             (it as Screens.SearchNavTabScreen).navigationQualifier to it.fragment
         }.toMap()
+
         init {
             this.fragmentManager?.beginTransaction()?.apply {
                 fragmentMap.mapValues {
@@ -124,14 +132,14 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
 
         override fun fragmentReplace(command: Replace) {
             this.fragmentManager?.beginTransaction()?.apply {
-                fragmentMap.forEach { key, fragment ->
-                        if (key == (command.screen as Screens.SearchNavTabScreen).navigationQualifier) {
-                            println("$key        ${command.screen}")
-                            show(fragment)
-                        } else {
-                            println("$key else")
-                            hide(fragment)
-                        }
+                fragmentMap.forEach { (key, fragment) ->
+                    if (key == (command.screen as Screens.SearchNavTabScreen).navigationQualifier) {
+                        println("$key        ${command.screen}")
+                        show(fragment)
+                    } else {
+                        println("$key else")
+                        hide(fragment)
+                    }
                 }
                 commitNow()
             }

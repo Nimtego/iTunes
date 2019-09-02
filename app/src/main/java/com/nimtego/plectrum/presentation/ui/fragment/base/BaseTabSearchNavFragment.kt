@@ -4,11 +4,12 @@ import android.os.Bundle
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchTabNavPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
+import com.nimtego.plectrum.presentation.mvp.view.TabNavigationView
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 
-abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView, BackButtonListener {
+abstract class BaseTabSearchNavFragment : BaseFragment(), TabNavigationView, BackButtonListener {
 
     final override val layoutRes: Int = R.layout.navigation_container_fragment
 
@@ -42,12 +43,10 @@ abstract class BaseTabSearchNavFragment : BaseFragment(), SearchNavigationView, 
     override fun onResume() {
         super.onResume()
         this.navigatorHolder.setNavigator(this.navigator)
-        this.presenter.viewIsVisible(true)
     }
 
     override fun onPause() {
         this.navigatorHolder.removeNavigator()
-        this.presenter.viewIsVisible(false)
         super.onPause()
     }
 

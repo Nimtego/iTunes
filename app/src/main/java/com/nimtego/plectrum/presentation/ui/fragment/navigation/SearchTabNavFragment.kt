@@ -17,7 +17,6 @@ import com.nimtego.plectrum.presentation.ui.fragment.base.BaseTabSearchNavFragme
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 import ru.terrakok.cicerone.commands.Replace
 import javax.inject.Inject
@@ -80,23 +79,6 @@ class SearchTabNavFragment : BaseTabSearchNavFragment() {
                 else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }
         }
-
-//        override fun fragmentForward(command: Forward?) {
-//            if (command?.screen is Screens.SearchNavigationScreen) {
-//                val fm = childFragmentManager
-//                val fragment: Fragment?
-//                val fragments = fm.fragments
-//                fragment = fragments?.firstOrNull { it.isVisible }
-//                if (fragment != null
-//                        && fragment is SearchNavigationFragment) {
-//                    fragmentReplace(Replace(command.screen))
-//                } else {
-//                    super.fragmentForward(command)
-//                }
-//            } else {
-//                super.fragmentForward(command)
-//            }
-//        }
     }
 
     companion object {

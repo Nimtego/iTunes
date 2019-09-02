@@ -10,9 +10,11 @@ import com.nimtego.plectrum.presentation.di.modules.domain.InteractorModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
-import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
-import com.nimtego.plectrum.presentation.manger.*
+import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
+import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
+import com.nimtego.plectrum.presentation.manger.MusicalItemStorageImp
+import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.SplashPresenter
@@ -26,11 +28,9 @@ import com.nimtego.plectrum.presentation.mvp.presenters.popular.MovieTabPresente
 import com.nimtego.plectrum.presentation.mvp.presenters.popular.MusicTabPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
-import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import com.nimtego.plectrum.presentation.navigation.SearchTabScreenFabric
 import dagger.Module
 import dagger.Provides
-import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Named
 
@@ -51,10 +51,9 @@ class PresenterModule {
     @Provides
     fun bottomBarPresenter(
             @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION) bottomRouter: Router,
-            userSearchItemStorage: UserSearchItemStorage,
-            tabsProvider: TabsProvider
+            userSearchItemStorage: UserSearchItemStorage
     ): BottomNavigationPresenter {
-        return BottomNavigationPresenter(bottomRouter, userSearchItemStorage, tabsProvider)
+        return BottomNavigationPresenter(bottomRouter, userSearchItemStorage)
     }
 
     @Provides
@@ -180,13 +179,11 @@ class PresenterModule {
             @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
             searchRouterHandler: NavigationHandler,
             itemStorage: UserSearchItemStorage,
-            searchTabScreenFabric: SearchTabScreenFabric,
-            tabsProvider: TabsProvider
+            searchTabScreenFabric: SearchTabScreenFabric
     ): SearchNavigationPresenter {
         return SearchNavigationPresenter(searchRouterHandler,
-                                         itemStorage,
-                                         searchTabScreenFabric,
-                                         tabsProvider)
+                itemStorage,
+                searchTabScreenFabric)
     }
 
     @Provides
@@ -200,19 +197,17 @@ class PresenterModule {
             schedulersProvider: SchedulersProvider
     ): SearchContentPresenter {
         return SearchContentPresenter(navigationHandler = navigationHandler,
-                                      interactor = interactor,
-                                      searchItemStorage = searchItemStorage,
-                                      userChoiceItemStorage = userChoiceItemStorage,
-                                      schedulersProvider = schedulersProvider)
+                interactor = interactor,
+                searchItemStorage = searchItemStorage,
+                userChoiceItemStorage = userChoiceItemStorage,
+                schedulersProvider = schedulersProvider)
     }
 
     @Provides
     fun searchTabNavPresenter(
             @Named(NavigationQualifiers.LOCAL_NAVIGATION_ROUTER_HANDLER)
-            navigationHandler: NavigationHandler,
-            searchItemStorage: UserSearchItemStorage
+            navigationHandler: NavigationHandler
     ): SearchTabNavPresenter {
-        return SearchTabNavPresenter(navigationHandler = navigationHandler,
-                                     userSearchItemStorage = searchItemStorage)
+        return SearchTabNavPresenter(navigationHandler)
     }
 }
