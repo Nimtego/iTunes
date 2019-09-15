@@ -42,6 +42,9 @@
 
     <!--Card view-->
     <color name="semiTransparentColor">#20ffffff</color>
+    
+    <!-- Navigation bar -->
+    <color name="navigation_bar_background_color">#ff32404f</color>
 
     <color name="signupColor">#066e8a</color>
     <color name="color_vendor_gradient_0_start">#ff397d6a</color>

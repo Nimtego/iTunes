@@ -36,7 +36,7 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseView {
         this.systemMessage.message(message)
     }
 
-    open fun showStatusBar(): Boolean = true
+    open fun showStatusBar(): Boolean = false
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

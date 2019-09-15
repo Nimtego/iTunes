@@ -1,84 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.nimtego.plectrum.presentation.ui.activity.AppActivity">
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_background_dark"
-        android:fitsSystemWindows="true"
-        app:elevation="0dp"
-        android:translationZ="0.1dp"
-        app:layout_behavior="com.nimtego.plectrum.presentation.ui.widget.behavior.AppBarLayoutBehaviorFix">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/tool_bar"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:contentInsetStart="0dp"
-            android:contentInsetLeft="0dp"
-            android:contentInsetEnd="0dp"
-            android:contentInsetRight="0dp"
-            android:minHeight="?attr/actionBarSize"
-            app:contentInsetEnd="0dp"
-            app:contentInsetLeft="0dp"
-            app:contentInsetRight="0dp"
-            app:contentInsetStart="0dp"
-            app:layout_collapseMode="pin"
-            app:layout_scrollFlags="scroll|snap|enterAlways"
-            app:popupTheme="@style/MyMaterialTheme.Base">
+            android:layout_height="wrap_content"
+            android:background="@color/color_background_dark"
+            android:translationZ="0.1dp"
+            app:elevation="0dp"
+            app:layout_behavior="com.nimtego.plectrum.presentation.ui.widget.behavior.AppBarLayoutBehaviorFix">
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/cardS"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:layout_marginEnd="6dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="4dp"
-                app:cardUseCompatPadding="true">
-                <!--app:layout_behavior="com.nimtego.plectrum.presentation.ui.widget.behavior.BottomNavigationBehavior"-->
+                android:layout_height="?attr/actionBarSize"
+                android:contentInsetStart="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetEnd="0dp"
+                android:contentInsetRight="0dp"
+                android:minHeight="?attr/actionBarSize"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:layout_scrollFlags="scroll|snap|enterAlways"
+                app:popupTheme="@style/MyMaterialTheme.Base">
 
-                <android.support.v7.widget.SearchView
-                    android:id="@+id/search_edit_text"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardS"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:background="@drawable/rounded_shape"
-                    android:elevation="2dp"
-                    android:gravity="center_vertical"
-                    android:hint="@string/search"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:theme="@style/MySearchViewStyle" />
-            </android.support.v7.widget.CardView>
-        </android.support.v7.widget.Toolbar>
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true">
+                    <!--app:layout_behavior="com.nimtego.plectrum.presentation.ui.widget.behavior.BottomNavigationBehavior"-->
 
-    </android.support.design.widget.AppBarLayout>
+                    <android.support.v7.widget.SearchView
+                        android:id="@+id/search_edit_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:background="@drawable/rounded_shape"
+                        android:elevation="2dp"
+                        android:gravity="center_vertical"
+                        android:hint="@string/search"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:theme="@style/MySearchViewStyle" />
+                </android.support.v7.widget.CardView>
+            </android.support.v7.widget.Toolbar>
 
-    <FrameLayout
-        android:id="@+id/bottom_navigation_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="fill_vertical"
-        android:background="@color/color_background_dark"
-        android:focusableInTouchMode="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-    </FrameLayout>
+        </android.support.design.widget.AppBarLayout>
 
-    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
-        android:id="@+id/bottom_navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/color_bottom_sheet_navigation_bar" />
-</android.support.design.widget.CoordinatorLayout>
+        <FrameLayout
+            android:id="@+id/bottom_navigation_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_vertical"
+            android:background="@color/color_background_dark"
+            android:focusableInTouchMode="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <!--app:layout_constraintStart_toStartOf="parent"--><!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/color_bottom_sheet_navigation_bar" />
+    </android.support.design.widget.CoordinatorLayout>
+</FrameLayout>
 
