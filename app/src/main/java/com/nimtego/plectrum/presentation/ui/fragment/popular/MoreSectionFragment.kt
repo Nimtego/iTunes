@@ -12,7 +12,7 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModel
 import com.nimtego.plectrum.presentation.mvp.presenters.general.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
-import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import javax.inject.Inject

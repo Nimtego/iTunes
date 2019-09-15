@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.presentation.manger
 
-import com.nimtego.plectrum.presentation.ui.auxiliary.TabContainer
+import com.nimtego.plectrum.presentation.ui.common.TabContainer
 import rx.subjects.PublishSubject
 
 interface TabsProvider {

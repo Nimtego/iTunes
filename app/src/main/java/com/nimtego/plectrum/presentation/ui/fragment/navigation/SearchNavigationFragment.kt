@@ -10,7 +10,7 @@ import com.nimtego.plectrum.App
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.navigation.*
-import com.nimtego.plectrum.presentation.ui.auxiliary.ParentRouterProvider
+import com.nimtego.plectrum.presentation.ui.common.ParentRouterProvider
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseSearchNavFragment
 import com.nimtego.plectrum.presentation.utils.TabSelectedListener
 import kotlinx.android.synthetic.main.navigation_search_fragment.*
@@ -134,10 +134,8 @@ class SearchNavigationFragment : BaseSearchNavFragment(), ParentRouterProvider {
             this.fragmentManager?.beginTransaction()?.apply {
                 fragmentMap.forEach { (key, fragment) ->
                     if (key == (command.screen as Screens.SearchNavTabScreen).navigationQualifier) {
-                        println("$key        ${command.screen}")
                         show(fragment)
                     } else {
-                        println("$key else")
                         hide(fragment)
                     }
                 }

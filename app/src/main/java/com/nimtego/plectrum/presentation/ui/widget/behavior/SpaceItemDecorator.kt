@@ -1,11 +1,11 @@
-package com.nimtego.plectrum.presentation.ui.widget
+package com.nimtego.plectrum.presentation.ui.widget.behavior
 
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
 class SpaceItemDecorator(private val spanCount: Int = 0,
-                         private val spacing: Int,
+                         val spacing: Int,
                          private val includeEdge: Boolean = true,
                          private val paddingTop: Int = 0,
                          private val paddingBottom: Int = 0) : RecyclerView.ItemDecoration() {

@@ -13,7 +13,7 @@ import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
-import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import javax.inject.Inject
