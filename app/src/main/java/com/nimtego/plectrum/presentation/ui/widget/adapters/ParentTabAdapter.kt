@@ -10,7 +10,8 @@ import android.widget.TextView
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
-import com.nimtego.plectrum.presentation.ui.widget.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.behavior.StartSnapHelper
+import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 
 class ParentTabAdapter(
         private val models: List<ParentTabModelContainer<ChildViewModel>>
@@ -30,7 +31,8 @@ class ParentTabAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.layout_tab_content_parent_item, parent, false)
+        val view = LayoutInflater.from(parent?.context)
+                .inflate(R.layout.layout_tab_content_parent_item, parent, false)
         val holder = ViewHolder(view)
         view.findViewById<LinearLayout>(R.id.section_header).setOnClickListener { _: View ->
             val adapterPosition = holder.adapterPosition
@@ -49,11 +51,11 @@ class ParentTabAdapter(
         holder.sectionTitle.text = sectionModel.title()
         val childLayoutManager = LinearLayoutManager(
                 holder.childRecyclerView?.context, LinearLayout.HORIZONTAL, false)
+
         holder.childRecyclerView?.apply {
             setHasFixedSize(true)
             layoutManager = childLayoutManager
-            addItemDecoration(SpaceItemDecorator(spacing = 30))
-//            itemAnimator = DefaultItemAnimator()
+            addItemDecoration(SpaceItemDecorator(spacing = spacingItems))
             adapter = SectionChildAdapter(sectionModel.getModels()).apply {
                 setOnItemClickListener(object : SectionChildAdapter.OnItemClickListener {
                     override fun onUserItemClicked(childViewModel: ChildViewModel) {
@@ -77,9 +79,18 @@ class ParentTabAdapter(
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var sectionTitle: TextView = itemView.findViewById(R.id.text_view_header)
         var childRecyclerView: RecyclerView? = null
+         var snapHelper: StartSnapHelper = StartSnapHelper()
 
         init {
-            childRecyclerView = itemView.findViewById(R.id.recycler_view_child_container)
+            this.childRecyclerView = itemView.findViewById(R.id.recycler_view_child_container)
+            this.snapHelper. apply {
+                attachToRecyclerView(childRecyclerView)
+                spaceSize = spacingItems
+            }
         }
+    }
+
+    companion object {
+        const val spacingItems = 30
     }
 }

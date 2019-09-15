@@ -12,7 +12,7 @@ import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchTabNavP
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.ParentHolderFragmentNavigator
 import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.ui.auxiliary.ParentRouterProvider
+import com.nimtego.plectrum.presentation.ui.common.ParentRouterProvider
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseTabSearchNavFragment
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder

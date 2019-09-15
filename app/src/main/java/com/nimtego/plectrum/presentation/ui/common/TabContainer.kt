@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.ui.auxiliary
+package com.nimtego.plectrum.presentation.ui.common
 
 import com.nimtego.plectrum.presentation.navigation.Tab
 
