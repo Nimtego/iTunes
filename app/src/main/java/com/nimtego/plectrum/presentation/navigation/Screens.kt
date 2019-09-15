@@ -1,13 +1,9 @@
 package com.nimtego.plectrum.presentation.navigation
 
 import android.support.v4.app.Fragment
-import com.nimtego.plectrum.presentation.ui.fragment.popular.InformationFragment
-import com.nimtego.plectrum.presentation.ui.fragment.popular.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
 import com.nimtego.plectrum.presentation.ui.fragment.navigation.*
-import com.nimtego.plectrum.presentation.ui.fragment.popular.BookTabFragment
-import com.nimtego.plectrum.presentation.ui.fragment.popular.MovieTabFragment
-import com.nimtego.plectrum.presentation.ui.fragment.popular.MusicTabFragment
+import com.nimtego.plectrum.presentation.ui.fragment.popular.*
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchContentFragment
 import com.nimtego.plectrum.presentation.ui.fragment.search.SearchInformationFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
