@@ -3,7 +3,6 @@ package com.nimtego.plectrum.presentation.navigation
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class NavigationHandlerFixed @Inject constructor(
@@ -11,8 +10,8 @@ class NavigationHandlerFixed @Inject constructor(
 ) : NavigationHandler {
 
     private fun getCicerone(qualifier: String): Cicerone<Router> {
-        return containers[qualifier] ?:
-        throw IllegalArgumentException("$qualifier in ${this.javaClass.canonicalName} not found")
+        return containers[qualifier]
+                ?: throw IllegalArgumentException("$qualifier in ${this.javaClass.canonicalName} not found")
     }
 
     override fun getNavigatorHolder(qualifier: String): NavigatorHolder {

@@ -7,7 +7,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.nimtego.plectrum"
-        minSdkVersion 24
+        minSdkVersion 23
         //noinspection OldTargetApi
         targetSdkVersion 26
         versionCode 1

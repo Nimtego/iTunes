@@ -49,14 +49,14 @@ class AppActivity : MvpAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE.getAppComponent().inject(this)
-        setTheme(R.style.MyMaterialTheme)
+        //setTheme(R.style.MyMaterialTheme)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
         this.statusBar = findViewById(R.id.status_bar)
 
         onLockOrientation()
-        setTransparentStatusBar()
+        //setTransparentStatusBar()
 
         this.navigator.applyCommands(arrayOf(Forward(Screens.SplashScreen)))
     }
@@ -90,6 +90,7 @@ class AppActivity : MvpAppCompatActivity() {
         this.statusBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
+    // @link - https://stackoverflow.com/questions/45527229/showing-content-behind-status-and-navigation-bar/45530210
     fun setTransparentStatusBar() {
         window.setFlags(
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
