@@ -13,18 +13,12 @@ class PopularBookFactory @Inject constructor(
 ) : PopularBookDataStore {
 
     override fun topFreeBook(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularBookKey.TOP_FREE_BOOK)) {
-            diskPopularBook.topFreeBook()
-        } else {
-            cloudDataStore.topFreeBook()
-        }
+        return Observable.concat(diskPopularBook.topFreeBook(),
+                cloudDataStore.topFreeBook())
     }
 
     override fun topPaidBook(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularBookKey.TOP_PAID_BOOK)) {
-            diskPopularBook.topPaidBook()
-        } else {
-            cloudDataStore.topPaidBook()
-        }
+        return Observable.concat(diskPopularBook.topPaidBook(),
+                cloudDataStore.topPaidBook())
     }
 }

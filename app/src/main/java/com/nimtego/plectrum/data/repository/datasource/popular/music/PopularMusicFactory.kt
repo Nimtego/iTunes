@@ -12,34 +12,22 @@ class PopularMusicFactory @Inject constructor(
 ) : PopularMusicDataStore {
 
     override fun hotTrack(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.HOT_TRACK)) {
-            diskPopularMusic.hotTrack()
-        } else {
-            cloudDataStore.hotTrack()
-        }
+        return Observable.concat(diskPopularMusic.hotTrack(),
+                cloudDataStore.hotTrack())
     }
 
     override fun newTrack(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.NEW_TRACK)) {
-            diskPopularMusic.newTrack()
-        } else {
-            cloudDataStore.newTrack()
-        }
+        return Observable.concat(diskPopularMusic.newTrack(),
+                cloudDataStore.newTrack())
     }
 
     override fun topTrack(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.TOP_TRACK)) {
-            diskPopularMusic.topTrack()
-        } else {
-            cloudDataStore.topTrack()
-        }
+        return Observable.concat(diskPopularMusic.topTrack(),
+                cloudDataStore.topTrack())
     }
 
     override fun topAlbum(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.TOP_ALBUM)) {
-            diskPopularMusic.topAlbum()
-        } else {
-            cloudDataStore.topAlbum()
-        }
+        return Observable.concat(diskPopularMusic.topAlbum(),
+                cloudDataStore.topAlbum())
     }
 }

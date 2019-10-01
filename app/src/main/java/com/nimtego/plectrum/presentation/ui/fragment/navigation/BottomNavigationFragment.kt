@@ -195,23 +195,23 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
             when (command.screen) {
                 Screens.MusicTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.hideWithCall(this.movieNavigationFragment)
-                            ?.hideWithCall(this.bookNavigationFragment)
-                            ?.showWithCall(this.musicNavigationFragment)
+                            ?.hide(this.movieNavigationFragment)
+                            ?.hide(this.bookNavigationFragment)
+                            ?.show(this.musicNavigationFragment)
                             ?.commit()
                 }
                 Screens.MovieTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.hideWithCall(this.musicNavigationFragment)
-                            ?.hideWithCall(this.bookNavigationFragment)
-                            ?.showWithCall(this.movieNavigationFragment)
+                            ?.hide(this.musicNavigationFragment)
+                            ?.hide(this.bookNavigationFragment)
+                            ?.show(this.movieNavigationFragment)
                             ?.commit()
                 }
                 Screens.BookTabNavigationScreen -> {
                     this.fragmentManager?.beginTransaction()
-                            ?.hideWithCall(this.musicNavigationFragment)
-                            ?.hideWithCall(this.movieNavigationFragment)
-                            ?.showWithCall(this.bookNavigationFragment)
+                            ?.hide(this.musicNavigationFragment)
+                            ?.hide(this.movieNavigationFragment)
+                            ?.show(this.bookNavigationFragment)
                             ?.commit()
 
                 }
@@ -238,13 +238,3 @@ class BottomNavigationFragment : BaseFragment(), MainBottomNavigationView, BackB
     }
 }
 
-private fun FragmentTransaction.showWithCall(fragment: Fragment): FragmentTransaction {
-    val fragmentTransaction = this.show(fragment)
-    (fragment as HideChangeListener).isShow(true)
-    return fragmentTransaction
-}
-
-private fun FragmentTransaction.hideWithCall(fragment: Fragment): FragmentTransaction {
-    (fragment as HideChangeListener).isShow(false)
-    return this.hide(fragment)
-}

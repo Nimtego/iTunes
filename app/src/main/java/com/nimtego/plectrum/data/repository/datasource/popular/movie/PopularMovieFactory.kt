@@ -15,10 +15,7 @@ class PopularMovieFactory @Inject constructor(
 
 
     override fun topMovie(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMovieKey.TOP_MOVIE)) {
-            diskPopularMusic.topMovie()
-        } else {
-            cloudDataStore.topMovie()
-        }
+        return Observable.concat(diskPopularMusic.topMovie(),
+                cloudDataStore.topMovie())
     }
 }

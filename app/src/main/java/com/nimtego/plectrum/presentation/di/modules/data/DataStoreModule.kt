@@ -58,7 +58,7 @@ class DataStoreModule {
             fileManager: FileManager,
             threadExecutor: ThreadExecutor
     ) : PopularResponseCache {
-        return PopularResponseCache(appContext, serializer, fileManager, threadExecutor)
+        return PopularResponseCache()
     }
 
     @Provides
@@ -98,7 +98,7 @@ class DataStoreModule {
             fileManager: FileManager,
             threadExecutor: ThreadExecutor
     ) : PopularResponseCache {
-        return PopularResponseCache(appContext, serializer, fileManager, threadExecutor)
+        return PopularResponseCache()
     }
 
     @Provides
@@ -138,7 +138,7 @@ class DataStoreModule {
             fileManager: FileManager,
             threadExecutor: ThreadExecutor
     ) : PopularResponseCache {
-        return PopularResponseCache(appContext, serializer, fileManager, threadExecutor)
+        return PopularResponseCache()
     }
 
     @Provides
