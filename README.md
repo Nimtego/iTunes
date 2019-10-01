@@ -45,9 +45,9 @@
 ------------
 1. RxJava2
 2. Dagger2
-3. Lombok
+3. Moxy
 4. Mockito
 5. Retrofit
 6. Picasso
 7. Jsoup
-8. ButterKnife
+8. Cicerone
