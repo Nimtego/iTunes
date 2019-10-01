@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.data.repository.repository
 
 import com.nimtego.plectrum.data.model.mappers.PopularMusicMapper
+import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicDataStore
 import com.nimtego.plectrum.domain.repository.Repository
@@ -17,9 +18,9 @@ class PopularMusicRepository @Inject constructor(
         private val mapper: PopularMusicMapper
 ) : Repository<BaseParentViewModel<ChildViewModel>> {
 
-    override fun query(request: String): Observable<BaseParentViewModel<ChildViewModel>> {
+    override fun query(request: String, responseSize: Int): Observable<BaseParentViewModel<ChildViewModel>> {
         return Observable.zip<MusicTabModel, MusicTabModel, MusicTabModel, MusicTabModel, BaseParentViewModel<ChildViewModel>>(
-                newTrack(), hotTrack(), topTrack(), topAlbum(),
+                newTrack(responseSize), hotTrack(responseSize), topTrack(responseSize), topAlbum(responseSize),
                 Function4{ newTrack: MusicTabModel,
                            hotTrack: MusicTabModel,
                            topTrack: MusicTabModel,
@@ -28,39 +29,31 @@ class PopularMusicRepository @Inject constructor(
                 })
     }
 
-    private fun hotTrack(): Observable<MusicTabModel> {
-        return dataStoreFactory.hotTrack().map {
+    private fun hotTrack(responseSize: Int): Observable<MusicTabModel> {
+        return transformResponse(dataStoreFactory.hotTrack(responseSize))
+    }
+
+    private fun newTrack(responseSize: Int): Observable<MusicTabModel> {
+        return transformResponse(dataStoreFactory.newTrack(responseSize))
+    }
+
+    private fun topTrack(responseSize: Int): Observable<MusicTabModel> {
+        return transformResponse(dataStoreFactory.topTrack(responseSize))
+    }
+
+    private fun topAlbum(responseSize: Int): Observable<MusicTabModel> {
+        return transformResponse(dataStoreFactory.topAlbum(responseSize))
+    }
+
+    private fun transformResponse(
+            response: Observable<PopularResponse>
+    ): Observable<MusicTabModel> {
+        return response.map {
             MusicTabModel(it.feed.title,
                     it.feed.results.map { result: Result ->
-                        SongWrapperModel(mapper.popularResultToSong(result))
+                        SongWrapperModel(mapper.popularResultToMusicalModel(result))
                     })
         }
     }
 
-    private fun newTrack(): Observable<MusicTabModel> {
-        return dataStoreFactory.newTrack().map {
-            MusicTabModel(it.feed.title,
-                    it.feed.results.map { result: Result ->
-                        SongWrapperModel(mapper.popularResultToSong(result))
-                    })
-        }
-    }
-
-    private fun topTrack(): Observable<MusicTabModel> {
-        return dataStoreFactory.topTrack().map {
-            MusicTabModel(it.feed.title,
-                    it.feed.results.map { result: Result ->
-                        SongWrapperModel(mapper.popularResultToSong(result))
-                    })
-        }
-    }
-
-    private fun topAlbum(): Observable<MusicTabModel> {
-        return dataStoreFactory.topAlbum().map {
-            MusicTabModel(it.feed.title,
-                    it.feed.results.map { result: Result ->
-                        SongWrapperModel(mapper.popularResultToSong(result))
-                    })
-        }
-    }
 }

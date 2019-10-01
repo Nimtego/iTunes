@@ -11,11 +11,11 @@ class DiskPopularBook @Inject constructor(
         private val cache: PopularResponseCache
 ) : PopularBookDataStore {
 
-    override fun topFreeBook(): Observable<PopularResponse> {
+    override fun topFreeBook(responseSize: Int): Observable<PopularResponse> {
         return cache.get(PopularBookKey.TOP_FREE_BOOK)
     }
 
-    override fun topPaidBook(): Observable<PopularResponse> {
+    override fun topPaidBook(responseSize: Int): Observable<PopularResponse> {
         return cache.get(PopularBookKey.TOP_PAID_BOOK)
     }
 }

@@ -47,7 +47,7 @@ class MusicTabPresenter @Inject constructor(
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }
-            }, PopularMusicInteractor.Params.forRequest(containerName))
+            }, PopularMusicInteractor.Params.forRequestWithSize(containerName, 5))
         }
     }
 

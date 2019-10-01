@@ -12,13 +12,13 @@ class PopularBookFactory @Inject constructor(
         private val diskPopularBook: DiskPopularBook
 ) : PopularBookDataStore {
 
-    override fun topFreeBook(): Observable<PopularResponse> {
-        return Observable.concat(diskPopularBook.topFreeBook(),
-                cloudDataStore.topFreeBook())
+    override fun topFreeBook(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularBook.topFreeBook(responseSize),
+                cloudDataStore.topFreeBook(responseSize))
     }
 
-    override fun topPaidBook(): Observable<PopularResponse> {
-        return Observable.concat(diskPopularBook.topPaidBook(),
-                cloudDataStore.topPaidBook())
+    override fun topPaidBook(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularBook.topPaidBook(responseSize),
+                cloudDataStore.topPaidBook(responseSize))
     }
 }

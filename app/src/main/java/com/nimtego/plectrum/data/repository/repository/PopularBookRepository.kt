@@ -19,10 +19,10 @@ class PopularBookRepository @Inject constructor(
         private val mapper: PopularBookMapper
 ) : Repository<BaseParentViewModel<ChildViewModel>> {
 
-    override fun query(request: String): Observable<BaseParentViewModel<ChildViewModel>> {
+    override fun query(request: String, responseSize: Int): Observable<BaseParentViewModel<ChildViewModel>> {
         return Observable.zip<PopularResponse, PopularResponse, BaseParentViewModel<ChildViewModel>>(
-                topFreeBook(),
-                topPaidBook(),
+                topFreeBook(responseSize),
+                topPaidBook(responseSize),
                 BiFunction<PopularResponse, PopularResponse, BaseParentViewModel<ChildViewModel>>
                 { freeBook, paidBook ->
                     BaseParentViewModel(listOf(topParentModel(freeBook.feed),
@@ -38,10 +38,10 @@ class PopularBookRepository @Inject constructor(
     }
 
 
-    private fun topFreeBook(): Observable<PopularResponse> {
-        return dataStoreFactory.topFreeBook()
+    private fun topFreeBook(responseSize: Int): Observable<PopularResponse> {
+        return dataStoreFactory.topFreeBook(responseSize)
     }
-    private fun topPaidBook(): Observable<PopularResponse> {
-        return dataStoreFactory.topPaidBook()
+    private fun topPaidBook(responseSize: Int): Observable<PopularResponse> {
+        return dataStoreFactory.topPaidBook(responseSize)
     }
 }

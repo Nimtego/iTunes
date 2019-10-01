@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.presentation.mvp.presenters.general
 
-import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.general.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
@@ -12,13 +11,11 @@ import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
-import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
-class MoreSectionPresenter
-@Inject constructor(
+class MoreSectionPresenter @Inject constructor(
         private val navigationHandler: NavigationHandler,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: MainItemStorage
@@ -35,32 +32,24 @@ class MoreSectionPresenter
 
     override fun attachView(view: MoreSectionView) {
         super.attachView(view)
-        viewReady()
+        prepareViewModel()
     }
 
-    fun viewReady() {
-        this.dataModel?.let { showModel() } ?: this.itemStorage.getCurrentSection()?.let {
-            this.viewState.systemMessage(it.title())
-            this.dataModel = it
-            showModel()
-        } ?: run {
-            interactor.execute(object : DisposableObserver<ParentTabModelContainer<ChildViewModel>>() {
-                override fun onComplete() {
-                    Log.i("Presenter", "onComplete()")
-                }
+    private fun prepareViewModel() {
+        this.dataModel?.let { showModel() } ?: run { executeModel() }
+    }
 
-                override fun onNext(songs: ParentTabModelContainer<ChildViewModel>) {
-                    Log.i("Presenter", "onnext")
-                    this@MoreSectionPresenter.dataModel = songs
-                    this@MoreSectionPresenter.showModel()
-                }
+    private fun executeModel() {
+        interactor.execute(object : DisposableObserver<ParentTabModelContainer<ChildViewModel>>() {
+            override fun onNext(viewModel: ParentTabModelContainer<ChildViewModel>) {
+                this@MoreSectionPresenter.dataModel = viewModel
+                this@MoreSectionPresenter.showModel()
+            }
 
-                override fun onError(e: Throwable) {
-                    Log.i("Presenter", "onerror $e")
-                }
-            }, MoreSectionInteractor.Params.forRequest(navigationQualifier))
-
-        }
+            override fun onComplete() {}
+            //todo need impl. error handler
+            override fun onError(e: Throwable) {}
+        }, MoreSectionInteractor.Params.forRequestWithSize(navigationQualifier, 200))
     }
 
     private fun showModel() {

@@ -6,7 +6,7 @@ import com.nimtego.plectrum.presentation.mvp.model.song.Song
 
 class PopularMusicMapper {
 
-    fun popularResultToSong(result: Result) : Song {
+    fun popularResultToMusicalModel(result: Result) : Song {
         return Song(artistName = result.artistName,
                 artistId = result.artistId.toInt(),
                 trackName = result.name,

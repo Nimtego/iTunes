@@ -11,23 +11,23 @@ class PopularMusicFactory @Inject constructor(
         private val diskPopularMusic: DiskPopularMusic
 ) : PopularMusicDataStore {
 
-    override fun hotTrack(): Observable<PopularResponse> {
-        return Observable.concat(diskPopularMusic.hotTrack(),
-                cloudDataStore.hotTrack())
+    override fun hotTrack(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.hotTrack(responseSize),
+                                 cloudDataStore.hotTrack(responseSize))
     }
 
-    override fun newTrack(): Observable<PopularResponse> {
-        return Observable.concat(diskPopularMusic.newTrack(),
-                cloudDataStore.newTrack())
+    override fun newTrack(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.newTrack(responseSize),
+                                 cloudDataStore.newTrack(responseSize))
     }
 
-    override fun topTrack(): Observable<PopularResponse> {
-        return Observable.concat(diskPopularMusic.topTrack(),
-                cloudDataStore.topTrack())
+    override fun topTrack(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.topTrack(responseSize),
+                                 cloudDataStore.topTrack(responseSize))
     }
 
-    override fun topAlbum(): Observable<PopularResponse> {
-        return Observable.concat(diskPopularMusic.topAlbum(),
-                cloudDataStore.topAlbum())
+    override fun topAlbum(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.topAlbum(responseSize),
+                cloudDataStore.topAlbum(responseSize))
     }
 }

@@ -44,7 +44,7 @@ class BookTabPresenter @Inject constructor(
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
                 }
-            }, PopularBookInteractor.Params.forRequest(containerName))
+            }, PopularBookInteractor.Params.forRequestWithSize(containerName, 5))
 
         }
     }

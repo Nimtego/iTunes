@@ -14,14 +14,21 @@ class MoreSectionInteractor @Inject constructor(
 ) : BaseInteractor<ParentTabModelContainer<ChildViewModel>, MoreSectionInteractor.Params>(disposable) {
 
     override fun buildUseCaseObservable(params: Params): Observable<ParentTabModelContainer<ChildViewModel>> {
-        return repository.query(params.request)
+        return repository.query(params.request, params.responseSize)
     }
 
-    class Params private constructor(val request: String) {
+    class Params private constructor(
+            val request: String,
+            val responseSize: Int) {
+
         companion object {
 
             fun forRequest(request: String): Params {
-                return Params(request)
+                return forRequestWithSize(request, 100)
+            }
+
+            fun forRequestWithSize(request: String, responseSize: Int): Params {
+                return Params(request, responseSize)
             }
 
         }

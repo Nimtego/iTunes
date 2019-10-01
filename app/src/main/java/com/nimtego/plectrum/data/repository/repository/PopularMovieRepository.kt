@@ -17,8 +17,8 @@ class PopularMovieRepository @Inject constructor(
         private val mapper: PopularMovieMapper
 ) : Repository<BaseParentViewModel<ChildViewModel>> {
 
-    override fun query(request: String): Observable<BaseParentViewModel<ChildViewModel>> {
-        return dataStoreFactory.topMovie().map {
+    override fun query(request: String, responseSize: Int): Observable<BaseParentViewModel<ChildViewModel>> {
+        return dataStoreFactory.topMovie(responseSize).map {
             BaseParentViewModel(listOf(resultToMovie(it.feed)))
         }
     }
