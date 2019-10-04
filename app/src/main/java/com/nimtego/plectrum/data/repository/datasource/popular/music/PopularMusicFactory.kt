@@ -14,20 +14,28 @@ class PopularMusicFactory @Inject constructor(
     override fun hotTrack(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularMusic.hotTrack(responseSize),
                                  cloudDataStore.hotTrack(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 
     override fun newTrack(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularMusic.newTrack(responseSize),
                                  cloudDataStore.newTrack(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 
     override fun topTrack(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularMusic.topTrack(responseSize),
                                  cloudDataStore.topTrack(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 
     override fun topAlbum(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularMusic.topAlbum(responseSize),
-                cloudDataStore.topAlbum(responseSize))
+                                 cloudDataStore.topAlbum(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 }

@@ -15,5 +15,7 @@ class PopularMovieFactory @Inject constructor(
     override fun topMovie(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularMusic.topMovie(responseSize),
                                  cloudDataStore.topMovie(responseSize))
+                                 .firstElement()
+                                 .toObservable()
     }
 }

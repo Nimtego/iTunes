@@ -8,6 +8,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicKey
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
@@ -74,8 +75,8 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
 //Mark: view override
 
     override fun showViewState(data: List<ChildViewModel>) {
-        //todo remove
-        val tmpData = MusicTabModel("tmp", data)
+        //todo remove key change model for search
+        val tmpData = MusicTabModel(PopularMusicKey.TOP_ALBUM, "tmp", data)
         this.searchContentRv?.apply {
             adapter = MoreSectionAdapter(tmpData).apply {
                 setOnItemClickListener(presenter)

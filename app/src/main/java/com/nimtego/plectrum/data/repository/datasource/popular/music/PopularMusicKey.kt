@@ -1,8 +1,10 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.music
 
-object PopularMusicKey {
-    const val HOT_TRACK = "HotTrack"
-    const val NEW_TRACK = "NewTrack"
-    const val TOP_TRACK = "TopTrack"
-    const val TOP_ALBUM = "TopAlbum"
+import com.nimtego.plectrum.data.repository.datasource.popular.SectionsKey
+
+enum class PopularMusicKey(val key: String): SectionsKey {
+    HOT_TRACK("HotTrack"),
+    NEW_TRACK("NewTrack"),
+    TOP_TRACK("TopTrack"),
+    TOP_ALBUM("TopAlbum")
 }

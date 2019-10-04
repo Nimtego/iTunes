@@ -12,10 +12,10 @@ class DiskPopularBook @Inject constructor(
 ) : PopularBookDataStore {
 
     override fun topFreeBook(responseSize: Int): Observable<PopularResponse> {
-        return cache.get(PopularBookKey.TOP_FREE_BOOK)
+        return cache.get(PopularBookKey.TOP_FREE_BOOK.key)
     }
 
     override fun topPaidBook(responseSize: Int): Observable<PopularResponse> {
-        return cache.get(PopularBookKey.TOP_PAID_BOOK)
+        return cache.get(PopularBookKey.TOP_PAID_BOOK.key)
     }
 }

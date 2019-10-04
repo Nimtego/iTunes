@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.book
 
-import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import io.reactivex.Observable
@@ -14,11 +13,15 @@ class PopularBookFactory @Inject constructor(
 
     override fun topFreeBook(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularBook.topFreeBook(responseSize),
-                cloudDataStore.topFreeBook(responseSize))
+                                 cloudDataStore.topFreeBook(responseSize))
+                                 .firstElement()
+                                 .toObservable()
     }
 
     override fun topPaidBook(responseSize: Int): Observable<PopularResponse> {
         return Observable.concat(diskPopularBook.topPaidBook(responseSize),
-                cloudDataStore.topPaidBook(responseSize))
+                                 cloudDataStore.topPaidBook(responseSize))
+                                 .firstElement()
+                                 .toObservable()
     }
 }

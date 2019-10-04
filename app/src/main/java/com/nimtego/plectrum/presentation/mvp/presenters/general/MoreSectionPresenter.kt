@@ -5,6 +5,7 @@ import com.nimtego.plectrum.domain.interactor.general.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
@@ -40,8 +41,8 @@ class MoreSectionPresenter @Inject constructor(
     }
 
     private fun executeModel() {
-        interactor.execute(object : DisposableObserver<ParentTabModelContainer<ChildViewModel>>() {
-            override fun onNext(viewModel: ParentTabModelContainer<ChildViewModel>) {
+        interactor.execute(object : DisposableObserver<SectionViewModel<ChildViewModel>>() {
+            override fun onNext(viewModel: SectionViewModel<ChildViewModel>) {
                 this@MoreSectionPresenter.dataModel = viewModel
                 this@MoreSectionPresenter.showModel()
             }
@@ -49,7 +50,10 @@ class MoreSectionPresenter @Inject constructor(
             override fun onComplete() {}
             //todo need impl. error handler
             override fun onError(e: Throwable) {}
-        }, MoreSectionInteractor.Params.forRequestWithSize(navigationQualifier, 200))
+        }, MoreSectionInteractor.Params.forRequestWithSize(
+                this.itemStorage.getCurrentSection()!!.titleKey(),
+                100)
+        )
     }
 
     private fun showModel() {

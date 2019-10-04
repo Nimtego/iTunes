@@ -15,28 +15,28 @@ class CloudPopularMusic @Inject constructor (
     override fun hotTrack(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.hotTracks(responseSize))
                 .doOnNext {
-                    this@CloudPopularMusic.cache.put(PopularMusicKey.HOT_TRACK, it)
+                    this@CloudPopularMusic.cache.put(PopularMusicKey.HOT_TRACK.key, it)
                 }
     }
 
     override fun newTrack(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.newMusic(responseSize))
                 .doOnNext {
-                    this@CloudPopularMusic.cache.put(PopularMusicKey.NEW_TRACK, it)
+                    this@CloudPopularMusic.cache.put(PopularMusicKey.NEW_TRACK.key, it)
                 }
     }
 
     override fun topTrack(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.topSongs(responseSize))
                 .doOnNext {
-                    this@CloudPopularMusic.cache.put(PopularMusicKey.TOP_TRACK, it)
+                    this@CloudPopularMusic.cache.put(PopularMusicKey.TOP_TRACK.key, it)
                 }
     }
 
     override fun topAlbum(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.topAlbum(responseSize))
                 .doOnNext {
-                    this@CloudPopularMusic.cache.put(PopularMusicKey.TOP_TRACK, it)
+                    this@CloudPopularMusic.cache.put(PopularMusicKey.TOP_TRACK.key, it)
                 }
     }
 }

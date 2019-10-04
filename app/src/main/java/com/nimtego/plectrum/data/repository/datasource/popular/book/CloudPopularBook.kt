@@ -15,14 +15,14 @@ class CloudPopularBook @Inject constructor (
     override fun topFreeBook(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.topFreeBook(responseSize))
                 .doOnNext {
-                    this@CloudPopularBook.cache.put(PopularBookKey.TOP_FREE_BOOK, it)
+                    this@CloudPopularBook.cache.put(PopularBookKey.TOP_FREE_BOOK.key, it)
                 }
     }
 
     override fun topPaidBook(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.topPaidBook(responseSize))
                 .doOnNext {
-                    this@CloudPopularBook.cache.put(PopularBookKey.TOP_PAID_BOOK, it)
+                    this@CloudPopularBook.cache.put(PopularBookKey.TOP_PAID_BOOK.key, it)
                 }
     }
 }

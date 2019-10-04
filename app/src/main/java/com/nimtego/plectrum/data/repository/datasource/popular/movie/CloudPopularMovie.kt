@@ -17,7 +17,7 @@ class CloudPopularMovie @Inject constructor (
     override fun topMovie(responseSize: Int): Observable<PopularResponse> {
         return rssItunesApi.getPopularContent(RssItunesFabricParam.topMovies(responseSize))
                 .doOnNext {
-                    this@CloudPopularMovie.cache.put(PopularMovieKey.TOP_MOVIE, it)
+                    this@CloudPopularMovie.cache.put(PopularMovieKey.TOP_MOVIE.key, it)
                 }
     }
 }

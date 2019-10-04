@@ -2,6 +2,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters.popular
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
+import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookKey
 import com.nimtego.plectrum.domain.interactor.popular.PopularBookInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
@@ -44,8 +45,8 @@ class BookTabPresenter @Inject constructor(
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
                 }
-            }, PopularBookInteractor.Params.forRequestWithSize(containerName, 5))
-
+            }, PopularBookInteractor.Params.forRequestWithSize(PopularBookKey.TOP_FREE_BOOK, 5))
+//todo PopularBookKey.TOP_FREE_BOOK not use in interactor. change interactor arg
         }
     }
 

@@ -27,37 +27,37 @@ class InteractorModule {
     @Provides
     @Singleton
     internal fun provideAppLaunchnInteractor(
-            popularMusicRepository: PopularMusicRepository,
-            popularMovieRepository: PopularMovieRepository,
-            popularBookRepository: PopularBookRepository,
+            musicRepository: PopularMusicRepository,
+            movieRepository: PopularMovieRepository,
+            bookRepository: PopularBookRepository,
             schedulersProvider: SchedulersProvider
     ): LaunchUseCase {
-        return AppLaunchInteractor(popularMusicRepository = popularMusicRepository,
-                popularMovieRepository = popularMovieRepository,
-                popularBookRepository = popularBookRepository,
+        return AppLaunchInteractor(musicRepository = musicRepository,
+                movieRepository = movieRepository,
+                bookRepository = bookRepository,
                 schedulersProvider = schedulersProvider)
     }
 
     @Provides
     @Singleton
     internal fun providePopularMusicInteractor(
-            repository: PopularMusicRepository,
+            repositoryMusicRepository: PopularMusicRepository,
             compositeDisposable: CompositeDisposable
-    ) = PopularMusicInteractor(compositeDisposable, repository)
+    ) = PopularMusicInteractor(compositeDisposable, repositoryMusicRepository)
 
     @Provides
     @Singleton
     internal fun providePopularMovieInteractor(
-            repository: PopularMovieRepository,
+            repositoryMovieRepository: PopularMovieRepository,
             compositeDisposable: CompositeDisposable
-    ) = PopularMovieInteractor(compositeDisposable, repository)
+    ) = PopularMovieInteractor(compositeDisposable, repositoryMovieRepository)
 
     @Provides
     @Singleton
     internal fun providePopularBookInteractor(
-            repository: PopularBookRepository,
+            repositoryBookRepository: PopularBookRepository,
             compositeDisposable: CompositeDisposable
-    ) = PopularBookInteractor(compositeDisposable, repository)
+    ) = PopularBookInteractor(compositeDisposable, repositoryBookRepository)
 
     @Provides
     @Singleton

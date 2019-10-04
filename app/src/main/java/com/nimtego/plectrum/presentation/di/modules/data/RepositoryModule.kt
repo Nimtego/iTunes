@@ -9,13 +9,11 @@ import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovi
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
 import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.data.repository.repository.*
-import com.nimtego.plectrum.domain.repository.Repository
-import com.nimtego.plectrum.domain.repository.SongSource
+import com.nimtego.plectrum.domain.repository.RepositoryPopular
 import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -32,7 +30,7 @@ class RepositoryModule {
             mapper: PopularMusicMapper,
             @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
             dataStoreFactory: PopularMusicFactory
-    ) : Repository<BaseParentViewModel<ChildViewModel>> {
+    ) : RepositoryPopular<BaseParentViewModel<ChildViewModel>> {
         return PopularMusicRepository(dataStoreFactory, mapper)
     }
 
@@ -43,7 +41,7 @@ class RepositoryModule {
             mapper: PopularMovieMapper,
             @Named(RepositoryQualifiers.MOVIE_REPOSITORY)
             dataStoreFactory: PopularMovieFactory
-    ) : Repository<BaseParentViewModel<ChildViewModel>> {
+    ) : RepositoryPopular<BaseParentViewModel<ChildViewModel>> {
         return PopularMovieRepository(dataStoreFactory, mapper)
     }
 
@@ -54,7 +52,7 @@ class RepositoryModule {
             mapper: PopularBookMapper,
             @Named(RepositoryQualifiers.MOVIE_REPOSITORY)
             dataStoreFactory: PopularBookFactory
-    ) : Repository<BaseParentViewModel<ChildViewModel>> {
+    ) : RepositoryPopular<BaseParentViewModel<ChildViewModel>> {
         return PopularBookRepository(dataStoreFactory, mapper)
     }
 
@@ -73,8 +71,13 @@ class RepositoryModule {
     @Provides
     @Singleton
     internal fun provideMoreSectionRepository(mapper: PopularMusicMapper,
-                                              dataStoreFactory: PopularMusicFactory) =
-            MoreSectionRepository(dataStoreFactory, mapper)
+                                              musicDataStoreFactory: PopularMusicFactory,
+                                              movieDataStoreFactory: PopularMovieFactory,
+                                              bookDataStoreFactory: PopularBookFactory) =
+            MoreSectionRepository(musicDataStoreFactory = musicDataStoreFactory,
+                                  movieDataStoreFactory = movieDataStoreFactory,
+                                  bookDataStoreFactory = bookDataStoreFactory,
+                                  mapper = mapper)
 
     @Provides
     @Singleton

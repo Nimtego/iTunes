@@ -1,25 +1,19 @@
 package com.nimtego.plectrum.domain.interactor
 
+import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicKey
 import com.nimtego.plectrum.data.repository.repository.PopularBookRepository
 import com.nimtego.plectrum.data.repository.repository.PopularMovieRepository
 import com.nimtego.plectrum.data.repository.repository.PopularMusicRepository
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableCompletableObserver
-import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AppLaunchInteractor @Inject constructor (
         private val schedulersProvider: SchedulersProvider,
-        private val popularMusicRepository: PopularMusicRepository,
-        private val popularMovieRepository: PopularMovieRepository,
-        private val popularBookRepository: PopularBookRepository
+        private val musicRepository: PopularMusicRepository,
+        private val movieRepository: PopularMovieRepository,
+        private val bookRepository: PopularBookRepository
 ) : LaunchUseCase  {
 
     override fun appLaunch(): Completable {
@@ -27,16 +21,17 @@ class AppLaunchInteractor @Inject constructor (
     }
 
     private fun popularMusic(): Completable {
-        return popularMusicRepository.query("").ignoreElements()
+        //todo change late
+        return musicRepository.query(PopularMusicKey.TOP_ALBUM, 5).ignoreElements()
     }
 
-    private fun popularMovie(): Completable {
-        return popularMovieRepository.query("").ignoreElements()
-    }
-
-    private fun popularBook(): Completable {
-        return popularBookRepository.query("").ignoreElements()
-    }
+//    private fun popularMovie(): Completable {
+//        return movieRepository.query("").ignoreElements()
+//    }
+//
+//    private fun popularBook(): Completable {
+//        return bookRepository.query("").ignoreElements()
+//    }
 
     class Params private constructor(val request: String) {
         companion object {
