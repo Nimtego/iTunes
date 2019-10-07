@@ -70,14 +70,18 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    internal fun provideMoreSectionRepository(mapper: PopularMusicMapper,
+    internal fun provideMoreSectionRepository(mapperMusic: PopularMusicMapper,
+                                              mapperMovie: PopularMovieMapper,
+                                              mapperBook: PopularBookMapper,
                                               musicDataStoreFactory: PopularMusicFactory,
                                               movieDataStoreFactory: PopularMovieFactory,
                                               bookDataStoreFactory: PopularBookFactory) =
             MoreSectionRepository(musicDataStoreFactory = musicDataStoreFactory,
                                   movieDataStoreFactory = movieDataStoreFactory,
                                   bookDataStoreFactory = bookDataStoreFactory,
-                                  mapper = mapper)
+                                  mapperMusic = mapperMusic,
+                                  mapperMovie = mapperMovie,
+                                  mapperBook = mapperBook)
 
     @Provides
     @Singleton

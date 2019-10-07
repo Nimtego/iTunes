@@ -1,5 +1,7 @@
 package com.nimtego.plectrum.data.repository.repository
 
+import com.nimtego.plectrum.data.model.mappers.PopularBookMapper
+import com.nimtego.plectrum.data.model.mappers.PopularMovieMapper
 import com.nimtego.plectrum.data.model.mappers.PopularMusicMapper
 import com.nimtego.plectrum.data.model.rss_itunes.Result
 import com.nimtego.plectrum.data.repository.datasource.popular.SectionsKey
@@ -10,20 +12,26 @@ import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovi
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicDataStore
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicKey
 import com.nimtego.plectrum.domain.repository.RepositoryPopular
+import com.nimtego.plectrum.presentation.mvp.model.book.Book
+import com.nimtego.plectrum.presentation.mvp.model.book.BookWrapperModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
 import com.nimtego.plectrum.presentation.mvp.model.movie.Movie
 import com.nimtego.plectrum.presentation.mvp.model.movie.MovieWrapperModel
+import com.nimtego.plectrum.presentation.mvp.model.movie.PopularMovieModel
 import com.nimtego.plectrum.presentation.mvp.model.song.*
 import io.reactivex.Observable
 import java.lang.Exception
 
+//todo it is too much arguments
 class MoreSectionRepository(
         private val musicDataStoreFactory: PopularMusicDataStore,
         private val bookDataStoreFactory: PopularBookDataStore,
         private val movieDataStoreFactory: PopularMovieDataStore,
-        private val mapper: PopularMusicMapper
+        private val mapperMusic: PopularMusicMapper,
+        private val mapperMovie: PopularMovieMapper,
+        private val mapperBook: PopularBookMapper
 ) : RepositoryPopular<SectionViewModel<ChildViewModel>> {
 
     override fun query(sectionKey: SectionsKey,
@@ -50,7 +58,7 @@ class MoreSectionRepository(
         }
         return contentObservableByKey.map {
             val modelList : List<ChildViewModel> = it.feed.results.map {
-                result: Result -> mapper.popularResultToMusicalModel(result)
+                result: Result -> mapperMusic.popularResultToMusicalModel(result)
             }.map { song: Song -> SongWrapperModel(song) }
             SectionViewModel(titleKey = keySection,
                              title = it.feed.title,
@@ -59,8 +67,6 @@ class MoreSectionRepository(
         }
     }
 
-    //todo Prepare wrapper for book and movie!
-    
     private fun getMovieContent(
             keySection: PopularMovieKey,
             responseSize: Int
@@ -70,8 +76,8 @@ class MoreSectionRepository(
         }
         return contentObservableByKey.map {
             val modelList : List<ChildViewModel> = it.feed.results.map {
-                result: Result -> mapper.popularResultToMusicalModel(result)
-            }.map { movie: Song -> SongWrapperModel(movie) }
+                result: Result -> mapperMovie.popularResultToMovie(result)
+            }.map { movie: PopularMovieModel -> MovieWrapperModel(movie) }
             SectionViewModel(titleKey = keySection,
                     title = it.feed.title,
                     parentList = modelList
@@ -89,8 +95,8 @@ class MoreSectionRepository(
         }
         return contentObservableByKey.map {
             val modelList : List<ChildViewModel> = it.feed.results.map {
-                result: Result -> mapper.popularResultToMusicalModel(result)
-            }.map { movie: Song -> SongWrapperModel(movie) }
+                result: Result -> mapperBook.popularResultToBook(result)
+            }.map { book: Book -> BookWrapperModel(book) }
             SectionViewModel(titleKey = keySection,
                     title = it.feed.title,
                     parentList = modelList
