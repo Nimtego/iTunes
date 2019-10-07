@@ -4,8 +4,8 @@ import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import io.reactivex.Observable
 
 interface PopularMusicDataStore {
-    fun hotTrack(): Observable<PopularResponse>
-    fun newTrack(): Observable<PopularResponse>
-    fun topTrack(): Observable<PopularResponse>
-    fun topAlbum(): Observable<PopularResponse>
+    fun hotTrack(responseSize: Int): Observable<PopularResponse>
+    fun newTrack(responseSize: Int): Observable<PopularResponse>
+    fun topTrack(responseSize: Int): Observable<PopularResponse>
+    fun topAlbum(responseSize: Int): Observable<PopularResponse>
 }

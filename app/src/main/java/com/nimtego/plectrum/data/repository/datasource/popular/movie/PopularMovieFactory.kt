@@ -12,13 +12,10 @@ class PopularMovieFactory @Inject constructor(
         private val diskPopularMusic: DiskPopularMovie
 ) : PopularMovieDataStore {
 
-
-
-    override fun topMovie(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMovieKey.TOP_MOVIE)) {
-            diskPopularMusic.topMovie()
-        } else {
-            cloudDataStore.topMovie()
-        }
+    override fun topMovie(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.topMovie(responseSize),
+                                 cloudDataStore.topMovie(responseSize))
+                                 .firstElement()
+                                 .toObservable()
     }
 }

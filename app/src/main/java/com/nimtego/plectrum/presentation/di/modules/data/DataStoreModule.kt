@@ -53,12 +53,8 @@ class DataStoreModule {
     @Singleton
     @Named(RepositoryQualifiers.MUSIC_REPOSITORY)
     internal fun provideMusicDataStoreCache(
-            appContext: Context,
-            serializer: Serializer,
-            fileManager: FileManager,
-            threadExecutor: ThreadExecutor
     ) : PopularResponseCache {
-        return PopularResponseCache(appContext, serializer, fileManager, threadExecutor)
+        return PopularResponseCache()
     }
 
     @Provides
@@ -93,12 +89,8 @@ class DataStoreModule {
     @Singleton
     @Named(RepositoryQualifiers.MOVIE_REPOSITORY)
     internal fun provideMovieDataStoreCache(
-            appContext: Context,
-            serializer: Serializer,
-            fileManager: FileManager,
-            threadExecutor: ThreadExecutor
     ) : PopularResponseCache {
-        return PopularResponseCache(appContext, serializer, fileManager, threadExecutor)
+        return PopularResponseCache()
     }
 
     @Provides
@@ -133,12 +125,8 @@ class DataStoreModule {
     @Singleton
     @Named(RepositoryQualifiers.BOOK_REPOSITORY)
     internal fun provideBookDataStoreCache(
-            appContext: Context,
-            serializer: Serializer,
-            fileManager: FileManager,
-            threadExecutor: ThreadExecutor
     ) : PopularResponseCache {
-        return PopularResponseCache(appContext, serializer, fileManager, threadExecutor)
+        return PopularResponseCache()
     }
 
     @Provides
@@ -172,20 +160,14 @@ class DataStoreModule {
     @Provides
     @Singleton
     internal fun provideSearchSongDataStoreFactory(
-//            @Named(RepositoryQualifiers.BOOK_REPOSITORY)
-//            cache: PopularResponseCache,
             cloudPopular: CloudMusicDataStore
-//            discPopular: DiskPopularBook
     ) : SongDataStoreFactory {
         return SongDataStoreFactory(cloudPopular)
     }
 
     @Provides
     @Singleton
-//    @Named(RepositoryQualifiers.BOOK_REPOSITORY)
     internal fun provideCloudSongSearchDataStore(
-//            @Named(RepositoryQualifiers.BOOK_REPOSITORY)
-//            cache: PopularResponseCache,
             @Named(NetworkQualifiers.ITUNES_API)
             api: ITunesApi
     ) =  CloudMusicDataStore(api)

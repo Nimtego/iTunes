@@ -4,5 +4,5 @@ import com.nimtego.plectrum.data.model.rss_itunes.PopularResponse
 import io.reactivex.Observable
 
 interface PopularMovieDataStore {
-    fun topMovie(): Observable<PopularResponse>
+    fun topMovie(responseSize: Int): Observable<PopularResponse>
 }

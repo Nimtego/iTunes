@@ -48,7 +48,7 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initRV()
-        presenter.viewReady()
+        //presenter.viewReady()
     }
 
     protected fun initRV() {

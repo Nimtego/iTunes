@@ -11,7 +11,7 @@ class DiskPopularMovie @Inject constructor(
         private val cache: PopularResponseCache
 ) : PopularMovieDataStore {
 
-    override fun topMovie(): Observable<PopularResponse> {
-        return cache.get(PopularMovieKey.TOP_MOVIE)
+    override fun topMovie(responseSize: Int): Observable<PopularResponse> {
+        return cache.get(PopularMovieKey.TOP_MOVIE.key)
     }
 }

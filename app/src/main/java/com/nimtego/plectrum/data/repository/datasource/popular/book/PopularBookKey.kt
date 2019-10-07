@@ -1,6 +1,8 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.book
 
-object PopularBookKey {
-    const val TOP_FREE_BOOK = "TopFreeBook"
-    const val TOP_PAID_BOOK = "TopPaidBook"
+import com.nimtego.plectrum.data.repository.datasource.popular.SectionsKey
+
+enum class PopularBookKey(val key: String): SectionsKey {
+    TOP_FREE_BOOK("TopFreeBook"),
+    TOP_PAID_BOOK("TopPaidBook")
 }

@@ -13,14 +13,14 @@ import javax.inject.Inject
 @InjectViewState
 class SplashPresenter @Inject constructor(
         private val appRouter: Router,
-        private val interactor: LaunchUseCase,
+        private val launchUseCase: LaunchUseCase,
         private val schedulersProvider: SchedulersProvider
 ) : BasePresenter<ProgressView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        this.interactor.appLaunch()
-                .timeout(5, TimeUnit.SECONDS)
+        this.launchUseCase.appLaunch()
+                //.timeout(5, TimeUnit.SECONDS)
                 .observeOn(schedulersProvider.ui())
                 .doOnSubscribe { this@SplashPresenter.viewState.showProgress(true) }
                 .doAfterTerminate { this@SplashPresenter.viewState.showProgress(false) }

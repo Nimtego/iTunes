@@ -2,6 +2,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters.popular
 
 import android.util.Log
 import com.arellomobile.mvp.InjectViewState
+import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicKey
 import com.nimtego.plectrum.domain.interactor.popular.PopularMusicInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
@@ -47,7 +48,7 @@ class MusicTabPresenter @Inject constructor(
 //                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
 
                 }
-            }, PopularMusicInteractor.Params.forRequest(containerName))
+            }, PopularMusicInteractor.Params.forRequestWithSize(PopularMusicKey.TOP_ALBUM, 5))
         }
     }
 

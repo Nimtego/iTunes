@@ -11,35 +11,31 @@ class PopularMusicFactory @Inject constructor(
         private val diskPopularMusic: DiskPopularMusic
 ) : PopularMusicDataStore {
 
-    override fun hotTrack(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.HOT_TRACK)) {
-            diskPopularMusic.hotTrack()
-        } else {
-            cloudDataStore.hotTrack()
-        }
+    override fun hotTrack(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.hotTrack(responseSize),
+                                 cloudDataStore.hotTrack(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 
-    override fun newTrack(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.NEW_TRACK)) {
-            diskPopularMusic.newTrack()
-        } else {
-            cloudDataStore.newTrack()
-        }
+    override fun newTrack(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.newTrack(responseSize),
+                                 cloudDataStore.newTrack(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 
-    override fun topTrack(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.TOP_TRACK)) {
-            diskPopularMusic.topTrack()
-        } else {
-            cloudDataStore.topTrack()
-        }
+    override fun topTrack(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.topTrack(responseSize),
+                                 cloudDataStore.topTrack(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 
-    override fun topAlbum(): Observable<PopularResponse> {
-        return if (cache.isCached(PopularMusicKey.TOP_ALBUM)) {
-            diskPopularMusic.topAlbum()
-        } else {
-            cloudDataStore.topAlbum()
-        }
+    override fun topAlbum(responseSize: Int): Observable<PopularResponse> {
+        return Observable.concat(diskPopularMusic.topAlbum(responseSize),
+                                 cloudDataStore.topAlbum(responseSize))
+                                .firstElement()
+                                .toObservable()
     }
 }

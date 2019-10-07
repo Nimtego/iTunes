@@ -1,5 +1,7 @@
 package com.nimtego.plectrum.data.repository.datasource.popular.movie
 
-object PopularMovieKey {
-    const val TOP_MOVIE = "TopMovie"
+import com.nimtego.plectrum.data.repository.datasource.popular.SectionsKey
+
+enum class PopularMovieKey(val key: String): SectionsKey {
+    TOP_MOVIE("TopMovie")
 }

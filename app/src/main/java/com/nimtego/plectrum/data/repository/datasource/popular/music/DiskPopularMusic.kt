@@ -9,19 +9,19 @@ class DiskPopularMusic @Inject constructor(
         private val cache: PopularResponseCache
 ) : PopularMusicDataStore {
 
-    override fun hotTrack(): Observable<PopularResponse> {
-        return cache.get(PopularMusicKey.HOT_TRACK)
+    override fun hotTrack(responseSize: Int): Observable<PopularResponse> {
+        return cache.get(PopularMusicKey.HOT_TRACK.key)
     }
 
-    override fun newTrack(): Observable<PopularResponse> {
-        return cache.get(PopularMusicKey.NEW_TRACK)
+    override fun newTrack(responseSize: Int): Observable<PopularResponse> {
+        return cache.get(PopularMusicKey.NEW_TRACK.key)
     }
 
-    override fun topTrack(): Observable<PopularResponse> {
-        return cache.get(PopularMusicKey.TOP_TRACK)
+    override fun topTrack(responseSize: Int): Observable<PopularResponse> {
+        return cache.get(PopularMusicKey.TOP_TRACK.key)
     }
 
-    override fun topAlbum(): Observable<PopularResponse> {
-        return cache.get(PopularMusicKey.TOP_ALBUM)
+    override fun topAlbum(responseSize: Int): Observable<PopularResponse> {
+        return cache.get(PopularMusicKey.TOP_ALBUM.key)
     }
 }
