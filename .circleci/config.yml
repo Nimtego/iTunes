@@ -31,7 +31,7 @@ jobs:
   dev-build:
     docker:
       # specify the version you desire here
-      - image: circleci/android:api-26-alpha
+      - image: circleci/android:api-23-alpha
     working_directory: ~/code
     steps:
       - checkout
@@ -62,7 +62,7 @@ jobs:
   prod-build:
     docker:
       # specify the version you desire here
-      - image: circleci/android:api-26-alpha
+      - image: circleci/android:api-23-alpha
     working_directory: ~/code
     steps:
       - checkout
