@@ -9,6 +9,5 @@ import com.nimtego.plectrum.presentation.mvp.model.song.Song
 
 @StateStrategyType(OneExecutionStateStrategy::class)
 interface MoreSectionView : BaseView {
-    @StateStrategyType(SkipStrategy::class)
     fun showViewState(data: ParentTabModelContainer<ChildViewModel>)
 }

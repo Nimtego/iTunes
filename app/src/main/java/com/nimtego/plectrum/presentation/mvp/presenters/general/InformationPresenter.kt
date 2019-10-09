@@ -22,7 +22,6 @@ class InformationPresenter
 
     private lateinit var navigationQualifier: String
     private var router: Router? = null
-    private var dataSongsModel: SongDetailsModel? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

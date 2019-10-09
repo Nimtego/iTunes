@@ -27,7 +27,7 @@ class BookTabPresenter @Inject constructor(
     private var tabContentModel: BaseParentViewModel<ChildViewModel>? = null
 
 
-    fun viewIsReady(containerName: String) {
+    fun viewIsReady() {
         tabContentModel?.let {
             showModel()
         } ?: run {

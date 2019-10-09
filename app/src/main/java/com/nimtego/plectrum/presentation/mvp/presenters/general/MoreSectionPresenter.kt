@@ -33,6 +33,11 @@ class MoreSectionPresenter @Inject constructor(
 
     override fun attachView(view: MoreSectionView) {
         super.attachView(view)
+        //prepareViewModel()
+    }
+
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
         prepareViewModel()
     }
 

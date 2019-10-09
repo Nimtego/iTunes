@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.fragment.base
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.mvp.presenters.navigation.SearchNavigationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchNavigationView
@@ -24,13 +25,23 @@ abstract class BaseSearchNavFragment : BaseFragment(),
     protected var navigator: Navigator? = null
 
     override fun onBackPressed(): Boolean {
-        val fragment =
-                this.childFragmentManager.findFragmentById(layoutContainer)
-        return if (fragment is BackButtonListener) {
+        val fm = childFragmentManager
+        val fragment: Fragment?
+        val fragments = fm.fragments
+        fragment = fragments?.firstOrNull { it.isVisible }
+        return if (fragment != null
+                && fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
-            this.presenter.onBackPressed()
+            presenter.onBackPressed()
         }
+//        val fragment =
+//                this.childFragmentManager.findFragmentById(layoutContainer)
+//        return if (fragment is BackButtonListener) {
+//            fragment.onBackPressed()
+//        } else {
+//            this.presenter.onBackPressed()
+//        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

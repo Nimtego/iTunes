@@ -26,7 +26,7 @@ class MusicTabPresenter @Inject constructor(
 
     private var songsModel: BaseParentViewModel<ChildViewModel>? = null
 
-    fun viewIsReady(containerName: String) {
+    fun viewIsReady() {
         this.songsModel?.let{
             showModel()
         } ?: run {

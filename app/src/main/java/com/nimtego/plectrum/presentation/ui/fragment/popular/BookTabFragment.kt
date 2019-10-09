@@ -30,11 +30,7 @@ class BookTabFragment : BaseTabFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        this.presenter.viewIsReady(getContainerName())
-    }
-
-    private fun getContainerName(): String {
-        return arguments.getString(TAB_NAME)!!
+        this.presenter.viewIsReady()
     }
 
     override fun onBackPressed(): Boolean {

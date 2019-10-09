@@ -48,7 +48,6 @@ class InformationFragment : BaseFragment(), InformationView, BackButtonListener 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         init()
-        //this.presenter.viewReady()
     }
 
     override fun onBackPressed(): Boolean {

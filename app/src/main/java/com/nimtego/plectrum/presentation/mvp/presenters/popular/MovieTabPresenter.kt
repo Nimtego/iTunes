@@ -27,7 +27,7 @@ class MovieTabPresenter @Inject constructor(
     private var movieModel: BaseParentViewModel<ChildViewModel>? = null
 
 
-    fun viewIsReady(containerName: String) {
+    fun viewIsReady() {
         movieModel?.let {
             showModel()
         } ?: run {
