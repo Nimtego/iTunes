@@ -1,17 +1,16 @@
 package com.nimtego.plectrum.presentation.mvp.presenters.search
 
 import com.arellomobile.mvp.InjectViewState
-import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
+import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
-import com.nimtego.plectrum.presentation.navigation.NavigationHandlerVariable
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import io.reactivex.observers.DisposableObserver
@@ -25,44 +24,37 @@ class SearchContentPresenter @Inject constructor(
         private val searchItemStorage: UserSearchItemStorage,
         private val userChoiceItemStorage: MainItemStorage,
         private val schedulersProvider: SchedulersProvider
-) : BasePresenter<SearchContentView>(), MoreSectionAdapter.OnItemClickListener {
+) : BaseContentPresenter<SearchContentView>(), MoreSectionAdapter.OnItemClickListener {
+
+    override lateinit var router: Router
 
     private lateinit var navigationQualifier: String
-    private var router: Router? = null
     private var dataModel: List<ChildViewModel>? = null
     private var currentSearchText: String? = null
 
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
         this.userChoiceItemStorage.changeCurrentChildItem(childViewModel)
-        this.router?.navigateTo(Screens.SearchItemInformationScreen(navigationQualifier))
+        this.router.navigateTo(Screens.SearchItemInformationScreen(navigationQualifier))
     }
 
-//    override fun attachView(view: MoreSectionView) {
-//        super.attachView(view)
-//        viewReady()
-//    }
-
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        requestSearchData()
+    override fun prepareViewModel() {
+        this.dataModel ?: run { requestSearchData() }
     }
 
     private fun requestSearchData() {
-        if (this.searchItemStorage.getCurrentSearchText() != this.currentSearchText) {
-            this.currentSearchText = this.searchItemStorage.getCurrentSearchText()
-            val currentSearchObserver = CurrentSearchObserver()
-            currentSearchObserver.connect()
-            this.currentSearchText?.let {
-                this.interactor.searchSong(it)
-                        .observeOn(schedulersProvider.ui())
-                        .doOnSubscribe {
-                            this@SearchContentPresenter.viewState.showProgress(true)
-                        }
-                        .doAfterTerminate {
-                            this@SearchContentPresenter.viewState.showProgress(false)
-                        }
-                        .subscribe(currentSearchObserver)
-            }
+        this.currentSearchText = this.searchItemStorage.getCurrentSearchText()
+        val currentSearchObserver = CurrentSearchObserver()
+        currentSearchObserver.connect()
+        this.currentSearchText?.let {
+            this.interactor.searchSong(it)
+                    .observeOn(schedulersProvider.ui())
+                    .doOnSubscribe {
+                        this@SearchContentPresenter.viewState.showProgress(true)
+                    }
+                    .doAfterTerminate {
+                        this@SearchContentPresenter.viewState.showProgress(false)
+                    }
+                    .subscribe(currentSearchObserver)
         }
     }
 
@@ -70,10 +62,6 @@ class SearchContentPresenter @Inject constructor(
         dataModel?.let {
             viewState.showViewState(it)
         }
-    }
-
-    fun onBackPressed() {
-        this.router?.exit()
     }
 
     fun setNavigationQualifier(navigationQualifier: String) {

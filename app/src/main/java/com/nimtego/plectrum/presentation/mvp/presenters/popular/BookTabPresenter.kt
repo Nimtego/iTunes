@@ -6,11 +6,11 @@ import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookK
 import com.nimtego.plectrum.domain.interactor.popular.PopularBookInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
-import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
+import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
@@ -19,18 +19,16 @@ import javax.inject.Inject
 
 @InjectViewState
 class BookTabPresenter @Inject constructor(
-        private val router: Router,
+        override var router: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularBookInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BaseContentPresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var tabContentModel: BaseParentViewModel<ChildViewModel>? = null
 
 
-    fun viewIsReady(containerName: String) {
-        tabContentModel?.let {
-            showModel()
-        } ?: run {
+    override fun prepareViewModel() {
+        tabContentModel ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
@@ -69,9 +67,4 @@ class BookTabPresenter @Inject constructor(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_BOOK_NAVIGATION)
         )
     }
-
-    fun onBackPressed() {
-        this.router.exit()
-    }
-
 }

@@ -6,7 +6,7 @@ import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -20,24 +20,26 @@ class MoreSectionPresenter @Inject constructor(
         private val navigationHandler: NavigationHandler,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: MainItemStorage
-) : BasePresenter<MoreSectionView>(), MoreSectionAdapter.OnItemClickListener {
+) : BaseContentPresenter<MoreSectionView>(), MoreSectionAdapter.OnItemClickListener {
 
     private lateinit var navigationQualifier: String
-    private var router: Router? = null
+    override lateinit var router: Router
     private var dataModel: ParentTabModelContainer<ChildViewModel>? = null
 
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.router?.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
+        this.router.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
     }
 
     override fun attachView(view: MoreSectionView) {
         super.attachView(view)
-        prepareViewModel()
+        if (!isInRestoreState(view)) {
+            prepareViewModel()
+        }
     }
 
-    private fun prepareViewModel() {
-        this.dataModel?.let { showModel() } ?: run { executeModel() }
+    override fun prepareViewModel() {
+        this.dataModel ?: run { executeModel() }
     }
 
     private fun executeModel() {
@@ -58,10 +60,6 @@ class MoreSectionPresenter @Inject constructor(
 
     private fun showModel() {
         dataModel?.let { viewState.showViewState(it) }
-    }
-
-    fun onBackPressed() {
-        this.router?.exit()
     }
 
     fun setNavigationQualifier(navigationQualifier: String) {

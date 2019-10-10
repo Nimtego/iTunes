@@ -7,10 +7,10 @@ import com.nimtego.plectrum.domain.interactor.popular.PopularMusicInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
-import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
+import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
@@ -19,17 +19,15 @@ import javax.inject.Inject
 
 @InjectViewState
 class MusicTabPresenter @Inject constructor(
-        private val router: Router,
+        override var router: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMusicInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BaseContentPresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var songsModel: BaseParentViewModel<ChildViewModel>? = null
 
-    fun viewIsReady(containerName: String) {
-        this.songsModel?.let{
-            showModel()
-        } ?: run {
+    override fun prepareViewModel() {
+        this.songsModel ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")
@@ -42,11 +40,7 @@ class MusicTabPresenter @Inject constructor(
                 }
 
                 override fun onError(e: Throwable) {
-                    Log.i("Presenter", "onerror $e")
-//                this@BottomNavigationPresenter.hideViewLoading()
-//                this@BottomNavigationPresenter.toast("error" + e.localizedMessage)
-//                // TODO: 01.11.2018 retry  view (showRetry() + hideRetry() in contract);
-
+                    Log.i("Presenter", "error $e")
                 }
             }, PopularMusicInteractor.Params.forRequestWithSize(PopularMusicKey.TOP_ALBUM, 5))
         }
@@ -70,9 +64,5 @@ class MusicTabPresenter @Inject constructor(
         this.router.navigateTo(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
         )
-    }
-
-    fun onBackPressed() {
-        this.router.exit()
     }
 }

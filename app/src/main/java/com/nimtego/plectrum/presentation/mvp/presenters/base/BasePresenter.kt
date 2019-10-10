@@ -6,11 +6,7 @@ import com.nimtego.plectrum.presentation.mvp.view.BaseView
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class BasePresenter<T : BaseView>(
-        //private val disposableInteractor: DisposableInteractor
-) : MvpPresenter<T>() {
-
-    private val compositeDisposable = CompositeDisposable()
+abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
 
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 
@@ -25,13 +21,4 @@ abstract class BasePresenter<T : BaseView>(
         Log.i(this.tag, "detachView")
         super.detachView(view)
     }
-
-    override fun onDestroy() {
-        compositeDisposable.dispose()
-    }
-
-    protected fun Disposable.connect() {
-        compositeDisposable.add(this)
-    }
-
 }

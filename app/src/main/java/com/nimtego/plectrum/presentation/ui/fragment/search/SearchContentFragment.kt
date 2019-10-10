@@ -14,12 +14,11 @@ import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
-import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
-import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 import javax.inject.Inject
 
-class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListener {
+class SearchContentFragment : BaseFragment(), SearchContentView {
 
     override val layoutRes: Int = R.layout.search_content_fragment
 
@@ -49,11 +48,6 @@ class SearchContentFragment : BaseFragment(), SearchContentView, BackButtonListe
 
     override fun showProgress(show: Boolean) {
         pb?.visibility = if (show) ProgressBar.VISIBLE else ProgressBar.GONE
-    }
-
-    override fun onBackPressed(): Boolean {
-        this.presenter.onBackPressed()
-        return true
     }
 
     private fun init() {

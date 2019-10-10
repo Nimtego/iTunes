@@ -132,21 +132,6 @@ class NavigationModule {
         return bookTabNavigationCicerone.navigatorHolder
     }
 
-//    @Provides
-//    @Singleton
-//    @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
-//    internal fun provideRouterHandler(): HashMap<String, Cicerone<Router>> {
-//        return bottomRouterHandler
-//    }
-//
-//    @Provides
-//    @Singleton
-//    @Named(NavigationQualifiers.SEARCH_NAVIGATION_ROUTER_HANDLER)
-//    internal fun provideSearchRouterHandler(): HashMap<String, Cicerone<Router>> {
-//        return searchNavigationHandler
-//    }
-
-
     @Provides
     @Singleton
     @Named(NavigationQualifiers.SEARCH_MUSIC_NAVIGATION)
@@ -160,12 +145,5 @@ class NavigationModule {
     internal fun provideSearchMusicNavigatorHolder(): NavigatorHolder {
         return searchMusicNavigationCicerone.navigatorHolder
     }
-
-//    @Provides
-//    @Singleton
-//    @Named(NavigationQualifiers.MORE_SECTION_NAVIGATION)
-//    internal fun provideMoreSongContentNavigatorHolder(): NavigatorHolder {
-//        return musicTabNavigationCicerone.navigatorHolder
-//    }
 
 }
