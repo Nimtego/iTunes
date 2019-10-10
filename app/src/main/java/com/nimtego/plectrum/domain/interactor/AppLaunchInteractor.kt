@@ -1,5 +1,7 @@
 package com.nimtego.plectrum.domain.interactor
 
+import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookKey
+import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovieKey
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicKey
 import com.nimtego.plectrum.data.repository.repository.PopularBookRepository
 import com.nimtego.plectrum.data.repository.repository.PopularMovieRepository
@@ -7,6 +9,8 @@ import com.nimtego.plectrum.data.repository.repository.PopularMusicRepository
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import io.reactivex.Completable
+import io.reactivex.Observable
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class AppLaunchInteractor @Inject constructor (
@@ -17,30 +21,23 @@ class AppLaunchInteractor @Inject constructor (
 ) : LaunchUseCase  {
 
     override fun appLaunch(): Completable {
-        return popularMusic().subscribeOn(schedulersProvider.io())
+        return Completable.mergeArrayDelayError(
+                popularMusic().subscribeOn(schedulersProvider.io()),
+                popularMovie().subscribeOn(schedulersProvider.io()),
+                popularBook().subscribeOn(schedulersProvider.io())
+        )
     }
 
     private fun popularMusic(): Completable {
-        //todo change late
         return musicRepository.query(PopularMusicKey.TOP_ALBUM, 5).ignoreElements()
     }
 
-//    private fun popularMovie(): Completable {
-//        return movieRepository.query("").ignoreElements()
-//    }
-//
-//    private fun popularBook(): Completable {
-//        return bookRepository.query("").ignoreElements()
-//    }
+    private fun popularMovie(): Completable {
+        return movieRepository.query(PopularMovieKey.TOP_MOVIE, 5).ignoreElements()
+    }
 
-    class Params private constructor(val request: String) {
-        companion object {
-
-            fun forRequest(request: String): Params {
-                return Params(request)
-            }
-
-        }
+    private fun popularBook(): Completable {
+        return bookRepository.query(PopularBookKey.TOP_FREE_BOOK, 5).ignoreElements()
     }
 
 }

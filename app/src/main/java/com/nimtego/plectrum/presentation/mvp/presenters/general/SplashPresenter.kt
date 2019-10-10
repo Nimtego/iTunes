@@ -21,7 +21,7 @@ class SplashPresenter @Inject constructor(
 
     override fun prepareViewModel() {
         this.launchUseCase.appLaunch()
-                //.timeout(5, TimeUnit.SECONDS)
+                .timeout(2, TimeUnit.SECONDS)
                 .observeOn(schedulersProvider.ui())
                 .doOnSubscribe { this@SplashPresenter.viewState.showProgress(true) }
                 .doAfterTerminate { this@SplashPresenter.viewState.showProgress(false) }
