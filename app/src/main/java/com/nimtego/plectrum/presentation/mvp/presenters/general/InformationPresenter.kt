@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.domain.interactor.general.InformationInteractor
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.information_view.SongDetailsModel
+import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.InformationView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
@@ -22,10 +23,27 @@ class InformationPresenter
 
     private lateinit var navigationQualifier: String
     private var router: Router? = null
+    private var dataModel: ChildViewModel? = null
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        this.itemStorage.getCurrentChildItem()?.let {
+    override fun attachView(view: InformationView) {
+        super.attachView(view)
+        if(!isInRestoreState(view)) {
+            prepareViewModel()
+            showModel()
+        }
+    }
+
+    private fun prepareViewModel() {
+        this.dataModel ?: run {
+            this.itemStorage.getCurrentChildItem()?.let {
+                this.dataModel = it
+
+            }
+        }
+    }
+
+    private fun showModel() {
+        dataModel?.let {
             viewState.showViewState(it)
         }
     }

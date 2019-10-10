@@ -3,14 +3,16 @@ package com.nimtego.plectrum.presentation.mvp.presenters.base
 import android.util.Log
 import com.arellomobile.mvp.MvpPresenter
 import com.nimtego.plectrum.presentation.mvp.view.BaseView
+import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import ru.terrakok.cicerone.Router
 
-abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
+abstract class BaseContentPresenter<T : BaseView> : MvpPresenter<T>() {
 
     private val compositeDisposable = CompositeDisposable()
 
-    protected val isViewAttached: Boolean get() = attachedViews.size > 0
+    protected abstract var router: Router?
 
     private val tag = javaClass.simpleName
 

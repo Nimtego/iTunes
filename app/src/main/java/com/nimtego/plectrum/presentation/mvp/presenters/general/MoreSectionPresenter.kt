@@ -31,17 +31,17 @@ class MoreSectionPresenter @Inject constructor(
         this.router?.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
     }
 
-    override fun attachView(view: MoreSectionView) {
-        super.attachView(view)
-        //prepareViewModel()
-    }
+//    override fun attachView(view: MoreSectionView) {
+//        super.attachView(view)
+//        prepareViewModel()
+//    }
+//
+//    override fun onFirstViewAttach() {
+//        super.onFirstViewAttach()
+//        //prepareViewModel()
+//    }
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        prepareViewModel()
-    }
-
-    private fun prepareViewModel() {
+    fun prepareViewModel() {
         this.dataModel?.let { showModel() } ?: run { executeModel() }
     }
 
