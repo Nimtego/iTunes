@@ -10,6 +10,7 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentView
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
@@ -19,14 +20,14 @@ import javax.inject.Inject
 
 @InjectViewState
 class MusicTabPresenter @Inject constructor(
-        private val router: Router,
+        override var router: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMusicInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BaseContentPresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var songsModel: BaseParentViewModel<ChildViewModel>? = null
 
-    fun viewIsReady() {
+    override fun prepareViewModel() {
         this.songsModel?.let{
             showModel()
         } ?: run {
@@ -70,9 +71,5 @@ class MusicTabPresenter @Inject constructor(
         this.router.navigateTo(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
         )
-    }
-
-    fun onBackPressed() {
-        this.router.exit()
     }
 }

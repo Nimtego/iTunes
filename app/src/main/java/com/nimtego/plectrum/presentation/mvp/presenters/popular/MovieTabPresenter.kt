@@ -9,6 +9,7 @@ import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -19,15 +20,15 @@ import javax.inject.Inject
 
 @InjectViewState
 class MovieTabPresenter @Inject constructor(
-        private val router: Router,
+        override var router: Router,
         private val itemStorage: MainItemStorage,
         private val interactor: PopularMovieInteractor
-) : BasePresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
+) : BaseContentPresenter<TabContentView>(), ParentTabAdapter.OnItemClickListener {
 
     private var movieModel: BaseParentViewModel<ChildViewModel>? = null
 
 
-    fun viewIsReady() {
+    override fun prepareViewModel() {
         movieModel?.let {
             showModel()
         } ?: run {
@@ -68,9 +69,5 @@ class MovieTabPresenter @Inject constructor(
         this.router.navigateTo(
                 Screens.ItemInformationScreen(NavigationQualifiers.TAB_MOVIE_NAVIGATION)
         )
-    }
-
-    fun onBackPressed() {
-        this.router.exit()
     }
 }

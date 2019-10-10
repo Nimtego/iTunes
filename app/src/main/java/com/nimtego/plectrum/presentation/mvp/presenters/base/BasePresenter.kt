@@ -8,8 +8,6 @@ import io.reactivex.disposables.Disposable
 
 abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
 
-    private val compositeDisposable = CompositeDisposable()
-
     protected val isViewAttached: Boolean get() = attachedViews.size > 0
 
     private val tag = javaClass.simpleName
@@ -23,13 +21,4 @@ abstract class BasePresenter<T : BaseView> : MvpPresenter<T>() {
         Log.i(this.tag, "detachView")
         super.detachView(view)
     }
-
-    override fun onDestroy() {
-        compositeDisposable.dispose()
-    }
-
-    protected fun Disposable.connect() {
-        compositeDisposable.add(this)
-    }
-
 }

@@ -28,11 +28,6 @@ class MovieTabFragment : BaseTabFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        this.presenter.viewIsReady()
-    }
-
     override fun onBackPressed(): Boolean {
         this.presenter.onBackPressed()
         return true

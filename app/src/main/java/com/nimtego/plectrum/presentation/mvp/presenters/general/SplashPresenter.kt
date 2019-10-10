@@ -3,6 +3,7 @@ package com.nimtego.plectrum.presentation.mvp.presenters.general
 import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
+import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.ProgressView
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -12,13 +13,13 @@ import javax.inject.Inject
 
 @InjectViewState
 class SplashPresenter @Inject constructor(
-        private val appRouter: Router,
+        override var router: Router,
         private val launchUseCase: LaunchUseCase,
         private val schedulersProvider: SchedulersProvider
-) : BasePresenter<ProgressView>() {
+) : BaseContentPresenter<ProgressView>() {
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
+
+    override fun prepareViewModel() {
         this.launchUseCase.appLaunch()
                 //.timeout(5, TimeUnit.SECONDS)
                 .observeOn(schedulersProvider.ui())
@@ -35,7 +36,7 @@ class SplashPresenter @Inject constructor(
     }
 
     private fun navigateToStartScreen() {
-        this.appRouter.replaceScreen(Screens.BottomNavigationScreen)
+        this.router.replaceScreen(Screens.BottomNavigationScreen)
     }
 
     companion object {
