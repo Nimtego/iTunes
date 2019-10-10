@@ -35,12 +35,11 @@ class MoreSectionPresenter @Inject constructor(
         super.attachView(view)
         if (!isInRestoreState(view)) {
             prepareViewModel()
-            showModel()
         }
     }
 
     override fun prepareViewModel() {
-        this.dataModel?.let { showModel() } ?: run { executeModel() }
+        this.dataModel ?: run { executeModel() }
     }
 
     private fun executeModel() {

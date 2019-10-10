@@ -10,7 +10,6 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
@@ -29,9 +28,7 @@ class MovieTabPresenter @Inject constructor(
 
 
     override fun prepareViewModel() {
-        movieModel?.let {
-            showModel()
-        } ?: run {
+        movieModel ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")

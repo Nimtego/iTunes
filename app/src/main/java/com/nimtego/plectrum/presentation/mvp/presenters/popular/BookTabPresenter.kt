@@ -6,12 +6,11 @@ import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookK
 import com.nimtego.plectrum.domain.interactor.popular.PopularBookInteractor
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
-import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
+import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import io.reactivex.observers.DisposableObserver
@@ -29,9 +28,7 @@ class BookTabPresenter @Inject constructor(
 
 
     override fun prepareViewModel() {
-        tabContentModel?.let {
-            showModel()
-        } ?: run {
+        tabContentModel ?: run {
             interactor.execute(object : DisposableObserver<BaseParentViewModel<ChildViewModel>>() {
                 override fun onComplete() {
                     Log.i("Presenter", "onComplete()")

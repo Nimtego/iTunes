@@ -9,7 +9,6 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.base.BasePresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -39,7 +38,7 @@ class SearchContentPresenter @Inject constructor(
     }
 
     override fun prepareViewModel() {
-        this.dataModel?.let { showModel() } ?: run { requestSearchData() }
+        this.dataModel ?: run { requestSearchData() }
     }
 
     private fun requestSearchData() {
