@@ -1,14 +1,12 @@
 package com.nimtego.plectrum.presentation.ui.fragment.popular
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
-import com.nimtego.plectrum.presentation.mvp.presenters.popular.BookTabPresenter
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.mvp.presenters.popular.BookTabPresenter
 import com.nimtego.plectrum.presentation.ui.widget.adapters.ParentTabAdapter
 import javax.inject.Inject
 
@@ -31,13 +29,6 @@ class BookTabFragment : BaseTabFragment() {
     override fun onBackPressed(): Boolean {
         this.presenter.onBackPressed()
         return true
-    }
-
-    override fun provideItemDecorator(): RecyclerView.ItemDecoration {
-        return SpaceItemDecorator(spacing = 32,
-                spanCount = 1,
-                paddingTop = 24,
-                paddingBottom = 24)
     }
 
 //Mark: view override

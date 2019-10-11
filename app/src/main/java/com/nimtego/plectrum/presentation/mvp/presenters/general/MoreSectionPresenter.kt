@@ -10,7 +10,6 @@ import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresente
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
 import com.nimtego.plectrum.presentation.ui.widget.adapters.SectionChildAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
@@ -21,8 +20,7 @@ class MoreSectionPresenter @Inject constructor(
         private val navigationHandler: NavigationHandler,
         private val interactor: MoreSectionInteractor,
         private val itemStorage: MainItemStorage
-) : BaseContentPresenter<MoreSectionView>(), MoreSectionAdapter.OnItemClickListener,
-                                             SectionChildAdapter.OnItemClickListener {
+) : BaseContentPresenter<MoreSectionView>(), SectionChildAdapter.OnItemClickListener {
 
     private lateinit var navigationQualifier: String
     override lateinit var router: Router

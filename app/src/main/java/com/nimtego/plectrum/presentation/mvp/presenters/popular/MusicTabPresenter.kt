@@ -42,7 +42,9 @@ class MusicTabPresenter @Inject constructor(
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "error $e")
                 }
-            }, PopularMusicInteractor.Params.forRequestWithSize(PopularMusicKey.TOP_ALBUM, 5))
+            }, PopularMusicInteractor
+                    .Params
+                    .forRequestWithSize(PopularMusicKey.TOP_ALBUM, 10))
         }
     }
 

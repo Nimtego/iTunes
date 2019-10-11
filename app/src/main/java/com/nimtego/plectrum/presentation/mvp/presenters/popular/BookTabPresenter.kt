@@ -43,7 +43,9 @@ class BookTabPresenter @Inject constructor(
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
                 }
-            }, PopularBookInteractor.Params.forRequestWithSize(PopularBookKey.TOP_FREE_BOOK, 5))
+            }, PopularBookInteractor
+                    .Params
+                    .forRequestWithSize(PopularBookKey.TOP_FREE_BOOK, 10))
 //todo PopularBookKey.TOP_FREE_BOOK not use in interactor. change interactor arg
         }
     }
