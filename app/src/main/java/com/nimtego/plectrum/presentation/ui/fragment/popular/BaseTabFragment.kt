@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.nimtego.plectrum.R
+import com.nimtego.plectrum.presentation.manger.ResourceManager
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
+import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import javax.inject.Inject
 
 abstract class BaseTabFragment : BaseFragment(), TabContentView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.bottom_parent_tab_fragment
+
+    @Inject
+    lateinit var resourceManager: ResourceManager
 
     protected var parentContainerRecyclerView: RecyclerView? = null
 
@@ -31,6 +37,9 @@ abstract class BaseTabFragment : BaseFragment(), TabContentView, BackButtonListe
         }
     }
 
-    abstract fun provideItemDecorator(): RecyclerView.ItemDecoration
+    //FIXME use ResourceManager
+    open fun provideItemDecorator(): RecyclerView.ItemDecoration {
+        return SpaceItemDecorator(spacing = 20, spanCount = 1, paddingBottom = 24)
+    }
 
 }

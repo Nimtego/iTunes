@@ -1,7 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.fragment.popular
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -12,8 +12,9 @@ import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModel
 import com.nimtego.plectrum.presentation.mvp.presenters.general.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
+import com.nimtego.plectrum.presentation.ui.widget.adapters.SectionChildAdapter
 import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
-import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
+import com.nimtego.plectrum.presentation.ui.widget.util.Util
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import javax.inject.Inject
 
@@ -54,13 +55,15 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
         this.parentContainerRecyclerView = this.view
                 ?.findViewById(R.id.recycler_view_more_section)
 
+        val itemInColumn = Util.calculateNoOfColumns(
+                this@MoreSectionFragment.context,
+                100F + 10)
         this.parentContainerRecyclerView?.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@MoreSectionFragment.context,
-                    LinearLayoutManager.VERTICAL,
-                    false)
-            addItemDecoration(SpaceItemDecorator(spacing = 32,
-                    spanCount = 1,
+            layoutManager = GridLayoutManager(this@MoreSectionFragment.context,
+                    itemInColumn)
+            addItemDecoration(SpaceItemDecorator(spacing = 40,
+                    spanCount = itemInColumn,
                     paddingTop = 24,
                     paddingBottom = 24))
 //            itemAnimator = DefaultItemAnimator()
@@ -71,8 +74,8 @@ class MoreSectionFragment : BaseFragment(), MoreSectionView, BackButtonListener 
 
     override fun showViewState(data: ParentTabModelContainer<ChildViewModel>) {
         this.parentContainerRecyclerView?.apply {
-            adapter = MoreSectionAdapter(data).apply {
-                setOnItemClickListener(presenter)
+            adapter = SectionChildAdapter(data.getModels()).apply {
+                setOnItemClickListener(this@MoreSectionFragment.presenter)
             }
         }
     }

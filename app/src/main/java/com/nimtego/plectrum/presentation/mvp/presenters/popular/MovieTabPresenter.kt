@@ -43,7 +43,9 @@ class MovieTabPresenter @Inject constructor(
                 override fun onError(e: Throwable) {
                     Log.i("Presenter", "onerror $e")
                 }
-            }, PopularMovieInteractor.Params.forRequestWithSize(PopularMovieKey.TOP_MOVIE, 5))
+            }, PopularMovieInteractor
+                    .Params
+                    .forRequestWithSize(PopularMovieKey.TOP_MOVIE, 10))
 
         }
     }

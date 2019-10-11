@@ -22,7 +22,10 @@ class SpaceItemDecorator(private val spanCount: Int = 0,
                 if (position < spanCount) {
                     outRect.top = spacing + paddingTop
                 }
-                outRect.bottom = spacing + if (position + 1 > size - spanCount) paddingBottom else 0
+                outRect.bottom = spacing + if (position + 1 > size - spanCount
+                                               && size - position > spanCount) {
+                    paddingBottom
+                } else 0
             } else {
                 if (position == 0) {
                     outRect.left = spacing

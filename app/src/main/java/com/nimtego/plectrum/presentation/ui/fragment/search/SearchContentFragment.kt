@@ -1,7 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.fragment.search
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.widget.ProgressBar
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -14,8 +14,9 @@ import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import com.nimtego.plectrum.presentation.mvp.presenters.search.SearchContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
-import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.SectionChildAdapter
 import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.util.Util
 import javax.inject.Inject
 
 class SearchContentFragment : BaseFragment(), SearchContentView {
@@ -53,13 +54,15 @@ class SearchContentFragment : BaseFragment(), SearchContentView {
     private fun init() {
         this.pb = view?.findViewById(R.id.pb_loading)
         this.searchContentRv = view?.findViewById(R.id.recycler_view_search_content)
+        val itemInColumn = Util.calculateNoOfColumns(
+                this@SearchContentFragment.context,
+                100F + 10)
         this.searchContentRv?.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@SearchContentFragment.context,
-                    LinearLayoutManager.VERTICAL,
-                    false)
-            addItemDecoration(SpaceItemDecorator(spacing = 32,
-                    spanCount = 1,
+            layoutManager = GridLayoutManager(this@SearchContentFragment.context,
+                    itemInColumn)
+            addItemDecoration(SpaceItemDecorator(spacing = 40,
+                    spanCount = itemInColumn,
                     paddingTop = 24,
                     paddingBottom = 24))
 //            itemAnimator = DefaultItemAnimator()
@@ -72,7 +75,7 @@ class SearchContentFragment : BaseFragment(), SearchContentView {
         //todo remove key change model for search
         val tmpData = MusicTabModel(PopularMusicKey.TOP_ALBUM, "tmp", data)
         this.searchContentRv?.apply {
-            adapter = MoreSectionAdapter(tmpData).apply {
+            adapter = SectionChildAdapter(tmpData.getModels()).apply {
                 setOnItemClickListener(presenter)
             }
         }

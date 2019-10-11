@@ -12,7 +12,7 @@ import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresente
 import com.nimtego.plectrum.presentation.mvp.view.SearchContentView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
 import com.nimtego.plectrum.presentation.navigation.Screens
-import com.nimtego.plectrum.presentation.ui.widget.adapters.MoreSectionAdapter
+import com.nimtego.plectrum.presentation.ui.widget.adapters.SectionChildAdapter
 import io.reactivex.observers.DisposableObserver
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
@@ -24,7 +24,7 @@ class SearchContentPresenter @Inject constructor(
         private val searchItemStorage: UserSearchItemStorage,
         private val userChoiceItemStorage: MainItemStorage,
         private val schedulersProvider: SchedulersProvider
-) : BaseContentPresenter<SearchContentView>(), MoreSectionAdapter.OnItemClickListener {
+) : BaseContentPresenter<SearchContentView>(), SectionChildAdapter.OnItemClickListener {
 
     override lateinit var router: Router
 
