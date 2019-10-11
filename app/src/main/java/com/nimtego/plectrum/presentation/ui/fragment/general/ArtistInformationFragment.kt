@@ -11,9 +11,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
+import com.nimtego.plectrum.presentation.mvp.presenters.general.ArtistInformationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.view.ArtistInformationView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
@@ -41,7 +43,14 @@ class ArtistInformationFragment : BaseFragment(), ArtistInformationView, BackBut
     //todo create presenter and other
     @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
     @InjectPresenter
-    internal lateinit var presenter: InformationPresenter
+    internal lateinit var presenter: ArtistInformationPresenter
+
+    @ProvidePresenter
+    fun provideRepositoryPresenter(): ArtistInformationPresenter {
+        val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
+        this.presenter.setNavigationQualifier(navigationQualifier)
+        return presenter
+    }
 
     override fun onBackPressed(): Boolean {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
