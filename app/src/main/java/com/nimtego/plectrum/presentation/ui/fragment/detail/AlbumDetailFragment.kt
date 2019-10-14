@@ -1,4 +1,4 @@
-package com.nimtego.plectrum.presentation.ui.fragment.general
+package com.nimtego.plectrum.presentation.ui.fragment.detail
 
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
@@ -12,12 +12,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
+import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
-import com.nimtego.plectrum.presentation.mvp.presenters.general.ArtistInformationPresenter
-import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
-import com.nimtego.plectrum.presentation.mvp.view.ArtistInformationView
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
+import com.nimtego.plectrum.presentation.mvp.presenters.detail.AlbumDetailPresenter
+import com.nimtego.plectrum.presentation.mvp.view.detail.AlbumDetailView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
@@ -26,8 +26,7 @@ import kotlinx.android.synthetic.main.artist_information_fragment.*
 import javax.inject.Inject
 import javax.inject.Named
 
-
-class ArtistInformationFragment : BaseFragment(), ArtistInformationView, BackButtonListener {
+class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener {
 
     override val layoutRes: Int = R.layout.artist_information_fragment
 
@@ -43,17 +42,27 @@ class ArtistInformationFragment : BaseFragment(), ArtistInformationView, BackBut
     //todo create presenter and other
     @field:[Inject Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)]
     @InjectPresenter
-    internal lateinit var presenter: ArtistInformationPresenter
+    internal lateinit var presenter: AlbumDetailPresenter
 
     @ProvidePresenter
-    fun provideRepositoryPresenter(): ArtistInformationPresenter {
+    fun provideRepositoryPresenter(): AlbumDetailPresenter {
         val navigationQualifier = requireNotNull(this.arguments?.getString(TAB_NAME))
         this.presenter.setNavigationQualifier(navigationQualifier)
         return presenter
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        App.INSTANCE.getAppComponent().inject(this)
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun showProgress(show: Boolean) {
+        //todo
+    }
+
     override fun onBackPressed(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        this.presenter.onBackPressed()
+        return true
     }
 
     private fun initView() {
@@ -78,11 +87,11 @@ class ArtistInformationFragment : BaseFragment(), ArtistInformationView, BackBut
         }
     }
 
-    override fun showViewState(artistModel: ArtistModel) {
-        artistName.text = artistModel.artistName
+    override fun showViewState(albumModel: AlbumModel) {
+        artistName.text = albumModel.albumArtistName
         //price.setText(data.getArtistArtwork())
         //information!!.setText(artistDetailsModel.getWikiInformation())
-        collapsingToolbarLayout.title = artistModel.artistName
+        collapsingToolbarLayout.title = albumModel.albumArtistName
 //        val albumsAdapter = AlbumsAdapterForArtist(artistDetailsModel.getAlbums(),
 //                this.getActivity())
 //        albumsAdapter.setOnItemClickListener(object : AlbumsAdapterForArtist.OnItemClickListener() {
@@ -92,22 +101,22 @@ class ArtistInformationFragment : BaseFragment(), ArtistInformationView, BackBut
 //        })
 //        albumsRv.adapter = albumsAdapter
 
-        Picasso.get().load(artistModel.artistArtwork
+        Picasso.get().load(albumModel.albumArtwork
                 .replace("135x135", "570x570"))
                 .into(albumImage, object : Callback {
                     override fun onSuccess() {
-                            pb.visibility = View.GONE
+                        pb.visibility = View.GONE
                     }
 
                     override fun onError(e: Exception) {
-                            pb.visibility = View.GONE
+                        pb.visibility = View.GONE
                     }
                 })
     }
 
     companion object {
-        fun getInstance(navigationQualifier: String): ArtistInformationFragment {
-            val fragment = ArtistInformationFragment()
+        fun getInstance(navigationQualifier: String): AlbumDetailFragment {
+            val fragment = AlbumDetailFragment()
 
             val arguments = Bundle()
             arguments.putString(TAB_NAME, navigationQualifier)

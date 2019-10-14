@@ -5,4 +5,6 @@ import com.nimtego.plectrum.data.model.itunes.ArtistResult
 import com.nimtego.plectrum.data.model.itunes.SongResult
 import com.nimtego.plectrum.presentation.mvp.model.song.Song
 
-interface MusicalSource : AuthorSource<ArtistResult>, SongSource<SongResult>, AlbumSource<AlbumResult>
+interface MusicalSource : AuthorSource<ArtistResult>,
+                          SongSource<SongResult>,
+                          AlbumSource<AlbumResult>

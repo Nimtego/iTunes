@@ -6,12 +6,8 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
-import android.R.attr.data
 
-
-
-
-class PopularResponseCache @Inject constructor() : Cache<String, PopularResponse> {
+class SearchResponseCache @Inject constructor() : Cache<String, PopularResponse> {
 
     private val TAG = this.javaClass.canonicalName
     private val cache = ConcurrentHashMap<String, PopularResponse>()
@@ -38,8 +34,8 @@ class PopularResponseCache @Inject constructor() : Cache<String, PopularResponse
     override fun evictAll(): Completable {
         return Completable.create { cache.clear() }
     }
-
     override fun getAllValue(): Observable<List<PopularResponse>> {
         return Observable.fromArray(this.cache.values.toList())
     }
+
 }

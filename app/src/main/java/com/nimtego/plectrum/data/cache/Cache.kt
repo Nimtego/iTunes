@@ -10,4 +10,5 @@ interface Cache<Key : Any, Value : Any> {
     fun put(key: Key, value: Value): Completable
     fun evict(key: Key): Completable
     fun evictAll(): Completable
+    fun getAllValue(): Observable<List<Value>>
 }

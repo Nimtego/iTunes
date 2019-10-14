@@ -19,11 +19,11 @@ class CloudMusicDataStore @Inject constructor (
     }
 
     override fun getAuthorByAlbumId(id: Int): Observable<ArtistResult> {
-        return api.getArtist(ItunesFabricParam.lookupArtist(id)).map { it.results.first() }
+        return api.getArtist(ItunesFabricParam.lookupArtist(id.toString())).map { it.results.first() }
     }
 
     override fun getAuthorBySongId(id: Int): Observable<ArtistResult> {
-        return api.getArtist(ItunesFabricParam.lookupArtist(id)).map { it.results.first() }
+        return api.getArtist(ItunesFabricParam.lookupArtist(id.toString())).map { it.results.first() }
     }
 
     override fun getSongsByRequest(request: String): Observable<List<SongResult>> {
@@ -31,11 +31,11 @@ class CloudMusicDataStore @Inject constructor (
     }
 
     override fun getSongsByAlbumId(id: Int): Observable<List<SongResult>> {
-        return api.getSongs(ItunesFabricParam.lookupSongsById(id)).map { it.results }
+        return api.getSongs(ItunesFabricParam.lookupSongsById(id.toString())).map { it.results }
     }
 
     override fun getSongById(id: Int): Observable<SongResult> {
-        return api.getSongs(ItunesFabricParam.lookupSongsById(id)).map { it.results.first() }
+        return api.getSongs(ItunesFabricParam.lookupSongsById(id.toString())).map { it.results.first() }
     }
 
     override fun getAlbumsByRequest(request: String): Observable<List<AlbumResult>> {
@@ -43,14 +43,14 @@ class CloudMusicDataStore @Inject constructor (
     }
 
     override fun getAlbumsByAuthorId(id: Int): Observable<List<AlbumResult>> {
-        return api.getAlbum(ItunesFabricParam.lookupAlbumById(id)).map { it.results }
+        return api.getAlbum(ItunesFabricParam.lookupAlbumById(id.toString())).map { it.results }
     }
 
     override fun getAlbumBySongId(id: Int): Observable<AlbumResult> {
-        return api.getAlbum(ItunesFabricParam.lookupAlbumById(id)).map { it.results.first() }
+        return api.getAlbum(ItunesFabricParam.lookupAlbumById(id.toString())).map { it.results.first() }
     }
 
     override fun getAlbumById(id: Int): Observable<AlbumResult> {
-        return api.getAlbum(ItunesFabricParam.lookupAlbumById(id)).map { it.results.first() }
+        return api.getAlbum(ItunesFabricParam.lookupAlbumById(id.toString())).map { it.results.first() }
     }
 }

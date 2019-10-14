@@ -5,4 +5,5 @@ data class SongModel (
     val trackAlbumName: String,
     val trackArtistName: String,
     val trackArtwork: String,
-    val songId: String)
+    val trackId: String,
+    val trackPrice: String)

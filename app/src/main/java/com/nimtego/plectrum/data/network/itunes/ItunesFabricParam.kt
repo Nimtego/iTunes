@@ -15,15 +15,15 @@ object ItunesFabricParam {
     }
 
     //https://itunes.apple.com/lookup?id=579372950&entity=song
-    fun lookupSongsById(id: Int, limit: Int = limitOfItems): Map<String, String> {
-        return hashMapOf("id" to id.toString(),
+    fun lookupSongsById(id: String, limit: Int = limitOfItems): Map<String, String> {
+        return hashMapOf("id" to id,
                          "entity" to "song",
                          "limit" to limit.toString())
     }
 
     //https://itunes.apple.com/lookup?id=579372950&entity=album
-    fun lookupAlbumById(id: Int, limit: Int = limitOfItems): Map<String, String> {
-        return hashMapOf("id" to id.toString(),
+    fun lookupAlbumById(id: String, limit: Int = limitOfItems): Map<String, String> {
+        return hashMapOf("id" to id,
                          "entity" to "song",
                          "limit" to limit.toString())
     }
@@ -63,8 +63,8 @@ object ItunesFabricParam {
                          "srsearch" to response)
     }
 
-    fun lookupArtist(id: Int): Map<String, String> {
-        return hashMapOf("id" to id.toString(),
+    fun lookupArtist(id: String): Map<String, String> {
+        return hashMapOf("id" to id,
                          "entity" to "musicArtist")
     }
 

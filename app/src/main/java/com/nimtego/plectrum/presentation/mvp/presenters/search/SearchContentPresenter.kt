@@ -20,7 +20,7 @@ import javax.inject.Inject
 @InjectViewState
 class SearchContentPresenter @Inject constructor(
         private val navigationHandler: NavigationHandler,
-        private val interactor: MusicalSearchUseCase,
+        private val musicalSearchUseCase: MusicalSearchUseCase,
         private val searchItemStorage: UserSearchItemStorage,
         private val userChoiceItemStorage: MainItemStorage,
         private val schedulersProvider: SchedulersProvider
@@ -46,7 +46,7 @@ class SearchContentPresenter @Inject constructor(
         val currentSearchObserver = CurrentSearchObserver()
         currentSearchObserver.connect()
         this.currentSearchText?.let {
-            this.interactor.searchSong(it)
+            this.musicalSearchUseCase.searchSong(it)
                     .observeOn(schedulersProvider.ui())
                     .doOnSubscribe {
                         this@SearchContentPresenter.viewState.showProgress(true)
