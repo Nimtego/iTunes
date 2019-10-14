@@ -15,9 +15,9 @@ abstract class BaseContentPresenter<T : BaseView> : BasePresenter<T>() {
 
     override fun attachView(view: T) {
         super.attachView(view)
-        if(!isInRestoreState(view)) {
+//        if(!isInRestoreState(view)) {
             prepareViewModel()
-        }
+//        }
     }
 
     protected abstract fun prepareViewModel()

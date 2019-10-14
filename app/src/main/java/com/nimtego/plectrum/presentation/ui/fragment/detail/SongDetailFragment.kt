@@ -56,9 +56,13 @@ class SongDetailFragment: BaseFragment(), SongDetailView, BackButtonListener {
         super.onCreate(savedInstanceState)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        init()
+    }
 
     override fun showProgress(show: Boolean) {
-        //todo
+        if(show)pb.visibility = View.VISIBLE else  pb.visibility = View.GONE
     }
 
     override fun onBackPressed(): Boolean {
@@ -66,7 +70,7 @@ class SongDetailFragment: BaseFragment(), SongDetailView, BackButtonListener {
         return true
     }
 
-    private fun initView() {
+    private fun init() {
         this.artistName = author_value
         this.date = release_date_value
         this.price = price_value
@@ -90,7 +94,7 @@ class SongDetailFragment: BaseFragment(), SongDetailView, BackButtonListener {
 
     override fun showViewState(songModel: SongModel) {
         artistName.text = songModel.trackName
-        //price.setText(data.getArtistArtwork())
+        price.text = songModel.trackPrice
         //information!!.setText(artistDetailsModel.getWikiInformation())
         collapsingToolbarLayout.title = songModel.trackArtistName
 //        val albumsAdapter = AlbumsAdapterForArtist(artistDetailsModel.getAlbums(),
