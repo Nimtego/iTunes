@@ -26,9 +26,9 @@ class ParentTabAdapter(
         fun childItemClicked(childViewModel: ChildViewModel)
     }
 
-    fun onUserItemClicked(childViewModel: ChildViewModel) {
-        onItemClickListener?.childItemClicked(childViewModel)
-    }
+//    fun onUserItemClicked(childViewModel: ChildViewModel) {
+//        onItemClickListener?.childItemClicked(childViewModel)
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context)

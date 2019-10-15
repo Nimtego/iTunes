@@ -22,13 +22,13 @@ import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.artist_information_fragment.*
+import kotlinx.android.synthetic.main.detail_song_fragment.*
 import javax.inject.Inject
 import javax.inject.Named
 
 class SongDetailFragment: BaseFragment(), SongDetailView, BackButtonListener {
 
-    override val layoutRes: Int = R.layout.artist_information_fragment
+    override val layoutRes: Int = R.layout.detail_song_fragment
 
     private lateinit var price: TextView
     private lateinit var date: TextView
@@ -107,7 +107,7 @@ class SongDetailFragment: BaseFragment(), SongDetailView, BackButtonListener {
 //        albumsRv.adapter = albumsAdapter
 
         Picasso.get().load(songModel.trackArtwork
-                .replace("135x135", "570x570"))
+                .replace("100x100", "570x570"))
                 .into(albumImage, object : Callback {
                     override fun onSuccess() {
                         pb.visibility = View.GONE

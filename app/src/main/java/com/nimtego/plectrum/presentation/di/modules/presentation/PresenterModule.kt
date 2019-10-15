@@ -167,11 +167,11 @@ class PresenterModule {
             navigationHandler: NavigationHandler,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             userChoiceItemStorage: MainChoiceItemStorage,
-            songDetailUseCase: AlbumDetailUseCase,
+            albumDetailUseCase: AlbumDetailUseCase,
             schedulersProvider: SchedulersProvider
     ): AlbumDetailPresenter {
         return AlbumDetailPresenter(navigationHandler,
-                songDetailUseCase,
+                albumDetailUseCase,
                 userChoiceItemStorage,
                 schedulersProvider)
     }
@@ -183,11 +183,11 @@ class PresenterModule {
             navigationHandler: NavigationHandler,
             @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
             userChoiceItemStorage: MainChoiceItemStorage,
-            songDetailUseCase: ArtistDetailUseCase,
+            artistDetailUseCase: ArtistDetailUseCase,
             schedulersProvider: SchedulersProvider
     ): ArtistDetailPresenter {
         return ArtistDetailPresenter(navigationHandler,
-                songDetailUseCase,
+                artistDetailUseCase,
                 userChoiceItemStorage,
                 schedulersProvider)
     }

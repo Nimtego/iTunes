@@ -26,6 +26,9 @@ class AlbumDetailPresenter @Inject constructor(
 
 
     override fun prepareViewModel() {
+        this.itemStorage.getCurrentChildItem()?.let{
+            println(it.id())
+        }
         this.dataModel ?: run {
             this.itemStorage.getCurrentChildItem()?.let {
                 this.albumDetailUseCase.albumModelById(it.id())
@@ -37,12 +40,13 @@ class AlbumDetailPresenter @Inject constructor(
                             this@AlbumDetailPresenter.viewState.showProgress(false)
                         }
                         .subscribe(
-                                { songModel ->
-                                    this@AlbumDetailPresenter.dataModel = songModel
+                                { model ->
+                                    this@AlbumDetailPresenter.dataModel = model
                                     this@AlbumDetailPresenter.showModel()
+                                    this@AlbumDetailPresenter.viewState.systemMessage(model.albumArtistName)
                                 },
                                 //todo throwable state
-                                {}
+                                {throwable -> this@AlbumDetailPresenter.viewState.systemMessage("${throwable.message}")}
                         ).connect()
             }
         }

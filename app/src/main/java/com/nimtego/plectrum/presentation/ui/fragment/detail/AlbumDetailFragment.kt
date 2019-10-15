@@ -22,13 +22,13 @@ import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.artist_information_fragment.*
+import kotlinx.android.synthetic.main.detail_song_fragment.*
 import javax.inject.Inject
 import javax.inject.Named
 
 class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener {
 
-    override val layoutRes: Int = R.layout.artist_information_fragment
+    override val layoutRes: Int = R.layout.detail_album_fragment
 
     private lateinit var price: TextView
     private lateinit var date: TextView
@@ -56,8 +56,13 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
         super.onCreate(savedInstanceState)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        init()
+    }
+
     override fun showProgress(show: Boolean) {
-        //todo
+        if(show)pb.visibility = View.VISIBLE else  pb.visibility = View.GONE
     }
 
     override fun onBackPressed(): Boolean {
@@ -65,7 +70,7 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
         return true
     }
 
-    private fun initView() {
+    private fun init() {
         this.artistName = author_value
         this.date = release_date_value
         this.price = price_value
@@ -91,7 +96,7 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
         artistName.text = albumModel.albumArtistName
         //price.setText(data.getArtistArtwork())
         //information!!.setText(artistDetailsModel.getWikiInformation())
-        collapsingToolbarLayout.title = albumModel.albumArtistName
+        collapsingToolbarLayout.title = albumModel.albumName
 //        val albumsAdapter = AlbumsAdapterForArtist(artistDetailsModel.getAlbums(),
 //                this.getActivity())
 //        albumsAdapter.setOnItemClickListener(object : AlbumsAdapterForArtist.OnItemClickListener() {

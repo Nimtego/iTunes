@@ -22,14 +22,14 @@ import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.artist_information_fragment.*
+import kotlinx.android.synthetic.main.detail_song_fragment.*
 import javax.inject.Inject
 import javax.inject.Named
 
 
 class ArtistDetailFragment : BaseFragment(), ArtistDetailView, BackButtonListener {
 
-    override val layoutRes: Int = R.layout.artist_information_fragment
+    override val layoutRes: Int = R.layout.detail_artist_fragment
 
     private lateinit var price: TextView
     private lateinit var date: TextView
@@ -61,12 +61,17 @@ class ArtistDetailFragment : BaseFragment(), ArtistDetailView, BackButtonListene
         //todo
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        init()
+    }
+
     override fun onBackPressed(): Boolean {
         this.presenter.onBackPressed()
         return true
     }
 
-    private fun initView() {
+    private fun init() {
         this.artistName = author_value
         this.date = release_date_value
         this.price = price_value

@@ -9,6 +9,11 @@ import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
 import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
+import com.nimtego.plectrum.data.model.itunes.AlbumResult
+import android.R.id
+import com.nimtego.plectrum.data.model.itunes.SongResult
+import io.reactivex.functions.BiFunction
+
 
 class MusicalDetail @Inject constructor(
         private val dataStoreFactory: DetailMusicalDataStore,
@@ -21,13 +26,15 @@ class MusicalDetail @Inject constructor(
         }
     }
 
+    //todo remove firs songs item !!!!
     override fun getAlbumById(id: String): Observable<AlbumModel> {
-        return this.dataStoreFactory.albumById(id).flatMap { albumResult ->
-            this.dataStoreFactory.songsByAlbumId(albumResult.collectionId.toString())
-                    .map { songResult ->
-                        this.mapper.albumResultToModel(albumResult, songResult)
-                    }
-        }
+        return Observable.zip(dataStoreFactory.albumById(id),
+                              dataStoreFactory.songsByAlbumId(id),
+                              BiFunction {album,
+                                          songs
+                                          -> this.mapper.albumResultToModel(album,
+                                      songs.takeLast(5))
+                              })
     }
 
     override fun getArtistById(id: String): Observable<ArtistModel> {
