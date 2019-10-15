@@ -1,11 +1,15 @@
 package com.nimtego.plectrum.presentation.mvp.presenters.general
 
 import com.arellomobile.mvp.InjectViewState
+import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.domain.interactor.general.MoreSectionInteractor
 import com.nimtego.plectrum.presentation.manger.MainItemStorage
+import com.nimtego.plectrum.presentation.mvp.model.book.BookWrapperModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
+import com.nimtego.plectrum.presentation.mvp.model.song.AlbumWrapperModel
+import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.MoreSectionView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
@@ -28,7 +32,11 @@ class MoreSectionPresenter @Inject constructor(
 
     override fun onUserItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
-        this.router.navigateTo(Screens.ItemInformationScreen(navigationQualifier))
+        this.router.navigateTo(when(childViewModel) {
+            is SongWrapperModel  -> Screens.SongDetailScreen(navigationQualifier)
+            is AlbumWrapperModel -> Screens.AlbumDetailScreen(navigationQualifier)
+            else                 -> Screens.ItemInformationScreen(navigationQualifier)
+        })
     }
 
     override fun attachView(view: MoreSectionView) {

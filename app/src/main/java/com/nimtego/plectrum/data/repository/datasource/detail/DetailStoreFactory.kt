@@ -3,7 +3,7 @@ package com.nimtego.plectrum.data.repository.datasource.detail
 import com.nimtego.plectrum.data.model.itunes.AlbumResult
 import com.nimtego.plectrum.data.model.itunes.ArtistResult
 import com.nimtego.plectrum.data.model.itunes.SongResult
-import io.reactivex.Single
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class DetailStoreFactory @Inject constructor(
@@ -11,34 +11,33 @@ class DetailStoreFactory @Inject constructor(
         private val diskPopularBook: DetailMusicalDataStore
 ) : DetailMusicalDataStore {
 
-    override fun songById(id: String): Single<SongResult> {
-//        return Single.concat(diskPopularBook.songById(id),
-//                cloudDataStore.songById(id)
-//        ).firstElement().toSingle()
-        return cloudDataStore.songById(id)
+    override fun songById(id: String): Observable<SongResult> {
+        return Observable.concat(diskPopularBook.songById(id),
+                cloudDataStore.songById(id)
+        ).firstElement().toObservable()
     }
 
-    override fun albumById(id: String): Single<AlbumResult> {
-        return Single.concat(diskPopularBook.albumById(id),
+    override fun albumById(id: String): Observable<AlbumResult> {
+        return Observable.concat(diskPopularBook.albumById(id),
                 cloudDataStore.albumById(id)
-        ).firstElement().toSingle()
+        ).firstElement().toObservable()
     }
 
-    override fun artistById(id: String): Single<ArtistResult> {
-        return Single.concat(diskPopularBook.artistById(id),
+    override fun artistById(id: String): Observable<ArtistResult> {
+        return Observable.concat(diskPopularBook.artistById(id),
                 cloudDataStore.artistById(id)
-        ).firstElement().toSingle()
+        ).firstElement().toObservable()
     }
 
-    override fun songsByAlbumId(id: String): Single<List<SongResult>> {
-        return Single.concat(diskPopularBook.songsByAlbumId(id),
+    override fun songsByAlbumId(id: String): Observable<List<SongResult>> {
+        return Observable.concat(diskPopularBook.songsByAlbumId(id),
                 cloudDataStore.songsByAlbumId(id)
-        ).firstElement().toSingle()
+        ).firstElement().toObservable()
     }
 
-    override fun albumsByArtistId(id: String): Single<List<AlbumResult>> {
-        return Single.concat(diskPopularBook.albumsByArtistId(id),
+    override fun albumsByArtistId(id: String): Observable<List<AlbumResult>> {
+        return Observable.concat(diskPopularBook.albumsByArtistId(id),
                 cloudDataStore.albumsByArtistId(id)
-        ).firstElement().toSingle()
+        ).firstElement().toObservable()
     }
 }

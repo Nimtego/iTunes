@@ -6,6 +6,7 @@ import com.nimtego.plectrum.domain.repository.detail.MusicalDetailRepository
 import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
 import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
 import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
+import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -14,13 +15,13 @@ class MusicalDetail @Inject constructor(
         private val mapper: MusicalDetailMapper
 ) : MusicalDetailRepository {
 
-    override fun getSongById(id: String): Single<SongModel> {
+    override fun getSongById(id: String): Observable<SongModel> {
         return this.dataStoreFactory.songById(id).map {
             this.mapper.songResultToModel(it)
         }
     }
 
-    override fun getAlbumById(id: String): Single<AlbumModel> {
+    override fun getAlbumById(id: String): Observable<AlbumModel> {
         return this.dataStoreFactory.albumById(id).flatMap { albumResult ->
             this.dataStoreFactory.songsByAlbumId(albumResult.collectionId.toString())
                     .map { songResult ->
@@ -29,7 +30,7 @@ class MusicalDetail @Inject constructor(
         }
     }
 
-    override fun getArtistById(id: String): Single<ArtistModel> {
+    override fun getArtistById(id: String): Observable<ArtistModel> {
         return this.dataStoreFactory.artistById(id).flatMap { artistResult ->
             this.dataStoreFactory.albumsByArtistId(artistResult.artistId.toString())
                     .map { albumResult ->

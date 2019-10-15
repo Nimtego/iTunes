@@ -5,7 +5,7 @@ import com.nimtego.plectrum.domain.repository.detail.MusicalDetailRepository
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.detail.AlbumDetailUseCase
 import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
-import io.reactivex.Single
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class AlbumDetail @Inject constructor(
@@ -13,7 +13,7 @@ class AlbumDetail @Inject constructor(
         private val musicalDetailRepository: MusicalDetailRepository
 ) : AlbumDetailUseCase {
 
-    override fun albumModelById(id: String): Single<AlbumModel> {
+    override fun albumModelById(id: String): Observable<AlbumModel> {
         return this.musicalDetailRepository.getAlbumById(id)
                 .subscribeOn(schedulersProvider.io())
     }

@@ -1,10 +1,9 @@
 package com.nimtego.plectrum.data.repository.datasource.detail
 
-import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.model.itunes.AlbumResult
 import com.nimtego.plectrum.data.model.itunes.ArtistResult
 import com.nimtego.plectrum.data.model.itunes.SongResult
-import io.reactivex.Single
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class DetailDiskDataStore @Inject constructor(
@@ -13,37 +12,23 @@ class DetailDiskDataStore @Inject constructor(
 //        private val cacheArtist: Cache<String, ArtistResult>
 ) : DetailMusicalDataStore {
 
-    override fun songById(id: String): Single<SongResult> {
-        return Single.fromObservable {
-            //cacheSong.get(id)
-        }
+    override fun songById(id: String): Observable<SongResult> {
+        return Observable.empty()
     }
 
-    override fun albumById(id: String): Single<AlbumResult> {
-        return Single.fromObservable {
-            //cacheAlbum.get(id)
-        }
+    override fun albumById(id: String): Observable<AlbumResult> {
+        return Observable.empty()
     }
 
-    override fun artistById(id: String): Single<ArtistResult> {
-        return Single.fromObservable {
-            //cacheArtist.get(id)
-        }
+    override fun artistById(id: String): Observable<ArtistResult> {
+        return Observable.empty()
     }
 
-    override fun songsByAlbumId(id: String): Single<List<SongResult>> {
-        return Single.fromObservable {
-            //cacheSong.getAllValue().map {
-               // it.filter { songResult -> songResult.collectionId.toString() == id }
-           // }
-        }
+    override fun songsByAlbumId(id: String): Observable<List<SongResult>> {
+        return Observable.empty()
     }
 
-    override fun albumsByArtistId(id: String): Single<List<AlbumResult>> {
-        return Single.fromObservable {
-           // cacheAlbum.getAllValue().map {
-             //   it.filter { albumResult -> albumResult.artistId.toString() == id }
-           // }
-        }
+    override fun albumsByArtistId(id: String): Observable<List<AlbumResult>> {
+        return Observable.empty()
     }
 }

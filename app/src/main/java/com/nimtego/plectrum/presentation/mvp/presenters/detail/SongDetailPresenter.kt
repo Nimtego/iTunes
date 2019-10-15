@@ -31,11 +31,9 @@ class SongDetailPresenter @Inject constructor(
                         .observeOn(schedulersProvider.ui())
                         .doOnSubscribe {
                             this@SongDetailPresenter.viewState.showProgress(true)
-                            this@SongDetailPresenter.viewState.systemMessage("On sub")
                         }
                         .doAfterTerminate {
                             this@SongDetailPresenter.viewState.showProgress(false)
-                            this@SongDetailPresenter.viewState.systemMessage("On terminate")
                         }
                         .subscribe(
                                 { songModel ->
