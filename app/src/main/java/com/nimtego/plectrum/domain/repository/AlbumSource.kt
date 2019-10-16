@@ -1,6 +1,5 @@
 package com.nimtego.plectrum.domain.repository
 
-import com.nimtego.plectrum.presentation.mvp.model.song.Album
 import io.reactivex.Observable
 
 interface AlbumSource<R> {

@@ -4,6 +4,9 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationModule
 import com.nimtego.plectrum.presentation.di.modules.presentation.PresenterModule
 import com.nimtego.plectrum.presentation.di.modules.system.SystemModule
 import com.nimtego.plectrum.presentation.ui.activity.AppActivity
+import com.nimtego.plectrum.presentation.ui.fragment.detail.AlbumDetailFragment
+import com.nimtego.plectrum.presentation.ui.fragment.detail.ArtistDetailFragment
+import com.nimtego.plectrum.presentation.ui.fragment.detail.SongDetailFragment
 import com.nimtego.plectrum.presentation.ui.fragment.popular.InformationFragment
 import com.nimtego.plectrum.presentation.ui.fragment.popular.MoreSectionFragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
@@ -54,4 +57,10 @@ interface ApplicationComponent {
     fun inject(fragment: SearchContentFragment)
 
     fun inject(fragment: SearchInformationFragment)
+
+    fun inject(fragment: AlbumDetailFragment)
+
+    fun inject(fragment: ArtistDetailFragment)
+
+    fun inject(fragment: SongDetailFragment)
 }

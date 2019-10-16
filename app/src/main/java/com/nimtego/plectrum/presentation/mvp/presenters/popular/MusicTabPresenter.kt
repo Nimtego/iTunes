@@ -9,6 +9,8 @@ import com.nimtego.plectrum.presentation.manger.MainItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
+import com.nimtego.plectrum.presentation.mvp.model.song.AlbumWrapperModel
+import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.TabContentView
 import com.nimtego.plectrum.presentation.navigation.Screens
@@ -64,7 +66,15 @@ class MusicTabPresenter @Inject constructor(
     override fun childItemClicked(childViewModel: ChildViewModel) {
         this.itemStorage.changeCurrentChildItem(childViewModel)
         this.router.navigateTo(
-                Screens.ItemInformationScreen(NavigationQualifiers.TAB_MUSIC_NAVIGATION)
+                when(childViewModel) {
+                    is SongWrapperModel -> Screens.SongDetailScreen(navigationQualifier)
+                    is AlbumWrapperModel -> Screens.AlbumDetailScreen(navigationQualifier)
+                    else -> throw Exception("Implement - ${childViewModel.javaClass.name} not permissible")
+                }
         )
+    }
+
+    companion object {
+        const val navigationQualifier = NavigationQualifiers.TAB_MUSIC_NAVIGATION
     }
 }

@@ -9,6 +9,7 @@ import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusi
 import com.nimtego.plectrum.domain.repository.RepositoryPopular
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
+import com.nimtego.plectrum.presentation.mvp.model.song.AlbumWrapperModel
 import com.nimtego.plectrum.presentation.mvp.model.song.MusicTabModel
 import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import io.reactivex.Observable
@@ -59,17 +60,23 @@ class PopularMusicRepository @Inject constructor(
         )
     }
 
+    //fixme remove titleKey check
     private fun transformResponse(
             titleKey: PopularMusicKey,
             response: Observable<PopularResponse>
     ): Observable<MusicTabModel> {
         return response.map {
-            val songsModel = it.feed.results.map { result: Result ->
-                SongWrapperModel(mapper.popularResultToMusicalModel(result))
+            val model: List<ChildViewModel> = it.feed.results.map { result: Result ->
+                if (titleKey == PopularMusicKey.TOP_ALBUM){
+                    AlbumWrapperModel(mapper.popularResultToAlbum(result))
+                } else {
+                    SongWrapperModel(mapper.popularResultToMusicalModel(result))
+                }
+
             }
             MusicTabModel(titleKey = titleKey,
                           title = it.feed.title,
-                          modelList = songsModel)
+                          modelList = model)
         }
     }
 

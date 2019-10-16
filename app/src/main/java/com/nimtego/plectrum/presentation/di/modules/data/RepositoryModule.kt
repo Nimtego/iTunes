@@ -1,15 +1,15 @@
 package com.nimtego.plectrum.presentation.di.modules.data
 
-import com.nimtego.plectrum.data.model.mappers.MusicalContentMapper
-import com.nimtego.plectrum.data.model.mappers.PopularBookMapper
-import com.nimtego.plectrum.data.model.mappers.PopularMovieMapper
-import com.nimtego.plectrum.data.model.mappers.PopularMusicMapper
+import com.nimtego.plectrum.data.model.mappers.*
+import com.nimtego.plectrum.data.repository.datasource.detail.DetailStoreFactory
 import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookFactory
 import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovieFactory
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
 import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.data.repository.repository.*
+import com.nimtego.plectrum.data.repository.repository.detail.MusicalDetailRepositoryImp
 import com.nimtego.plectrum.domain.repository.RepositoryPopular
+import com.nimtego.plectrum.domain.repository.detail.MusicalDetailRepository
 import com.nimtego.plectrum.presentation.di.modules.ContextModule
 import com.nimtego.plectrum.presentation.di.modules.domain.RepositoryQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.BaseParentViewModel
@@ -91,6 +91,19 @@ class RepositoryModule {
         return MusicalRepository(dataStoreFactory, mapper)
     }
 
+    @Provides
+    @Singleton
+    internal fun provideMusicalDetailRepository(
+            mapper: MusicalDetailMapper,
+            dataStoreFactory: DetailStoreFactory
+    ): MusicalDetailRepository {
+        return MusicalDetailRepositoryImp(dataStoreFactory, mapper)
+    }
+
+    @Provides
+    internal fun provideDetailMusicalMapper(): MusicalDetailMapper {
+        return MusicalDetailMapper()
+    }
 
     @Provides
     internal fun providePopularMusicMapper(): PopularMusicMapper {

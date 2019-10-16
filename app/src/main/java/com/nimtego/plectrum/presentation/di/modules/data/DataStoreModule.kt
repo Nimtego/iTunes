@@ -1,12 +1,19 @@
 package com.nimtego.plectrum.presentation.di.modules.data
 
 import android.content.Context
+import com.nimtego.plectrum.data.cache.Cache
 import com.nimtego.plectrum.data.cache.FileManager
 import com.nimtego.plectrum.data.cache.PopularResponseCache
 import com.nimtego.plectrum.data.cache.Serializer
 import com.nimtego.plectrum.data.executor.BaseExecutor
+import com.nimtego.plectrum.data.model.itunes.AlbumResult
+import com.nimtego.plectrum.data.model.itunes.ArtistResult
+import com.nimtego.plectrum.data.model.itunes.SongResult
 import com.nimtego.plectrum.data.network.itunes.ITunesApi
 import com.nimtego.plectrum.data.network.rss_itunes.RssItunesApi
+import com.nimtego.plectrum.data.repository.datasource.detail.DetailCloudDataStore
+import com.nimtego.plectrum.data.repository.datasource.detail.DetailDiskDataStore
+import com.nimtego.plectrum.data.repository.datasource.detail.DetailStoreFactory
 import com.nimtego.plectrum.data.repository.datasource.popular.book.CloudPopularBook
 import com.nimtego.plectrum.data.repository.datasource.popular.book.DiskPopularBook
 import com.nimtego.plectrum.data.repository.datasource.popular.book.PopularBookDataStore
@@ -67,6 +74,24 @@ class DataStoreModule {
     ) : PopularMusicDataStore {
         return PopularMusicFactory(cache, cloudPopularMusic, discPopularMusic)
     }
+    @Provides
+    @Singleton
+    internal fun provideMusicDetailStoreFactory(
+            cloud: DetailCloudDataStore,
+            disc: DetailDiskDataStore
+    ) : DetailStoreFactory {
+        return DetailStoreFactory(cloud, disc)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideMusicDetailCloudStoreFactory(
+            @Named(NetworkQualifiers.ITUNES_API)
+            api: ITunesApi
+    ) : DetailCloudDataStore {
+        return DetailCloudDataStore(api)
+    }
+
 
     @Provides
     @Singleton

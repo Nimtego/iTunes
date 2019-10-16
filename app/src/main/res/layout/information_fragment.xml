@@ -63,7 +63,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/author"
+                android:id="@+id/author_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="64dp"
@@ -86,10 +86,10 @@
                 android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/information" />
+                app:layout_constraintTop_toBottomOf="@+id/information_value" />
 
             <TextView
-                android:id="@+id/release_date"
+                android:id="@+id/release_date_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -98,7 +98,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/author"
+                app:layout_constraintStart_toStartOf="@+id/author_value"
                 app:layout_constraintTop_toTopOf="@+id/release_date_text_view" />
 
             <TextView
@@ -112,10 +112,10 @@
                 android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/release_date" />
+                app:layout_constraintTop_toBottomOf="@+id/release_date_value" />
 
             <TextView
-                android:id="@+id/price"
+                android:id="@+id/price_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -123,7 +123,7 @@
                 android:text="@string/price"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/release_date"
+                app:layout_constraintStart_toStartOf="@+id/release_date_value"
                 app:layout_constraintTop_toTopOf="@+id/price_text_view" />
 
             <TextView
@@ -137,10 +137,10 @@
                 android:textColor="@color/separator_gray"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/author_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/author" />
+                app:layout_constraintTop_toBottomOf="@+id/author_value" />
 
             <TextView
-                android:id="@+id/information"
+                android:id="@+id/information_value"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -148,11 +148,11 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/price"
+                app:layout_constraintStart_toStartOf="@+id/price_value"
                 app:layout_constraintTop_toTopOf="@+id/information_text_view" />
 
             <TextView
-                android:id="@+id/songs_text_view"
+                android:id="@+id/albums_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -161,8 +161,8 @@
                 android:text="@string/songs"
                 android:textColor="@color/separator_gray"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/price_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/price" />
+                app:layout_constraintStart_toStartOf="@+id/price_value"
+                app:layout_constraintTop_toBottomOf="@+id/price_value" />
 
             <TextView
                 android:id="@+id/songs"
@@ -173,8 +173,8 @@
                 android:text="@string/songs"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/price"
-                app:layout_constraintTop_toTopOf="@+id/songs_text_view" />
+                app:layout_constraintStart_toStartOf="@+id/price_value"
+                app:layout_constraintTop_toTopOf="@+id/albums_text_view" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 

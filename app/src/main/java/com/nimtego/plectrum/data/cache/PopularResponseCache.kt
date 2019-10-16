@@ -38,4 +38,8 @@ class PopularResponseCache @Inject constructor() : Cache<String, PopularResponse
     override fun evictAll(): Completable {
         return Completable.create { cache.clear() }
     }
+
+    override fun getAllValue(): Observable<List<PopularResponse>> {
+        return Observable.fromArray(this.cache.values.toList())
+    }
 }

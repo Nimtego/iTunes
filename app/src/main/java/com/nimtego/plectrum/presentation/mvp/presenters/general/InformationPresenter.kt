@@ -15,8 +15,7 @@ import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState
-class InformationPresenter
-@Inject constructor(
+class InformationPresenter @Inject constructor(
         private val navigationHandler: NavigationHandler,
         private val interactor: InformationInteractor,
         private val itemStorage: ChildItemStorage

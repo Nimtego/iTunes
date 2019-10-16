@@ -68,9 +68,12 @@ class MusicTabNavFragment : BaseNavFragment() {
 
         override fun createFragment(screen: SupportAppScreen): Fragment? {
             return when (screen) {
-                Screens.MusicTabScreen -> screen.fragment
-                is Screens.MoreContentScreen -> screen.fragment
-                is Screens.ItemInformationScreen -> screen.fragment
+                Screens.MusicTabScreen            -> screen.fragment
+                is Screens.MoreContentScreen      -> screen.fragment
+                is Screens.ArtistDetailScreen     -> screen.fragment
+                is Screens.AlbumDetailScreen      -> screen.fragment
+                is Screens.SongDetailScreen       -> screen.fragment
+                is Screens.ItemInformationScreen  -> screen.fragment
                 is Screens.SearchNavigationScreen -> screen.fragment
                 else -> throw Exception("Screen - ${screen.screenKey} not permissible")
             }

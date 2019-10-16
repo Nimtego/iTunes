@@ -12,9 +12,15 @@ import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifi
 import com.nimtego.plectrum.presentation.interactor.LaunchUseCase
 import com.nimtego.plectrum.presentation.interactor.MusicalSearchUseCase
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
+import com.nimtego.plectrum.presentation.interactor.detail.AlbumDetailUseCase
+import com.nimtego.plectrum.presentation.interactor.detail.ArtistDetailUseCase
+import com.nimtego.plectrum.presentation.interactor.detail.SongDetailUseCase
 import com.nimtego.plectrum.presentation.manger.MainChoiceItemStorage
 import com.nimtego.plectrum.presentation.manger.MusicalItemStorageImp
 import com.nimtego.plectrum.presentation.manger.UserSearchItemStorage
+import com.nimtego.plectrum.presentation.mvp.presenters.detail.AlbumDetailPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.detail.ArtistDetailPresenter
+import com.nimtego.plectrum.presentation.mvp.presenters.detail.SongDetailPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.InformationPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.MoreSectionPresenter
 import com.nimtego.plectrum.presentation.mvp.presenters.general.SplashPresenter
@@ -138,6 +144,54 @@ class PresenterModule {
         return MoreSectionPresenter(navigationHandler, interactor, userChoiceItemStorage)
     }
 
+    @Provides
+    @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
+    fun songDetailPresenter(
+            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+            navigationHandler: NavigationHandler,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            userChoiceItemStorage: MainChoiceItemStorage,
+            songDetailUseCase: SongDetailUseCase,
+            schedulersProvider: SchedulersProvider
+    ): SongDetailPresenter {
+        return SongDetailPresenter(navigationHandler,
+                songDetailUseCase,
+                userChoiceItemStorage,
+                schedulersProvider)
+    }
+
+    @Provides
+    @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
+    fun albumDetailPresenter(
+            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+            navigationHandler: NavigationHandler,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            userChoiceItemStorage: MainChoiceItemStorage,
+            albumDetailUseCase: AlbumDetailUseCase,
+            schedulersProvider: SchedulersProvider
+    ): AlbumDetailPresenter {
+        return AlbumDetailPresenter(navigationHandler,
+                albumDetailUseCase,
+                userChoiceItemStorage,
+                schedulersProvider)
+    }
+
+    @Provides
+    @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
+    fun artistDetailPresenter(
+            @Named(NavigationQualifiers.BOTTOM_NAVIGATION_ROUTER_HANDLER)
+            navigationHandler: NavigationHandler,
+            @Named(StorageQualifiers.MAIN_ITEM_STORAGE_MANAGER)
+            userChoiceItemStorage: MainChoiceItemStorage,
+            artistDetailUseCase: ArtistDetailUseCase,
+            schedulersProvider: SchedulersProvider
+    ): ArtistDetailPresenter {
+        return ArtistDetailPresenter(navigationHandler,
+                artistDetailUseCase,
+                userChoiceItemStorage,
+                schedulersProvider)
+    }
+
     //todo
     @Provides
     @Named(NavigationQualifiers.BOTTOM_BAR_NAVIGATION)
@@ -197,7 +251,7 @@ class PresenterModule {
             schedulersProvider: SchedulersProvider
     ): SearchContentPresenter {
         return SearchContentPresenter(navigationHandler = navigationHandler,
-                interactor = interactor,
+                musicalSearchUseCase = interactor,
                 searchItemStorage = searchItemStorage,
                 userChoiceItemStorage = userChoiceItemStorage,
                 schedulersProvider = schedulersProvider)

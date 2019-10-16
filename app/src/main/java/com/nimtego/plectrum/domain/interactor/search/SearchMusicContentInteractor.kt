@@ -15,7 +15,6 @@ class SearchMusicContentInteractor @Inject constructor (
     override fun searchSong(request: String): Observable<List<Song>> {
         return this.songRepository.getSongsByRequest(request)
                 .subscribeOn(schedulersProvider.io())
-
     }
 
     class Params private constructor(val request: String) {

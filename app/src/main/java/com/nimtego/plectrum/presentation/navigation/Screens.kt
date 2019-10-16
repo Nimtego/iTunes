@@ -1,6 +1,9 @@
 package com.nimtego.plectrum.presentation.navigation
 
 import android.support.v4.app.Fragment
+import com.nimtego.plectrum.presentation.ui.fragment.detail.AlbumDetailFragment
+import com.nimtego.plectrum.presentation.ui.fragment.detail.ArtistDetailFragment
+import com.nimtego.plectrum.presentation.ui.fragment.detail.SongDetailFragment
 import com.nimtego.plectrum.presentation.ui.fragment.general.SplashFragment
 import com.nimtego.plectrum.presentation.ui.fragment.navigation.*
 import com.nimtego.plectrum.presentation.ui.fragment.popular.*
@@ -76,6 +79,24 @@ object Screens {
     class MoreContentScreen(private val navigationQualifier: String) : SupportAppScreen() {
         override fun getFragment(): Fragment {
             return MoreSectionFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class ArtistDetailScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return ArtistDetailFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class AlbumDetailScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return AlbumDetailFragment.getInstance(navigationQualifier)
+        }
+    }
+
+    class SongDetailScreen(private val navigationQualifier: String) : SupportAppScreen() {
+        override fun getFragment(): Fragment {
+            return SongDetailFragment.getInstance(navigationQualifier)
         }
     }
 

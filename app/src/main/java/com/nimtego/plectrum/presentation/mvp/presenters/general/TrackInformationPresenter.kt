@@ -14,8 +14,7 @@ import javax.inject.Inject
 
 
 @InjectViewState
-class TrackInformationPresenter
-@Inject constructor(
+class TrackInformationPresenter @Inject constructor(
         private val tabContentRouter: Router,
         private val itemStorage: MusicalItemStorage,
         private val interactor: TrackInformationInteractor

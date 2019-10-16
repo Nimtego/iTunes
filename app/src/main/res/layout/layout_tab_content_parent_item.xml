@@ -49,11 +49,15 @@
 
         </LinearLayout>
 
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@color/divider_color_light"/>-->
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_child_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:nestedScrollingEnabled="false">
 
         </android.support.v7.widget.RecyclerView>
