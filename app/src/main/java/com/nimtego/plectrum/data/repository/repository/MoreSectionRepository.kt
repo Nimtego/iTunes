@@ -15,14 +15,12 @@ import com.nimtego.plectrum.domain.repository.RepositoryPopular
 import com.nimtego.plectrum.presentation.mvp.model.book.Book
 import com.nimtego.plectrum.presentation.mvp.model.book.BookWrapperModel
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ChildViewModel
-import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.ParentTabModelContainer
 import com.nimtego.plectrum.presentation.mvp.model.main_tab_model.SectionViewModel
-import com.nimtego.plectrum.presentation.mvp.model.movie.Movie
 import com.nimtego.plectrum.presentation.mvp.model.movie.MovieWrapperModel
 import com.nimtego.plectrum.presentation.mvp.model.movie.PopularMovieModel
-import com.nimtego.plectrum.presentation.mvp.model.song.*
+import com.nimtego.plectrum.presentation.mvp.model.song.AlbumWrapperModel
+import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import io.reactivex.Observable
-import java.lang.Exception
 
 //todo it is too much arguments
 class MoreSectionRepository(
@@ -37,11 +35,10 @@ class MoreSectionRepository(
     override fun query(sectionKey: SectionsKey,
                        responseSize: Int
     ): Observable<SectionViewModel<ChildViewModel>> {
-        //todo remove "request,request," - ugly
         return when (sectionKey) {
             is PopularMusicKey -> getMusicalContent(sectionKey, responseSize)
             is PopularMovieKey -> getMovieContent(sectionKey, responseSize)
-            is PopularBookKey  -> getBookContent(sectionKey, responseSize)
+            is PopularBookKey -> getBookContent(sectionKey, responseSize)
             else -> throw Exception("Section invalid")
         }
     }
@@ -50,20 +47,27 @@ class MoreSectionRepository(
             keySection: PopularMusicKey,
             responseSize: Int
     ): Observable<SectionViewModel<ChildViewModel>> {
-        val contentObservableByKey = when(keySection) {
+        val contentObservableByKey = when (keySection) {
             PopularMusicKey.TOP_TRACK -> musicDataStoreFactory.topTrack(responseSize)
             PopularMusicKey.HOT_TRACK -> musicDataStoreFactory.hotTrack(responseSize)
             PopularMusicKey.NEW_TRACK -> musicDataStoreFactory.newTrack(responseSize)
             PopularMusicKey.TOP_ALBUM -> musicDataStoreFactory.topAlbum(responseSize)
         }
-        return contentObservableByKey.map {
-            val modelList : List<ChildViewModel> = it.feed.results.map {
-                result: Result -> mapperMusic.popularResultToMusicalModel(result)
-            }.map { song: Song -> SongWrapperModel(song) }
+        return contentObservableByKey.map { response ->
+            val modelList: List<ChildViewModel> = wrapModelByKey(keySection, response.feed.results)
             SectionViewModel(titleKey = keySection,
-                             title = it.feed.title,
-                             parentList = modelList
+                    title = response.feed.title,
+                    parentList = modelList
             )
+        }
+    }
+
+    private fun wrapModelByKey(key: PopularMusicKey, result: List<Result>): List<ChildViewModel> {
+        return when (key) {
+            PopularMusicKey.TOP_ALBUM -> result.map {
+                AlbumWrapperModel(mapperMusic.popularResultToAlbum(it))
+            }
+            else -> result.map { SongWrapperModel(mapperMusic.popularResultToMusicalModel(it)) }
         }
     }
 
@@ -71,12 +75,12 @@ class MoreSectionRepository(
             keySection: PopularMovieKey,
             responseSize: Int
     ): Observable<SectionViewModel<ChildViewModel>> {
-        val contentObservableByKey = when(keySection) {
+        val contentObservableByKey = when (keySection) {
             PopularMovieKey.TOP_MOVIE -> movieDataStoreFactory.topMovie(responseSize)
         }
         return contentObservableByKey.map {
-            val modelList : List<ChildViewModel> = it.feed.results.map {
-                result: Result -> mapperMovie.popularResultToMovie(result)
+            val modelList: List<ChildViewModel> = it.feed.results.map { result: Result ->
+                mapperMovie.popularResultToMovie(result)
             }.map { movie: PopularMovieModel -> MovieWrapperModel(movie) }
             SectionViewModel(titleKey = keySection,
                     title = it.feed.title,
@@ -89,13 +93,13 @@ class MoreSectionRepository(
             keySection: PopularBookKey,
             responseSize: Int
     ): Observable<SectionViewModel<ChildViewModel>> {
-        val contentObservableByKey = when(keySection) {
+        val contentObservableByKey = when (keySection) {
             PopularBookKey.TOP_PAID_BOOK -> bookDataStoreFactory.topPaidBook(responseSize)
             PopularBookKey.TOP_FREE_BOOK -> bookDataStoreFactory.topFreeBook(responseSize)
         }
         return contentObservableByKey.map {
-            val modelList : List<ChildViewModel> = it.feed.results.map {
-                result: Result -> mapperBook.popularResultToBook(result)
+            val modelList: List<ChildViewModel> = it.feed.results.map { result: Result ->
+                mapperBook.popularResultToBook(result)
             }.map { book: Book -> BookWrapperModel(book) }
             SectionViewModel(titleKey = keySection,
                     title = it.feed.title,
