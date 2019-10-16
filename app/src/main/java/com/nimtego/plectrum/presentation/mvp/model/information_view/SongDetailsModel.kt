@@ -1,5 +1,6 @@
 package com.nimtego.plectrum.presentation.mvp.model.information_view
 
+@Deprecated("Change conceptions")
 data class SongDetailsModel (
     val songName: String? = null,
     val songArtistName: String? = null,

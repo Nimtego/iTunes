@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.detail.AlbumDetailUseCase
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
-import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.detail.AlbumDetailView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
@@ -22,14 +22,14 @@ class AlbumDetailPresenter @Inject constructor(
     override lateinit var router: Router
 
     private lateinit var navigationQualifier: String
-    private var dataModel: AlbumModel? = null
+    private var albumDetailModel: AlbumDetailModel? = null
 
 
     override fun prepareViewModel() {
         this.itemStorage.getCurrentChildItem()?.let{
             println(it.id())
         }
-        this.dataModel ?: run {
+        this.albumDetailModel ?: run {
             this.itemStorage.getCurrentChildItem()?.let {
                 this.albumDetailUseCase.albumModelById(it.id())
                         .observeOn(schedulersProvider.ui())
@@ -41,7 +41,7 @@ class AlbumDetailPresenter @Inject constructor(
                         }
                         .subscribe(
                                 { model ->
-                                    this@AlbumDetailPresenter.dataModel = model
+                                    this@AlbumDetailPresenter.albumDetailModel = model
                                     this@AlbumDetailPresenter.showModel()
                                     this@AlbumDetailPresenter.viewState.systemMessage(model.albumArtistName)
                                 },
@@ -53,7 +53,7 @@ class AlbumDetailPresenter @Inject constructor(
     }
 
     private fun showModel() {
-        dataModel?.let {
+        albumDetailModel?.let {
             viewState.showViewState(it)
         }
     }

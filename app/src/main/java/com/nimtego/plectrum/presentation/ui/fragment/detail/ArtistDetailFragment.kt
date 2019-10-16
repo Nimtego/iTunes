@@ -15,7 +15,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
+import com.nimtego.plectrum.presentation.mvp.model.music.ArtistDetailModel
 import com.nimtego.plectrum.presentation.mvp.presenters.detail.ArtistDetailPresenter
 import com.nimtego.plectrum.presentation.mvp.view.detail.ArtistDetailView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
@@ -84,7 +84,7 @@ class ArtistDetailFragment : BaseFragment(), ArtistDetailView, BackButtonListene
     }
 
     private fun initAlbumsListRV() {
-        this.albumsRv = album_rv
+        this.albumsRv = songs_album_rv
         albumsRv.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
@@ -93,21 +93,21 @@ class ArtistDetailFragment : BaseFragment(), ArtistDetailView, BackButtonListene
         }
     }
 
-    override fun showViewState(artistModel: ArtistModel) {
-        artistName.text = artistModel.artistName
+    override fun showViewState(artistDetailModel: ArtistDetailModel) {
+        artistName.text = artistDetailModel.artistName
         //price.setText(data.getArtistArtwork())
         //information!!.setText(artistDetailsModel.getWikiInformation())
-        collapsingToolbarLayout.title = artistModel.artistName
+        collapsingToolbarLayout.title = artistDetailModel.artistName
 //        val albumsAdapter = AlbumsAdapterForArtist(artistDetailsModel.getAlbums(),
 //                this.getActivity())
 //        albumsAdapter.setOnItemClickListener(object : AlbumsAdapterForArtist.OnItemClickListener() {
-//            fun onUserItemClicked(albumModel: AlbumModel) {
-//                mPresenter.albumClicked(albumModel)
+//            fun onUserItemClicked(albumDetailModel: AlbumDetailModel) {
+//                mPresenter.albumClicked(albumDetailModel)
 //            }
 //        })
 //        albumsRv.adapter = albumsAdapter
 
-        Picasso.get().load(artistModel.artistArtwork
+        Picasso.get().load(artistDetailModel.artistArtwork
                 .replace("135x135", "570x570"))
                 .into(albumImage, object : Callback {
                     override fun onSuccess() {

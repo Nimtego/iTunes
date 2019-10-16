@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.presentation.mvp.model.music
 
-data class SongModel (
+data class SongDetailModel (
     val trackName: String,
     val trackAlbumName: String,
     val trackArtistName: String,

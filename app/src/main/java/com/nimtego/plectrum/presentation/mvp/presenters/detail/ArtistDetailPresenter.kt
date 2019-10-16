@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.detail.ArtistDetailUseCase
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
-import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
+import com.nimtego.plectrum.presentation.mvp.model.music.ArtistDetailModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.detail.ArtistDetailView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
@@ -22,11 +22,11 @@ class ArtistDetailPresenter @Inject constructor(
     override lateinit var router: Router
 
     private lateinit var navigationQualifier: String
-    private var dataModel: ArtistModel? = null
+    private var dataDetailModel: ArtistDetailModel? = null
 
 
     override fun prepareViewModel() {
-        this.dataModel ?: run {
+        this.dataDetailModel ?: run {
             this.itemStorage.getCurrentChildItem()?.let {
                 this.artistDetailUseCase.artistModelById(it.id())
                         .observeOn(schedulersProvider.ui())
@@ -38,7 +38,7 @@ class ArtistDetailPresenter @Inject constructor(
                         }
                         .subscribe(
                                 { songModel ->
-                                    this@ArtistDetailPresenter.dataModel = songModel
+                                    this@ArtistDetailPresenter.dataDetailModel = songModel
                                     this@ArtistDetailPresenter.showModel()
                                 },
                                 //todo throwable state
@@ -49,7 +49,7 @@ class ArtistDetailPresenter @Inject constructor(
     }
 
     private fun showModel() {
-        dataModel?.let {
+        dataDetailModel?.let {
             viewState.showViewState(it)
         }
     }

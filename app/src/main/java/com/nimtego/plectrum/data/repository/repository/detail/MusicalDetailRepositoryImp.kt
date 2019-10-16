@@ -3,46 +3,49 @@ package com.nimtego.plectrum.data.repository.repository.detail
 import com.nimtego.plectrum.data.model.mappers.MusicalDetailMapper
 import com.nimtego.plectrum.data.repository.datasource.detail.DetailMusicalDataStore
 import com.nimtego.plectrum.domain.repository.detail.MusicalDetailRepository
-import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
-import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
-import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.ArtistDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.SongDetailModel
 import io.reactivex.Observable
-import io.reactivex.Single
 import javax.inject.Inject
-import com.nimtego.plectrum.data.model.itunes.AlbumResult
-import android.R.id
 import com.nimtego.plectrum.data.model.itunes.SongResult
 import io.reactivex.functions.BiFunction
 
 
-class MusicalDetail @Inject constructor(
+class MusicalDetailRepositoryImp @Inject constructor(
         private val dataStoreFactory: DetailMusicalDataStore,
         private val mapper: MusicalDetailMapper
 ) : MusicalDetailRepository {
 
-    override fun getSongById(id: String): Observable<SongModel> {
+    override fun getSongById(id: String): Observable<SongDetailModel> {
         return this.dataStoreFactory.songById(id).map {
             this.mapper.songResultToModel(it)
         }
     }
 
-    //todo remove firs songs item !!!!
-    override fun getAlbumById(id: String): Observable<AlbumModel> {
+    override fun getAlbumById(id: String): Observable<AlbumDetailModel> {
         return Observable.zip(dataStoreFactory.albumById(id),
                               dataStoreFactory.songsByAlbumId(id),
                               BiFunction {album,
                                           songs
-                                          -> this.mapper.albumResultToModel(album,
-                                      songs.takeLast(5))
+                                          -> this.mapper.albumResultToModel(album, filterTrack(songs))
                               })
     }
 
-    override fun getArtistById(id: String): Observable<ArtistModel> {
+    private fun filterTrack(songsResult: Collection<SongResult>): List<SongResult> {
+        return songsResult.filter { it.wrapperType == validSongWrapperType }
+    }
+
+    override fun getArtistById(id: String): Observable<ArtistDetailModel> {
         return this.dataStoreFactory.artistById(id).flatMap { artistResult ->
             this.dataStoreFactory.albumsByArtistId(artistResult.artistId.toString())
                     .map { albumResult ->
                         this.mapper.artistResultToModel(artistResult, albumResult)
                     }
         }
+    }
+
+    companion object {
+        const val validSongWrapperType = "track"
     }
 }

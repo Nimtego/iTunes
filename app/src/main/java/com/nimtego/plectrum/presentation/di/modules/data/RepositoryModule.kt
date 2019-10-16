@@ -7,7 +7,7 @@ import com.nimtego.plectrum.data.repository.datasource.popular.movie.PopularMovi
 import com.nimtego.plectrum.data.repository.datasource.popular.music.PopularMusicFactory
 import com.nimtego.plectrum.data.repository.datasource.search.SongDataStoreFactory
 import com.nimtego.plectrum.data.repository.repository.*
-import com.nimtego.plectrum.data.repository.repository.detail.MusicalDetail
+import com.nimtego.plectrum.data.repository.repository.detail.MusicalDetailRepositoryImp
 import com.nimtego.plectrum.domain.repository.RepositoryPopular
 import com.nimtego.plectrum.domain.repository.detail.MusicalDetailRepository
 import com.nimtego.plectrum.presentation.di.modules.ContextModule
@@ -97,7 +97,7 @@ class RepositoryModule {
             mapper: MusicalDetailMapper,
             dataStoreFactory: DetailStoreFactory
     ): MusicalDetailRepository {
-        return MusicalDetail(dataStoreFactory, mapper)
+        return MusicalDetailRepositoryImp(dataStoreFactory, mapper)
     }
 
     @Provides

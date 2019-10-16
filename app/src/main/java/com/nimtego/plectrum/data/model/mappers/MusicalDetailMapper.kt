@@ -3,13 +3,13 @@ package com.nimtego.plectrum.data.model.mappers
 import com.nimtego.plectrum.data.model.itunes.AlbumResult
 import com.nimtego.plectrum.data.model.itunes.ArtistResult
 import com.nimtego.plectrum.data.model.itunes.SongResult
-import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
-import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
-import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.ArtistDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.SongDetailModel
 
 class MusicalDetailMapper {
-    fun songResultToModel(songResult: SongResult): SongModel {
-        return SongModel(
+    fun songResultToModel(songResult: SongResult): SongDetailModel {
+        return SongDetailModel(
                 trackName = songResult.trackName,
                 trackAlbumName = songResult.collectionName,
                 trackArtistName = songResult.artistName,
@@ -18,30 +18,30 @@ class MusicalDetailMapper {
                 trackPrice = songResult.trackPrice.toString())
     }
 
-    fun albumResultToModel(albumResult: AlbumResult, songsAlbum: List<SongResult>): AlbumModel {
-        return AlbumModel(
+    fun albumResultToModel(albumResult: AlbumResult, songsAlbum: List<SongResult>): AlbumDetailModel {
+        return AlbumDetailModel(
                 albumName = albumResult.collectionName,
                 albumArtistName = albumResult.artistName,
                 albumArtwork = albumResult.artworkUrl100,
                 albumId = albumResult.collectionId.toString(),
                 albumPrice = albumResult.collectionPrice.toString(),
                 albumReleaseDate = albumResult.releaseDate,
-                albumSongs = songsAlbum.map { songResultToModel(it) }
+                albumSongDetails = songsAlbum.map { songResultToModel(it) }
         )
     }
 
-    private fun albumResultToModel(albumResult: AlbumResult): AlbumModel {
+    private fun albumResultToModel(albumResult: AlbumResult): AlbumDetailModel {
         return albumResultToModel(albumResult, emptyList())
     }
 
     fun artistResultToModel(artistResult: ArtistResult,
-                            albumResult: List<AlbumResult>): ArtistModel {
-        return ArtistModel(
+                            albumResult: List<AlbumResult>): ArtistDetailModel {
+        return ArtistDetailModel(
                 artistName = artistResult.artistName,
                 artistArtwork = artistResult.artistLinkUrl,
                 artistId = artistResult.artistId.toString(),
                 primaryGenreName = artistResult.primaryGenreName,
                 artistViewUrl = artistResult.artistLinkUrl,
-                artistAlbums = albumResult.map { albumResultToModel(it) })
+                artistAlbumDetails = albumResult.map { albumResultToModel(it) })
     }
 }

@@ -1,5 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,6 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            android:radius="16dp"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginEnd="64dp"
             app:expandedTitleMarginStart="48dp"
@@ -54,6 +54,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/bottom_navigation_height"
         android:background="@color/divider_color_light"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -62,142 +63,179 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/author_text_view"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.CardView
+                android:id="@+id/information_card_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/author"
-                android:textColor="@color/separator_gray"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/author_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="64dp"
-                android:layout_marginEnd="8dp"
-                android:singleLine="false"
-                android:text="@string/author"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/author_text_view"
-                app:layout_constraintTop_toTopOf="@+id/author_text_view" />
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
 
-            <TextView
-                android:id="@+id/release_date_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/release_date"
-                android:textColor="@color/separator_gray"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/author_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/information_value" />
+                    <TextView
+                        android:id="@+id/author_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="@string/author"
+                        android:textColor="@color/separator_gray"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/release_date_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:singleLine="false"
-                android:text="@string/release_date"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/author_value"
-                app:layout_constraintTop_toTopOf="@+id/release_date_text_view" />
+                    <TextView
+                        android:id="@+id/author_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="64dp"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="false"
+                        android:text="@string/author"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/author_text_view"
+                        app:layout_constraintTop_toTopOf="@+id/author_text_view" />
 
-            <TextView
-                android:id="@+id/price_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/price"
-                android:textColor="@color/separator_gray"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/author_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/release_date_value" />
+                    <TextView
+                        android:id="@+id/release_date_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="@string/release_date"
+                        android:textColor="@color/separator_gray"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/author_text_view"
+                        app:layout_constraintTop_toBottomOf="@+id/information_value" />
 
-            <TextView
-                android:id="@+id/price_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:singleLine="false"
-                android:text="@string/price"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/release_date_value"
-                app:layout_constraintTop_toTopOf="@+id/price_text_view" />
+                    <TextView
+                        android:id="@+id/release_date_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="false"
+                        android:text="@string/release_date"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/author_value"
+                        app:layout_constraintTop_toTopOf="@+id/release_date_text_view" />
 
-            <TextView
-                android:id="@+id/information_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/information"
-                android:textColor="@color/separator_gray"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/author_text_view"
-                app:layout_constraintTop_toBottomOf="@+id/author_value" />
+                    <TextView
+                        android:id="@+id/price_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="@string/price"
+                        android:textColor="@color/separator_gray"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/author_text_view"
+                        app:layout_constraintTop_toBottomOf="@+id/release_date_value" />
 
-            <TextView
-                android:id="@+id/information_value"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:singleLine="false"
-                android:text="@string/information"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/price_value"
-                app:layout_constraintTop_toTopOf="@+id/information_text_view" />
+                    <TextView
+                        android:id="@+id/price_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="false"
+                        android:text="@string/price"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/release_date_value"
+                        app:layout_constraintTop_toTopOf="@+id/price_text_view" />
 
-            <TextView
-                android:id="@+id/albums_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:maxLines="2"
-                android:singleLine="false"
-                android:text="@string/albums"
-                android:textColor="@color/separator_gray"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/price_value"
-                app:layout_constraintTop_toBottomOf="@+id/price_value" />
+                    <TextView
+                        android:id="@+id/information_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:maxLines="2"
+                        android:singleLine="false"
+                        android:text="@string/information"
+                        android:textColor="@color/separator_gray"
+                        android:textSize="12sp"
+                        app:layout_constraintStart_toStartOf="@+id/author_text_view"
+                        app:layout_constraintTop_toBottomOf="@+id/author_value" />
+
+                    <TextView
+                        android:id="@+id/information_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:singleLine="false"
+                        android:text="@string/information"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/price_value"
+                        app:layout_constraintTop_toTopOf="@+id/information_text_view" />
 
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/album_rv"
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/transparent"
-                android:clipToPadding="false"
-                android:paddingBottom="50dp"
-                android:scrollbars="vertical"
-                android:text="@string/no_data_available"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintEnd_toEndOf="@+id/author_value"
-                app:layout_constraintStart_toStartOf="@+id/author_value"
-                app:layout_constraintTop_toBottomOf="@+id/albums_text_view">
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="4dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/information_card_view">
 
-            </android.support.v7.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/albums_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:maxLines="2"
+                    android:singleLine="false"
+                    android:text="@string/songs"
+                    android:textColor="@color/separator_gray"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@+id/price_value"
+                    app:layout_constraintTop_toBottomOf="@+id/price_value" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/songs_album_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/bottom_navigation_height"
+                    android:background="@color/transparent"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    android:text="@string/no_data_available"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintEnd_toEndOf="@+id/author_value"
+                    app:layout_constraintStart_toStartOf="@+id/author_value"
+                    app:layout_constraintTop_toBottomOf="@+id/albums_text_view">
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
         </android.support.constraint.ConstraintLayout>
 
 

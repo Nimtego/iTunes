@@ -1,12 +1,12 @@
 package com.nimtego.plectrum.presentation.interactor
 
-import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
-import com.nimtego.plectrum.presentation.mvp.model.music.ArtistModel
-import com.nimtego.plectrum.presentation.mvp.model.music.SongModel
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.ArtistDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.SongDetailModel
 import io.reactivex.Single
 
 interface MusicalInformationUseCase {
-    fun song(id: String): Single<SongModel>
-    fun album(id: String): Single<AlbumModel>
-    fun artist(id: String): Single<ArtistModel>
+    fun song(id: String): Single<SongDetailModel>
+    fun album(id: String): Single<AlbumDetailModel>
+    fun artist(id: String): Single<ArtistDetailModel>
 }

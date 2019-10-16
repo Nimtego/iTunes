@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -15,14 +16,18 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
-import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
 import com.nimtego.plectrum.presentation.mvp.presenters.detail.AlbumDetailPresenter
 import com.nimtego.plectrum.presentation.mvp.view.detail.AlbumDetailView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
+import com.nimtego.plectrum.presentation.ui.widget.adapters.detail.SongsDetailAdapter
+import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
+import com.nimtego.plectrum.presentation.ui.widget.util.Util
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.detail_song_fragment.*
+import java.lang.StringBuilder
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -36,7 +41,7 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
     private lateinit var albumImage: ImageView
     private lateinit var information: TextView
     private lateinit var pb: ProgressBar
-    private lateinit var albumsRv: RecyclerView
+    private lateinit var songsRv: RecyclerView
     private lateinit var collapsingToolbarLayout: CollapsingToolbarLayout
 
     //todo create presenter and other
@@ -83,31 +88,41 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
     }
 
     private fun initAlbumsListRV() {
-        this.albumsRv = album_rv
-        albumsRv.apply {
+        val itemInColumn = Util.calculateNoOfColumns(
+                this@AlbumDetailFragment.context,
+                100F + 10)
+        this.songsRv = songs_album_rv
+        songsRv.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            ViewCompat.setNestedScrollingEnabled(this, false)
-            itemAnimator = DefaultItemAnimator()
+            layoutManager = LinearLayoutManager(this@AlbumDetailFragment.context)
+//            addItemDecoration(SpaceItemDecorator(spacing = 4,
+//                    spanCount = 1,
+//                    paddingTop = 24,
+//                    paddingBottom = 34))
+            isNestedScrollingEnabled = false
         }
     }
 
-    override fun showViewState(albumModel: AlbumModel) {
-        artistName.text = albumModel.albumArtistName
+    override fun showViewState(albumDetailModel: AlbumDetailModel) {
+        artistName.text = albumDetailModel.albumArtistName
         //price.setText(data.getArtistArtwork())
-        //information!!.setText(artistDetailsModel.getWikiInformation())
-        collapsingToolbarLayout.title = albumModel.albumName
-//        val albumsAdapter = AlbumsAdapterForArtist(artistDetailsModel.getAlbums(),
-//                this.getActivity())
-//        albumsAdapter.setOnItemClickListener(object : AlbumsAdapterForArtist.OnItemClickListener() {
-//            fun onUserItemClicked(albumModel: AlbumModel) {
-//                mPresenter.albumClicked(albumModel)
+        val track = StringBuilder()
+        albumDetailModel.albumSongDetails.forEach {
+            track.append(it.trackName)
+            track.append("/n")
+        }
+        information.text = track
+        collapsingToolbarLayout.title = albumDetailModel.albumName
+        val songsAdapter = SongsDetailAdapter(albumDetailModel.albumSongDetails)
+//        songsAdapter.setOnItemClickListener(object : SongsDetailAdapter.OnItemClickListener() {
+//            fun onUserItemClicked(albumDetailModel: AlbumDetailModel) {
+//                mPresenter.albumClicked(albumDetailModel)
 //            }
 //        })
-//        albumsRv.adapter = albumsAdapter
+        songsRv.adapter = songsAdapter
 
-        Picasso.get().load(albumModel.albumArtwork
-                .replace("135x135", "570x570"))
+        Picasso.get().load(albumDetailModel.albumArtwork
+                .replace("100x100", "570x570"))
                 .into(albumImage, object : Callback {
                     override fun onSuccess() {
                         pb.visibility = View.GONE

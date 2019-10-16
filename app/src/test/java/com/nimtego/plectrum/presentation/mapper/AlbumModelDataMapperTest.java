@@ -1,6 +1,6 @@
 package com.nimtego.plectrum.presentation.mapper;
 
-import com.nimtego.plectrum.presentation.mvp.model.music.AlbumModel;
+import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,11 +30,11 @@ public class AlbumModelDataMapperTest {
 //
 //    }
 
-    private void testAssert(AlbumModel albumModel) {
-        assertThat(albumModel, is(instanceOf(AlbumModel.class)));
-        assertThat(albumModel.getAlbumArtistName(), is(ALBUM_ARTIST_NAME));
-        assertThat(albumModel.getAlbumName(), is(ALBUM_NAME));
-        assertThat(albumModel.getAlbumArtwork(), is(ALBUM_IMAGE));
+    private void testAssert(AlbumDetailModel albumDetailModel) {
+        assertThat(albumDetailModel, is(instanceOf(AlbumDetailModel.class)));
+        assertThat(albumDetailModel.getAlbumArtistName(), is(ALBUM_ARTIST_NAME));
+        assertThat(albumDetailModel.getAlbumName(), is(ALBUM_NAME));
+        assertThat(albumDetailModel.getAlbumArtwork(), is(ALBUM_IMAGE));
     }
 
 
