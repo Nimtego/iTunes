@@ -26,7 +26,7 @@ class AlbumDetailPresenter @Inject constructor(
 
 
     override fun prepareViewModel() {
-        this.itemStorage.getCurrentChildItem()?.let{
+        this.itemStorage.getCurrentChildItem()?.let {
             println(it.id())
         }
         this.albumDetailModel ?: run {
@@ -43,10 +43,9 @@ class AlbumDetailPresenter @Inject constructor(
                                 { model ->
                                     this@AlbumDetailPresenter.albumDetailModel = model
                                     this@AlbumDetailPresenter.showModel()
-                                    this@AlbumDetailPresenter.viewState.systemMessage(model.albumArtistName)
                                 },
                                 //todo throwable state
-                                {throwable -> this@AlbumDetailPresenter.viewState.systemMessage("${throwable.message}")}
+                                { throwable -> this@AlbumDetailPresenter.viewState.systemMessage("${throwable.message}") }
                         ).connect()
             }
         }

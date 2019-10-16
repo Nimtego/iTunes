@@ -12,7 +12,7 @@ class DetailDiskDataStore @Inject constructor(
 //        private val cacheArtist: Cache<String, ArtistResult>
 ) : DetailMusicalDataStore {
 
-    override fun songById(id: String): Observable<SongResult> {
+    override fun songById(id: String): Observable<List<SongResult>> {
         return Observable.empty()
     }
 

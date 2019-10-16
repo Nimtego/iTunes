@@ -6,7 +6,7 @@ import com.nimtego.plectrum.data.model.itunes.SongResult
 import io.reactivex.Observable
 
 interface DetailMusicalDataStore {
-    fun songById(id: String): Observable<SongResult>
+    fun songById(id: String): Observable<List<SongResult>>
     fun albumById(id: String): Observable<AlbumResult>
     fun artistById(id: String): Observable<ArtistResult>
     fun songsByAlbumId(id: String): Observable<List<SongResult>>

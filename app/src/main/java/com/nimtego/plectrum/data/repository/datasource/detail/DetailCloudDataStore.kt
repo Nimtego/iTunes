@@ -15,11 +15,9 @@ class DetailCloudDataStore @Inject constructor(
 //        private val cacheArtist: Cache<String, ArtistResult>
 ) : DetailMusicalDataStore {
 
-    override fun songById(id: String): Observable<SongResult> {
+    override fun songById(id: String): Observable<List<SongResult>> {
         return this.api.getSongs(ItunesFabricParam.lookupSongsById(id))
-                .map {
-                    it.results.first()
-                }
+                .map { it.results }
     }
 
     override fun albumById(id: String): Observable<AlbumResult> {

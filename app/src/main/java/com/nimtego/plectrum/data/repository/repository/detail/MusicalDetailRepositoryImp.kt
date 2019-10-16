@@ -19,7 +19,7 @@ class MusicalDetailRepositoryImp @Inject constructor(
 
     override fun getSongById(id: String): Observable<SongDetailModel> {
         return this.dataStoreFactory.songById(id).map {
-            this.mapper.songResultToModel(it)
+            this.mapper.songResultToModel(filterTrack(it).first())
         }
     }
 

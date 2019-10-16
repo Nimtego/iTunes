@@ -11,7 +11,7 @@ class DetailStoreFactory @Inject constructor(
         private val diskPopularBook: DetailMusicalDataStore
 ) : DetailMusicalDataStore {
 
-    override fun songById(id: String): Observable<SongResult> {
+    override fun songById(id: String): Observable<List<SongResult>> {
         return Observable.concat(diskPopularBook.songById(id),
                 cloudDataStore.songById(id)
         ).firstElement().toObservable()
