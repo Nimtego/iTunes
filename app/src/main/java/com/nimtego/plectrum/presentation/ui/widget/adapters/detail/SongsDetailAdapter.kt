@@ -24,7 +24,7 @@ class SongsDetailAdapter(
         holder.itemView.setOnClickListener { _: View ->
             val adapterPosition = holder.adapterPosition
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                this.models.get(adapterPosition).let {
+                this.models[adapterPosition].let {
                     this.onItemClickListener?.onUserItemClicked(it)
                 }
             }

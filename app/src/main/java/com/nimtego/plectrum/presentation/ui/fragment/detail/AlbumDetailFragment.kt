@@ -2,9 +2,6 @@ package com.nimtego.plectrum.presentation.ui.fragment.detail
 
 import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
-import android.support.v4.view.ViewCompat
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -17,11 +14,11 @@ import com.nimtego.plectrum.App
 import com.nimtego.plectrum.R
 import com.nimtego.plectrum.presentation.di.modules.navigation.NavigationQualifiers
 import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.SongDetailModel
 import com.nimtego.plectrum.presentation.mvp.presenters.detail.AlbumDetailPresenter
 import com.nimtego.plectrum.presentation.mvp.view.detail.AlbumDetailView
 import com.nimtego.plectrum.presentation.ui.fragment.base.BaseFragment
 import com.nimtego.plectrum.presentation.ui.widget.adapters.detail.SongsDetailAdapter
-import com.nimtego.plectrum.presentation.ui.widget.behavior.SpaceItemDecorator
 import com.nimtego.plectrum.presentation.ui.widget.util.Util
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
 import com.squareup.picasso.Callback
@@ -114,11 +111,11 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
         information.text = track
         collapsingToolbarLayout.title = albumDetailModel.albumName
         val songsAdapter = SongsDetailAdapter(albumDetailModel.albumSongDetails)
-//        songsAdapter.setOnItemClickListener(object : SongsDetailAdapter.OnItemClickListener() {
-//            fun onUserItemClicked(albumDetailModel: AlbumDetailModel) {
-//                mPresenter.albumClicked(albumDetailModel)
-//            }
-//        })
+        songsAdapter.setOnItemClickListener(object: SongsDetailAdapter.OnItemClickListener {
+            override fun onUserItemClicked(songDetailModel: SongDetailModel) {
+                presenter.songClicked(songDetailModel)
+            }
+        })
         songsRv.adapter = songsAdapter
 
         Picasso.get().load(albumDetailModel.albumArtwork

@@ -5,9 +5,13 @@ import com.nimtego.plectrum.presentation.interactor.SchedulersProvider
 import com.nimtego.plectrum.presentation.interactor.detail.AlbumDetailUseCase
 import com.nimtego.plectrum.presentation.manger.ChildItemStorage
 import com.nimtego.plectrum.presentation.mvp.model.music.AlbumDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.music.SongDetailModel
+import com.nimtego.plectrum.presentation.mvp.model.song.AlbumWrapperModel
+import com.nimtego.plectrum.presentation.mvp.model.song.SongWrapperModel
 import com.nimtego.plectrum.presentation.mvp.presenters.base.BaseContentPresenter
 import com.nimtego.plectrum.presentation.mvp.view.detail.AlbumDetailView
 import com.nimtego.plectrum.presentation.navigation.NavigationHandler
+import com.nimtego.plectrum.presentation.navigation.Screens
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
@@ -60,6 +64,12 @@ class AlbumDetailPresenter @Inject constructor(
     fun setNavigationQualifier(navigationQualifier: String) {
         this.navigationQualifier = navigationQualifier
         this.router = navigationHandler.getRouter(navigationQualifier)
+    }
+
+    fun songClicked(songDetailModel: SongDetailModel) {
+        //todo implement
+       // this.itemStorage.changeCurrentChildItem(songDetailModel)
+        //this.router.navigateTo(Screens.SongDetailScreen(navigationQualifier))
     }
 
 }

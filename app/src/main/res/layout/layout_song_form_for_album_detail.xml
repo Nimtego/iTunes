@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/song_image">
+            app:layout_constraintStart_toEndOf="@+id/song_image"
+            android:background="@drawable/custom_ripple_effect_after_21">
 
             <ImageView
                 android:id="@+id/imageView"
