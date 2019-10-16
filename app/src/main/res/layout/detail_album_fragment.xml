@@ -226,6 +226,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/bottom_navigation_height"
                     android:background="@color/transparent"
+                    android:nestedScrollingEnabled="false"
                     android:clipToPadding="false"
                     android:scrollbars="vertical"
                     android:text="@string/no_data_available"

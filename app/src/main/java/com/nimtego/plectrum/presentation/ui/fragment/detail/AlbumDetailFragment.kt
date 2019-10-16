@@ -85,18 +85,10 @@ class AlbumDetailFragment : BaseFragment(), AlbumDetailView, BackButtonListener 
     }
 
     private fun initAlbumsListRV() {
-        val itemInColumn = Util.calculateNoOfColumns(
-                this@AlbumDetailFragment.context,
-                100F + 10)
         this.songsRv = songs_album_rv
         songsRv.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this@AlbumDetailFragment.context)
-//            addItemDecoration(SpaceItemDecorator(spacing = 4,
-//                    spanCount = 1,
-//                    paddingTop = 24,
-//                    paddingBottom = 34))
-            isNestedScrollingEnabled = false
         }
     }
 
