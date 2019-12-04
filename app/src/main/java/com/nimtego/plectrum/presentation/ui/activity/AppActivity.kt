@@ -1,6 +1,7 @@
 package com.nimtego.plectrum.presentation.ui.activity
 
 import android.content.pm.ActivityInfo
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -16,6 +17,7 @@ import com.nimtego.plectrum.presentation.navigation.Screens
 import com.nimtego.plectrum.presentation.ui.massage.SystemMessageNotifier
 import com.nimtego.plectrum.presentation.ui.massage.SystemMessageType
 import com.nimtego.plectrum.presentation.utils.BackButtonListener
+import com.nimtego.plectrum.presentation.utils.StatusBarUtils
 import io.reactivex.disposables.Disposable
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -56,7 +58,7 @@ class AppActivity : MvpAppCompatActivity() {
         this.statusBar = findViewById(R.id.status_bar)
 
         onLockOrientation()
-        //setTransparentStatusBar()
+        setTransparentStatusBar()
 
         this.navigator.applyCommands(arrayOf(Forward(Screens.SplashScreen)))
     }
@@ -90,12 +92,29 @@ class AppActivity : MvpAppCompatActivity() {
         this.statusBar.visibility = if (show) View.VISIBLE else View.GONE
     }
 
-    // @link - https://stackoverflow.com/questions/45527229/showing-content-behind-status-and-navigation-bar/45530210
-    fun setTransparentStatusBar() {
-        window.setFlags(
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
+    private fun setTransparentStatusBar() {
+        setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
+        window.statusBarColor = Color.TRANSPARENT
+        makeStatusBarIconDark()
+    }
+
+    private fun setWindowFlag(bits: Int, on: Boolean) {
+        val win = window
+        val winParams = win.attributes
+        if (on) {
+            winParams.flags = winParams.flags or bits
+        } else {
+            winParams.flags = winParams.flags and bits.inv()
+        }
+        win.attributes = winParams
+    }
+
+    private fun makeStatusBarIconDark(makeIconDark: Boolean = true) {
+        if (makeIconDark) {
+            StatusBarUtils.makeIconsDark(this, this.window)
+        } else {
+            StatusBarUtils.makeIconsLight(this, this.window)
+        }
     }
 
     private fun showAlertMessage(message: String) {

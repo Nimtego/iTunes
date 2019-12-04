@@ -44,7 +44,6 @@ class SearchContentPresenter @Inject constructor(
     private fun requestSearchData() {
         this.currentSearchText = this.searchItemStorage.getCurrentSearchText()
         val currentSearchObserver = CurrentSearchObserver()
-        currentSearchObserver.connect()
         this.currentSearchText?.let {
             this.musicalSearchUseCase.searchSong(it)
                     .observeOn(schedulersProvider.ui())
@@ -54,7 +53,9 @@ class SearchContentPresenter @Inject constructor(
                     .doAfterTerminate {
                         this@SearchContentPresenter.viewState.showProgress(false)
                     }
-                    .subscribe(currentSearchObserver)
+                    .subscribe{
+                        currentSearchObserver.connect()
+                    }
         }
     }
 

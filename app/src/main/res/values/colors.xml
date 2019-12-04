@@ -26,6 +26,8 @@
 
     <!--Search view-->
     <color name="color_search_view">@android:color/white</color>
+    <color name="search_view_border">#E7E8ED</color>
+    <color name="search_view_background">#F7F8F9</color>
 
     <!--Splash view-->
     <color name="splash_view_background">#580D0D</color>

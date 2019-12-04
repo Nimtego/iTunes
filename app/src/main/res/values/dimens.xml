@@ -22,6 +22,9 @@
     <dimen name="rounded_edit_text">16sp</dimen>
     <dimen name="value_text_view">8sp</dimen>
 
+    <!--Boders-->
+    <dimen name="border_radius_search_view">2dp</dimen>
+
     <!-- Text size -->
     <dimen name="text_view_size_header">18sp</dimen>
     <!-- Standard Styles -->
